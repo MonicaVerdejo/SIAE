@@ -1,0 +1,190 @@
+body{
+ overflow-x: hidden;   
+ color: #131313;
+}
+a {
+    color: #1f1f1f;
+    text-decoration: none !important;
+    outline: none !important;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: 0;
+    font-weight: normal;
+    position: relative;
+    padding: 0 0 10px 0;
+    font-weight: normal;
+    line-height: 120% !important;
+
+    margin: 0 
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    text-decoration: none!important;
+    opacity: 1 
+}
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+    opacity: .8 
+}
+
+a, .btn {
+    text-decoration: none !important;
+    outline: none !important;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+/*---------------------------------------------------------INDEX.PHP--------------------------------------------------------------
+ESTILO PARA EL SLIDER PRINCIPAL*/
+.padre {
+    position: relative;
+    /* para poder posicionar el texto de forma absoluta */
+    display: inline-block;
+    /* para que solo ocupe el ancho de la imagen */
+    width: 100%;
+    background-color: white;
+}
+
+
+.padre div {
+    color: white;
+    font-size: 4em;
+    text-align: center;
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+.padre label {
+    font-size: 0.3em;
+    text-align: center;
+}
+
+.card-title {
+    position: absolute;
+    /* posición absolute con respecto al padre */
+    bottom: 0;
+    /* posicionada en la esquina inferior derecha */
+    right: 6.5rem;
+}
+
+/*Titulos personalizados*/
+h1.elegantshadow {
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+    font-size: 50px;
+    padding: 80px 50px;
+    text-align: center;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+    color: #131313;
+    left: 0;
+
+    letter-spacing: 0.15em;
+    text-shadow: 0.5px -0.5px 0 #767676, -0.5px 1px 0.5px #737272, -1px 2px 0.5px #767474, -1.5px 3px 0.5px #787777, -2px 4px 0.5px #7b7a7a, -2.5px 5px 0.5px #7f7d7d, -3px 6px 0.5px #828181, -3.5px 7px 0.5px #868585, -4px 8px 0.5px #8b8a89, -4.5px 9px 0.5px #8f8e8d, -5px 10px 0.5px #949392, -5.5px 11px 0.5px #999897;
+
+}
+
+
+h1.elegantshadow2 {
+    font-family: "Satisfy", Satisfy, sans-serif;
+    font-size: 50px;
+    padding: 30px 10px;
+    text-align: center;
+    text-rendering: optimizeLegibility;
+    color: #131313;
+    left: 0;
+    letter-spacing: 0.15em;
+    text-shadow: 0.5px -0.5px 0 #767676, -0.5px 1px 0.5px #737272, -1px 2px 0.5px #767474, -1.5px 3px 0.5px #787777, -2px 4px 0.5px #7b7a7a, -2.5px 5px 0.5px #7f7d7d, -3px 6px 0.5px #828181, -3.5px 7px 0.5px #868585, -4px 8px 0.5px #8b8a89, -4.5px 9px 0.5px #8f8e8d, -5px 10px 0.5px #949392, -5.5px 11px 0.5px #999897;
+
+}
+
+.img-cultura{
+    width: 165px;
+    height: 165px;
+    margin-left: 45%;
+}
+
+.title-all h1{
+    font-size: 32px;
+    font-weight: 700;
+    color: #000000;
+}
+.title-all p{
+    color: #999999;
+    font-size: 16px;
+}
+
+/*---------------------------------------------------------ITEMS.php---------------------------------------------------------*/
+.articulo{
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin-left: 3%;
+}
+
+/*------------------------------------------------------------------ LOADER -------------------------------------------------------------------*/
+#back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9999;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    line-height: 5px;
+    background: #527cca;
+    color: #ffffff;
+    cursor: pointer;
+    border: 0;
+    border-radius: 0px;
+    text-decoration: none;
+    transition: opacity 0.2s ease-out;
+    font-size: 28px;
+}
+/*------------------------------------------------------------------ Footer Main -------------------------------------------------------------------*/
+.footer-main{
+    padding: 70px 0px;
+    background: #010101;
+}
+.footer-main hr{
+   border-top: 1px solid rgba(255,255,255,.6);
+}
+
+/*------------------------------------------------------------------ Copyright -------------------------------------------------------------------*/
+.footer-copyright{
+    background: #060606;
+    padding: 20px 0px;
+    position: relative;
+}
+.footer-copyright p {
+    text-align: center;
+    color: #ffffff;
+    font-size: 16px;
+}
+.footer-copyright p a{
+    color: #ffffff;
+}
+.footer-copyright p a:hover{
+    color: #739EEC;
+}
+
+
+
+
+/*--------------------------------------------------------DISEÑO MOVIL------------------------------------------------------*/
+@media only screen and (max-width: 600px) {
+    /*items.php*/
+    .articulo{
+        display: inline-block;
+        vertical-align: top;
+        text-align: center;
+        margin-top: 4%;
+        margin-bottom: 4%;
+        margin-left: 0;
+    }
+
+}
