@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
@@ -128,73 +129,162 @@
 
 
         <!-- Perfiles-->
-        <section class="section section-full section-xl bg-default text-md-center" id="projects">
+        <section class="section  section-xl bg-default text-md-center" id="projects">
             <div class="container">
                 <div class="row row-lg row-30">
-                    <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".2s">
-                        <article class="project-classic box-md"><img src="img/logos/administrador.png" alt="Perfil Administrador" width="100"
-                                height="100" />
+                    <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".2s" id="admin">
+
+                        <article class="project-classic box-md-Perfiles"><img src="img/logos/administrador.png" alt=""
+                                width="200" height="200" />
                             <div class="project-classic-caption">
                                 <div>
                                     <h4 class="project-classic-title"><a href="#">Administrativos</a></h4>
-                                    
                                 </div>
                             </div>
                         </article>
+
                     </div>
-                    <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".1s">
-                        <article class="project-classic box-md"><img src="img/logos/alumno.png" alt="" width="100"
-                                height="100" />
+                    <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".1s" id="alumno">
+
+                        <article class="project-classic box-md-Perfiles"><img src="img/logos/alumno.png" alt=""
+                                width="370" height="262" />
                             <div class="project-classic-caption">
                                 <div>
-                                    <h4 class="project-classic-title"><a href="#">Alumnos</a></h4>                                  
+                                    <h4 class="project-classic-title">Alumnos</h4>
                                 </div>
                             </div>
                         </article>
+
                     </div>
 
-                    <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".2s">
-                        <article class="project-classic box-md"><img src="img/logos/maestro.png" alt="" width="100"
-                                height="100" />
+                    <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".2s" id="mtro">
+
+                        <article class="project-classic box-md-Perfiles"><img src="img/logos/maestro.png" alt=""
+                                width="370" height="262" />
                             <div class="project-classic-caption">
                                 <div>
                                     <h4 class="project-classic-title"><a href="#">Maestros</a></h4>
+
                                 </div>
                             </div>
                         </article>
+
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!--Formularios de acceso al perfil administrativo-->
+        <section class="section-form bg-default" style="display: none;" id="formadmin">
+            <div id="base">
+                <div id="triangle"></div>
+                <div id="titulo">Iniciar sesion</div>
+                <div id="form">
+                    <form>
+                        <div class="form-group">
+                            <label for="Usuario">Usuario</label>
+                            <input id="Usuario" class="form-control" type="text" name="" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control" name="" id="password" placeholder=""
+                                required="true">
+                        </div>
+                        <input class="btn btn-gray" type="submit" value="Enviar">
+                    </form>
+                </div>
+                <div></div>
+            </div>
+        </section>
+
+        <!--Formularios de acceso al perfil alumno-->
+        <section class=" section-form bg-default" style="display: none;" id="formalumno">
+            <div id="base">
+                <div id="triangle"></div>
+                <div id="titulo">Iniciar sesion</div>
+                <div id="form">
+                    <form>
+                        <div class="form-group">
+                            <label for="Matricula">Matricula</label>
+                            <input id="Matricula" class="form-control" type="text" name="" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">NIP</label>
+                            <input type="password" class="form-control" name="" id="password" placeholder=""
+                                required="true">
+                        </div>
+                        <input class="btn btn-gray" type="submit" value="Enviar">
+                    </form>
+                </div>
+                <div></div>
+            </div>
+        </section>
+
+        <!--Formularios de acceso al perfil maestro-->
+        <section class="section-form bg-default" style="display: none;" id="formmtro">
+            <div id="base">
+                <div id="triangle"></div>
+                <div id="titulo">Iniciar sesion</div>
+                <div id="form">
+                    <form>
+                        <div class="form-group">
+                            <label for="Usuario">Usuario</label>
+                            <input id="Usuario" class="form-control" type="text" name="" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control" name="" id="password" placeholder=""
+                                required="true">
+                        </div>
+                        <input class="btn btn-gray" type="submit" value="Enviar">
+                    </form>
+                </div>
+                <div></div>
             </div>
         </section>
 
 
 
 
+
         <!-- Page Footer-->
-        <footer
-            class="section bg-gray-3 context-dark text-md-center"
-            >
-           
+        <footer class="section bg-gray-3 context-dark text-md-center">
+
             <div class="container">
-                <div class="footer-classic-list-social wow fadeInUp ">
-                    <ul class="list-inline list-social list-inline-sm">
-                        <li><a class="icon fa fa-twitter" href="https://twitter.com/ITESCHAM" target="_blank"></a></li>
-                        <li><a class="icon fa fa-facebook" href="https://m.facebook.com/ITESCHAM/" target="_blank"></a></li>
-                        <li><a class="icon fa fa-instagram" href="https://www.instagram.com/itescham/"
-                                target="_blank"></a></li>
-                    </ul>
-                </div>
+
                 <p class="rights wow fadeInUp"><span>&copy;&nbsp; </span>
                     <span class="copyright-year"></span><span>&nbsp;</span>
                     <span>SIAE</span><span>.&nbsp;</span>
                     <span>Todos los derechos reservados.</span><br />Diseñado&nbsp;por&nbsp;<a href="#">Softup</a></p>
-                   
+
             </div>
         </footer>
     </div>
     <div class="snackbars" id="form-output-global"></div>
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#admin").on('click', function () {
+                $("#formadmin").show();
+                $("#formalumno").hide();
+                $("#formmtro").hide();
+                return false;
+            });
+            $("#alumno").on('click', function () {
+                $("#formadmin").hide();
+                $("#formalumno").show();
+                $("#formmtro").hide();
+                return false;
+            });
+            $("#mtro").on('click', function () {
+                $("#formadmin").hide();
+                $("#formalumno").hide();
+                $("#formmtro").show();
+                return false;
+            });
+        });
+    </script>
 </body>
 
 </html>
