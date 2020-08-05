@@ -490,7 +490,9 @@ h3 + img {
 .section-inset-1 {
 	padding: 120px 0 100px;
 }
-
+.section-inset-P {
+	padding: 100px 0 60px;
+}
 .section-collapse + .section-collapse {
 	padding-top: 0;
 }
@@ -862,6 +864,10 @@ html [class*='section-'].section-bottom-0 {
 */
 .background-position-1 {
 	background-position: 30% 50%;
+}
+
+.background-position-P {
+	background-position: 25% 75%;
 }
 
 @media (min-width: 576px) {
