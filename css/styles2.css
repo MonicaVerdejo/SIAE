@@ -478,3 +478,93 @@ body {
 .chiller-theme .sidebar-footer>a:last-child {
     border-right: none;
 }
+
+
+/*---------------------------------------ALUMNOS------------------------------------------------------*/
+.datosTaller{
+  background: rgb(141, 175, 209);
+  border-radius: 2px;
+  display: inline-block;
+  height: 300px;
+  margin: 1rem;
+  position: relative;
+  width: 300px;
+  padding: 2%;
+}
+
+.datosTaller li{
+  margin-left: 2%;
+list-style: none;
+
+}
+
+.card-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+ 
+}
+
+.card-1:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+body{
+  background: #f7f5f3;
+}
+
+
+.table, .table-bordered {
+  width: 600px;
+ position: relative;
+ background-color: darkgray;
+ margin-left: 25%;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  .table, .table-bordered {
+   width: 90%;
+   position: relative;
+   background-color: darkgray;
+   margin-right: 10%;
+  }
+  
+}
+
+
+@media only screen and (max-width: 600px) {
+	h1{
+		font-size: 20px;
+	}
+
+	.datosTaller{
+    background: rgb(51, 65, 80);
+    border-radius: 4px;
+    display: inline-block;
+    height: 300px;
+    position: relative;
+    width: 300px;
+    padding: 2%;
+    color: cornsilk;
+    margin-bottom: 5%;
+    margin:1%;
+  }
+  
+  .card-1 {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
+  
+  .card-1:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+  
+  .table, .table-bordered {
+    width: 300px;
+   position: relative;
+   background-color: darkgray;
+   margin: 1%;
+  }
+  
+
+}
