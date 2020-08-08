@@ -53,70 +53,29 @@ if (!isset($_SESSION['rol'])) {
                                 <span>General</span>
                             </li>
                             <li>
-                                <a href="admin_inicio.php">
+                                <a href="alumno.php">
                                     <i class="fa fa-tachometer-alt"></i>
                                     <span>Inicio</span>
                                 </a>
                             </li>
-
                             <li>
-                                <a href="admin_tablas.php">
+                                <a href="alumno_horario.php">
                                     <i class="fas fa-table"></i>
-                                    <span>Tablas</span>
+                                    <span>Horario</span>
                                 </a>
 
-                            </li>
-
-                            <li>
-                                <a href="admin_graficas.php">
-                                    <i class="fas fa-chart-pie"></i>
-                                    <span>Graficas</span>
-                                </a>
-                            </li>
-
-                            <li class="sidebar-dropdown">
-                                <a href="#">
-                                    <i class="fas fa-h-square"></i>
-                                    <span>Hoteles</span>
-                                </a>
-                                <div class="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <?php
-                                            $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
-                                            $sentencia->execute();
-
-                                            foreach ($sentencia as $row) {
-
-                                            ?>
-                                                <form class="text-center" action="buscar_id.php" method="POST">
-
-                                                    <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
-
-                                                                                                                                                if ($row[0] != 'Administrador') {
-                                                                                                                                                ?> value="<?php echo $row[0]; ?>"><?php
-
-                                                                                                                                                                                } else {
-                                                                                                                                                                                    ?> style="display: none;" > <?php
-                                                                                                                                                                                }
-                                                                                                                                                                                    ?></input>
-                                                </form>
-                                            <?php
-                                            }
-                                            ?>
-                                        </li>
-                                    </ul>
-
-                                </div>
                             </li>
                             <li>
-                                <a href="admin_becarios.php">
+                                <a href="alumno_mensajes.php">
+                                    <i class="fa fa-comment" aria-hidden="true"></i>
+                                    <span>Mensajes</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="datos_alumno.php">
                                     <i class="fas fa-graduation-cap"></i>
-                                    <span>Becarios</span>
+                                    <span>Datos generales</span>
                                 </a>
-                            </li>
-                            <li class="header-menu">
-                                <span>Sistema</span>
                             </li>
                             <li>
                                 <a href="cerrar.php">
@@ -134,8 +93,28 @@ if (!isset($_SESSION['rol'])) {
 
             <main class="page-content">
                 <div class="container-fluid">
-                    <h2>Tabla de registros</h2>
+                    <img src="img/logos/tecnm.svg" alt="">
+
                 </div>
+                <!--Inicio-->
+                <div class="section section-lg ">
+                    <h1>
+                        Bienvenido <?php echo ($_SESSION['usuario']); ?>
+                    </h1>
+                </div>
+
+                <!--Horario-->
+
+                <!--Mensajes-->
+                <!--Datos generales-->
+
+
+
+
+
+
+
+
 
             </main>
         </div>

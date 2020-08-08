@@ -1,0 +1,3 @@
+ErrorDocument 404 https://hi-chibi.000webhostapp.com/Hi-chibi!/404.php
+ErrorDocument 400 https://hi-chibi.000webhostapp.com/Hi-chibi!/400.php
+ErrorDocument 500 https://hi-chibi.000webhostapp.com/Hi-chibi!/500.php
