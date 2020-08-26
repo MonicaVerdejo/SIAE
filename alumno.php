@@ -11,8 +11,10 @@ if (!isset($_SESSION['rol'])) {
     }
 }
 
-
-$query = $db->connect()->prepare("SELECT talleres.taller, talleres.direccion, talleres.mtro_asignado, maestro.nombre FROM talleres JOIN maestro join alumnos ON talleres.id = alumnos.taller_id and maestro.taller_asignado = talleres.mtro_asignado;");
+$alumno_id=$_SESSION['id_user'];
+$query = $db->connect()->prepare("SELECT talleres.taller, talleres.direccion, talleres.mtro_asignado, maestro.nombre FROM talleres 
+JOIN maestro join alumnos ON talleres.id = alumnos.taller_id and maestro.taller_asignado = talleres.mtro_asignado
+where alumnos.id=$alumno_id;");
 $query->execute();
 
 $opcion = $query->fetch(PDO::FETCH_NUM);
@@ -77,7 +79,6 @@ $mtroasignado = $opcion[3];
                                     <i class="fas fa-table"></i>
                                     <span>Horario</span>
                                 </a>
-
                             </li>
                             <li id="alumno_mensajes">
                                 <a href="#alumno_mensajes">
@@ -214,7 +215,7 @@ $mtroasignado = $opcion[3];
 
                                                 $sentencia = $db->connect()->prepare('select fecha, maestro.nombre, mensaje from maestro join mensajemaestro join talleres join alumnos
                                                                                             on mensajemaestro.taller_id= talleres.id and alumnos.taller_id = talleres.id and talleres.id = maestro.taller_asignado 
-                                                                                                where talleres.id=:taller_id');
+                                                                                                where talleres.id=:taller_id and talleres.mtro_asignado=mensajemaestro.mtro_id');
                                                 $sentencia->execute(['taller_id' => $taller_id]);
                                                 foreach ($sentencia as $row) {
 
@@ -247,19 +248,6 @@ $mtroasignado = $opcion[3];
                     <!-- /.container-fluid -->
 
                 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

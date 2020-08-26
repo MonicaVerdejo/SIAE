@@ -42,81 +42,115 @@ if (!isset($_SESSION['rol'])) {
             <nav id="sidebar" class="sidebar-wrapper">
                 <div class="sidebar-content">
                     <div class="sidebar-brand">
+
                         <a href="#">Administrador</a>
                         <div id="close-sidebar">
                             <i class="fas fa-times"></i>
                         </div>
+
+                        <hr>
+
                     </div>
+                    <div class="text-center">
+                        <?php if ((isset($_SESSION['rol'])) && ($_SESSION['rol'] != "")) { ?>
+
+                            <div class="user-img"> <img height="40" width="40" src="img/img_profile/<?php echo  $_SESSION['img_profile']; ?>" alt=""></div>
+
+
+                            <div id="cambiarp">
+                                <img width="20" height="20" src="img/editar.png" alt="">
+                                <label for="file">Cambiar avatar</label>
+                            </div>
+
+                            <!---->
+                            <form class="col-12" id="perfil" style="display:none;" action="upload.php" method="post" enctype="multipart/form-data">
+
+                                <input type="file" lass="form-control" name="file" id="file">
+                                <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                            </form>
+
+                            <!---->
+
+                        <?php } ?>
+                    </div>
+
                     <div class="sidebar-menu">
                         <ul>
                             <li class="header-menu">
                                 <span>General</span>
                             </li>
-                            <li>
-                                <a href="admin_inicio.php">
-                                    <i class="fa fa-tachometer-alt"></i>
-                                    <span>Inicio</span>
+                            <li id="alumno_horario">
+                                <a href="#horario">
+                                    <i class="fa fa-desktop" aria-hidden="true"></i>
+                                    <span>Administrar inicio</span>
                                 </a>
                             </li>
-
-                            <li>
-                                <a href="admin_tablas.php">
+                            <li id="mtro_tablas">
+                                <a href="#mtro_tablas">
                                     <i class="fas fa-table"></i>
-                                    <span>Tablas</span>
+                                    <span>Maestros</span>
+                                </a>
+                            </li>
+                            <li id="mtro_tablas">
+                                <a href="#mtro_tablas">
+                                    <i class="fas fa-table"></i>
+                                    <span>Alumnos</span>
                                 </a>
 
                             </li>
-
-                            <li>
-                                <a href="admin_graficas.php">
-                                    <i class="fas fa-chart-pie"></i>
-                                    <span>Graficas</span>
-                                </a>
-                            </li>
-
                             <li class="sidebar-dropdown">
-                                <a href="#">
-                                    <i class="fas fa-h-square"></i>
-                                    <span>Hoteles</span>
+                                <a href="#mtro_mensajes">
+                                    <i class="fa fa-comment" aria-hidden="true"></i>
+                                    <span>Mensajes</span>
                                 </a>
                                 <div class="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <?php
-                                            $sentencia = $db->connect()->prepare("SELECT usuario FROM usuario");
-                                            $sentencia->execute();
-
-                                            foreach ($sentencia as $row) {
-
-                                            ?>
-                                                <form class="text-center" action="buscar_id.php" method="POST">
-
-                                                    <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" <?php
-
-                                                                                                                                                if ($row[0] != 'Administrador') {
-                                                                                                                                                ?> value="<?php echo $row[0]; ?>"><?php
-
-                                                                                                                                                                                } else {
-                                                                                                                                                                                    ?> style="display: none;" > <?php
-                                                                                                                                                                                }
-                                                                                                                                                                                    ?></input>
-                                                </form>
-                                            <?php
-                                            }
-                                            ?>
+                                    <ul style="text-align: center;">
+                                        <li style="text-align: left;" class="btn btn-outline-info btn-sm mt-1 mb-1" id="mensajesEnviados">
+                                            <i class="fa fa-archive" aria-hidden="true"></i>Enviados
+                                        </li> <br>
+                                        <li class="btn btn-outline-info btn-sm mt-1 mb-1" id="mensajesRecibidos">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i> Recibidos
+                                        </li> <br>
+                                        <li class="btn btn-outline-info btn-sm mt-1 mb-1" id="mensajesNuevos">
+                                            <i class="fas fa-edit"></i>Nuevo
                                         </li>
                                     </ul>
-
                                 </div>
                             </li>
-                            <li>
-                                <a href="admin_becarios.php">
-                                    <i class="fas fa-graduation-cap"></i>
-                                    <span>Becarios</span>
+                            <li class="">
+                                <a href="#">
+                                    <i class="fa fa-folder-open" aria-hidden="true"></i>
+                                    <span>Talleres</span>
+                                </a>
+                                
+                            </li>
+                            <li id="mtro_evaluacion">
+                                <a href="#mtro_evaluacion">
+                                    <i class="fa fa-hourglass" aria-hidden="true"></i>
+                                    <span>Evaluación bimestral</span>
                                 </a>
                             </li>
                             <li class="header-menu">
                                 <span>Sistema</span>
+                            </li>
+
+                            <li class="sidebar-dropdown" id="opciones">
+                                <a href="#opciones">
+                                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                                    <span>Opciones</span>
+                                </a>
+                                <div class="sidebar-submenu">
+
+                                    <a href="#opcionespass">
+                                    <i class="fas fa-edit "></i>
+                                        <span>Cambiar contraseña</span>
+                                    </a>
+
+                                    <a href="#opcionesadmin">
+                                        <i class="fa fa-user-circle" ></i>
+                                        <span>Administrativos</span>
+                                    </a>
+                                </div>
                             </li>
                             <li>
                                 <a href="cerrar.php">
@@ -134,7 +168,7 @@ if (!isset($_SESSION['rol'])) {
 
             <main class="page-content">
                 <div class="container-fluid">
-                    <h2>Tabla de registros</h2>
+                    <h2>SIAE</h2>
                 </div>
 
             </main>
@@ -146,6 +180,18 @@ if (!isset($_SESSION['rol'])) {
     <script src="js/js.js" type="text/javascript"></script>
     <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js" type="text/javascript"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#cambiarp").on('click', function() {
+                $("#perfil").show();
+                //$("#perfiloculto").hide();
+                // $("#element5").show();  
+                return false;
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>
