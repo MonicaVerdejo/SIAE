@@ -16,7 +16,7 @@ if (!empty($_POST['correo']) && !empty($_POST['password'])) {
         $rol = $row[8];
         $_SESSION['rol'] = $rol;
         $_SESSION['nombre'] = $row[1];
-        $_SESSION['id_user'] = $row[0];
+        $_SESSION['id_admin'] = $row[0];
         $_SESSION['img_profile']=$row[6];
         $_SESSION['correo']=$row[2];
         
