@@ -174,55 +174,7 @@ if (!isset($_SESSION['rol'])) {
 
                 <!-------------------------------------------------------------SECCIÓN DE IMÁGENES--------------------------------------------->
 
-                <!--Mensajes Recibidos-->
-                <section id="mensajesR" style="display: none;">
-                    <div class="container-fluid">
-                        <div class="col-12 card">
-                            <div class="card-header">
-                                <h3 class="card-title">
-                                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                                    Mensajes Recibidos</h3>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="col-lg-12 col-xs-12">
-                                <div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table class="table table-bordered table-hover">
-                                            <tbody>
-                                                <?php
-                                                $taller_id = $_SESSION['taller_id'];
-                                                $busqueda = $db->connect()->prepare('select fecha, maestro.nombre, mensaje from maestro join mensajemaestro join talleres join alumnos
-                                                                                            on mensajemaestro.taller_id= talleres.id and alumnos.taller_id = talleres.id and talleres.id = maestro.taller_asignado 
-                                                                                                where talleres.id=:taller_id');
-                                                $busqueda->execute(['taller_id' => $taller_id]);
-                                                foreach ($busqueda as $fila) {
-                                                ?>
-                                                    <tr>
-                                                        <td>
-                                                            <img class="" src="img/mensajes.png" width="50" height="50" alt="Mensajes">
-                                                            <br>
-                                                            <?php echo $fila[0]; ?>
-                                                            <br>
-                                                            <?php echo $fila[1]; ?>
-                                                        </td>
-                                                        <td><?php echo $fila[2]; ?></td>
-                                                    </tr>
-                                                <?php
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
-                </section>
-
+                
                 <!--Mensajes Enviados-->
                 <section id="mensajesE" style="display: none;">
                     <form method="POST" class="container mr-0">

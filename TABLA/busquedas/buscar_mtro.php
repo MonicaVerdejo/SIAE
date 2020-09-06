@@ -1,8 +1,10 @@
 <?php
 include_once 'db.php';
 $db = new DB();
-
 $salida = "";
+$mtro_id=$_SESSION['id_mtro'];
+echo $mtro_id;
+
 $sentencia = $db->connect()->prepare("select fecha, maestro.nombre, mensaje from maestro join mensajemaestro join talleres
 on mensajemaestro.taller_id= talleres.id and talleres.id = maestro.taller_asignado and talleres.mtro_asignado=mensajemaestro.mtro_id 
 where mensajemaestro.mtro_id=:mtro_id");

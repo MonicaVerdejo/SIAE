@@ -31,6 +31,7 @@ if (!isset($_SESSION['rol'])) {
     <link rel="stylesheet" href="TABLA/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" type="text/css">
     <link rel="stylesheet" href="TABLA/busquedas/buscar_mtro.php">
     <link rel="stylesheet" href="css/styles2.css">
+
 </head>
 
 <body>
@@ -140,21 +141,23 @@ if (!isset($_SESSION['rol'])) {
             <!-- Sidebar end -->
 
             <main class="page-content">
-                <div class="container-fluid">
-                    <img src="img/logos/tecnm.svg" alt="">
+                <div id="Bienvenido">
+                    <div class="container-fluid">
+                        <img src="img/logos/tecnm.svg" alt="">
 
-                </div>
-                <div class="section section-lg ">
-                    <h1>
-                        <?php
-                        if ($_SESSION['sexo'] == 'F') {
-                        ?> Bienvenida <?php echo ($_SESSION['nombre']);
-                                    } else {
-                                        ?> Bienvenido <?php echo ($_SESSION['nombre']);
-                                                    }
+                    </div>
+                    <div class="section section-lg ">
+                        <h1>
+                            <?php
+                            if ($_SESSION['sexo'] == 'F') {
+                            ?> Bienvenida <?php echo ($_SESSION['nombre']);
+                                        } else {
+                                            ?> Bienvenido <?php echo ($_SESSION['nombre']);
+                                                        }
 
-                                                        ?>
-                    </h1>
+                                                            ?>
+                        </h1>
+                    </div>
                 </div>
 
 
@@ -195,6 +198,7 @@ if (!isset($_SESSION['rol'])) {
 
                 <!--Mensajes Recibidos-->
                 <section id="mensajesR" style="display: none;">
+
                     <div class="container-fluid">
                         <div class="col-12 card">
                             <div class="card-header">
@@ -203,6 +207,7 @@ if (!isset($_SESSION['rol'])) {
                                     Mensajes Recibidos</h3>
                             </div>
                         </div>
+
                         <div>
                             <div class="col-lg-12 col-xs-12">
                                 <div>
@@ -211,22 +216,19 @@ if (!isset($_SESSION['rol'])) {
                                         <table class="table table-bordered table-hover">
                                             <tbody>
                                                 <?php
-                                                $taller_id = $_SESSION['taller_id'];
-                                                $busqueda = $db->connect()->prepare('select fecha, maestro.nombre, mensaje from maestro join mensajemaestro join talleres join alumnos
-                                                                                            on mensajemaestro.taller_id= talleres.id and alumnos.taller_id = talleres.id and talleres.id = maestro.taller_asignado 
-                                                                                                where talleres.id=:taller_id');
-                                                $busqueda->execute(['taller_id' => $taller_id]);
+                                                $busqueda = $db->connect()->prepare('select fecha, mensaje from mensajeadmin order by fecha desc');
+                                                $busqueda->execute();
                                                 foreach ($busqueda as $fila) {
                                                 ?>
                                                     <tr>
-                                                        <td>
-                                                            <img class="" src="img/mensajes.png" width="50" height="50" alt="Mensajes">
+                                                        <td style="background-image: url(img/mailbox.jpg); background-size:cover; background-repeat: no-repeat; ">
+                                                            <img class="" src="img/mensajes.png" width="50" height="50" alt="Mensajes"> <br><br>
+                                                            <br>
+                                                            Administrador
                                                             <br>
                                                             <?php echo $fila[0]; ?>
-                                                            <br>
-                                                            <?php echo $fila[1]; ?>
                                                         </td>
-                                                        <td><?php echo $fila[2]; ?></td>
+                                                        <td><?php echo $fila[1]; ?></td>
                                                     </tr>
                                                 <?php
                                                 }
@@ -244,53 +246,57 @@ if (!isset($_SESSION['rol'])) {
 
                 <!--Mensajes Enviados-->
                 <section id="mensajesE" style="display: none;">
-                    <form method="POST" class="container mr-0">
-                        <div class="row col-5  mt-4">
-                            <div class="input-group mb-3">
-                                <label for="caja_busqueda" class="mt-1">Buscar:</label>
-                                <input type="text" name="caja_busqueda" id="caja_busqueda" class="form-control" placeholder="Busca por taller, fecha, mensaje">
-                            </div>
-                        </div>
-                    </form>
 
                     <div class="container-fluid">
                         <div class="col-12 card">
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <i class="fa fa-envelope" aria-hidden="true"></i>
-                                    Historial de mensajes</h3>
+                                    Mensajes Enviados </h3>
                             </div>
                         </div>
-                        <div class="container">
 
-                            <section id="tabla_resultado" class="content">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-12 ">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title text-center">ESTADÍSTICA DE LA OCUPACIÓN HOTELERA</h3>
-                                                </div>
-                                                <!-- /.card-header -->
-                                                <div class="card-body">
-                                                    <table id="datos" class="text-center table table-bordered table-hover table-responsive">
+                        <div>
+                            <div class="col-lg-12 col-xs-12">
+                                <div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table class="table table-bordered table-hover">
+                                            <tbody>
+                                                <?php
+                                                $mtro_id = $_SESSION['id_mtro'];
 
-
-
-
-                                                    </table>
-                                                </div>
-                                                <!-- /.card-body -->
-                                            </div>
-                                            <!-- /.card -->
-                                        </div>
-                                        <!-- /.col -->
+                                                $sentencia = $db->connect()->prepare("select fecha, maestro.nombre, mensaje from maestro join mensajemaestro join talleres
+                            on mensajemaestro.taller_id= talleres.id and talleres.id = maestro.taller_asignado and talleres.mtro_asignado=mensajemaestro.mtro_id 
+                            where mensajemaestro.mtro_id=:mtro_id");
+                                                $sentencia->execute(['mtro_id' => $mtro_id]);
+                                                $sentencia->execute();
+                                                $busqueda = $db->connect()->prepare('select fecha, mensaje from mensajeadmin order by fecha desc');
+                                                $sentencia->execute();
+                                                foreach ($sentencia as $fila) {
+                                                ?>
+                                                    <tr>
+                                                        <td style="background-image: url(img/mailbox.jpg); background-size:cover; background-repeat: no-repeat; ">
+                                                            <img class="" src="img/mensajes.png" width="50" height="50" alt="Mensajes"> <br><br>
+                                                            <br>
+                                                            <?php echo $fila[1]; ?>
+                                                            <br>
+                                                            <?php echo $fila[0]; ?>
+                                                        </td>
+                                                        <td><?php echo $fila[2]; ?></td>
+                                                    </tr>
+                                                <?php
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <!-- /.row -->
                                 </div>
-                                <!-- /.container-fluid -->
+                            </div>
                         </div>
-                        <!-- /.container-fluid -->
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
                 </section>
 
 
@@ -332,7 +338,23 @@ if (!isset($_SESSION['rol'])) {
                 </section>
 
 
-
+                <!-------------------------------EVALUACION BIMESTRAL---------------------------------------->
+                <section id="Ebimestral" style="display:none;">
+                    <div class="col-12 card mt-3">
+                        <div class="card-header">
+                            <h3 class="card-title"><i class="fas fa-edit"></i>INSTRUCCIONES</h3>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            <img src="img/test.svg" class="img-responsive" width="" height="400" alt="Instrucciones evaluacion">
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <iframe class="pdf" src="pdf/Formato de Evaluación al Desempeño de la Actividad Complementaria.pdf" allowfullscreen="true" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </section>
             </main>
         </div>
     </main>
@@ -356,6 +378,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#horario").hide();
                 $("#inicio").hide();
                 $("#mensajesN").hide();
+                $("#mensajesE").hide();
                 $("#mensajesR").show();
                 return false;
             });
@@ -363,20 +386,26 @@ if (!isset($_SESSION['rol'])) {
                 $("#horario").hide();
                 $("#inicio").hide();
                 $("#mensajesN").hide();
+                $("#mensajesR").hide();
                 $("#mensajesE").show();
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
                 $("#horario").hide();
                 $("#inicio").hide();
+                $("#mensajesR").hide();
+                $("#mensajesE").hide();
                 $("#mensajesN").show();
                 return false;
             });
-            $("#alumno_inicio").on('click', function() {
+            $("#mtro_evaluacion").on('click', function() {
                 $("#horario").hide();
+                $("#mensajesR").hide();
+                $("#mensajesE").hide();
                 $("#mensajesN").hide();
-                $("#inicio").show();
-                $("#mensajes").hide();
+                $("#Ebimestral").show();
+                $("#Bienvenido").hide();
+
                 return false;
             });
         });
@@ -387,6 +416,7 @@ if (!isset($_SESSION['rol'])) {
             $('[data-toggle="popover"]').popover();
         });
     </script>
+
 
 </body>
 
