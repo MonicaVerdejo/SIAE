@@ -607,6 +607,7 @@ body {
   background: silver;
   padding: 10px;
   margin-bottom: 3%;
+ 
 }
 
 
@@ -619,5 +620,32 @@ body {
   box-shadow: 0px 0px 3px #343434;
   box-shadow: 0px 0px 3px #343434;
   border-radius: 50%;
-  
+}
+
+#base{
+  margin:auto;
+  width: 300px;
+  height: auto;
+  background-color: steelblue;
+  padding-bottom: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  text-align: center;
+}
+
+
+
+#titulo {
+	position: relative;
+	top: -13px;
+	text-align: center;
+	font-size: 25px;
+	height: 45px;
+	color: black;
+	background-color: #d6d4d4;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+
 }

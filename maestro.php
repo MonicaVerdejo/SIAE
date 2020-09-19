@@ -60,13 +60,7 @@ if (!isset($_SESSION['rol'])) {
                                     <span>Horario</span>
                                 </a>
                             </li>
-                            <li id="mtro_tablas">
-                                <a href="#mtro_tablas">
-                                    <i class="fas fa-table"></i>
-                                    <span>Tablas</span>
-                                </a>
-
-                            </li>
+                            
                             <li class="sidebar-dropdown">
                                 <a href="#mtro_mensajes">
                                     <i class="fa fa-comment" aria-hidden="true"></i>
@@ -120,12 +114,7 @@ if (!isset($_SESSION['rol'])) {
                             <li class="header-menu">
                                 <span>Sistema</span>
                             </li>
-                            <li id="opciones">
-                                <a href="#opciones">
-                                    <i class="fa fa-cogs" aria-hidden="true"></i>
-                                    <span>Opciones</span>
-                                </a>
-                            </li>
+                            
                             <li>
                                 <a href="cerrar.php">
                                     <i class="fa fa-power-off"></i>
