@@ -649,3 +649,56 @@ body {
 	border-top-right-radius: 5px;
 
 }
+
+
+
+/*------------------------------------------------CMS------------------------------------------------------*/
+.base-cms{
+ margin: auto;
+ width: auto;
+ background-color: gainsboro;
+ padding-bottom: 1%;
+ padding-left: 1%;
+ padding-right: 1%;
+ box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+ border-radius: 5px;
+}
+
+.img-div-1{
+  margin:auto;
+  width: 100px;
+  height: auto;
+  background-color: steelblue;
+  padding-bottom: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.img-div-2{
+  margin:auto;
+  width: 100px;
+  height: auto;
+  background-color: mediumseagreen;
+  padding-bottom: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.img-div-3{
+  margin:auto;
+  width: 100px;
+  height: auto;
+  background-color: rgb(189, 108, 189);
+  padding-bottom: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  text-align: center;
+}

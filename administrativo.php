@@ -30,6 +30,8 @@ if (!isset($_SESSION['rol'])) {
     <link rel="stylesheet" href="TABLA/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" type="text/css">
     <link rel="stylesheet" href="TABLA/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" type="text/css">
     <link rel="stylesheet" href="css/styles2.css">
+    <!--MODAL BOOTSTRAP-->
+
 
 </head>
 
@@ -169,7 +171,124 @@ if (!isset($_SESSION['rol'])) {
                 <div class="container-fluid">
                     <h2>SIAE</h2>
                 </div>
+
                 <!-------------------------------------------------------------SECCIÓN DE CMS------------------------------------------------->
+
+                <section class="section bg-default text-md-center">
+                    <div class="container " id="cms" style="display:none;">
+                        <h4 style="color:black">TABLERO DE EDICIÓN</h4>
+                        <div class="base-cms mt-5">
+                            <br>
+                            <h5 class="mt-1">Nueva experiencia de edición</h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-4 ">
+                                    <div class="img-div-1 btn btn-default btn-rounded" data-toggle="modal" data-target="#exampleModal">
+                                        <p>INICIO</p>
+                                        <img src="img/muestra.png" height="150px" alt="Edit image index">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="img-div-2">
+                                        <p>MODULO CIVICO</p>
+                                        <img src="img/image.png" height="150px" alt="Edit image civico">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="img-div-3">
+                                        <p>MODULO CULTURAL</p>
+                                        <img src="img/galeria.png" height="150px" alt="Edit image cultural">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-4 ">
+                                    <div class="img-div-1">
+                                        <p>MODULO DEPORTIVO</p>
+                                        <img src="img/img.png" height="150px" alt="Edit image index">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="img-div-2">
+                                        <p>SLIDER 1</p>
+                                        <img src="img/galeriaa.png" height="150px" alt="Edit image civico">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="img-div-3">
+                                        <p>SLIDER 2</p>
+                                        <img src="img/imagen.png" height="150px" alt="Edit image cultural">
+                                    </div>
+                                </div>
+                                <div class="col-4 mt-3">
+                                    <div class="img-div-1">
+                                        <p>SLIDER 3</p>
+                                        <img src="img/gallery.png" height="150px" alt="Edit image cultural">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr>
+                            <div>
+                                <label>
+                                    En esta sección podrás editar las imágenes que deseas destaquen en tu página sin necesidad de acudir al técnico del sistema.
+                                    <br> Recuerda que es primordial te acates a las dimensiones específicadas si deseas que no haya desbordes en la misma.
+                                </label>
+                                <div class="col-12">
+                                    <div class="">
+                                        <img src="img/CMS.png" height="150px" alt="CMS">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+                </section>
+
+                <!--Modal Form-->
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Cambiar imagen de Inicio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/img_edit/bg-image-1-1920x800.jpg" width="400px" alt="Portada Inicio">
+
+                                <form class="col-12" action="cms/upload_inicio.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--Modal Form-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <!-------------------------------------------------------------SECCIÓN DE MAESTROS--------------------------------------------->
                 <section class="section  section-xl bg-default text-md-center">
@@ -236,16 +355,16 @@ if (!isset($_SESSION['rol'])) {
 
                                     $taller = $db->connect()->prepare("SELECT taller,id FROM `talleres` WHERE 1");
                                     $taller->execute();
-                                    
+
                                     foreach ($taller as $row) {
                                     ?>
-                                         <div class="form-group">
-                                        <label for="sexo">Sexo</label>
-                                        <select id="sexo" class="form-control" name="sexo">
-                                            <option><?php echo $row[0]; ?></option>
-                                            
-                                        </select>
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="sexo">Sexo</label>
+                                            <select id="sexo" class="form-control" name="sexo">
+                                                <option><?php echo $row[0]; ?></option>
+
+                                            </select>
+                                        </div>
                                     <?php
                                     }
                                     ?>
@@ -460,9 +579,7 @@ if (!isset($_SESSION['rol'])) {
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <script src="js/popper.min.js" type="text/javascript"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/js.js" type="text/javascript"></script>
     <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js" type="text/javascript"></script>
@@ -473,31 +590,42 @@ if (!isset($_SESSION['rol'])) {
                 $("#perfil").show();
                 return false;
             });
+            //Seccion de CMS
+            $("#inicio-cms").on('click', function() {
+                $("#cms").show();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#teach-options").hide();
+                $("#table-mtro").hide();
+                $("#form-Tregister").hide();
+                return false;
+            });
             //seccion de mensajes
             $("#mensajesEnviados").on('click', function() {
-                $("#inicio").hide();
+                $("#cms").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").show();
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
-                $("#inicio").hide();
+                $("#cms").hide();
                 $("#mensajesN").show();
                 return false;
             });
             //seccion de maestro
             $("#page-mtro").on('click', function() {
-                $("#inicio").hide();
+                $("#cms").hide();
                 $("#mensajesN").hide();
                 $("#teach-options").show();
                 $("#table-mtro").show();
                 return false;
             });
             $("#registrarM").on('click', function() {
-                $("#inicio").hide();
+                $("#cms").hide();
                 $("#form-Tregister").show();
                 return false;
             });
+
 
         });
     </script>

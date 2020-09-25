@@ -144,6 +144,7 @@
       </div>
     </header>
     <!--SIAE-->
+
     <section class="section section-full section-inset-1 bg-default text-center bg-image background-position-1"
       id="home" style="background-image: url(img/img_portada/inicio.jpg)">
       <div class="container">
