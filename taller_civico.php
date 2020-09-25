@@ -93,7 +93,8 @@ $db = new DB();
                 </nav>
             </div>
         </header>
-        <section class="section section-inset-1 bg-default text-center bg-image background-position-1" id="home" style="background-image: url(img/img_portada/civico.jpg)">
+        <section class="section section-inset-1 bg-default text-center bg-image background-position-1" 
+        id="home" style="background-image: url(img/img_portada/civico/civico.jpg)">
             <div class="container">
                 <div class="title-style-1-wrap">
                     <div class="oh-desktop wow slideInLeft">

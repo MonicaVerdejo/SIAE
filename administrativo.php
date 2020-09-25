@@ -183,46 +183,46 @@ if (!isset($_SESSION['rol'])) {
                             <hr>
                             <div class="row">
                                 <div class="col-4 ">
-                                    <div class="img-div-1 btn btn-default btn-rounded" data-toggle="modal" data-target="#exampleModal">
-                                        <p>INICIO</p>
+                                    <div class="img-div-1 btn btn-default btn-rounded" data-toggle="modal" data-target="#inicioModal">
+                                        <p class="font-weight-bold">INICIO</p>
                                         <img src="img/muestra.png" height="150px" alt="Edit image index">
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="img-div-2">
-                                        <p>MODULO CIVICO</p>
+                                    <div class="img-div-2 btn btn-default btn-rounded" data-toggle="modal" data-target="#civicoModal">
+                                        <p class="font-weight-bold">CIVICO</p>
                                         <img src="img/image.png" height="150px" alt="Edit image civico">
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="img-div-3">
-                                        <p>MODULO CULTURAL</p>
+                                    <div class="img-div-3 btn btn-default btn-rounded" data-toggle="modal" data-target="#culturalModal">
+                                        <p class="font-weight-bold">CULTURAL</p>
                                         <img src="img/galeria.png" height="150px" alt="Edit image cultural">
                                     </div>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-4 ">
-                                    <div class="img-div-1">
-                                        <p>MODULO DEPORTIVO</p>
+                                    <div class="img-div-1 btn btn-default btn-rounded" data-toggle="modal" data-target="#deportivoModal">
+                                        <p class="font-weight-bold">DEPORTIVO</p>
                                         <img src="img/img.png" height="150px" alt="Edit image index">
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="img-div-2">
-                                        <p>SLIDER 1</p>
+                                    <div class="img-div-2 btn btn-default btn-rounded" data-toggle="modal" data-target="#slider1Modal">
+                                        <p class="font-weight-bold">SLIDER 1</p>
                                         <img src="img/galeriaa.png" height="150px" alt="Edit image civico">
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="img-div-3">
-                                        <p>SLIDER 2</p>
+                                    <div class="img-div-3 btn btn-default btn-rounded" data-toggle="modal" data-target="#slider2Modal">
+                                        <p class="font-weight-bold">SLIDER 2</p>
                                         <img src="img/imagen.png" height="150px" alt="Edit image cultural">
                                     </div>
                                 </div>
                                 <div class="col-4 mt-3">
-                                    <div class="img-div-1">
-                                        <p>SLIDER 3</p>
+                                    <div class="img-div-1 btn btn-default btn-rounded" data-toggle="modal" data-target="#slider3Modal">
+                                        <p class="font-weight-bold">SLIDER 3</p>
                                         <img src="img/gallery.png" height="150px" alt="Edit image cultural">
                                     </div>
                                 </div>
@@ -245,18 +245,19 @@ if (!isset($_SESSION['rol'])) {
                     </div>
                 </section>
 
-                <!--Modal Form-->
+                <!--Modal Form Index-->
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="inicioModal" tabindex="-1" role="dialog" aria-labelledby="inicioModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Cambiar imagen de Inicio</h5>
+                                <h5 class="modal-title" id="inicioModalLabel">Cambiar imagen de Inicio</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body text-center">
+
                                 <img src="img/img_edit/bg-image-1-1920x800.jpg" width="400px" alt="Portada Inicio">
 
                                 <form class="col-12" action="cms/upload_inicio.php" method="post" enctype="multipart/form-data">
@@ -271,22 +272,148 @@ if (!isset($_SESSION['rol'])) {
                         </div>
                     </div>
                 </div>
-                <!--Modal Form-->
+
+                <!--Modal Form Civico-->
+                <div class="modal fade" id="civicoModal" tabindex="-1" role="dialog" aria-labelledby="civicoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="civicoModalLabel">Cambiar imagen de Civico</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+
+                                <img src="img/img_edit/bg-image-1-1920x800.jpg" width="400px" alt="Portada Inicio">
+
+                                <form class="col-12" action="cms/upload_civico.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
 
 
+                        </div>
+                    </div>
+                </div>
 
+                <!--Modal Form Cultural-->
+                <div class="modal fade" id="culturalModal" tabindex="-1" role="dialog" aria-labelledby="culturalModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="culturalModalLabel">Cambiar imagen de Cultural</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/img_edit/bg-image-1-1920x800.jpg" width="400px" alt="Portada Inicio">
+                                <form class="col-12" action="cms/upload_cultural.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!--Modal Form Deportivo-->
+                <div class="modal fade" id="deportivoModal" tabindex="-1" role="dialog" aria-labelledby="deportivoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deportivoModalLabel">Cambiar imagen de Deportivo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/img_edit/bg-image-1-1920x800.jpg" width="400px" alt="Portada Inicio">
+                                <form class="col-12" action="cms/upload_deportivo.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                 <!--Modal Form Slider1-->
+                 <div class="modal fade" id="slider1Modal" tabindex="-1" role="dialog" aria-labelledby="slider1ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="slider1ModalLabel">Cambiar la imagen 1 del carrusel que se presenta en el módulo de Inicio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/img_edit/index-1-618x614.jpg" height="250px" alt="Portada Inicio">
+                                <form class="col-12" action="cms/upload_slider1.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                 <!--Modal Form Slider2-->
+                 <div class="modal fade" id="slider2Modal" tabindex="-1" role="dialog" aria-labelledby="slider2ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="slider2ModalLabel">Cambiar la imagen 2 del carrusel que se presenta en el módulo de Inicio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/img_edit/index-1-618x614.jpg" height="250px" alt="Portada Inicio">
+                                <form class="col-12" action="cms/upload_slider2.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-
-
-
-
-
-
-
-
+                <!--Modal Form Slider3-->
+                <div class="modal fade" id="slider3Modal" tabindex="-1" role="dialog" aria-labelledby="slider3ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="slider3ModalLabel">Cambiar la imagen 2 del carrusel que se presenta en el módulo de Inicio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/img_edit/index-1-618x614.jpg" height="250px" alt="Portada Inicio">
+                                <form class="col-12" action="cms/upload_slider3.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
