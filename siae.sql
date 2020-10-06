@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-09-2020 a las 19:14:51
+-- Tiempo de generación: 03-10-2020 a las 22:20:54
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -83,14 +83,22 @@ INSERT INTO `alumnos` (`id`, `nombre`, `matricula`, `password`, `taller_id`, `re
 --
 
 CREATE TABLE `cms` (
-  `img_index` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `img_civico` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `img_cultural` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `img_deportivo` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `slider1` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `slider2` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `slider3` varchar(30) COLLATE utf8_unicode_ci NOT NULL
+  `id` int(11) NOT NULL,
+  `img_index` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `img_civico` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `img_cultural` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `img_deporte` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `slider1` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `slider2` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `slider3` varchar(60) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `cms`
+--
+
+INSERT INTO `cms` (`id`, `img_index`, `img_civico`, `img_cultural`, `img_deporte`, `slider1`, `slider2`, `slider3`) VALUES
+(1, 'inicio.jpg', 'civico.jpg', 'cultural.jpg', 'deportivo.jpg', 'slider1.jpg', 'slider2.jpg', 'slider3.jpg');
 
 -- --------------------------------------------------------
 
@@ -117,7 +125,40 @@ CREATE TABLE `maestro` (
 
 INSERT INTO `maestro` (`id`, `nombre`, `correo`, `password`, `taller_asignado`, `curp`, `telefono`, `sexo`, `Token`, `rol_id`) VALUES
 (1, 'Rommel Antonio Chi Lopez', 'rommel@yopmail.com', '$2y$12$5ut95DOWPJ/XGLSKShLm0e8SgjhOHMH4Lz.O3gY9uSYYUYaCWnfeS', 1, 'CILR971204MCCLRN01', '9821276466', 'M', '', 3),
-(2, 'Luis Miranda', 'miranda@yopmail.com', '$2y$12$Gx5CdxGjsmWh.wQnHamv9elSzvpLMQ2EwR3ZVhCyqt0e/kUou8vry', 2, 'MIOL971204MCCLRN05', '9821276467', 'M', '', 3);
+(2, 'Luis Miranda', 'miranda@yopmail.com', '$2y$12$Gx5CdxGjsmWh.wQnHamv9elSzvpLMQ2EwR3ZVhCyqt0e/kUou8vry', 2, 'MIOL971204MCCLRN05', '9821276467', 'M', '', 3),
+(13, 'monica verdejo', 'priscila_verdejo@outlook.com', '$2y$10$HaI32qg4GekVuwG9hRT2xuDILvAMSkBI4BVxsOOtEGy8sMpNnYMmy', 2, 'DEVM971204MCCLRN01', '9821276466', 'F', '', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensajeadmin`
+--
+
+CREATE TABLE `mensajeadmin` (
+  `id` int(11) NOT NULL,
+  `mensaje` varchar(140) COLLATE utf8_unicode_ci NOT NULL,
+  `fecha` datetime NOT NULL,
+  `estado` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `mensajeadmin`
+--
+
+INSERT INTO `mensajeadmin` (`id`, `mensaje`, `fecha`, `estado`, `admin_id`) VALUES
+(0, 'Bienvenidos al nuevo curso', '2020-09-03 12:31:26', 0, 0),
+(0, 'Verifiquen su correo, por favor. ', '2020-09-03 12:40:32', 0, 0),
+(0, 'Buenas tardes, los quiero. ', '2020-09-03 12:42:30', 0, 0),
+(0, 'Buenas tardes raza', '2020-09-03 12:53:22', 0, 0),
+(0, 'sesdsd', '2020-09-03 12:54:19', 0, 0),
+(0, 'sdsdsdsd', '2020-09-03 13:01:56', 0, 0),
+(0, 'asasas', '2020-09-03 13:05:25', 0, 0),
+(0, 'ptmxmil', '2020-09-03 13:07:43', 0, 0),
+(0, 'sdsdsdsd', '2020-09-03 13:08:55', 0, 0),
+(0, 'sdsdsdsd', '2020-09-03 13:09:20', 0, 0),
+(0, 'sdsdsdsdsd', '2020-09-03 13:10:36', 0, 0),
+(0, 'adadadadad', '2020-09-03 13:11:48', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -215,6 +256,12 @@ ALTER TABLE `alumnos`
   ADD KEY `taller_id` (`taller_id`);
 
 --
+-- Indices de la tabla `cms`
+--
+ALTER TABLE `cms`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `maestro`
 --
 ALTER TABLE `maestro`
@@ -259,10 +306,16 @@ ALTER TABLE `alumnos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `cms`
+--
+ALTER TABLE `cms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `maestro`
 --
 ALTER TABLE `maestro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajemaestro`

@@ -148,7 +148,7 @@ $db = new DB();
 
         <!-- Page Footer-->
         <footer class="section footer-classic section-full section-full-1 section-sm section-inset-2 bg-gray-3 context-dark text-md-center" id="contacts">
-         <img class="mb-3" src="img/slider/comunidadDigital.jpg" alt="comunidad Digital">
+         <img class="mb-3" src="img/img_portada/slider/comunidadDigital.jpg" alt="comunidad Digital">
             <div class="container">
                 <div class="footer-classic-list-social wow fadeInUp">
                     <ul class="list-inline list-social list-inline-sm">
