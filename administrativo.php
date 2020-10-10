@@ -522,7 +522,19 @@ if (!isset($_SESSION['rol'])) {
                                         <select class="custom-select" name="mtro" id="mtro" required="true">
                                             <?php foreach ($taller as $row) {
                                             ?>
-                                                <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+                                                <option
+                                                <?php 
+                                                if ($row[0] == 1) {
+                                                    # code...
+                                                   ?> style="display: none;"<?php
+                                                } else {
+                                                    # code...
+                                                    ?> value="<?php echo $row[0];?>"<?php
+                                                }
+                                                                                            
+                                                ?>
+                                                
+                                                 ><?php echo $row[1]; ?></option>
 
                                             <?php
                                             }
@@ -594,7 +606,24 @@ if (!isset($_SESSION['rol'])) {
                                         <select class="custom-select" name="mtro" id="mtro" required="true">
                                             <?php foreach ($taller as $row) {
                                             ?>
-                                                <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+                                                <option
+                                                
+                                                <?php 
+                                                if ($row[0] == 1) {
+                                                    # code...
+                                                   ?> style="display: none;"<?php
+                                                } else {
+                                                    # code...
+                                                    ?> value="<?php echo $row[0];?>"<?php
+                                                }
+                                                
+                                                
+                                                ?>
+                                                
+                                                
+                                                
+                                                
+                                                ><?php echo $row[1]; ?></option>
 
                                             <?php
                                             }
