@@ -85,12 +85,52 @@ if (!isset($_SESSION['rol'])) {
                                     <span>Administrar inicio</span>
                                 </a>
                             </li>
-                            <li id="page-Course">
+
+                            <li class="sidebar-dropdown">
                                 <a href="#">
                                     <i class="fa fa-folder-open" aria-hidden="true"></i>
                                     <span>Talleres</span>
                                 </a>
+                                <div class="sidebar-submenu">
+                                    <ul style="text-align: center;">
+                                        <li id="page-Course" style="text-align: left;" class="btn btn-outline-info btn-sm mt-1 mb-1" id="mensajesEnviados">
+                                            <i class="fa fa-archive" aria-hidden="true"></i>Administrar
+                                        </li> <br>
+                                        <li>
+                                            <?php
+                                            $sentencia = $db->connect()->prepare("SELECT taller FROM talleres");
+                                            $sentencia->execute();
+
+                                            foreach ($sentencia as $row) {
+
+                                            ?>
+                                                <form class="text-center" action="buscar_id.php" method="POST">
+
+                                                    <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[0]; ?>">
+                                                    </input>
+                                                </form>
+                                            <?php } ?>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             <li id="page-mtro">
                                 <a href="#">
                                     <i class="fas fa-table"></i>
@@ -136,15 +176,9 @@ if (!isset($_SESSION['rol'])) {
                                     <span>Opciones</span>
                                 </a>
                                 <div class="sidebar-submenu">
-
                                     <a href="#opcionespass">
                                         <i class="fas fa-edit "></i>
                                         <span>Cambiar contraseña</span>
-                                    </a>
-
-                                    <a href="#opcionesadmin">
-                                        <i class="fa fa-user-circle"></i>
-                                        <span>Administrativos</span>
                                     </a>
                                 </div>
                             </li>
@@ -522,19 +556,16 @@ if (!isset($_SESSION['rol'])) {
                                         <select class="custom-select" name="mtro" id="mtro" required="true">
                                             <?php foreach ($taller as $row) {
                                             ?>
-                                                <option
-                                                <?php 
-                                                if ($row[0] == 1) {
-                                                    # code...
-                                                   ?> style="display: none;"<?php
-                                                } else {
-                                                    # code...
-                                                    ?> value="<?php echo $row[0];?>"<?php
-                                                }
-                                                                                            
-                                                ?>
-                                                
-                                                 ><?php echo $row[1]; ?></option>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
+
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
 
                                             <?php
                                             }
@@ -593,7 +624,9 @@ if (!isset($_SESSION['rol'])) {
                         <div id="base">
                             <div id="triangle"></div>
                             <div id="titulo">Eliminar maestro</div>
-                            <div id="form">
+
+                            <img src="img/logos/recycle-bin.png" width="100px" alt="Borrar">
+                            <div class="mt-4" id="form">
                                 <form method="POST" action="admin/delete_mtro.php">
                                     <?php
                                     $taller = $db->connect()->prepare("SELECT id, nombre FROM `maestro` WHERE 1");
@@ -606,24 +639,17 @@ if (!isset($_SESSION['rol'])) {
                                         <select class="custom-select" name="mtro" id="mtro" required="true">
                                             <?php foreach ($taller as $row) {
                                             ?>
-                                                <option
-                                                
-                                                <?php 
-                                                if ($row[0] == 1) {
-                                                    # code...
-                                                   ?> style="display: none;"<?php
-                                                } else {
-                                                    # code...
-                                                    ?> value="<?php echo $row[0];?>"<?php
-                                                }
-                                                
-                                                
-                                                ?>
-                                                
-                                                
-                                                
-                                                
-                                                ><?php echo $row[1]; ?></option>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
+
+
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
 
                                             <?php
                                             }
@@ -631,7 +657,8 @@ if (!isset($_SESSION['rol'])) {
                                         </select>
                                     </div>
 
-                                    <input class="btn btn-info" type="submit" value="Enviar">
+                                    <input class="btn btn-info" type="submit" value="Enviar" title="Advertencia" data-trigger="hover" data-content="Recuerda que una vez eliminado no podrás recuperarlo" data-toggle="popover">
+
                                 </form>
                             </div>
                         </div>
@@ -732,8 +759,9 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                         </div>
                     </div>
+
                     <!--Form-registrar-alumno-->
-                    <section class="section-form bg-default mt-4" id="form-Aregister" style="display: none;">
+                    <section class="section-form bg-default mt-4 mb-4" id="form-Aregister" style="display: none;">
                         <div id="base">
                             <div id="titulo">Agregar Alumno</div>
                             <div id="form">
@@ -815,19 +843,62 @@ if (!isset($_SESSION['rol'])) {
                     </section>
 
                     <!--Form-edit-alumno-->
-                    <section class="mt-4 section-form bg-default" style="display:none" id="form-Aedit">
+                    <section class="mt-4 mb-4 section-form bg-default" style="display:none" id="form-Aedit">
                         <div id="base">
                             <div id="triangle"></div>
                             <div id="titulo">Editar Alumno</div>
                             <div id="form">
                                 <form method="POST" action="admin/edit_std.php">
                                     <div class="form-group">
-                                        <label for="nombre">Nombre completo</label>
-                                        <input id="nombre" class="form-control" type="text" name="nombre" required="true">
-                                    </div>
-                                    <div class="form-group">
                                         <label for="matricula">Matricula</label>
                                         <input id="matricula" class="form-control" type="text" name="matricula" required="true">
+                                    </div>
+                                    <?php
+                                    $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
+                                    $taller->execute();
+                                    ?>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="taller">Taller</label>
+                                        </div>
+                                        <select class="custom-select" name="taller" id="taller" required="true">
+                                            <?php foreach ($taller as $row) {
+                                            ?>
+                                                <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="representativo">Representativo</label>
+                                        <select id="representativo" class="form-control" name="representativo" required="true">
+                                            <option>Sí</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Estatus del curso</label>
+                                        <select id="status" class="form-control" name="status" required="true">
+                                            <option>Cursando</option>
+                                            <option>Aprobado</option>
+                                            <option>Reprobado</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="semestre">Semestre</label>
+                                        <select id="semestre" class="form-control" name="semestre" required="true">
+                                            <option>Primero</option>
+                                            <option>Segundo</option>
+                                            <option>Tercero</option>
+                                            <option>Cuarto</option>
+                                            <option>Quinto</option>
+                                            <option>Sexto</option>
+                                            <option>Séptimo</option>
+                                            <option>Octavo</option>
+                                            <option>Noveno</option>
+                                        </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                 </form>
@@ -836,26 +907,35 @@ if (!isset($_SESSION['rol'])) {
                     </section>
 
                     <!--Form-eliminar-alumno-->
-                    <section class="mt-4 section-form bg-default" style="display:none" id="form-Adelete">
+                    <section class="mt-4 mb-4 section-form bg-default" style="display:none" id="form-Adelete">
                         <div id="base">
                             <div id="triangle"></div>
                             <div id="titulo">Eliminar Alumno</div>
                             <div id="form">
-                                <form method="POST" action="admin/delete_std.php">
-                                    <div class="form-group">
-                                        <label for="nombre">Nombre completo</label>
-                                        <input id="nombre" class="form-control" type="text" name="nombre" required="true">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="matricula">Matricula</label>
-                                        <input id="matricula" class="form-control" type="text" name="matricula" required="true">
-                                    </div>
 
-                                    <input class="btn btn-info" type="submit" value="Enviar">
+                                <img src="img/logos/recycle-bin.png" width="100px" alt="Borrar">
+
+                                <form class="col-12" action="admin/delete_std.php" method="post">
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="matricula">Ingresa la Matricula</label>
+                                        <input id="matricula" class="form-control" type="text" name="matricula" required=>
+                                    </div>
+                                    <button type="submit" class="btn btn-secondary" title="Advertencia" data-trigger="hover" data-content="Recuerda que una vez eliminado no podrás recuperarlo" data-toggle="popover">Enviar</button>
                                 </form>
+
+
+
                             </div>
                         </div>
                     </section>
+
+                    <!--End-alumnos_section-->
+
+
+
+
+
 
                 </section>
 
@@ -1094,7 +1174,10 @@ if (!isset($_SESSION['rol'])) {
                             <div id="base">
                                 <div id="triangle"></div>
                                 <div id="titulo">Eliminar taller</div>
-                                <div id="form">
+
+                                <img src="img/logos/recycle-bin.png" width="100px" alt="Borrar">
+                                <div class="mt-4" id="form">
+
                                     <form method="POST" action="admin/delete_taller.php">
                                         <?php
                                         $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
@@ -1114,7 +1197,8 @@ if (!isset($_SESSION['rol'])) {
                                                 ?>
                                             </select>
                                         </div>
-                                        <input class="btn btn-info" type="submit" value="Enviar">
+                                        <input class="btn btn-info" type="submit" value="Enviar" title="Advertencia" data-trigger="hover" data-content="Recuerda que una vez eliminado no podrás recuperarlo" data-toggle="popover">
+
                                     </form>
                                 </div>
                             </div>
@@ -1246,7 +1330,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
                 $("#form-Adelete").hide();
-                
+
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
@@ -1263,7 +1347,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
                 $("#form-Adelete").hide();
-               
+
                 return false;
             });
             //seccion de maestro
@@ -1278,7 +1362,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Adelete").hide();
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
-               
+
                 return false;
             });
             $("#registrarM").on('click', function() {
@@ -1440,7 +1524,7 @@ if (!isset($_SESSION['rol'])) {
                 return false;
             });
 
-            
+
         });
     </script>
     <script>
