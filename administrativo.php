@@ -31,8 +31,6 @@ if (!isset($_SESSION['rol'])) {
     <link rel="stylesheet" href="TABLA/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" type="text/css">
     <link rel="stylesheet" href="css/styles2.css">
     <!--MODAL BOOTSTRAP-->
-
-
 </head>
 
 <body>
@@ -85,17 +83,31 @@ if (!isset($_SESSION['rol'])) {
                                     <span>Administrar inicio</span>
                                 </a>
                             </li>
-
+                            <li id="page-Course">
+                                <a href="#">
+                                    <i class="fas fa-table"></i>
+                                    <span>Talleres</span>
+                                </a>
+                            </li>
+                            
+                            <li id="page-mtro">
+                                <a href="#">
+                                    <i class="fas fa-table"></i>
+                                    <span>Maestros</span>
+                                </a>
+                            </li>
+                            
                             <li class="sidebar-dropdown">
                                 <a href="#">
                                     <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                    <span>Talleres</span>
+                                    <span>Alumnos</span>
                                 </a>
                                 <div class="sidebar-submenu">
                                     <ul style="text-align: center;">
-                                        <li id="page-Course" style="text-align: left;" class="btn btn-outline-info btn-sm mt-1 mb-1" id="mensajesEnviados">
+                                        <li id="page-std" style="text-align: left;" class="btn btn-outline-info btn-sm mt-1 mb-1" id="mensajesEnviados">
                                             <i class="fa fa-archive" aria-hidden="true"></i>Administrar
                                         </li> <br>
+                                        <p style="color: white; text-align: left; margin-left:15px;">Listas/Evaluar:</p>
                                         <li>
                                             <?php
                                             $sentencia = $db->connect()->prepare("SELECT taller FROM talleres");
@@ -106,42 +118,21 @@ if (!isset($_SESSION['rol'])) {
                                             ?>
                                                 <form class="text-center" action="buscar_id.php" method="POST">
 
-                                                    <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[0]; ?>">
+                                                    <input
+                                                    
+                                            <?php if ($row[0] == "No asignado") { ?> style="display: none;" <?php }else{ ?>
+                                                    
+                                                    type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[0];} ?>">
                                                     </input>
                                                 </form>
                                             <?php } ?>
+
+
+
+                                            
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            <li id="page-mtro">
-                                <a href="#">
-                                    <i class="fas fa-table"></i>
-                                    <span>Maestros</span>
-                                </a>
-                            </li>
-                            <li id="page-std">
-                                <a href="#">
-                                    <i class="fas fa-table"></i>
-                                    <span>Alumnos</span>
-                                </a>
                             </li>
                             <li class="sidebar-dropdown">
                                 <a href="#">
@@ -512,9 +503,18 @@ if (!isset($_SESSION['rol'])) {
                                             <label class="input-group-text" for="taller">Taller</label>
                                         </div>
                                         <select class="custom-select" name="taller" id="taller" required="true">
-                                            <?php foreach ($taller as $row) {
+                                        <?php foreach ($taller as $row) {
                                             ?>
-                                                <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
+
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
 
                                             <?php
                                             }
@@ -593,9 +593,18 @@ if (!isset($_SESSION['rol'])) {
                                             <label class="input-group-text" for="taller">Taller</label>
                                         </div>
                                         <select class="custom-select" name="taller" id="taller" required="true">
-                                            <?php foreach ($taller as $row) {
+                                        <?php foreach ($taller as $row) {
                                             ?>
-                                                <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
+
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
 
                                             <?php
                                             }
@@ -787,9 +796,18 @@ if (!isset($_SESSION['rol'])) {
                                             <label class="input-group-text" for="taller">Taller</label>
                                         </div>
                                         <select class="custom-select" name="taller" id="taller" required="true">
-                                            <?php foreach ($taller as $row) {
+                                        <?php foreach ($taller as $row) {
                                             ?>
-                                                <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
+
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
 
                                             <?php
                                             }
@@ -862,9 +880,18 @@ if (!isset($_SESSION['rol'])) {
                                             <label class="input-group-text" for="taller">Taller</label>
                                         </div>
                                         <select class="custom-select" name="taller" id="taller" required="true">
-                                            <?php foreach ($taller as $row) {
+                                        <?php foreach ($taller as $row) {
                                             ?>
-                                                <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
+
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
 
                                             <?php
                                             }
@@ -931,11 +958,6 @@ if (!isset($_SESSION['rol'])) {
                     </section>
 
                     <!--End-alumnos_section-->
-
-
-
-
-
 
                 </section>
 
@@ -1124,13 +1146,22 @@ if (!isset($_SESSION['rol'])) {
                                                 <label class="input-group-text" for="nombre">Taller</label>
                                             </div>
                                             <select class="custom-select" name="nombre" id="nombre" required="true">
-                                                <?php foreach ($taller as $row) {
-                                                ?>
-                                                    <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+                                            <?php foreach ($taller as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
 
-                                                <?php
-                                                }
-                                                ?>
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
+
+                                            <?php
+                                            }
+                                            ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -1278,7 +1309,10 @@ if (!isset($_SESSION['rol'])) {
                 </section>
                 <!-------------------------------------------------------------SECCIÓN DE EVALUACION BIMESTRAL------------------------------------------------->
 
+<section>
 
+
+</section>
 
 
 

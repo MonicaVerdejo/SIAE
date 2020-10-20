@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['taller']) && !empty($
     $busquedataller->execute();
     foreach ($busquedataller  as $row) {$taller_id= $row[0];}
     
-    if ($sentencia==True) {
+    if (!empty($busquedataller)) {
        
         $query = $db->connect()->prepare("INSERT INTO mensajemaestro (mensaje,fecha,estado,mtro_id,taller_id) 
                                       VALUES('$mensaje', now(), 0 ,'$mtro_id', '$taller_id');");
@@ -20,3 +20,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['taller']) && !empty($
 
     }
 }
+
+echo "<script>location.href='maestro.php';</script>";

@@ -29,8 +29,8 @@ if (!isset($_SESSION['rol'])) {
     <!-- DataTables -->
     <link rel="stylesheet" href="TABLA/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" type="text/css">
     <link rel="stylesheet" href="TABLA/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" type="text/css">
-    <link rel="stylesheet" href="TABLA/busquedas/buscar_mtro.php">
     <link rel="stylesheet" href="css/styles2.css">
+
 
 </head>
 
@@ -60,9 +60,9 @@ if (!isset($_SESSION['rol'])) {
                                     <span>Horario</span>
                                 </a>
                             </li>
-                            
+
                             <li class="sidebar-dropdown">
-                                <a href="#mtro_mensajes">
+                                <a href="#">
                                     <i class="fa fa-comment" aria-hidden="true"></i>
                                     <span>Mensajes</span>
                                 </a>
@@ -95,8 +95,8 @@ if (!isset($_SESSION['rol'])) {
                                             $sentencia->execute(['mtro_id' => $mtro_id]);
                                             foreach ($sentencia as $row) {
                                             ?>
-                                                <form class="text-center" action="buscar_id.php" method="POST">
-                                                    <input type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[0]; ?>"></input>
+                                                <form class="text-center" action="" method="POST">
+                                                    <input type="submit" id="nombreTaller" name="nombreTaller" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[0]; ?>"></input>
                                                 </form>
                                             <?php
                                             }
@@ -108,13 +108,13 @@ if (!isset($_SESSION['rol'])) {
                             <li id="mtro_evaluacion">
                                 <a href="#mtro_evaluacion">
                                     <i class="fa fa-hourglass" aria-hidden="true"></i>
-                                    <span>Evaluación bimestral</span>
+                                    <span>Instrumentación Didáctica</span>
                                 </a>
                             </li>
                             <li class="header-menu">
                                 <span>Sistema</span>
                             </li>
-                            
+
                             <li>
                                 <a href="cerrar.php">
                                     <i class="fa fa-power-off"></i>
@@ -202,7 +202,7 @@ if (!isset($_SESSION['rol'])) {
                                 <div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
-                                        <table class="table table-bordered table-hover">
+                                        <table class="table table-bordered table-hover" style="border-radius: 3%;">
                                             <tbody>
                                                 <?php
                                                 $busqueda = $db->connect()->prepare('select fecha, mensaje from mensajeadmin order by fecha desc');
@@ -210,7 +210,7 @@ if (!isset($_SESSION['rol'])) {
                                                 foreach ($busqueda as $fila) {
                                                 ?>
                                                     <tr>
-                                                        <td style="background-image: url(img/mailbox.jpg); background-size:cover; background-repeat: no-repeat; ">
+                                                        <td style="background-color: lightblue; ">
                                                             <img class="" src="img/mensajes.png" width="50" height="50" alt="Mensajes"> <br><br>
                                                             <br>
                                                             Administrador
@@ -250,7 +250,7 @@ if (!isset($_SESSION['rol'])) {
                                 <div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
-                                        <table class="table table-bordered table-hover">
+                                        <table class="table table-bordered table-hover" style="border-radius: 3%;">
                                             <tbody>
                                                 <?php
                                                 $mtro_id = $_SESSION['id_mtro'];
@@ -265,7 +265,7 @@ if (!isset($_SESSION['rol'])) {
                                                 foreach ($sentencia as $fila) {
                                                 ?>
                                                     <tr>
-                                                        <td style="background-image: url(img/mailbox.jpg); background-size:cover; background-repeat: no-repeat; ">
+                                                        <td style="background-color:lightblue">
                                                             <img class="" src="img/mensajes.png" width="50" height="50" alt="Mensajes"> <br><br>
                                                             <br>
                                                             <?php echo $fila[1]; ?>
@@ -320,40 +320,176 @@ if (!isset($_SESSION['rol'])) {
                             <div class="form-group">
                                 <button title="Advertencia" data-toggle="popover" data-trigger="hover" data-content="Recuerda que una vez enviado no podrás eliminarlo" type="submit" class="btn btn-primary">Enviar</button>
                             </div>
-
-
                         </form>
                     </div>
                 </section>
 
 
-                <!-------------------------------EVALUACION BIMESTRAL---------------------------------------->
-                <section id="Ebimestral" style="display:none;">
-                    <div class="col-12 card mt-3">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fas fa-edit"></i>INSTRUCCIONES</h3>
-                            
+                <!-------------------------------INSTRUMENTACION DIDACTICA---------------------------------------->
+                <section id="Ebimestral" style="display:none;" class="mt-4 section-form bg-default container">
+                    <h4>INSTRUMENTACIÓN DIDÁCTICA</h4>
+
+                    <?php
+                    if (isset($_SESSION['message']) && $_SESSION['message']) {
+                        printf('<b>%s</b>', $_SESSION['message']);
+                        unset($_SESSION['message']);
+                    }
+                    ?>
+
+
+
+                    <div class="envio-descargar mt-5">
+                        <div class="row ">
+                            <div class="col-sm-4 col-xs-12">
+                                <h3>Descargar Formato</h3>
+                                <a download="Instrumentacion didactica" href="pdf/Formato_Instrumentación_Didáctica_para_Ingreso.docx">
+                                    <img src="img/descargar.png" width="100" height="100" alt="Descargar Formato de Instrumentacion Didáctica"></a>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <h3>Instrucciones de llenado</h3>
+                                <a href="pdf/Instrucciones para la Instrumentación Didáctica.pdf" target="blank"><img src="img/editar.png" width="100" height="100" alt="Instrucciones de llenado"></a>
+                            </div>
+                            <div class="col-sm-4 col-xs-12" data-toggle="modal" data-target="#enviarModal">
+                                <h3>Enviar Formato</h3>
+                                <img src="img/agregar.png" width="100" height="100" alt="Enviar Formato de Instrumentación">
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <img src="img/test.svg" class="img-responsive" width="" height="400" alt="Instrucciones evaluacion">
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <iframe class="pdf" src="pdf/Formato de Evaluación al Desempeño de la Actividad Complementaria.pdf" allowfullscreen="true" frameborder="0"></iframe>
+
+
+                    <!--Modal envio-->
+                    <div class="modal fade" id="enviarModal" tabindex="-1" role="dialog" aria-labelledby="enviarModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="inicioModalLabel">Enviar instrumentación didáctica</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <div class="form-group">
+                                        <div class="row text-left">
+                                            <div class="col-10"><label for="talleres">Tus talleres son:</label></div>
+                                        </div>
+                                        <?php
+                                        $sentencia = $db->connect()->prepare('SELECT taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
+                                        $sentencia->execute(['mtro_id' => $mtro_id]);
+                                        foreach ($sentencia as $row) {
+                                        ?>
+                                            <button id="talleres" name="talleres" class="btn btn-outline-info btn-sm mb-1" value="<?php echo $row[0]; ?>"><?php echo $row[0]; ?></button>
+                                        <?php } ?>
+                                    </div>
+
+                                    <form class="mt-3" method="POST" action="maestro/enviarFormato.php" enctype="multipart/form-data">
+                                        <div class="form-group sr-only ">
+                                            <input type="text" class="form-control" name="mtro_id" id="mtro_id" value="<?php echo $mtro_id; ?>">
+                                        </div>
+                                        <div class="form-group" title="Advertencia" data-toggle="popover" data-trigger="hover" data-content="Escoge sólo un taller">
+                                            <label for="taller">Confirma el taller al que pertenece la instrumentación:</label>
+                                            <textarea class="form-control" name="taller" id="taller" rows="1"></textarea>
+                                        </div>
+                                        <img src="img/logos/adjuntar.png" width="100px" alt="Portada Inicio">
+                                        <div class="form-group mt-2">
+                                            <span>Cargar archivo:</span>
+                                            <input type="file" name="userfile" />
+                                        </div>
+                                        <br>
+                                        <input class="btn btn-info" type="submit" name="uploadBtn" value="Subir" />
+                                    </form>
+                                    <span>Recuerda que una vez enviado no podrás eliminarlo</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
+
+                <!-------------------------------TALLERES---------------------------------------->
+                <section class="container">
+                    <?php
+                    $sentencia = $db->connect()->prepare('SELECT id, taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
+                    $sentencia->execute(['mtro_id' => $mtro_id]);
+                    foreach ($sentencia as $row) {
+                        $tallerNombre = $row[1];
+                        $tallerid=$row[0];
+                    }
+                    ?>
+                    <h3> <?php echo $tallerNombre;  ?> </h3>
+                    <!--Tabla de alumnos dados de alta en el taller-->
+                    <div>
+                        <div class="col-lg-12 col-xs-12">
+                            <div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table class="table table-bordered table-hover">
+                                        <thead style="background-color:steelblue;">
+                                            <th>Nombre</th>
+                                            <th>Matrícula</th>
+                                            <th>Carrera</th>
+                                            <th>Semestre</th>
+                                            <th>Sexo</th>
+                                            <th>Representativo</th>
+                                            <th>Evaluacion</th>
+                                        </thead>
+                                        <tbody style="background-color:  #f7f5f3;">
+                                            <?php
+                                            $busqueda = $db->connect()->prepare("SELECT nombre, matricula,carrera, semestre, sexo, representativo, evaluacion FROM `alumnos` WHERE taller_id='$tallerid'");
+                                            $busqueda->execute();
+                                            foreach ($busqueda as $fila) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $fila[0]; ?></td>
+                                                    <td><?php echo $fila[1]; ?></td>
+                                                    <td><?php echo $fila[2]; ?></td>
+                                                    <td><?php echo $fila[3]; ?></td>
+                                                    <td><?php echo $fila[4]; ?></td>
+                                                    <td><?php echo $fila[5]; ?>
+                                                
+                                                
+                                                </td>
+                                                    <td><?php echo $fila[6]; ?></td>
+                                                </tr>
+                                            <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <!--Fin tabla-->
+
+                    <?php
+
+
+                    if (!empty($_POST['nombreTaller'])) {
+                        $taller = $_POST['nombreTaller'];
+                        
+                    } else {
+                        echo "PUTA LA QUE TE REPARIO";
+                        //echo $hotel;
+                    }
+
+                    ?>
+                </section>
+
             </main>
         </div>
     </main>
-    <script src="js/buscar_datos.js" type="text/javascript"></script>
-    <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/popper.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/js.js" type="text/javascript"></script>
     <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js" type="text/javascript"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
+
+
+
+
     <script>
         $(document).ready(function() {
             $("#alumno_horario").on('click', function() {

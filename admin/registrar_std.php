@@ -14,8 +14,8 @@ if (!empty($_POST['taller'])) {
 
 
     //Insertar los datos en la bd
-    $newstd = $db->connect()->prepare("INSERT INTO `alumnos` (`id`,`nombre`, `matricula`, `password`, `taller_id`, `representativo`, `carrera`, `estatus`, `semestre`, `evaluacion`, `sexo`, `rol_id`) 
-    VALUES ('', '$nombre', '$matricula', '$password', '$taller', '$representativo', '$carrera', 'Cursando', '$semestre', '', '$sexo', '2');");
+    $newstd = $db->connect()->prepare("INSERT INTO `alumnos` (`nombre`, `matricula`, `password`, `taller_id`, `representativo`, `carrera`, `estatus`, `semestre`, `evaluacion`, `sexo`, `rol_id`) 
+    VALUES ('$nombre', '$matricula', '$password', '$taller', '$representativo', '$carrera', 'Cursando', '$semestre', '', '$sexo', '2');");
     $newstd->execute();
 
     header('Location: ../administrativo.php');

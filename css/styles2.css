@@ -611,6 +611,18 @@ body {
 }
 
 
+.envio-descargar{
+margin: auto;
+padding: 5%;
+width: 600px;
+height: auto;
+color: black;
+border: 3px solid slategrey;
+  border-radius: 3%;
+  background: silver;
+text-align: center;
+}
+
 
 
 /*---------------------------------------ADMINISTRATIVOS------------------------------------------------------*/
@@ -705,3 +717,5 @@ body {
 
 
 /*------------------------------------------------SECTION TALLER------------------------------------------------------*/
+
+
