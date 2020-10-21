@@ -89,14 +89,14 @@ if (!isset($_SESSION['rol'])) {
                                     <span>Talleres</span>
                                 </a>
                             </li>
-                            
+
                             <li id="page-mtro">
                                 <a href="#">
                                     <i class="fas fa-table"></i>
                                     <span>Maestros</span>
                                 </a>
                             </li>
-                            
+
                             <li class="sidebar-dropdown">
                                 <a href="#">
                                     <i class="fa fa-folder-open" aria-hidden="true"></i>
@@ -118,18 +118,15 @@ if (!isset($_SESSION['rol'])) {
                                             ?>
                                                 <form class="text-center" action="buscar_id.php" method="POST">
 
-                                                    <input
-                                                    
-                                            <?php if ($row[0] == "No asignado") { ?> style="display: none;" <?php }else{ ?>
-                                                    
-                                                    type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[0];} ?>">
+                                                    <input <?php if ($row[0] == "No asignado") { ?> style="display: none;" <?php } else { ?> type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[0];
+                                                                                                                                                                                                                                    } ?>">
                                                     </input>
                                                 </form>
                                             <?php } ?>
 
 
 
-                                            
+
                                         </li>
                                     </ul>
                                 </div>
@@ -152,9 +149,15 @@ if (!isset($_SESSION['rol'])) {
                                 </div>
                             </li>
                             <li id="mtro_evaluacion">
-                                <a href="#mtro_evaluacion">
+                                <a href="">
                                     <i class="fa fa-hourglass" aria-hidden="true"></i>
                                     <span>Evaluación bimestral</span>
+                                </a>
+                            </li>
+                            <li id="mtro_instrumentacion">
+                                <a href="">
+                                    <i class="fa fa-hourglass" aria-hidden="true"></i>
+                                    <span>Instrumentación didáctica</span>
                                 </a>
                             </li>
                             <li class="header-menu">
@@ -503,7 +506,7 @@ if (!isset($_SESSION['rol'])) {
                                             <label class="input-group-text" for="taller">Taller</label>
                                         </div>
                                         <select class="custom-select" name="taller" id="taller" required="true">
-                                        <?php foreach ($taller as $row) {
+                                            <?php foreach ($taller as $row) {
                                             ?>
                                                 <option <?php
                                                         if ($row[0] == 1) {
@@ -593,7 +596,7 @@ if (!isset($_SESSION['rol'])) {
                                             <label class="input-group-text" for="taller">Taller</label>
                                         </div>
                                         <select class="custom-select" name="taller" id="taller" required="true">
-                                        <?php foreach ($taller as $row) {
+                                            <?php foreach ($taller as $row) {
                                             ?>
                                                 <option <?php
                                                         if ($row[0] == 1) {
@@ -796,7 +799,7 @@ if (!isset($_SESSION['rol'])) {
                                             <label class="input-group-text" for="taller">Taller</label>
                                         </div>
                                         <select class="custom-select" name="taller" id="taller" required="true">
-                                        <?php foreach ($taller as $row) {
+                                            <?php foreach ($taller as $row) {
                                             ?>
                                                 <option <?php
                                                         if ($row[0] == 1) {
@@ -880,7 +883,7 @@ if (!isset($_SESSION['rol'])) {
                                             <label class="input-group-text" for="taller">Taller</label>
                                         </div>
                                         <select class="custom-select" name="taller" id="taller" required="true">
-                                        <?php foreach ($taller as $row) {
+                                            <?php foreach ($taller as $row) {
                                             ?>
                                                 <option <?php
                                                         if ($row[0] == 1) {
@@ -1146,22 +1149,22 @@ if (!isset($_SESSION['rol'])) {
                                                 <label class="input-group-text" for="nombre">Taller</label>
                                             </div>
                                             <select class="custom-select" name="nombre" id="nombre" required="true">
-                                            <?php foreach ($taller as $row) {
-                                            ?>
-                                                <option <?php
-                                                        if ($row[0] == 1) {
-                                                            # code...
-                                                        ?> style="display: none;" <?php
-                                                                                } else {
-                                                                                    # code...
-                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
-                                                                                                                    }
+                                                <?php foreach ($taller as $row) {
+                                                ?>
+                                                    <option <?php
+                                                            if ($row[0] == 1) {
+                                                                # code...
+                                                            ?> style="display: none;" <?php
+                                                                                    } else {
+                                                                                        # code...
+                                                                                        ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                        }
 
-                                                                                                                        ?>><?php echo $row[1]; ?></option>
+                                                                                                                            ?>><?php echo $row[1]; ?></option>
 
-                                            <?php
-                                            }
-                                            ?>
+                                                <?php
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -1309,12 +1312,68 @@ if (!isset($_SESSION['rol'])) {
                 </section>
                 <!-------------------------------------------------------------SECCIÓN DE EVALUACION BIMESTRAL------------------------------------------------->
 
-<section>
+                <section>
 
 
-</section>
+                </section>
 
 
+                <!-------------------------------------------------------------INSTRUMENTACION DIDACTICA--------------------------------------------->
+
+                <section>
+                    <div style="display:none;" id="instrumentacionD">
+                        <div class="container">
+<!--Tabla de instrumentacion didactica -->
+                        <div class="col-12 card mt-5">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fa fa-address-book" aria-hidden="true"></i>
+                                    Instrumentación didáctica del curso</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-xs-12 mt-2">
+                            <div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table class="table table-bordered table-hover">
+                                        <thead style="background-color:steelblue;">
+                                            <th>Nombre</th>
+                                            <th>Taller</th>
+                                            <th>Documento</th>
+                                         
+                                        </thead>
+                                        <tbody style="background-color:  #f7f5f3;">
+                                            <?php
+                                            $busqueda = $db->connect()->prepare('SELECT maestro.nombre, taller, documento FROM `maestro` join documentos join talleres on maestro.id=documentos.maestro_id and talleres.id=maestro.taller_asignado WHERE documentos.categoria="instrumentacionD"');
+                                            $busqueda->execute();
+                                            foreach ($busqueda as $fila) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $fila[0]; ?></td>
+                                                    <td><?php echo $fila[1]; ?></td>
+                                                    <td>
+                                                    <a download="Instrumentacion didactica" href="pdf/instrumentacion/<?php echo $fila[2];?>">
+                                    <img src="img/descargar.png" width="100" height="100" alt="Descargar Formato de Instrumentacion Didáctica"></a>    
+                                                        <!--Pendiente verificar-->
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Fin tabla-->
+
+
+                        </div>
+                    </div>
+
+
+                </section>
 
 
 
@@ -1557,7 +1616,28 @@ if (!isset($_SESSION['rol'])) {
                 $("#table-talleres").show();
                 return false;
             });
-
+            //INSTRUMENTACION DIDACTICA
+            $("#mtro_instrumentacion").on('click', function() {
+                $("#cms").hide();
+                $("#options_T").hide();
+                $("#student-options").hide();
+                $("#teach-options").hide();
+                $("#table-mtro").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Tdelete").hide();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#table-talleres").hide();
+                $("#form-Adelete").hide();
+                $("#form-Aedit").hide();
+                $("#form-Aregister").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").hide();
+                $("#instrumentacionD").show();
+                return false;
+            });
 
         });
     </script>

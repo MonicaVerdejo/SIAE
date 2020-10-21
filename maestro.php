@@ -130,12 +130,12 @@ if (!isset($_SESSION['rol'])) {
             <!-- Sidebar end -->
 
             <main class="page-content">
-                <div id="Bienvenido">
+                <div>
                     <div class="container-fluid">
                         <img src="img/logos/tecnm.svg" alt="">
 
                     </div>
-                    <div class="section section-lg ">
+                    <div id="Bienvenido" class="section section-lg">
                         <h1>
                             <?php
                             if ($_SESSION['sexo'] == 'F') {
@@ -405,19 +405,79 @@ if (!isset($_SESSION['rol'])) {
                 </section>
 
                 <!-------------------------------TALLERES---------------------------------------->
-                <section class="container">
+                <section>
                     <?php
-                    $sentencia = $db->connect()->prepare('SELECT id, taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
-                    $sentencia->execute(['mtro_id' => $mtro_id]);
-                    foreach ($sentencia as $row) {
-                        $tallerNombre = $row[1];
-                        $tallerid=$row[0];
+
+
+                    if (!empty($_POST['nombreTaller'])) {
+                        $taller = $_POST['nombreTaller'];
+                    } else {
+                        //echo "PUTA LA QUE TE REPARIO";
+                        //echo $hotel;
                     }
+
                     ?>
-                    <h3> <?php echo $tallerNombre;  ?> </h3>
+
+                    <!--Opciones para listas de alumnos-->
+                    <div class="container" style="display:none; text-align:center;" id="std-options">
+                        <?php
+                        $sentencia = $db->connect()->prepare('SELECT id, taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
+                        $sentencia->execute(['mtro_id' => $mtro_id]);
+                        foreach ($sentencia as $row) {
+                            $tallerNombre = $row[1];
+                            $tallerid = $row[0];
+                        }
+                        ?>
+                        <h3 class="text-left" style="text-transform: uppercase;"> <?php echo $tallerNombre;  ?> </h3>
+
+                        <h4 class="mt-5 text-center">ALUMNOS</h4>
+                        <div class="row">
+
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".2s" id="verLista">
+                                <article class=""><img src="img/logos/show-listado.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Ver lista</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".2s" id="editRepresentativo">
+
+                                <article class=""><img src="img/logos/representativo.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Representativos</a></h4>
+
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".1s" id="evaluarA">
+
+                                <article class=""><img src="img/logos/evaluar.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Evaluar</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+
+                            </div>
+                        </div>
+                    </div>
+
+
                     <!--Tabla de alumnos dados de alta en el taller-->
-                    <div>
-                        <div class="col-lg-12 col-xs-12">
+                    <div style="display: none;" class="text-center container" id="ListaA">
+                        <div class="col-12 card mt-5">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fa fa-address-book" aria-hidden="true"></i>
+                                    Alumnos suscritos en el taller</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-xs-12 mt-2">
                             <div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -428,12 +488,13 @@ if (!isset($_SESSION['rol'])) {
                                             <th>Carrera</th>
                                             <th>Semestre</th>
                                             <th>Sexo</th>
+                                            <th>Estatus</th>
                                             <th>Representativo</th>
                                             <th>Evaluacion</th>
                                         </thead>
                                         <tbody style="background-color:  #f7f5f3;">
                                             <?php
-                                            $busqueda = $db->connect()->prepare("SELECT nombre, matricula,carrera, semestre, sexo, representativo, evaluacion FROM `alumnos` WHERE taller_id='$tallerid'");
+                                            $busqueda = $db->connect()->prepare("SELECT nombre, matricula,carrera, semestre, sexo, estatus, representativo, evaluacion FROM `alumnos` WHERE taller_id='$tallerid'");
                                             $busqueda->execute();
                                             foreach ($busqueda as $fila) {
                                             ?>
@@ -443,11 +504,9 @@ if (!isset($_SESSION['rol'])) {
                                                     <td><?php echo $fila[2]; ?></td>
                                                     <td><?php echo $fila[3]; ?></td>
                                                     <td><?php echo $fila[4]; ?></td>
-                                                    <td><?php echo $fila[5]; ?>
-                                                
-                                                
-                                                </td>
+                                                    <td><?php echo $fila[5]; ?></td>
                                                     <td><?php echo $fila[6]; ?></td>
+                                                    <td><?php echo $fila[7]; ?></td>
                                                 </tr>
                                             <?php
                                             }
@@ -458,21 +517,93 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                         </div>
                     </div>
-                    <!-- /.row -->
                     <!--Fin tabla-->
 
-                    <?php
+                    <!--Form-edit-alumnoRepresentativo-->
+                    <section class="mt-4 mb-4 section-form bg-default" style="display:none" id="form-Aedit">
+                        <?php
+                        $sentencia = $db->connect()->prepare('SELECT id FROM `talleres` WHERE mtro_asignado=:mtro_id');
+                        $sentencia->execute(['mtro_id' => $mtro_id]);
+                        foreach ($sentencia as $row) {
+                            $tallerid = $row[0];
+                        }
+                        ?>
+                        <div id="base">
+                            <div id="triangle"></div>
+                            <div id="titulo">Designar representativo</div>
+                            <div id="form">
+                                <form method="POST" action="maestro/edit_stdR.php">
+
+                                    <div class="form-group sr-only ">
+                                        <input type="text" class="form-control" name="taller_id" id="taller_id" value="<?php echo $tallerid; ?>">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="matricula">Matricula</label>
+                                        <input id="matricula" class="form-control" type="text" name="matricula" required="true">
+                                    </div>
+                                    <?php
+                                    $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
+                                    $taller->execute();
+                                    ?>
+
+                                    <div class="form-group">
+                                        <label for="representativo">Representativo</label>
+                                        <select id="representativo" class="form-control" name="representativo" required="true">
+                                            <option>Sí</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    <!--
+                                       ~~~ Siento que el maestro debe poder evaluar al alumno, no solo el administrador
+                                        <div class="form-group">
+                                        <label for="status">Estatus del curso</label>
+                                        <select id="status" class="form-control" name="status" required="true">
+                                            <option>Cursando</option>
+                                            <option>Aprobado</option>
+                                            <option>Reprobado</option>
+                                        </select>
+                                    </div>
+                                    -->
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
 
 
-                    if (!empty($_POST['nombreTaller'])) {
-                        $taller = $_POST['nombreTaller'];
-                        
-                    } else {
-                        echo "PUTA LA QUE TE REPARIO";
-                        //echo $hotel;
-                    }
+                    <!--Form-evaluarAlumno-->
+                    <section class="mt-4 mb-4 section-form bg-default" style="display:none" id="form-evaluarA">
+                        <?php
+                        $sentencia = $db->connect()->prepare('SELECT id FROM `talleres` WHERE mtro_asignado=:mtro_id');
+                        $sentencia->execute(['mtro_id' => $mtro_id]);
+                        foreach ($sentencia as $row) {
+                            $tallerid = $row[0];
+                        }
+                        ?>
+                        <div id="base">
+                            <div id="triangle"></div>
+                            <div id="titulo">Asignar evaluacion</div>
+                            <div id="form">
+                                <form method="POST" action="maestro/enviarEvaluacion.php" enctype="multipart/form-data">
+                                    <div class="form-group sr-only ">
+                                        <input type="text" class="form-control" name="taller_id" id="taller_id" value="<?php echo $tallerid; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="matricula">Matricula</label>
+                                        <input id="matricula" class="form-control" type="text" name="matricula" required="true">
+                                    </div>
+                                    <img src="img/logos/adjuntar.png" width="100px" alt="Portada Inicio">
+                                    <div class="form-group mt-2">
+                                        <span>Cargar archivo:</span>
+                                        <input type="file" name="userfile" />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
 
-                    ?>
                 </section>
 
             </main>
@@ -494,12 +625,14 @@ if (!isset($_SESSION['rol'])) {
         $(document).ready(function() {
             $("#alumno_horario").on('click', function() {
                 $("#horario").show();
+                $("#Bienvenido").hide();
                 $("#inicio").hide();
                 $("#mensajes").hide();
                 $("#mensajesN").hide();
                 return false;
             });
             $("#mensajesRecibidos").on('click', function() {
+                $("#Bienvenido").hide();
                 $("#horario").hide();
                 $("#inicio").hide();
                 $("#mensajesN").hide();
@@ -508,6 +641,7 @@ if (!isset($_SESSION['rol'])) {
                 return false;
             });
             $("#mensajesEnviados").on('click', function() {
+                $("#Bienvenido").hide();
                 $("#horario").hide();
                 $("#inicio").hide();
                 $("#mensajesN").hide();
@@ -516,6 +650,7 @@ if (!isset($_SESSION['rol'])) {
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
+                $("#Bienvenido").hide();
                 $("#horario").hide();
                 $("#inicio").hide();
                 $("#mensajesR").hide();
@@ -524,6 +659,7 @@ if (!isset($_SESSION['rol'])) {
                 return false;
             });
             $("#mtro_evaluacion").on('click', function() {
+                $("#Bienvenido").hide();
                 $("#horario").hide();
                 $("#mensajesR").hide();
                 $("#mensajesE").hide();
@@ -533,6 +669,35 @@ if (!isset($_SESSION['rol'])) {
 
                 return false;
             });
+            //seccion de maestro
+            $("#nombreTaller").on('click', function() {
+                $("#Bienvenido").hide();
+                $("#std-options").show();
+                return false;
+            });
+            $("#verLista").on('click', function() {
+                $("#std-options").show();
+                $("#form-evaluarA").hide();
+                $("#ListaA").show();
+                return false;
+            });
+            $("#editRepresentativo").on('click', function() {
+                $("#std-options").show();
+                $("#form-Aedit").show();
+                $("#form-evaluarA").hide();
+                $("#ListaA").hide();
+                return false;
+            });
+            $("#evaluarA").on('click', function() {
+                $("#std-options").show();
+                $("#form-evaluarA").show();
+                $("#form-Aedit").hide();
+                $("#ListaA").hide();
+                return false;
+            });
+
+
+
         });
     </script>
 

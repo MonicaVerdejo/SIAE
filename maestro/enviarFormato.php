@@ -12,7 +12,7 @@ $tamano_archivo = $_FILES['userfile']['size'];
 if (!((strpos($tipo_archivo, "pdf") || strpos($tipo_archivo, "doc")))) {
     echo "La extensión de los archivos no es correcta. <br><br><table><tr><td><li>Se permiten archivos .gif o .jpg<br><li></td></tr></table>";
 } else {
-    $carpeta_destino = 'documentos/';
+    $carpeta_destino = 'documentos/instrumentacion/';
     $archivo = $carpeta_destino . $_FILES['userfile']['name'];
     if (move_uploaded_file($_FILES['userfile']['tmp_name'],  $archivo)) {
 
