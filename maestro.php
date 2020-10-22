@@ -137,7 +137,7 @@ if (!isset($_SESSION['rol'])) {
                                 <img src="img/logos/tecnm.svg" alt="">
 
                             </div>
-                            <div class="col-sm-9 mt-2">
+                            <div class="col-sm-9 mt-2 text-center">
                                 <h1>Sistema Integral para Actividades Extraescolares</h1>
                             </div>
                         </div>
@@ -176,16 +176,18 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                 </div>
                             </div>
-                            
-                            <table class="table table-bordered table-hover">
-                            <h3 class="mr-5"><?php 
-                              $mtro_id = $_SESSION['id_mtro'];
 
-                              $sentencia = $db->connect()->prepare('SELECT taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
-                              $sentencia->execute(['mtro_id' => $mtro_id]);
-                              foreach ($sentencia as $row) { echo $row[0]; }
-                            
-                           ?></h3>
+                            <table class="table table-bordered table-hover">
+                                <h3 class="mr-5"><?php
+                                                    $mtro_id = $_SESSION['id_mtro'];
+
+                                                    $sentencia = $db->connect()->prepare('SELECT taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
+                                                    $sentencia->execute(['mtro_id' => $mtro_id]);
+                                                    foreach ($sentencia as $row) {
+                                                        echo $row[0];
+                                                    }
+
+                                                    ?></h3>
                                 <thead style="background-color:steelblue;">
                                     <th>Turno</th>
                                     <th>Lunes</th>
@@ -381,8 +383,14 @@ if (!isset($_SESSION['rol'])) {
 
                 <!-------------------------------INSTRUMENTACION DIDACTICA---------------------------------------->
                 <section id="instrumentacionD" style="display:none;" class="mt-4 section-form bg-default container">
-                    <h4>INSTRUMENTACIÓN DIDÁCTICA</h4>
 
+                    <div class="col-12 card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="margin-left:400px;">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                INSTRUMENTACIÓN DIDÁCTICA </h3>
+                        </div>
+                    </div>
                     <?php
                     if (isset($_SESSION['message']) && $_SESSION['message']) {
                         printf('<b>%s</b>', $_SESSION['message']);
@@ -482,9 +490,17 @@ if (!isset($_SESSION['rol'])) {
                             $tallerid = $row[0];
                         }
                         ?>
-                        <h3 class="text-left" style="text-transform: uppercase;"> <?php echo $tallerNombre;  ?> </h3>
 
-                        <h4 class="mt-5 text-center">ALUMNOS</h4>
+                        <div class="col-12 card">
+                            <div class="card-header">
+                            <h5 class="text-left" style="text-transform: uppercase;">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <?php echo $tallerNombre;  ?> </h5>
+
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt-5 text-center">ALUMNOS</h4> <br>
                         <div class="row">
 
                             <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".2s" id="verLista">
