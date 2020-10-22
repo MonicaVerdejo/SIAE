@@ -57,7 +57,7 @@ if (!isset($_SESSION['rol'])) {
                             <li id="alumno_horario">
                                 <a href="#horario">
                                     <i class="fas fa-calendar"></i>
-                                    <span>Horario</span>
+                                    <span>Inicio</span>
                                 </a>
                             </li>
 
@@ -132,11 +132,19 @@ if (!isset($_SESSION['rol'])) {
             <main class="page-content">
                 <div>
                     <div class="container-fluid">
-                        <img src="img/logos/tecnm.svg" alt="">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img src="img/logos/tecnm.svg" alt="">
 
+                            </div>
+                            <div class="col-sm-9 mt-2">
+                                <h1>Sistema Integral para Actividades Extraescolares</h1>
+                            </div>
+                        </div>
                     </div>
                     <div id="Bienvenido" class="section section-lg">
-                        <h1>
+                        <hr>
+                        <h3 class="text-center">
                             <?php
                             if ($_SESSION['sexo'] == 'F') {
                             ?> Bienvenida <?php echo ($_SESSION['nombre']);
@@ -145,43 +153,89 @@ if (!isset($_SESSION['rol'])) {
                                                         }
 
                                                             ?>
-                        </h1>
+                        </h3>
+
                     </div>
                 </div>
 
 
                 <!--Horario-->
-
-                <div class="container" id="horario" style="display: none;">
-
-                    <section id="tabla_resultado" class="content">
+                <div class="container" id="horario">
+                    <section>
                         <div class="container">
                             <div class="row">
-                                <div class="col-12 ">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title text-center">Horario</h3>
-                                        </div>
-                                        <!-- /.card-header -->
-                                        <div class="card-body">
-                                            <table id="datos" class="text-center table table-bordered table-hover table-responsive">
-
-
-
-
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <!-- /.card -->
+                                <div class="col-6">
+                                    <img src="img/logos/schedule.png" width="100" height="100" alt="Horario asignado">
                                 </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                        <!-- /.container-fluid -->
-                    </section>
+                                <div class="col-6 ">
+                                    <div class="card">
+                                        <div class="card-header ">
+                                            <h1 class="card-title" style="margin-left: 150px;">HORARIO ASIGNADO</h1>
+                                        </div>
 
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <table class="table table-bordered table-hover">
+                            <h3 class="mr-5"><?php 
+                              $mtro_id = $_SESSION['id_mtro'];
+
+                              $sentencia = $db->connect()->prepare('SELECT taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
+                              $sentencia->execute(['mtro_id' => $mtro_id]);
+                              foreach ($sentencia as $row) { echo $row[0]; }
+                            
+                           ?></h3>
+                                <thead style="background-color:steelblue;">
+                                    <th>Turno</th>
+                                    <th>Lunes</th>
+                                    <th>Martes</th>
+                                    <th>Miercoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                    <th>Sabado</th>
+                                    <th>Domingo</th>
+                                </thead>
+                                <tbody style="background-color:  #f7f5f3;">
+                                    <?php
+                                    $mtroTaller = $_SESSION['id_tallerMtro'];
+                                    $busqueda = $db->connect()->prepare("SELECT turno,lunes,martes,miercoles,jueves,viernes,sabado,domingo from horarios WHERE taller=$mtroTaller");
+                                    $busqueda->execute();
+                                    foreach ($busqueda as $fila) {
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $fila[0]; ?></td>
+                                            <td><?php echo $fila[1]; ?></td>
+                                            <td><?php echo $fila[2]; ?></td>
+                                            <td><?php echo $fila[3]; ?></td>
+                                            <td><?php echo $fila[4]; ?></td>
+                                            <td><?php echo $fila[5]; ?></td>
+                                            <td><?php echo $fila[6]; ?></td>
+                                            <td><?php echo $fila[7]; ?></td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                            <div class="row mt-5">
+                                <div class="col-6 ">
+                                    <div class="card">
+                                        <div class="card-header ">
+                                            <h1 class="card-title" style="margin-left: 150px;">ESTADISTICAS DE MIS ALUMNOS</h1>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <img src="img/logos/icon_alumnos.png" width="100" height="100" alt="Horario asignado">
+                                </div>
+                            </div>
+                            <div>
+                                aqui va algo mamalon sobre sus reprobados y aprobados, los que estan cursando tambien
+                            </div>
+                        </div>
+                    </section>
                 </div>
 
 
@@ -311,11 +365,11 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                             <div class="form-group" title="Advertencia" data-toggle="popover" data-trigger="hover" data-content="Escoge sólo un taller">
                                 <label for="taller">Confirma el taller destinatario del mensaje:</label>
-                                <textarea class="form-control" name="taller" id="taller" rows="1"></textarea>
+                                <textarea class="form-control" name="taller" id="taller" rows="1" required="true"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="mensaje">Redacta tu mensaje:</label>
-                                <textarea class="form-control" name="mensaje" id="mensaje" rows="3"></textarea>
+                                <textarea class="form-control" name="mensaje" id="mensaje" rows="3" required="true"></textarea>
                             </div>
                             <div class="form-group">
                                 <button title="Advertencia" data-toggle="popover" data-trigger="hover" data-content="Recuerda que una vez enviado no podrás eliminarlo" type="submit" class="btn btn-primary">Enviar</button>
@@ -326,7 +380,7 @@ if (!isset($_SESSION['rol'])) {
 
 
                 <!-------------------------------INSTRUMENTACION DIDACTICA---------------------------------------->
-                <section id="Ebimestral" style="display:none;" class="mt-4 section-form bg-default container">
+                <section id="instrumentacionD" style="display:none;" class="mt-4 section-form bg-default container">
                     <h4>INSTRUMENTACIÓN DIDÁCTICA</h4>
 
                     <?php
@@ -387,12 +441,12 @@ if (!isset($_SESSION['rol'])) {
                                         </div>
                                         <div class="form-group" title="Advertencia" data-toggle="popover" data-trigger="hover" data-content="Escoge sólo un taller">
                                             <label for="taller">Confirma el taller al que pertenece la instrumentación:</label>
-                                            <textarea class="form-control" name="taller" id="taller" rows="1"></textarea>
+                                            <textarea class="form-control" name="taller" id="taller" rows="1" required="true"></textarea>
                                         </div>
                                         <img src="img/logos/adjuntar.png" width="100px" alt="Portada Inicio">
                                         <div class="form-group mt-2">
                                             <span>Cargar archivo:</span>
-                                            <input type="file" name="userfile" />
+                                            <input type="file" name="userfile" required="true" />
                                         </div>
                                         <br>
                                         <input class="btn btn-info" type="submit" name="uploadBtn" value="Subir" />
@@ -596,7 +650,7 @@ if (!isset($_SESSION['rol'])) {
                                     <img src="img/logos/adjuntar.png" width="100px" alt="Portada Inicio">
                                     <div class="form-group mt-2">
                                         <span>Cargar archivo:</span>
-                                        <input type="file" name="userfile" />
+                                        <input type="file" name="userfile" required="true" />
                                     </div>
                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                 </form>
@@ -618,17 +672,19 @@ if (!isset($_SESSION['rol'])) {
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 
 
-
-
-
     <script>
         $(document).ready(function() {
             $("#alumno_horario").on('click', function() {
-                $("#horario").show();
-                $("#Bienvenido").hide();
+                $("#Bienvenido").show();
                 $("#inicio").hide();
                 $("#mensajes").hide();
                 $("#mensajesN").hide();
+                $("#std-options").hide();
+                $("#form-Aedit").hide();
+                $("#form-evaluarA").hide();
+                $("#ListaA").hide();
+                $("#instrumentacionD").hide();
+                $("#horario").show();
                 return false;
             });
             $("#mensajesRecibidos").on('click', function() {
@@ -637,7 +693,13 @@ if (!isset($_SESSION['rol'])) {
                 $("#inicio").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
+                $("#std-options").hide();
+                $("#form-Aedit").hide();
+                $("#form-evaluarA").hide();
+                $("#ListaA").hide();
+                $("#instrumentacionD").hide();
                 $("#mensajesR").show();
+
                 return false;
             });
             $("#mensajesEnviados").on('click', function() {
@@ -646,7 +708,13 @@ if (!isset($_SESSION['rol'])) {
                 $("#inicio").hide();
                 $("#mensajesN").hide();
                 $("#mensajesR").hide();
+                $("#std-options").hide();
+                $("#form-Aedit").hide();
+                $("#form-evaluarA").hide();
+                $("#ListaA").hide();
+                $("#instrumentacionD").hide();
                 $("#mensajesE").show();
+
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
@@ -655,6 +723,11 @@ if (!isset($_SESSION['rol'])) {
                 $("#inicio").hide();
                 $("#mensajesR").hide();
                 $("#mensajesE").hide();
+                $("#instrumentacionD").hide();
+                $("#std-options").hide();
+                $("#form-Aedit").hide();
+                $("#form-evaluarA").hide();
+                $("#ListaA").hide();
                 $("#mensajesN").show();
                 return false;
             });
@@ -664,14 +737,23 @@ if (!isset($_SESSION['rol'])) {
                 $("#mensajesR").hide();
                 $("#mensajesE").hide();
                 $("#mensajesN").hide();
-                $("#Ebimestral").show();
-                $("#Bienvenido").hide();
 
+                $("#std-options").hide();
+                $("#form-Aedit").hide();
+                $("#form-evaluarA").hide();
+                $("#ListaA").hide();
+                $("#instrumentacionD").show();
                 return false;
             });
             //seccion de maestro
             $("#nombreTaller").on('click', function() {
                 $("#Bienvenido").hide();
+                $("#horario").hide();
+                $("#mensajesR").hide();
+                $("#mensajesE").hide();
+                $("#mensajesN").hide();
+                $("#instrumentacionD").hide();
+
                 $("#std-options").show();
                 return false;
             });
@@ -679,6 +761,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#std-options").show();
                 $("#form-evaluarA").hide();
                 $("#ListaA").show();
+
                 return false;
             });
             $("#editRepresentativo").on('click', function() {

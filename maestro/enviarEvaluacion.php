@@ -1,5 +1,4 @@
 <?php
-include_once '../maestro.php';
 include_once '../db.php';
 ob_start();
 $db = new DB();
@@ -9,14 +8,8 @@ $matricula = $_POST['matricula'];
 $taller = $_POST['taller_id'];
 
 
-echo $matricula;
-echo $taller;
-
-
-header('location: ../maestro.php');
-
-/*
-
+$busqueda = $db->connect()->prepare("SELECT matricula FROM alumnos WHERE taller_id='$taller'");
+$busqueda->execute();
 
 //para cada una de las matriculas:
 foreach ($busqueda  as $row) {
@@ -69,8 +62,6 @@ foreach ($busqueda  as $row) {
         window.location.href="../maestro.php"; </script>';
     }
 }
-
-*/
 
 
 

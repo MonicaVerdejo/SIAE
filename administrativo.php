@@ -89,7 +89,12 @@ if (!isset($_SESSION['rol'])) {
                                     <span>Talleres</span>
                                 </a>
                             </li>
-
+                            <li id="page-schedule">
+                                <a href="#">
+                                    <i class="fas fa-calendar-alt    "></i>
+                                    <span>Horarios</span>
+                                </a>
+                            </li>
                             <li id="page-mtro">
                                 <a href="#">
                                     <i class="fas fa-table"></i>
@@ -1312,10 +1317,7 @@ if (!isset($_SESSION['rol'])) {
                 </section>
                 <!-------------------------------------------------------------SECCIÓN DE EVALUACION BIMESTRAL------------------------------------------------->
 
-                <section>
 
-
-                </section>
 
 
                 <!-------------------------------------------------------------INSTRUMENTACION DIDACTICA--------------------------------------------->
@@ -1323,55 +1325,336 @@ if (!isset($_SESSION['rol'])) {
                 <section>
                     <div style="display:none;" id="instrumentacionD">
                         <div class="container">
-<!--Tabla de instrumentacion didactica -->
-                        <div class="col-12 card mt-5">
-                            <div class="card-header">
-                                <h3 class="card-title">
-                                    <i class="fa fa-address-book" aria-hidden="true"></i>
-                                    Instrumentación didáctica del curso</h3>
+                            <!--Tabla de instrumentacion didactica -->
+                            <div class="col-12 card mt-5">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fa fa-address-book" aria-hidden="true"></i>
+                                        Instrumentación didáctica del curso</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-12 col-xs-12 mt-2">
-                            <div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table class="table table-bordered table-hover">
-                                        <thead style="background-color:steelblue;">
-                                            <th>Nombre</th>
-                                            <th>Taller</th>
-                                            <th>Documento</th>
-                                         
-                                        </thead>
-                                        <tbody style="background-color:  #f7f5f3;">
-                                            <?php
-                                            $busqueda = $db->connect()->prepare('SELECT maestro.nombre, taller, documento FROM `maestro` join documentos join talleres on maestro.id=documentos.maestro_id and talleres.id=maestro.taller_asignado WHERE documentos.categoria="instrumentacionD"');
-                                            $busqueda->execute();
-                                            foreach ($busqueda as $fila) {
-                                            ?>
-                                                <tr>
-                                                    <td><?php echo $fila[0]; ?></td>
-                                                    <td><?php echo $fila[1]; ?></td>
-                                                    <td>
-                                                    <a download="Instrumentacion didactica" href="pdf/instrumentacion/<?php echo $fila[2];?>">
-                                    <img src="img/descargar.png" width="100" height="100" alt="Descargar Formato de Instrumentacion Didáctica"></a>    
-                                                        <!--Pendiente verificar-->
-                                                    </td>
-                                                </tr>
-                                            <?php
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
+                            <div class="col-lg-12 col-xs-12 mt-2">
+                                <div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table class="table table-bordered table-hover">
+                                            <thead style="background-color:steelblue;">
+                                                <th>Nombre</th>
+                                                <th>Taller</th>
+                                                <th>Fecha</th>
+                                                <th>Documento</th>
+
+                                            </thead>
+                                            <tbody style="background-color:  #f7f5f3;">
+                                                <?php
+                                                $busqueda = $db->connect()->prepare('SELECT maestro.nombre, taller,fecha, documento FROM `maestro` join documentos join talleres on maestro.id=documentos.maestro_id and talleres.id=maestro.taller_asignado WHERE documentos.categoria="instrumentacionD"');
+                                                $busqueda->execute();
+                                                foreach ($busqueda as $fila) {
+                                                ?>
+                                                    <tr>
+                                                        <td><?php echo $fila[0]; ?></td>
+                                                        <td><?php echo $fila[1]; ?></td>
+                                                        <td><?php echo $fila[2]; ?></td>
+                                                        <td>
+
+                                                            <a download="Instrumentacion didactica" href="maestro/documentos/instrumentacion/<?php echo $fila[3]; ?>">
+                                                                <img src="img/descargar.png" width="60" height="60" alt="Descargar Formato de Instrumentacion Didáctica"></a>
+
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!--Fin tabla-->
                     </div>
-                    <!--Fin tabla-->
+                </section>
 
 
+                <!-------------------------------------------------------------SECCIÓN DE HORARIOS------------------------------------------------->
+                <section class="section bg-default text-md-center">
+                    <div id="options_Hr" style="display: none;">
+                        <div>
+                            <h3>HORARIOS</h3>
+                            <img src="img/logos/schedule.png" width="250" height="200" alt="cms_Talleres">
                         </div>
-                    </div>
+                        <!--Options-Talleres-->
+                        <div class="row row-lg row-30 mt-5" style="margin:auto;">
 
+                            <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".2s" id="registrarHorario">
+                                <article class=""><img src="img/logos/editHr.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Asignar horario</a></h4>
+
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".2s" id="editarHorario">
+                                <article class=""><img src="img/logos/editT.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Editar horario</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".1s" id="eliminarHorario">
+                                <article class=""><img src="img/logos/recycle-bin.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Eliminar horarios</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".1s" id="mostrarHorario">
+                                <article class=""><img src="img/logos/show-listado.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Mostrar horarios</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+
+
+                        <!--Form-registrar-Horario-->
+                        <section class="mt-4 section-form bg-default" style="display:none" id="form-registrarHr">
+                            <div id="base">
+                                <div id="triangle"></div>
+                                <div id="titulo">Asignar Horario</div>
+                                <div id="form">
+                                    <form method="POST" action="admin/registrar_horario.php" enctype="multipart/form-data">
+                                        <?php
+                                        $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
+                                        $taller->execute();
+                                        ?>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="nombre">Taller</label>
+                                            </div>
+                                            <select class="custom-select" name="nombre" id="nombre" required="true">
+                                                <?php foreach ($taller as $row) {
+                                                ?>
+                                                    <option <?php
+                                                            if ($row[0] == 1) {
+                                                                # code...
+                                                            ?> style="display: none;" <?php
+                                                                                    } else {
+                                                                                        # code...
+                                                                                        ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                        }
+
+                                                                                                                            ?>><?php echo $row[1]; ?></option>
+
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="turno">Turno</label>
+                                            <select id="turno" class="form-control" name="turno" required="true">
+                                                <option selected value="matutino">Matutino</option>
+                                                <option value="vespertino">Vespertino</option>
+
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="lunes">Lunes:</label>
+                                            <input type="text" name="lunes" id="" class="form-control" placeholder="12:00pm - 1:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="martes">Martes:</label>
+                                            <input type="text" name="martes" id="" class="form-control" placeholder="1:30pm - 2:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="miercoles">Miércoles:</label>
+                                            <input type="text" name="miercoles" id="" class="form-control" placeholder="10:00am - 12:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="jueves">Jueves:</label>
+                                            <input type="text" name="jueves" id="" class="form-control" placeholder="12:00pm - 1:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="viernes">Viernes:</label>
+                                            <input type="text" name="viernes" id="" class="form-control" placeholder="2:00pm - 3:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="sabado">Sábado:</label>
+                                            <input type="text" name="sabado" id="" class="form-control" placeholder="7:00pm - 8:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="domingo">Domingo:</label>
+                                            <input type="text" name="domingo" id="" class="form-control" placeholder="10:00am - 11:30am" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-secondary">Enviar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!--Form-editar-Horario-->
+                        <section class="mt-4 section-form bg-default" style="display:none" id="form-editarHr">
+                            <div id="base">
+                                <div id="triangle"></div>
+                                <div id="titulo">Editar Horario</div>
+                                <div id="form">
+                                    <form method="POST" action="admin/edit_horario.php" enctype="multipart/form-data">
+                                        <?php
+                                        $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
+                                        $taller->execute();
+                                        ?>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="nombre">Taller</label>
+                                            </div>
+                                            <select class="custom-select" name="nombre" id="nombre" required="true">
+                                                <?php foreach ($taller as $row) {
+                                                ?>
+                                                    <option <?php
+                                                            if ($row[0] == 1) {
+                                                                # code...
+                                                            ?> style="display: none;" <?php
+                                                                                    } else {
+                                                                                        # code...
+                                                                                        ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                        }
+
+                                                                                                                            ?>><?php echo $row[1]; ?></option>
+
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="turno">Turno</label>
+                                            <select id="turno" class="form-control" name="turno" required="true">
+                                                <option selected value="matutino">Matutino</option>
+                                                <option value="vespertino">Vespertino</option>
+
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="lunes">Lunes:</label>
+                                            <input type="text" name="lunes" id="" class="form-control" placeholder="12:00pm - 1:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="martes">Martes:</label>
+                                            <input type="text" name="martes" id="" class="form-control" placeholder="1:30pm - 2:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="miercoles">Miércoles:</label>
+                                            <input type="text" name="miercoles" id="" class="form-control" placeholder="10:00am - 12:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="jueves">Jueves:</label>
+                                            <input type="text" name="jueves" id="" class="form-control" placeholder="12:00pm - 1:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="viernes">Viernes:</label>
+                                            <input type="text" name="viernes" id="" class="form-control" placeholder="2:00pm - 3:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="sabado">Sábado:</label>
+                                            <input type="text" name="sabado" id="" class="form-control" placeholder="7:00pm - 8:30pm" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="domingo">Domingo:</label>
+                                            <input type="text" name="domingo" id="" class="form-control" placeholder="10:00am - 11:30am" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-secondary">Enviar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!--Form-eliminar-Horario-->
+                        <section class="mt-4 section-form bg-default" style="display:none" id="form-eliminarHr">
+                            <div id="base">
+                                <div id="triangle"></div>
+                                <div id="titulo">Eliminar Horario</div>
+                                <div id="form">
+                                    <form method="POST" action="admin/delete_horario.php" enctype="multipart/form-data">
+                                        <?php
+                                        $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
+                                        $taller->execute();
+                                        ?>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="nombre">Taller</label>
+                                            </div>
+                                            <select class="custom-select" name="nombre" id="nombre" required="true">
+                                                <?php foreach ($taller as $row) {
+                                                ?>
+                                                    <option <?php
+                                                            if ($row[0] == 1) {
+                                                                # code...
+                                                            ?> style="display: none;" <?php
+                                                                                    } else {
+                                                                                        # code...
+                                                                                        ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                        }
+
+                                                                                                                            ?>><?php echo $row[1]; ?></option>
+
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="turno">Turno</label>
+                                            <select id="turno" class="form-control" name="turno" required="true">
+                                                <option selected value="matutino">Matutino</option>
+                                                <option value="vespertino">Vespertino</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-secondary">Enviar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+
+
+                        <footer class="container-fluid mt-4">
+                            <div class="col-12 card " style="background-color: slategray;">
+                                <div class="card-header">
+                                    <span class="">
+                                        Recuerda que todos los cambios que hagas en los horarios de los talleres serán visibles para todos los usuarios.
+                                    </span>
+                                </div>
+                            </div>
+                        </footer>
+
+                    </div>
 
                 </section>
 
@@ -1636,6 +1919,108 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Coursedelete").hide();
                 $("#form-Courseregister").hide();
                 $("#instrumentacionD").show();
+                return false;
+            });
+
+            //HORARIOS
+            $("#page-schedule").on('click', function() {
+                $("#cms").hide();
+                $("#options_T").hide();
+                $("#student-options").hide();
+                $("#teach-options").hide();
+                $("#table-mtro").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Tdelete").hide();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#table-talleres").hide();
+                $("#form-Adelete").hide();
+                $("#form-Aedit").hide();
+                $("#form-Aregister").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").hide();
+                $("#instrumentacionD").hide();
+                $("#options_Hr").show();
+
+                return false;
+            });
+
+            $("#registrarHorario").on('click', function() {
+                $("#cms").hide();
+                $("#options_T").hide();
+                $("#student-options").hide();
+                $("#teach-options").hide();
+                $("#table-mtro").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Tdelete").hide();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#table-talleres").hide();
+                $("#form-Adelete").hide();
+                $("#form-Aedit").hide();
+                $("#form-Aregister").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").hide();
+                $("#instrumentacionD").hide();
+                $("#options_Hr").show();
+                $("#form-eliminarHr").hide();
+                $("#form-editarHr").hide();
+                $("#form-registrarHr").show();
+                return false;
+            });
+
+            $("#editarHorario").on('click', function() {
+                $("#cms").hide();
+                $("#options_T").hide();
+                $("#student-options").hide();
+                $("#teach-options").hide();
+                $("#table-mtro").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Tdelete").hide();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#table-talleres").hide();
+                $("#form-Adelete").hide();
+                $("#form-Aedit").hide();
+                $("#form-Aregister").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").hide();
+                $("#instrumentacionD").hide();
+                $("#options_Hr").show();
+                $("#form-registrarHr").hide();
+                $("#form-eliminarHr").hide();
+                $("#form-editarHr").show();
+                return false;
+            });
+            $("#eliminarHorario").on('click', function() {
+                $("#cms").hide();
+                $("#options_T").hide();
+                $("#student-options").hide();
+                $("#teach-options").hide();
+                $("#table-mtro").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Tdelete").hide();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#table-talleres").hide();
+                $("#form-Adelete").hide();
+                $("#form-Aedit").hide();
+                $("#form-Aregister").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").hide();
+                $("#instrumentacionD").hide();
+                $("#options_Hr").show();
+                $("#form-registrarHr").hide();
+                $("#form-editarHr").hide();
+                $("#form-eliminarHr").show();
                 return false;
             });
 

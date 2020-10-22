@@ -1,5 +1,5 @@
 <?php
-include_once '../maestro.php';
+
 include_once '../db.php';
 ob_start();
 $db = new DB();
@@ -10,7 +10,10 @@ $tamano_archivo = $_FILES['userfile']['size'];
 
 //compruebo si las características del archivo son las que deseo, solo aceptara pdf y word
 if (!((strpos($tipo_archivo, "pdf") || strpos($tipo_archivo, "doc")))) {
-    echo "La extensión de los archivos no es correcta. <br><br><table><tr><td><li>Se permiten archivos .gif o .jpg<br><li></td></tr></table>";
+    echo '<script type="text/javascript">
+    alert("Sólo se permiten archivos con la extension .doc y .pdf");
+    window.location.href="../maestro.php"; 
+    </script>';
 } else {
     $carpeta_destino = 'documentos/instrumentacion/';
     $archivo = $carpeta_destino . $_FILES['userfile']['name'];
@@ -26,21 +29,25 @@ if (!((strpos($tipo_archivo, "pdf") || strpos($tipo_archivo, "doc")))) {
 
         if ($sentencia == True) {
             # code...
-            $sentencia = "INSERT INTO `documentos` (`id`, `maestro_id`, `taller_id`, `alumno_id`, `categoria`, `documento`) 
-            VALUES ('', '$id', '$taller_id', '0', 'instrumentacionD', :documento);";
+            
+            $sentencia = "INSERT INTO `documentos` (`id`, `maestro_id`, `taller_id`, `alumno_id`, `categoria`, `documento`,`fecha`) 
+            VALUES ('', '$id', '$taller_id', '0', 'instrumentacionD', :documento,NOW());";
             $statement = $db->connect()->prepare($sentencia);
             $statement->execute(array(':documento' => $_FILES['userfile']['name']));
 
-            echo "El archivo ha sido cargado correctamente.";
+            echo '<script type="text/javascript">
+            alert("El archivo ha sido cargado correctamente");
+            window.location.href="../maestro.php"; </script>';
         }
 
 
     } else {
-        echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";
+        echo '<script type="text/javascript">
+        alert("Ocurrió un error al subir el fichero");
+        window.location.href="../maestro.php"; </script>';
     }
 }
 
-echo "<script>location.href='../maestro.php';</script>";
 
 
 ob_end_flush();

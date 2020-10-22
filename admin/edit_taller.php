@@ -4,10 +4,8 @@ $db = new DB();
 $nombre = $_POST['nombre'];
 $nombreR = $_POST['nombreR'];
 $descripcion = $_POST['descripcion'];
-$horario = $_POST['horario'];
 $categoria = $_POST['categoria'];
 $direccion = $_POST['direccion'];
-
 $civico = 'Civico';
 $deportivo = 'Deportivo';
 $cultural = 'Cultural';
@@ -55,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     #Despues de verificar la categoria para una correcta clasicacion de las imagenes, se ejecuta la consulta 
-    $sql = "UPDATE `talleres` set `nombre`='$nombreR', `descripcion`='$descripcion', `horario`='$horario', 
+    $sql = "UPDATE `talleres` set `nombre`='$nombreR', `descripcion`='$descripcion', 
     `categoria`='$categoria', `direccion`='$direccion', `img1`=:img1 where id='$nombre'";
     $statement = $db->connect()->prepare($sql);
     $statement->execute(array(':img1' => $_FILES['file']['name']));

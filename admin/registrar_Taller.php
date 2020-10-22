@@ -4,7 +4,6 @@ $db = new DB();
 $nombre = $_POST['nombre'];
 $nombreR = $_POST['nombreR'];
 $descripcion = $_POST['descripcion'];
-$horario = $_POST['horario'];
 $categoria = $_POST['categoria'];
 $direccion = $_POST['direccion'];
 
@@ -13,8 +12,6 @@ $deportivo = 'Deportivo';
 $cultural = 'Cultural';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-
     if (strcmp($categoria, $civico) === 0) {
        # echo ("civico");
 
@@ -56,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     #Despues de verificar la categoria para una correcta clasicacion de las imagenes, se ejecuta la consulta 
-    $sql = "INSERT INTO `talleres` (`id`, `taller`, `nombre`, `descripcion`, `horario`, `mtro_asignado`, `categoria`, `direccion`, `img1`)
-        VALUES (NULL, '$nombre', '$nombreR','$descripcion','$horario','1','$categoria','$direccion',:img1)";
+    $sql = "INSERT INTO `talleres` (`id`, `taller`, `nombre`, `descripcion`, `mtro_asignado`, `categoria`, `direccion`, `img1`)
+        VALUES (NULL, '$nombre', '$nombreR','$descripcion','1','$categoria','$direccion',:img1)";
     $statement = $db->connect()->prepare($sql);
     $statement->execute(array(':img1' => $_FILES['file']['name']));
 
