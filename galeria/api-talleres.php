@@ -10,9 +10,7 @@ if(isset($_GET['categoria'])){
         $categoria = $_GET['categoria'];
         $productos = new Talleres();
         $items = $productos->getItemsByCategory($categoria);
-
         echo json_encode(['statuscode'=>200, 'items'=>$items]);
-
     }
 
 }else if(isset($_GET['get-item'])){

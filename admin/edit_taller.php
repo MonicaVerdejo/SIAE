@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             # code...
             $check = @getimagesize($_FILES['file']['tmp_name']);
             if ($check !== false) {
-                $carpeta_destino = '../img/civico/taller/';
+                $carpeta_destino = '../img/Civico/taller/';
                 $archivo = $carpeta_destino . $_FILES['file']['name'];
                 move_uploaded_file($_FILES['file']['tmp_name'], $archivo);
             }
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             # code...
             $check = @getimagesize($_FILES['file']['tmp_name']);
             if ($check !== false) {
-                $carpeta_destino = '../img/deporte/taller/';
+                $carpeta_destino = '../img/Deportivo/taller/';
                 $archivo = $carpeta_destino . $_FILES['file']['name'];
                 move_uploaded_file($_FILES['file']['tmp_name'], $archivo);
             }
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             # code...
             $check = @getimagesize($_FILES['file']['tmp_name']);
             if ($check !== false) {
-                $carpeta_destino = '../img/cultura/taller/';
+                $carpeta_destino = '../img/Cultural/taller/';
                 $archivo = $carpeta_destino . $_FILES['file']['name'];
                 move_uploaded_file($_FILES['file']['tmp_name'], $archivo);
             }

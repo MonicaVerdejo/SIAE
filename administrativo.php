@@ -62,7 +62,6 @@ if (!isset($_SESSION['rol'])) {
 
                             <!---->
                             <form class="col-12" id="perfil" style="display:none;" action="upload.php" method="post" enctype="multipart/form-data">
-
                                 <input type="file" lass="form-control" name="file" id="file">
                                 <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
                             </form>
@@ -1112,11 +1111,6 @@ if (!isset($_SESSION['rol'])) {
                                             <textarea placeholder="En este taller aprenderás todo lo necesario para ser una estrella en el volleyball." id="descripcion" class="form-control" name="descripcion" rows="5" required="true"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label for="horario">Horario</label>
-                                            <textarea placeholder="Lunes:  10:00 am- 12:00 pm
-                                               Martes: 1:00 pm- 2:00 pm" id="horario" class="form-control" name="horario" rows="5" required="true"></textarea>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="categoria">Categoria</label>
                                             <select id="categoria" class="form-control" name="categoria" required="true">
                                                 <option>Civico</option>
@@ -1179,11 +1173,6 @@ if (!isset($_SESSION['rol'])) {
                                         <div class="form-group">
                                             <label for="descripcion">Descripción</label>
                                             <textarea placeholder="En este taller aprenderás todo lo necesario para ser una estrella en el volleyball." id="descripcion" class="form-control" name="descripcion" rows="5" required="true"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="horario">Horario</label>
-                                            <textarea placeholder="Lunes:  10:00 am- 12:00 pm
-                                               Martes: 1:00 pm- 2:00 pm" id="horario" class="form-control" name="horario" rows="5" required="true"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="categoria">Categoria</label>

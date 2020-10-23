@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES)) {
     }
     
 
-    $id = $_SESSION['id_user'];
+    $id = $_SESSION['id_admin'];
 
     $sql = "UPDATE administrador SET img_profile=:img_profile WHERE id=$id";
     $statement = $db->connect()->prepare($sql);

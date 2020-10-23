@@ -126,7 +126,7 @@ $db = new DB();
             <div>
                 <main class="container">
                     <?php
-                    $response = json_decode(file_get_contents('http://localhost/SIAE2/galeria/api-talleres.php?categoria=civico'), true);
+                    $response = json_decode(file_get_contents('http://localhost/SIAE2/galeria/api-talleres.php?categoria=Civico'), true);
                     if ($response['statuscode'] == 200) {
                         foreach ($response['items'] as $item) {
                             include('items.php');

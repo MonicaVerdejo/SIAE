@@ -8,7 +8,7 @@ class Talleres extends DB{
     }
 
     public function get($id){
-        $query = $this->connect()->prepare('SELECT id,taller,nombreRepresentativo,descripcion,img1,categoria FROM talleres WHERE id= :id LIMIT 0,12');
+        $query = $this->connect()->prepare('SELECT id,taller,nombre,descripcion,img1,categoria FROM talleres WHERE id= :id LIMIT 0,12');
         $query->execute(['id'=>$id]);
         
         $row=$query->fetch();
@@ -16,7 +16,7 @@ class Talleres extends DB{
         return[
             'id' => $row['id'],
             'taller' => $row['taller'],
-            'nombreRepresentativo' => $row['nombreRepresentativo'],
+            'nombre' => $row['nombre'],
             'descripcion' => $row['descripcion'],
             'img1' => $row['img1'],
             'categoria' => $row['categoria'],
@@ -25,7 +25,7 @@ class Talleres extends DB{
     }
 
     public function getItemsByCategory($category){
-        $query = $this->connect()->prepare('SELECT id,taller,nombreRepresentativo,descripcion,img1,categoria FROM talleres WHERE categoria= :cat LIMIT 0,12');
+        $query = $this->connect()->prepare('SELECT id,taller,nombre,descripcion,img1,categoria FROM talleres WHERE categoria= :cat LIMIT 0,12');
         $query->execute(['cat'=>$category]);
         
         $items = []; //creo mi arreglo de arreglos 
@@ -35,7 +35,7 @@ class Talleres extends DB{
         $item = [
             'id' => $row['id'],
             'taller' => $row['taller'],
-            'nombreRepresentativo' => $row['nombreRepresentativo'],
+            'nombre' => $row['nombre'],
             'descripcion' => $row['descripcion'],
             'img1' => $row['img1'],
             'categoria' => $row['categoria'],
