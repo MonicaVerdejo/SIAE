@@ -154,7 +154,6 @@ if (!isset($_SESSION['rol'])) {
 
                                                             ?>
                         </h3>
-
                     </div>
                 </div>
 
