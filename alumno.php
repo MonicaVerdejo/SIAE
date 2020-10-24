@@ -11,17 +11,17 @@ if (!isset($_SESSION['rol'])) {
     }
 }
 
-$alumno_id=$_SESSION['id_user'];
+$alumno_id = $_SESSION['matricula'];
 $query = $db->connect()->prepare("SELECT talleres.taller, talleres.direccion, talleres.mtro_asignado, maestro.nombre FROM talleres 
-JOIN maestro join alumnos ON talleres.id = alumnos.taller_id and maestro.taller_asignado = talleres.mtro_asignado
-where alumnos.id=$alumno_id;");
+JOIN maestro join alumnos ON talleres.id = alumnos.taller_id and maestro.id = talleres.mtro_asignado
+where alumnos.matricula=$alumno_id;");
 $query->execute();
 
 $opcion = $query->fetch(PDO::FETCH_NUM);
 
 //session_destroy('imagen_profile');
 //session_start();
-$_SESSION['taller'] = $opcion[0];
+$taller = $opcion[0];
 $direccion = $opcion[1];
 $mtroasignado = $opcion[3];
 
@@ -45,6 +45,8 @@ $mtroasignado = $opcion[3];
     <link rel="stylesheet" href="TABLA/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" type="text/css">
     <link rel="stylesheet" href="TABLA/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" type="text/css">
     <link rel="stylesheet" href="css/styles2.css">
+
+
 
 </head>
 
@@ -86,6 +88,13 @@ $mtroasignado = $opcion[3];
                                     <span>Mensajes</span>
                                 </a>
                             </li>
+                            <li id="constancia de crédito">
+                                <a href="#">   <!--Con un if si tiene doc asignado lo descarga y si no imprime "Este apartado aun no esta disponible para ti"
+                            o algo por el estilo-->
+                                   <i class="fa fa-file" aria-hidden="true"></i>
+                                    <span>Constancia de Crédito</span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="cerrar.php">
                                     <i class="fa fa-power-off"></i>
@@ -101,54 +110,50 @@ $mtroasignado = $opcion[3];
             <!-- Sidebar end -->
 
             <main class="page-content">
-                <div class="container-fluid">
-                    <img src="img/logos/tecnm.svg" alt="">
+                <div class="container-fluid row">
+                    <img class="col-md-2 col-sm-2 col-xs-6" src="img/logos/tecnm.svg" alt="TecNM">
+                    <div class="col-md-9 col-sm-9 col-xs-12 section section-lg text-center mt-1">
+                        <h1>
+                            <?php
+                            if ($_SESSION['sexo'] == 'F') {
+                            ?> Bienvenida <?php echo ($_SESSION['nombre']);
+                                        } else {
+                                            ?> Bienvenido <?php echo ($_SESSION['nombre']);
+                                                        }
 
+                                                            ?>
+                        </h1>
+                    </div>
                 </div>
                 <!--Inicio-->
-                <div class="section section-lg ">
-                    <h1>
-                        <?php
-                        if ($_SESSION['sexo'] == 'F') {
-                        ?> Bienvenida <?php echo ($_SESSION['nombre']);
-                                    } else {
-                                        ?> Bienvenido <?php echo ($_SESSION['nombre']);
-                                                    }
 
-                                                        ?>
-                    </h1>
-                </div>
 
-                <div class="row" id="inicio">
-                    <div class="col-lg-6 col-sm-6 col-xs-12">
-                        ESTADO DEL CURSO: <?php echo ($_SESSION['estatus']); ?>
-                    </div>
-                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                <div class="row" id="inicio" style="background-image: url(img/actividades-extraescolar.jpg); background-size:cover;  background-repeat: no-repeat;">
+                    <div class="col-lg-6 col-sm-6 col-xs-12" style="height: 400px;">
                         <div class="datosTaller card-1">
-                         
-                                <li>
-                                    <i class="fa fa-bookmark" aria-hidden="true"></i>
-                                    Inscrito en: <?php echo $_SESSION['taller']; ?>
-                                </li>
-                                <li>
-                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
-                                    Matricula: <?php echo $_SESSION['matricula']; ?>
-                                </li>
-                                <li>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    Carrera: <?php echo $_SESSION['carrera']; ?>
-                                    <hr>
-                                </li>
-                                <li>
+                            <li>
+                                <i class="fa fa-bookmark" aria-hidden="true"></i>
+                                Inscrito en: <?php echo $taller; ?>
+                            </li>
+                            <li>
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                Matricula: <?php echo $_SESSION['matricula']; ?>
+                            </li>
+                            <li>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                Carrera: <?php echo $_SESSION['carrera']; ?>
+                                <hr>
+                            </li>
+                            <li>
                                 <i class="fa fa-id-card" aria-hidden="true"></i>
-                                    Maestro asignado: <?php echo $mtroasignado; ?>
-                                </li>
-                                <li>
-                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                                    Ubicación del taller: <?php echo $direccion; ?>
-                                    <hr>
-                                </li>
-                            
+                                Maestro asignado: <?php echo $mtroasignado; ?>
+                            </li>
+                            <li>
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                Ubicación del taller: <?php echo $direccion; ?>
+                                <hr>
+                            </li>
+
                             <span>En caso de dudas consultar en el área de actividades extraescolares. Departamento de vinculación.</span>
                         </div>
                     </div>
@@ -157,34 +162,115 @@ $mtroasignado = $opcion[3];
                 <!--Horario-->
 
                 <div class="container" id="horario" style="display: none;">
-
-                    <section id="tabla_resultado" class="content">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12 ">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title text-center">Horario</h3>
-                                        </div>
-                                        <!-- /.card-header -->
-                                        <div class="card-body">
-                                            <table id="datos" class="text-center table table-bordered table-hover table-responsive">
-
-
-
-
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <!-- /.card -->
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
+                    <div class="row">
+                        <div class="col-6">
+                            <img src="img/logos/schedule.png" width="100" height="100" alt="Horario asignado">
                         </div>
-                        <!-- /.container-fluid -->
-                    </section>
+                        <div class="col-6 ">
+                            <div class="card">
+                                <div class="card-header" style="margin:auto">
+                                    <h1 class="card-title">HORARIO ASIGNADO</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+
+                        <section id="tabla_resultado" class="content">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 mt-3">
+                                        <div class="card">
+                                            <div class="card-header">
+
+                                                <h3 class="mr-5 card-title text-center" style="text-transform: uppercase;"><?php
+                                                                                                                            $alumno_id = $_SESSION['matricula'];
+
+                                                                                                                            $sentencia = $db->connect()->prepare("SELECT id,taller FROM `talleres` join alumnos on alumnos.taller_id=talleres.id where matricula=$alumno_id");
+                                                                                                                            $sentencia->execute();
+                                                                                                                            foreach ($sentencia as $row) {
+                                                                                                                                $idtallerAlumno = $row[0];
+                                                                                                                                $tallerAlumno = $row[1];
+                                                                                                                                echo $tallerAlumno;
+                                                                                                                            }
+
+                                                                                                                            ?></h3>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body">
+
+                                                <table class="text-center table  table-hover table-responsive" style="width: 70%; background-color: white;margin-left:4%;">
+                                                    <thead style="background-color: lightslategray;">
+                                                        <th>No. Control</th>
+                                                        <th>Alumno</th>
+                                                        <th>Semestre</th>
+                                                        <th>Carrera</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><?php echo  $alumno_id; ?></td>
+                                                            <td><?php $nombre = $_SESSION['nombre'];
+                                                                echo $nombre; ?> </td>
+                                                            <td><?php $semestre = $_SESSION['semestre'];
+                                                                echo $semestre; ?></td>
+                                                            <td><?php $carrera = $_SESSION['carrera'];
+                                                                echo $carrera;  ?></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table class="mt-3 text-center table  table-hover table-responsive" style=" width: 70%; background-color: white;">
+
+                                                    <thead style="background-color: lightslategray;">
+                                                        <th>Turno</th>
+                                                        <th>Lunes</th>
+                                                        <th>Martes</th>
+                                                        <th>Miercoles</th>
+                                                        <th>Jueves</th>
+                                                        <th>Viernes</th>
+                                                        <th>Sabado</th>
+                                                        <th>Domingo</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+
+                                                        $busqueda = $db->connect()->prepare("SELECT turno,lunes,martes,miercoles,jueves,viernes,sabado,domingo from horarios WHERE taller=$idtallerAlumno");
+                                                        $busqueda->execute();
+                                                        foreach ($busqueda as $fila) {
+                                                        ?>
+                                                            <tr>
+                                                                <td><?php echo $fila[0]; ?></td>
+                                                                <td><?php echo $fila[1]; ?></td>
+                                                                <td><?php echo $fila[2]; ?></td>
+                                                                <td><?php echo $fila[3]; ?></td>
+                                                                <td><?php echo $fila[4]; ?></td>
+                                                                <td><?php echo $fila[5]; ?></td>
+                                                                <td><?php echo $fila[6]; ?></td>
+                                                                <td><?php echo $fila[7]; ?></td>
+                                                            </tr>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </tbody>
+
+
+
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.container-fluid -->
+                        </section>
+
+                    </div>
+
+
 
                 </div>
 
@@ -197,8 +283,8 @@ $mtroasignado = $opcion[3];
                         <div class="col-12 card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>    
-                                Mensajes</h3>
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    Mensajes</h3>
                             </div>
                         </div>
                         <div>
@@ -262,6 +348,13 @@ $mtroasignado = $opcion[3];
     <script src="js/js.js" type="text/javascript"></script>
     <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-30d18ea41045577cdb11c797602d08e0b9c2fa407c8b81058b1c422053ad8041.js" type="text/javascript"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <!-- DataTables -->
+    <script src="public/TABLA/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="public/TABLA/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+    <script src="public/TABLA/plugins/datatables-responsive/js/dataTables.responsive.min.js" type="text/javascript"></script>
+    <script src="public/TABLA/plugins/datatables-responsive/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
     <script>
         $(document).ready(function() {
             $("#alumno_horario").on('click', function() {

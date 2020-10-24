@@ -112,7 +112,7 @@ if (!isset($_SESSION['rol'])) {
                                 </a>
                             </li>
                             <hr>
-                            
+
                             <li class="header-menu">
                                 <span>Sistema</span>
                             </li>
@@ -358,8 +358,16 @@ if (!isset($_SESSION['rol'])) {
 
 
                 <!--Mensajes Nuevos-->
-                <section class="mensajesN container" id="mensajesN" style="display: none;">
-                    <div>
+                <section id="mensajesN" style="display: none;">
+                    <div class="col-12 card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                Envía un nuevo mensaje a tus alumnos </h3>
+                        </div>
+                    </div>
+                    <div class="mensajesN container">
+
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-10"><label for="talleres">Tus talleres son:</label></div>
@@ -379,7 +387,7 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                             <div class="form-group" title="Advertencia" data-toggle="popover" data-trigger="hover" data-content="Escoge sólo un taller">
                                 <label for="taller">Confirma el taller destinatario del mensaje:</label>
-                                <textarea class="form-control" name="taller" id="taller" rows="1" required="true"></textarea>
+                                <textarea class="form-control" placeholder="Danza Moderna"  name="taller" id="taller" rows="1" required="true"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="mensaje">Redacta tu mensaje:</label>
@@ -388,6 +396,7 @@ if (!isset($_SESSION['rol'])) {
                             <div class="form-group">
                                 <button title="Advertencia" data-toggle="popover" data-trigger="hover" data-content="Recuerda que una vez enviado no podrás eliminarlo" type="submit" class="btn btn-primary">Enviar</button>
                             </div>
+                            
                         </form>
                     </div>
                 </section>
@@ -461,7 +470,7 @@ if (!isset($_SESSION['rol'])) {
                                         </div>
                                         <div class="form-group" title="Advertencia" data-toggle="popover" data-trigger="hover" data-content="Escoge sólo un taller">
                                             <label for="taller">Confirma el taller al que pertenece la instrumentación:</label>
-                                            <textarea class="form-control" name="taller" id="taller" rows="1" required="true"></textarea>
+                                            <textarea class="form-control" placeholder="Danza Moderna"  name="taller" id="taller" rows="1" required="true"></textarea>
                                         </div>
                                         <img src="img/logos/adjuntar.png" width="100px" alt="Portada Inicio">
                                         <div class="form-group mt-2">
@@ -505,13 +514,13 @@ if (!isset($_SESSION['rol'])) {
 
                         <div class="col-12 card">
                             <div class="card-header">
-                            <h5 class="text-left" style="text-transform: uppercase;">
-                            <i class="fa fa-users" aria-hidden="true"></i>
-                            <?php echo $tallerNombre;  ?> </h5>
+                                <h5 class="text-left" style="text-transform: uppercase;">
+                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                    <?php echo $tallerNombre;  ?> </h5>
 
                             </div>
                         </div>
-                        
+
                         <h4 class="mt-5 text-center">ALUMNOS</h4> <br>
                         <div class="row">
 
@@ -563,7 +572,7 @@ if (!isset($_SESSION['rol'])) {
                             <div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table class="table table-bordered table-hover">
+                                    <table class="table table-bordered table-hover table-responsive" style="width:80%;margin-left:12%;">
                                         <thead style="background-color:steelblue;">
                                             <th>Nombre</th>
                                             <th>Matrícula</th>
@@ -622,7 +631,7 @@ if (!isset($_SESSION['rol'])) {
 
                                     <div class="form-group">
                                         <label for="matricula">Matricula</label>
-                                        <input id="matricula" class="form-control" type="text" name="matricula" required="true">
+                                        <input id="matricula" placeholder="161080138"  class="form-control" type="text" name="matricula" required="true">
                                     </div>
                                     <?php
                                     $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
@@ -673,7 +682,7 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="matricula">Matricula</label>
-                                        <input id="matricula" class="form-control" type="text" name="matricula" required="true">
+                                        <input id="matricula" placeholder="161080138" class="form-control" type="text" name="matricula" required="true">
                                     </div>
                                     <img src="img/logos/adjuntar.png" width="100px" alt="Portada Inicio">
                                     <div class="form-group mt-2">
@@ -689,7 +698,7 @@ if (!isset($_SESSION['rol'])) {
                 </section>
 
 
-                
+
                 <!-------------------------------------------------------------CHANGE PASSWORD SECTION------------------------------------------------->
                 <div class="modal fade" id="changePModal" tabindex="-1" role="dialog" aria-labelledby="changePModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -705,15 +714,12 @@ if (!isset($_SESSION['rol'])) {
                                 <form class="col-12" action="admin/changePass_Mtro.php" method="post" enctype="multipart/form-data">
                                     <br>
                                     <div class="form-group">
-                                      <label for="oldPass">Contraseña Actual</label>
-                                      <input type="password" class="form-control" name="oldPass" id="oldPass" placeholder="" required="true">
+                                        <label for="oldPass">Contraseña Actual</label>
+                                        <input type="password" class="form-control" name="oldPass" id="oldPass" placeholder="" required="true">
                                     </div>
                                     <div class="form-group">
-                                      <label for="newPass">Nueva contraseña</label>
-                                      <input type="password" class="form-control" name="newPass" id="newPass" placeholder="" required="true"
-                                       pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,20}$" 
-                                       oninvalid="this.setCustomValidity('La contraseña debe tener entre 8 y 20 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.')"
-                                       oninput="this.setCustomValidity('')"/>
+                                        <label for="newPass">Nueva contraseña</label>
+                                        <input type="password" class="form-control" name="newPass" id="newPass" placeholder="" required="true" pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,20}$" oninvalid="this.setCustomValidity('La contraseña debe tener entre 8 y 20 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.')" oninput="this.setCustomValidity('')" />
                                     </div>
                                     <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
                                 </form>
@@ -740,8 +746,9 @@ if (!isset($_SESSION['rol'])) {
             $("#alumno_horario").on('click', function() {
                 $("#Bienvenido").show();
                 $("#inicio").hide();
-                $("#mensajes").hide();
+                $("#mensajesR").hide();
                 $("#mensajesN").hide();
+                $("#mensajesE").hide();
                 $("#std-options").hide();
                 $("#form-Aedit").hide();
                 $("#form-evaluarA").hide();
@@ -816,13 +823,13 @@ if (!isset($_SESSION['rol'])) {
                 $("#mensajesE").hide();
                 $("#mensajesN").hide();
                 $("#instrumentacionD").hide();
-
                 $("#std-options").show();
                 return false;
             });
             $("#verLista").on('click', function() {
                 $("#std-options").show();
                 $("#form-evaluarA").hide();
+                $("#form-Aedit").hide();
                 $("#ListaA").show();
 
                 return false;

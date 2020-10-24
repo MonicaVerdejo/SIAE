@@ -12,17 +12,16 @@ if (!empty($_POST['usuario']) && !empty($_POST['password'])) {
 
     $row = $query->fetch(PDO::FETCH_NUM); //transforma a un arreglo que puedo usar
 
-    if (($row == true) && password_verify($_POST['password'], $row[3])) { //si existe contenido valida el rol
-        $rol = $row[11];
+    if (($row == true) && password_verify($_POST['password'], $row[2])) { //si existe contenido valida el rol
+        $rol = $row[10];
         $_SESSION['rol'] = $rol;
-        $_SESSION['nombre'] = $row[1];
-        $_SESSION['id_user'] = $row[0];
-        $_SESSION['estatus'] = $row[7];
-        $_SESSION['sexo'] = $row[10];
-        $_SESSION['matricula'] = $row[2];
-        $_SESSION['carrera'] = $row[6];
-        $_SESSION['semestre'] = $row[8];
-        $_SESSION['taller_id'] = $row[4];
+        $_SESSION['nombre'] = $row[0];
+        $_SESSION['estatus'] = $row[6];
+        $_SESSION['sexo'] = $row[9];
+        $_SESSION['matricula'] = $row[1];
+        $_SESSION['carrera'] = $row[5];
+        $_SESSION['semestre'] = $row[7];
+        $_SESSION['taller_id'] = $row[3];
         switch ($rol) {
             case 2:
                 header('location: alumno.php');

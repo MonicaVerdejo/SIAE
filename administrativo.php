@@ -696,7 +696,7 @@ if (!isset($_SESSION['rol'])) {
                                         <div>
                                             <!-- /.card-header -->
                                             <div class="card-body">
-                                                <table class="table table-bordered table-hover">
+                                                <table class="table table-bordered table-hover table-responsive" style="width:80%;margin-left:12%;">
                                                     <thead style="background-color:steelblue;">
                                                         <th>Nombre</th>
                                                         <th>Correo</th>
@@ -1019,8 +1019,15 @@ if (!isset($_SESSION['rol'])) {
 
 
                 <!--Mensajes Nuevos-->
-                <section class="mensajesN container" id="mensajesN" style="display: none;">
-                    <div>
+                <section id="mensajesN" style="display: none;">
+                    <div class="col-12 card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                Envía un nuevo mensaje a tus alumnos </h3>
+                        </div>
+                    </div>
+                    <div class="mensajesN container">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-10 mt-3"><label for="talleres">Redacta tu mensaje</label></div>
@@ -1249,7 +1256,7 @@ if (!isset($_SESSION['rol'])) {
                                             <div>
                                                 <!-- /.card-header -->
                                                 <div class="card-body">
-                                                    <table class="table table-bordered table-hover">
+                                                    <table class="table table-bordered table-hover table-responsive" style="width:100%;margin-left:1%;">
                                                         <thead style="background-color:steelblue;">
                                                             <th>Taller</th>
                                                             <th>Nombre del representativo</th>
@@ -1664,15 +1671,12 @@ if (!isset($_SESSION['rol'])) {
                                 <form class="col-12" action="admin/changePass_Admin.php" method="post" enctype="multipart/form-data">
                                     <br>
                                     <div class="form-group">
-                                      <label for="oldPass">Contraseña Actual</label>
-                                      <input type="password" class="form-control" name="oldPass" id="oldPass" placeholder="" required="true">
+                                        <label for="oldPass">Contraseña Actual</label>
+                                        <input type="password" class="form-control" name="oldPass" id="oldPass" placeholder="" required="true">
                                     </div>
                                     <div class="form-group">
-                                      <label for="newPass">Nueva contraseña</label>
-                                      <input type="password" class="form-control" name="newPass" id="newPass" placeholder="" required="true"
-                                       pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,20}$" 
-                                       oninvalid="this.setCustomValidity('La contraseña debe tener entre 8 y 20 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.')"
-                                       oninput="this.setCustomValidity('')"/>
+                                        <label for="newPass">Nueva contraseña</label>
+                                        <input type="password" class="form-control" name="newPass" id="newPass" placeholder="" required="true" pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,20}$" oninvalid="this.setCustomValidity('La contraseña debe tener entre 8 y 20 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.')" oninput="this.setCustomValidity('')" />
                                     </div>
                                     <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
                                 </form>

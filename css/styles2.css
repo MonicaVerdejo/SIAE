@@ -508,11 +508,12 @@ body {
   background: rgb(141, 175, 209);
   border-radius: 2px;
   display: inline-block;
-  height: 300px;
+  height: 320px;
   margin: 1rem;
   position: relative;
   width: 300px;
   padding: 2%;
+
 }
 
 .datosTaller li {
@@ -532,16 +533,18 @@ body {
 
 body {
   background: #f7f5f3;
+  
 }
 
 
 .table,
 .table-bordered {
   width: 600px;
-  position: relative;
   background-color: darkgray;
+  position: relative;
   margin-left: 25%;
 }
+
 
 @media (min-width: 1025px) and (max-width: 1280px) {
 
@@ -552,6 +555,7 @@ body {
     background-color: darkgray;
     margin-right: 10%;
   }
+
 
 }
 
@@ -592,7 +596,7 @@ body {
   }
 
 
-  
+
 }
 
 
@@ -607,20 +611,20 @@ body {
   background: silver;
   padding: 10px;
   margin-bottom: 3%;
- 
+
 }
 
 
-.envio-descargar{
-margin: auto;
-padding: 5%;
-width: 600px;
-height: auto;
-color: black;
-border: 3px solid slategrey;
+.envio-descargar {
+  margin: auto;
+  padding: 5%;
+  width: 600px;
+  height: auto;
+  color: black;
+  border: 3px solid slategrey;
   border-radius: 3%;
   background: silver;
-text-align: center;
+  text-align: center;
 }
 
 
@@ -634,8 +638,8 @@ text-align: center;
   border-radius: 50%;
 }
 
-#base{
-  margin:auto;
+#base {
+  margin: auto;
   width: 300px;
   height: auto;
   background-color: steelblue;
@@ -650,34 +654,34 @@ text-align: center;
 
 
 #titulo {
-	position: relative;
-	top: -13px;
-	text-align: center;
-	font-size: 25px;
-	height: 45px;
-	color: black;
-	background-color: #d6d4d4;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+  position: relative;
+  top: -13px;
+  text-align: center;
+  font-size: 25px;
+  height: 45px;
+  color: black;
+  background-color: #d6d4d4;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 
 }
 
 
 
 /*------------------------------------------------CMS------------------------------------------------------*/
-.base-cms{
- margin: auto;
- width: auto;
- background-color: gainsboro;
- padding-bottom: 1%;
- padding-left: 1%;
- padding-right: 1%;
- box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
- border-radius: 5px;
+.base-cms {
+  margin: auto;
+  width: auto;
+  background-color: gainsboro;
+  padding-bottom: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
-.img-div-1{
-  margin:auto;
+.img-div-1 {
+  margin: auto;
   width: 100px;
   height: auto;
   background-color: steelblue;
@@ -689,8 +693,8 @@ text-align: center;
   text-align: center;
 }
 
-.img-div-2{
-  margin:auto;
+.img-div-2 {
+  margin: auto;
   width: 100px;
   height: auto;
   background-color: mediumseagreen;
@@ -702,8 +706,8 @@ text-align: center;
   text-align: center;
 }
 
-.img-div-3{
-  margin:auto;
+.img-div-3 {
+  margin: auto;
   width: 100px;
   height: auto;
   background-color: rgb(189, 108, 189);
@@ -717,5 +721,3 @@ text-align: center;
 
 
 /*------------------------------------------------SECTION TALLER------------------------------------------------------*/
-
-
