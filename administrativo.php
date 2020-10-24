@@ -1798,6 +1798,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Tdelete").hide();
                 $("#form-Tedit").hide();
                 $("#form-Tregister").hide();
+                $("#options_Hr").hide();
                 return false;
             });
             //seccion de mensajes
@@ -1815,7 +1816,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
                 $("#form-Adelete").hide();
-
+                $("#options_Hr").hide();
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
@@ -1832,7 +1833,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
                 $("#form-Adelete").hide();
-
+                $("#options_Hr").hide();
                 return false;
             });
             //seccion de maestro
@@ -1847,7 +1848,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Adelete").hide();
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
-
+                $("#options_Hr").hide();
                 return false;
             });
             $("#registrarM").on('click', function() {
@@ -1889,6 +1890,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Tdelete").hide();
                 $("#form-Tedit").hide();
                 $("#form-Tregister").hide();
+                $("#options_Hr").hide();
                 return false;
             });
 
@@ -1941,6 +1943,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Courseedit").hide();
                 $("#form-Coursedelete").hide();
                 $("#form-Courseregister").hide();
+                $("#options_Hr").hide();
                 return false;
             });
             $("#registrarTaller").on('click', function() {
@@ -2027,6 +2030,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Courseedit").hide();
                 $("#form-Coursedelete").hide();
                 $("#form-Courseregister").hide();
+                $("#options_Hr").hide();
                 $("#instrumentacionD").show();
                 return false;
             });
@@ -2129,6 +2133,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#options_Hr").show();
                 $("#form-registrarHr").hide();
                 $("#form-editarHr").hide();
+                $("#horario").hide();
                 $("#form-eliminarHr").show();
                 return false;
             });
