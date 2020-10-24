@@ -111,10 +111,23 @@ if (!isset($_SESSION['rol'])) {
                                     <span>Instrumentación Didáctica</span>
                                 </a>
                             </li>
+                            <hr>
+                            
                             <li class="header-menu">
                                 <span>Sistema</span>
                             </li>
-
+                            <li class="sidebar-dropdown" id="opciones">
+                                <a href="#">
+                                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                                    <span>Opciones</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <a href="#" data-toggle="modal" data-target="#changePModal">
+                                        <i class="fas fa-edit "></i>
+                                        <span>Cambiar contraseña</span>
+                                    </a>
+                                </div>
+                            </li>
                             <li>
                                 <a href="cerrar.php">
                                     <i class="fa fa-power-off"></i>
@@ -674,6 +687,41 @@ if (!isset($_SESSION['rol'])) {
                     </section>
 
                 </section>
+
+
+                
+                <!-------------------------------------------------------------CHANGE PASSWORD SECTION------------------------------------------------->
+                <div class="modal fade" id="changePModal" tabindex="-1" role="dialog" aria-labelledby="changePModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="changePModalLabel">Cambiar la contraseña de usuario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/logos/changePass.png" height="150px" alt="Portada Inicio">
+                                <form class="col-12" action="admin/changePass_Mtro.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <div class="form-group">
+                                      <label for="oldPass">Contraseña Actual</label>
+                                      <input type="password" class="form-control" name="oldPass" id="oldPass" placeholder="" required="true">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="newPass">Nueva contraseña</label>
+                                      <input type="password" class="form-control" name="newPass" id="newPass" placeholder="" required="true"
+                                       pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,20}$" 
+                                       oninvalid="this.setCustomValidity('La contraseña debe tener entre 8 y 20 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.')"
+                                       oninput="this.setCustomValidity('')"/>
+                                    </div>
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda siempre cuidar la seguridad de tus datos de inicio de sesión.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </main>
         </div>

@@ -28,7 +28,9 @@ if (!empty($_POST['correo']) && !empty($_POST['password'])) {
             default:
         }
     } else {
-        // no existe el usuario
-        echo '<script type="text/javascript">alert("Usuario o contraseña incorrectos")</script>';
+    
+        echo '<script type="text/javascript">
+        alert("Usuario o contraseña incorrectos");
+        window.location.href="perfiles.html"; </script>';
     }
 }
