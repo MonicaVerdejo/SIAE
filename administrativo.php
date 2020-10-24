@@ -1380,7 +1380,7 @@ if (!isset($_SESSION['rol'])) {
                             <img src="img/logos/schedule.png" width="250" height="200" alt="cms_Talleres">
                         </div>
                         <!--Options-Talleres-->
-                        <div class="row row-lg row-30 mt-5" style="margin:auto;">
+                        <div class="row row-lg row-30 mt-5 mb-5" style="margin:auto;">
 
                             <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".2s" id="registrarHorario">
                                 <article class=""><img src="img/logos/editHr.png" alt="" width="100" height="100" />
@@ -1638,6 +1638,89 @@ if (!isset($_SESSION['rol'])) {
                                 </div>
                             </div>
                         </section>
+
+
+
+                        <!--Horario-->
+
+                        <div id="horario" style="display: none;">
+                            <div class="row">
+                                <div class="col-6">
+                                    <img src="img/logos/horarios.png" width="200" height="auto" alt="Horario asignado">
+                                </div>
+                                <div class="col-6 ">
+                                    <div class="card">
+                                        <div class="card-header" style="margin:auto">
+                                            <h1 class="card-title">HORARIOS ASIGNADOS</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?php
+                            $busqueda = $db->connect()->prepare("SELECT turno, lunes, martes,miercoles,jueves,viernes,sabado,domingo, talleres.taller FROM `horarios` join talleres on talleres.id=horarios.taller where 1");
+                            $busqueda->execute();
+                            foreach ($busqueda as $fila) {
+
+                            ?>
+                                <div class="container">
+                                    <section id="tabla_resultado" class="content">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-12 mt-3">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h3 class="mr-5 card-title text-center" style="text-transform: uppercase;"><?php echo $fila[8]; ?></h3>
+                                                        </div>
+                                                        <!-- /.card-header -->
+                                                        <div class="card-body">
+                                                            <table class="mt-3 text-center table  table-hover table-responsive" style=" width: 70%; background-color: white;">
+                                                                <thead style="background-color: lightslategray;">
+                                                                    <th>Turno</th>
+                                                                    <th>Lunes</th>
+                                                                    <th>Martes</th>
+                                                                    <th>Miercoles</th>
+                                                                    <th>Jueves</th>
+                                                                    <th>Viernes</th>
+                                                                    <th>Sabado</th>
+                                                                    <th>Domingo</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><?php echo $fila[0]; ?></td>
+                                                                        <td><?php echo $fila[1]; ?></td>
+                                                                        <td><?php echo $fila[2]; ?></td>
+                                                                        <td><?php echo $fila[3]; ?></td>
+                                                                        <td><?php echo $fila[4]; ?></td>
+                                                                        <td><?php echo $fila[5]; ?></td>
+                                                                        <td><?php echo $fila[6]; ?></td>
+                                                                        <td><?php echo $fila[7]; ?></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!-- /.card-body -->
+                                                    </div>
+                                                    <!-- /.card -->
+                                                </div>
+                                                <!-- /.col -->
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                        <!-- /.container-fluid -->
+                                    </section>
+                                </div>
+                            <?php }
+
+                            ?>
+                        </div>
+
+
+
+
+
+
+
 
 
                         <footer class="container-fluid mt-4">
@@ -2047,6 +2130,32 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-registrarHr").hide();
                 $("#form-editarHr").hide();
                 $("#form-eliminarHr").show();
+                return false;
+            });
+            $("#mostrarHorario").on('click', function() {
+                $("#cms").hide();
+                $("#options_T").hide();
+                $("#student-options").hide();
+                $("#teach-options").hide();
+                $("#table-mtro").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Tdelete").hide();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#table-talleres").hide();
+                $("#form-Adelete").hide();
+                $("#form-Aedit").hide();
+                $("#form-Aregister").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").hide();
+                $("#instrumentacionD").hide();
+                $("#options_Hr").show();
+                $("#form-registrarHr").hide();
+                $("#form-editarHr").hide();
+                $("#form-eliminarHr").hide();
+                $("#horario").show();
                 return false;
             });
 
