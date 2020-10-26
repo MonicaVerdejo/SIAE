@@ -579,18 +579,7 @@ if (!isset($_SESSION['rol'])) {
                                             ?>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="correo">Correo</label>
-                                        <input id="correo" class="form-control" type="email" name="correo" required="true">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Contraseña</label>
-                                        <input id="password" class="form-control" type="password" name="password" required="true">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="curp">Curp</label>
-                                        <input id="curp" class="form-control" type="text" name="curp" required="true">
-                                    </div>
+                                  
                                     <?php
                                     $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
                                     $taller->execute();

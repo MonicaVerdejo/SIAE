@@ -9,35 +9,58 @@ if (isset($_POST['taller'])) {
     $taller = $_POST['taller'];
     $telefono = $_POST['telefono'];
     $sexo = $_POST['sexo'];
-    $password = password_hash($_POST['curp'], PASSWORD_BCRYPT);
-    
-    //Insertar los datos en la bd
-    $newteacher = $db->connect()->prepare("INSERT INTO `maestro` (`id`, `nombre`, `correo`, `password`, `taller_asignado`, `curp`, `telefono`, `sexo`, `Token`, `rol_id`) 
-                                                        VALUES ('', '$nombre', '$correo', '$password', '$taller', '$curp', '$telefono', '$sexo', '', '3');");
-    $newteacher->execute();
-    
-    #Consultar el id del maestro que acabamos de registrar
 
-    $id = $db->connect()->prepare("SELECT `id`, `nombre`, `curp` FROM  `maestro` WHERE 
-    `nombre`='$nombre' and `curp`='$curp'");
-    $id->execute();
 
-    foreach ($id as $row) {
-        echo $row[0];
+
+    if (strpos($correo, 'outlook.com') || strpos($correo, '@gmail.com') || strpos($correo, '@hotmail.com') || strpos($correo, '@yahoo.es') !== false) {
+        #check email register on bd
+        $stmtCorreosRegistrados = $db->connect()->prepare('SELECT correo FROM maestro WHERE correo = :correo');
+        $stmtCorreosRegistrados->bindParam(':correo', $_POST['correo']);
+        $stmtCorreosRegistrados->execute();
+        #check curp register on bd
+        $stmtCurpRegistrados = $db->connect()->prepare('SELECT curp FROM maestro WHERE curp = :curp');
+        $stmtCurpRegistrados->bindParam(':curp', $_POST['curp']);
+        $stmtCurpRegistrados->execute();
+
+        if (($stmtCorreosRegistrados->rowCount() > 0) || ($stmtCurpRegistrados->rowCount() > 0)) {
+            echo '<script type="text/javascript">
+             alert("El correo o CURP que has proporcionado ya se encuentra registrado con otra cuenta, por favor intenta con otro");
+             window.location.href="../administrativo.php";
+             </script>';
+        } else {
+            #code register
+            $password = password_hash($_POST['curp'], PASSWORD_BCRYPT);
+            //Insertar los datos en la bd
+            $newteacher = $db->connect()->prepare("INSERT INTO `maestro` (`id`, `nombre`, `correo`, `password`, `taller_asignado`, `curp`, `telefono`, `sexo`, `Token`, `rol_id`) 
+                                                                VALUES ('', '$nombre', '$correo', '$password', '$taller', '$curp', '$telefono', '$sexo', '', '3');");
+            $newteacher->execute();
         
-   #Actualizar el campo maestro_asignado en tabla talleres
-   $sql = "UPDATE `talleres` set `mtro_asignado`='$row[0]' WHERE 
-   `id`='$taller'";
-   $statement = $db->connect()->prepare($sql);
-   $statement->execute();
+            #Consultar el id del maestro que acabamos de registrar
+            $id = $db->connect()->prepare("SELECT `id`, `nombre`, `curp` FROM  `maestro` WHERE 
+            `nombre`='$nombre' and `curp`='$curp'");
+            $id->execute();
+        
+            foreach ($id as $row) {
+                echo $row[0];
+                #Actualizar el campo maestro_asignado en tabla talleres
+                $sql = "UPDATE `talleres` set `mtro_asignado`='$row[0]' WHERE 
+           `id`='$taller'";
+                $statement = $db->connect()->prepare($sql);
+                $statement->execute();
+            }
+            header('Location: ../administrativo.php');
+        
+        }
+    } else {
+        echo '<script type="text/javascript">
+        alert("El correo no es de una credencial válida, intenta con @outlook.com, @gmail.com, @hotmail.com o @yahoo.es");
+        window.location.href="../administrativo.php";
+        </script>';
     }
 
-
-
-
-
-    header('Location: ../administrativo.php');
+   
+    
 } else {
-    echo 'no esta registrando';
+    echo 'Error';
 }
 require_once('../administrativo.php');
