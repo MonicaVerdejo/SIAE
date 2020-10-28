@@ -1,5 +1,6 @@
 <?php
 include_once '../db.php';
+session_start();
 ob_start();
 $db = new DB();
 
@@ -27,23 +28,44 @@ foreach ($busqueda  as $row) {
             //compruebo si las características del archivo son las que deseo, solo aceptara pdf y word
             if (!((strpos($tipo_archivo, "pdf") || strpos($tipo_archivo, "doc")))) {
                 echo '<script type="text/javascript">
-                alert("La extensión de los archivos no es correcta. <br><br> Sólo se permiten archivos con extensión .doc o .pdf");
+                alert("La extensión de los archivos no es correcta. Sólo se permiten archivos con extensión .doc o .pdf");
                 window.location.href="../maestro.php"; </script>';
-            } else {
+            } else if((strpos($tipo_archivo,"pdf"))){
                 $carpeta_destino = 'documentos/evaluacion/';
+                $_FILES['userfile']['name']=$matricula.'.pdf';
                 $archivo = $carpeta_destino . $_FILES['userfile']['name'];
                 if (move_uploaded_file($_FILES['userfile']['tmp_name'],  $archivo)) {
                     $id = $_SESSION['id_mtro'];
                    
-                    if ($sentencia == True) {
                         # code...
-                        $sentencia = "INSERT INTO `documentos` (`id`, `maestro_id`, `taller_id`, `alumno_id`, `categoria`, `documento`) 
-                                     VALUES ('', '$id', '$taller', '$matricula', 'evaluacionB', :documento);";
+                        $sentencia = "INSERT INTO `documentos` (`id`, `maestro_id`, `taller_id`, `alumno_id`, `categoria`, `documento`,fecha) 
+                                     VALUES ('', '$id', '$taller', '$matricula', 'evaluacionB', :documento,NOW());";
                         $statement = $db->connect()->prepare($sentencia);
                         $statement->execute(array(':documento' => $_FILES['userfile']['name']));
 
                         echo "El archivo ha sido cargado correctamente.";
-                    }
+                        header('Location: ../maestro.php');
+                    
+                } else {
+                    echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";
+                }
+               
+            }else{
+                $carpeta_destino = 'documentos/evaluacion/';
+                $_FILES['userfile']['name']=$matricula.'.docx';
+                $archivo = $carpeta_destino . $_FILES['userfile']['name'];
+                if (move_uploaded_file($_FILES['userfile']['tmp_name'],  $archivo)) {
+                    $id = $_SESSION['id_mtro'];
+                   
+                        # code...
+                        $sentencia = "INSERT INTO `documentos` (`id`, `maestro_id`, `taller_id`, `alumno_id`, `categoria`, `documento`,fecha) 
+                                     VALUES ('', '$id', '$taller', '$matricula', 'evaluacionB', :documento,NOW());";
+                        $statement = $db->connect()->prepare($sentencia);
+                        $statement->execute(array(':documento' => $_FILES['userfile']['name']));
+
+                        echo "El archivo ha sido cargado correctamente.";
+                        header('Location: ../maestro.php');
+                    
                 } else {
                     echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";
                 }

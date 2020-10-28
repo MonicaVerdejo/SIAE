@@ -579,7 +579,7 @@ if (!isset($_SESSION['rol'])) {
                                             ?>
                                         </select>
                                     </div>
-                                  
+
                                     <?php
                                     $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
                                     $taller->execute();
@@ -610,13 +610,6 @@ if (!isset($_SESSION['rol'])) {
                                     <div class="form-group">
                                         <label for="telefono">Telefono</label>
                                         <input id="telefono" class="form-control" type="text" name="telefono" required="true">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="sexo">Sexo</label>
-                                        <select id="sexo" class="form-control" name="sexo" required="true">
-                                            <option>M</option>
-                                            <option>F</option>
-                                        </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                 </form>
@@ -1214,7 +1207,16 @@ if (!isset($_SESSION['rol'])) {
                                             <select class="custom-select" name="taller" id="taller" required="true">
                                                 <?php foreach ($taller as $row) {
                                                 ?>
-                                                    <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+                                                    <option <?php
+                                                            if ($row[0] == 1) {
+                                                                # code...
+                                                            ?> style="display: none;" <?php
+                                                                                    } else {
+                                                                                        # code...
+                                                                                        ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                        }
+
+                                                                                                                            ?>><?php echo $row[1]; ?></option>
 
                                                 <?php
                                                 }
@@ -1245,32 +1247,49 @@ if (!isset($_SESSION['rol'])) {
                                             <div>
                                                 <!-- /.card-header -->
                                                 <div class="card-body">
-                                                    <table class="table table-bordered table-hover table-responsive" style="width:100%;margin-left:1%;">
+                                                    <table class="table table-bordered table-hover table-responsive" style="width:69%;margin-left:15%;">
                                                         <thead style="background-color:steelblue;">
                                                             <th>Taller</th>
                                                             <th>Nombre del representativo</th>
                                                             <th>Descripción</th>
                                                             <th>Maestro Asignado</th>
-                                                            <th>Horario</th>
+                                                            
                                                             <th>Categoria</th>
                                                             <th>Dirección</th>
                                                         </thead>
                                                         <tbody style="background-color:  #f7f5f3;">
                                                             <?php
-                                                            $busqueda = $db->connect()->prepare('SELECT taller, talleres.nombre,descripcion, maestro.nombre, horario, categoria,direccion FROM `talleres` join maestro on talleres.mtro_asignado=maestro.id');
+                                                            $busqueda = $db->connect()->prepare('SELECT taller, talleres.nombre,descripcion, maestro.nombre, categoria,direccion FROM `talleres` join maestro on talleres.mtro_asignado=maestro.id');
                                                             $busqueda->execute();
                                                             foreach ($busqueda as $fila) {
+                                                                $sinasignar = "No asignado";
+                                                                $NoAsignado = $fila[0];
+                                                                if (strcmp($sinasignar,$NoAsignado) === 0) {
+                                                                   ?> 
+                                                                    <tr class="sr-only">
+                                                                        <td ><?php echo $fila[0]; ?></td>
+                                                                        <td><?php echo $fila[1]; ?></td>
+                                                                        <td><?php echo $fila[2]; ?></td>
+                                                                        <td><?php echo $fila[3]; ?></td>
+                                                                        <td><?php echo $fila[4]; ?></td>
+                                                                        <td><?php echo $fila[5]; ?></td>
+                                                                        
+                                                                    </tr>
+                                                                   
+                                                                   <?php
+                                                                } else {
                                                             ?>
-                                                                <tr>
-                                                                    <td><?php echo $fila[0]; ?></td>
-                                                                    <td><?php echo $fila[1]; ?></td>
-                                                                    <td><?php echo $fila[2]; ?></td>
-                                                                    <td><?php echo $fila[3]; ?></td>
-                                                                    <td><?php echo $fila[4]; ?></td>
-                                                                    <td><?php echo $fila[5]; ?></td>
-                                                                    <td><?php echo $fila[6]; ?></td>
-                                                                </tr>
+                                                                    <tr>
+                                                                        <td><?php echo $fila[0]; ?></td>
+                                                                        <td><?php echo $fila[1]; ?></td>
+                                                                        <td><?php echo $fila[2]; ?></td>
+                                                                        <td><?php echo $fila[3]; ?></td>
+                                                                        <td><?php echo $fila[4]; ?></td>
+                                                                        <td><?php echo $fila[5]; ?></td>
+                                                                        
+                                                                    </tr>
                                                             <?php
+                                                                }
                                                             }
                                                             ?>
                                                         </tbody>
@@ -2072,6 +2091,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-eliminarHr").hide();
                 $("#form-editarHr").hide();
                 $("#form-registrarHr").show();
+                $("#horario").hide();
                 return false;
             });
 
@@ -2098,6 +2118,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-registrarHr").hide();
                 $("#form-eliminarHr").hide();
                 $("#form-editarHr").show();
+                $("#horario").hide();
                 return false;
             });
             $("#eliminarHorario").on('click', function() {
