@@ -1,5 +1,5 @@
 <?php
-include_once '../administrativo.php';
+//include_once '../administrativo.php';
 include_once '../db.php';
 ob_start();
 $db = new DB();

@@ -423,7 +423,7 @@ if (!isset($_SESSION['rol'])) {
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="slider3ModalLabel">Cambiar la imagen 2 del carrusel que se presenta en el módulo de Inicio</h5>
+                                <h5 class="modal-title" id="slider3ModalLabel">Cambiar la imagen 3 del carrusel que se presenta en el módulo de Inicio</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

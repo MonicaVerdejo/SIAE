@@ -711,7 +711,7 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                             <div class="modal-body text-center">
                                 <img src="img/logos/changePass.png" height="150px" alt="Portada Inicio">
-                                <form class="col-12" action="admin/changePass_Mtro.php" method="post" enctype="multipart/form-data">
+                                <form class="col-12" action="maestro/changePass_Mtro.php" method="post" enctype="multipart/form-data">
                                     <br>
                                     <div class="form-group">
                                         <label for="oldPass">Contraseña Actual</label>
