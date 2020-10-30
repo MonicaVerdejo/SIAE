@@ -13,11 +13,11 @@ if (!empty($_POST['correo']) && !empty($_POST['password'])) {
     $row = $query->fetch(PDO::FETCH_NUM); //transforma a un arreglo que puedo usar
 
     if (($row == true) && password_verify($_POST['password'], $row[3])) { //si existe contenido valida el rol
-        $rol = $row[8];
+        $rol = $row[7];
         $_SESSION['rol'] = $rol;
         $_SESSION['nombre'] = $row[1];
         $_SESSION['id_admin'] = $row[0];
-        $_SESSION['img_profile']=$row[6];
+        $_SESSION['img_profile']=$row[5];
         $_SESSION['correo']=$row[2];
         
        

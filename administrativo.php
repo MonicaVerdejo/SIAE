@@ -128,9 +128,6 @@ if (!isset($_SESSION['rol'])) {
                                                 </form>
                                             <?php } ?>
 
-
-
-
                                         </li>
                                     </ul>
                                 </div>
@@ -174,6 +171,18 @@ if (!isset($_SESSION['rol'])) {
                                     <span>Opciones</span>
                                 </a>
                                 <div class="sidebar-submenu">
+                                    <a href="#" <?php
+                                                $adminDios = $_SESSION['id_admin'];
+                                                if ($adminDios == 1) {
+                                                ?>id="page_editAdmin" <?php
+                                                            } else {
+                                                                ?>data-toggle="modal" data-target="#permisosModal"<?php
+                                                            }
+
+                                                                ?>>
+                                        <i class="fas fa-edit "></i>
+                                        <span>Administrativos</span>
+                                    </a>
                                     <a href="#" data-toggle="modal" data-target="#changePModal">
                                         <i class="fas fa-edit "></i>
                                         <span>Cambiar contraseña</span>
@@ -1253,7 +1262,7 @@ if (!isset($_SESSION['rol'])) {
                                                             <th>Nombre del representativo</th>
                                                             <th>Descripción</th>
                                                             <th>Maestro Asignado</th>
-                                                            
+
                                                             <th>Categoria</th>
                                                             <th>Dirección</th>
                                                         </thead>
@@ -1264,21 +1273,21 @@ if (!isset($_SESSION['rol'])) {
                                                             foreach ($busqueda as $fila) {
                                                                 $sinasignar = "No asignado";
                                                                 $NoAsignado = $fila[0];
-                                                                if (strcmp($sinasignar,$NoAsignado) === 0) {
-                                                                   ?> 
+                                                                if (strcmp($sinasignar, $NoAsignado) === 0) {
+                                                            ?>
                                                                     <tr class="sr-only">
-                                                                        <td ><?php echo $fila[0]; ?></td>
+                                                                        <td><?php echo $fila[0]; ?></td>
                                                                         <td><?php echo $fila[1]; ?></td>
                                                                         <td><?php echo $fila[2]; ?></td>
                                                                         <td><?php echo $fila[3]; ?></td>
                                                                         <td><?php echo $fila[4]; ?></td>
                                                                         <td><?php echo $fila[5]; ?></td>
-                                                                        
+
                                                                     </tr>
-                                                                   
-                                                                   <?php
+
+                                                                <?php
                                                                 } else {
-                                                            ?>
+                                                                ?>
                                                                     <tr>
                                                                         <td><?php echo $fila[0]; ?></td>
                                                                         <td><?php echo $fila[1]; ?></td>
@@ -1286,7 +1295,7 @@ if (!isset($_SESSION['rol'])) {
                                                                         <td><?php echo $fila[3]; ?></td>
                                                                         <td><?php echo $fila[4]; ?></td>
                                                                         <td><?php echo $fila[5]; ?></td>
-                                                                        
+
                                                                     </tr>
                                                             <?php
                                                                 }
@@ -1723,14 +1732,6 @@ if (!isset($_SESSION['rol'])) {
                             ?>
                         </div>
 
-
-
-
-
-
-
-
-
                         <footer class="container-fluid mt-4">
                             <div class="col-12 card " style="background-color: slategray;">
                                 <div class="card-header">
@@ -1777,6 +1778,228 @@ if (!isset($_SESSION['rol'])) {
                     </div>
                 </div>
 
+                
+                <!-------------------------------------------------------------PERMISOS MODAL------------------------------------------------->
+                <div class="modal fade" id="permisosModal" tabindex="-1" role="dialog" aria-labelledby="permisosModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="permisosModalLabel">QUERIDO ADMINISTRADOR</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/logos/losentimos.gif" height="150px" alt="Portada Inicio">
+                                <h5>Lamentamos informarle que no cuenta con los permisos necesarios para acceder a estas funciones.</h5>
+                                <span>Por favor sigue trabajando arduamente con nuestro sistema.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-------------------------------------------------------------SECCIÓN DE ADMINISTRATIVOS------------------------------------------------->
+                <section class="section bg-default text-md-center">
+                    <div id="options_Admin" style="display: none;">
+                        <div>
+                            <h3>ADMINISTRATIVOS</h3>
+                            <img src="img/img_portada/administrativos.jpg" width="350" alt="cms_Talleres">
+                        </div>
+                        <!--Options-Talleres-->
+                        <div class="row row-lg row-30 mt-3 mb-3" style="margin:auto;">
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".2s" id="registrarAdmin">
+                                <article class=""><img src="img/logos/administrativo.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Agregar Administrador</a></h4>
+
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".1s" id="eliminarAdmin">
+                                <article class=""><img src="img/logos/recycle-bin.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Eliminar Administrador</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".1s" id="mostrarAdmin">
+                                <article class=""><img src="img/logos/verAdmin.jpg" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Mostrar Administradores</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+
+
+                        <!--Form-registrar-Admin-->
+                        <section class="mt-4 section-form bg-default" style="display:none" id="form-registrarAdmin">
+                            <div id="base">
+                                <div id="triangle"></div>
+                                <div id="titulo">Nuevo Administrador</div>
+                                <div id="form">
+                                    <form method="POST" action="admin/registrar_admin.php" enctype="multipart/form-data">
+
+                                        <div class="form-group">
+                                            <label for="nombre">Nombre</label>
+                                            <input type="text" name="nombre" id="" class="form-control" placeholder="Fernando Vela Leon" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="Correo">Correo:</label>
+                                            <input type="email" name="correo" id="" class="form-control" placeholder="vela97@outlook.com" aria-describedby="helpId" required="True">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="curp">CURP</label>
+                                            <input type="text" name="curp" id="" class="form-control" placeholder="VELF971204HCCLRN73" aria-describedby="helpId" required="True">
+                                        </div>
+                                        <button type="submit" class="btn btn-secondary">Enviar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+
+
+
+                        <!--Form-eliminar-Admin-->
+                        <section class="mt-4 section-form bg-default" style="display:none" id="form-eliminarAdmin">
+                            <div id="base">
+                                <div id="triangle"></div>
+                                <div id="titulo">Eliminar Administrador</div>
+                                <div id="form">
+                                    <form method="POST" action="admin/delete_admin.php" enctype="multipart/form-data">
+                                        <?php
+                                        $searchAdmin = $db->connect()->prepare("SELECT id, nombre FROM `administrador` WHERE 1");
+                                        $searchAdmin->execute();
+                                        ?>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="nombre">Administrador</label>
+                                            </div>
+                                            <select class="custom-select" name="nombre" id="nombre" required="true">
+                                                <?php foreach ($searchAdmin as $row) {
+                                                ?>
+                                                    <option <?php
+                                                            if ($row[0] == 1) {
+                                                                # code...
+                                                            ?> style="display: none;" <?php
+                                                                                    } else {
+                                                                                        # code...
+                                                                                        ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                        }
+
+                                                                                                                            ?>><?php
+                                                                                                                                if ($row[0] == 1) {
+                                                                                                                                ?> Selecciona<?php
+                                                                                                                                            } else {
+                                                                                                                                                echo $row[1];
+                                                                                                                                            }
+
+                                                                                                                                                ?></option>
+
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-secondary" title="Advertencia" data-trigger="hover" data-content="Recuerda que en cuanto des click no podrás cancelar el proceso" data-toggle="popover">Enviar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+
+
+
+                        <!--Administrativos-->
+
+                        <div id="lista-mostrarAdmin" style="display: none;">
+                            <div class="row">
+                                <div class="col-6">
+                                    <img src="img/logos/listAdmin.png" width="160" height="auto" alt="Horario asignado">
+                                </div>
+                                <div class="col-6 ">
+                                    <div class="card">
+                                        <div class="card-header" style="margin:auto">
+                                            <h1 class="card-title">Administradores dados de alta</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?php
+                            $busqueda = $db->connect()->prepare("SELECT nombre,correo,curp FROM `administrador` where 1");
+                            $busqueda->execute();
+
+
+                            ?>
+                            <div class="container">
+                                <section id="tabla_resultado" class="content">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12 mt-3">
+                                                <div class="card">
+
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body">
+                                                        <table class="mt-3 text-center table  table-hover table-responsive" style=" width: 70%; background-color: white;">
+                                                            <thead style="background-color: lightslategray;">
+                                                                <th>Nombre</th>
+                                                                <th>Correo</th>
+                                                                <th>CURP</th>
+
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php foreach ($busqueda as $fila) { ?>
+                                                                    <tr>
+                                                                        <td><?php echo $fila[0]; ?></td>
+                                                                        <td><?php echo $fila[1]; ?></td>
+                                                                        <td><?php echo $fila[2]; ?></td>
+
+                                                                    </tr>
+                                                                <?php }
+
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.card-body -->
+                                                </div>
+                                                <!-- /.card -->
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.row -->
+                                    </div>
+                                    <!-- /.container-fluid -->
+                                </section>
+                            </div>
+
+                        </div>
+
+                        <footer class="container-fluid mt-4">
+                            <div class="col-12 card " style="background-color: slategray;">
+                                <div class="card-header">
+                                    <span class="">
+                                        El administrativo es quien puede acceder a toda la información que se recaba con el sistema, no le des permisos a cualquiera.
+                                    </span>
+                                </div>
+                            </div>
+                        </footer>
+
+                    </div>
+
+                </section>
+
+
 
             </main>
         </div>
@@ -1807,6 +2030,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Tedit").hide();
                 $("#form-Tregister").hide();
                 $("#options_Hr").hide();
+                $("#options_Admin").hide();
                 return false;
             });
             //seccion de mensajes
@@ -1825,6 +2049,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Aregister").hide();
                 $("#form-Adelete").hide();
                 $("#options_Hr").hide();
+                $("#options_Admin").hide();
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
@@ -1842,6 +2067,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Aregister").hide();
                 $("#form-Adelete").hide();
                 $("#options_Hr").hide();
+                $("#options_Admin").hide();
                 return false;
             });
             //seccion de maestro
@@ -1857,6 +2083,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
                 $("#options_Hr").hide();
+                $("#options_Admin").hide();
                 return false;
             });
             $("#registrarM").on('click', function() {
@@ -1899,6 +2126,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Tedit").hide();
                 $("#form-Tregister").hide();
                 $("#options_Hr").hide();
+                $("#options_Admin").hide();
                 return false;
             });
 
@@ -1930,6 +2158,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
 
+
                 return false;
             });
             //SECCION TALLERES
@@ -1952,6 +2181,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Coursedelete").hide();
                 $("#form-Courseregister").hide();
                 $("#options_Hr").hide();
+                $("#options_Admin").hide();
                 return false;
             });
             $("#registrarTaller").on('click', function() {
@@ -2039,6 +2269,7 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Coursedelete").hide();
                 $("#form-Courseregister").hide();
                 $("#options_Hr").hide();
+                $("#options_Admin").hide();
                 $("#instrumentacionD").show();
                 return false;
             });
@@ -2063,8 +2294,8 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Coursedelete").hide();
                 $("#form-Courseregister").hide();
                 $("#instrumentacionD").hide();
+                $("#options_Admin").hide();
                 $("#options_Hr").show();
-
                 return false;
             });
 
@@ -2171,6 +2402,120 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-editarHr").hide();
                 $("#form-eliminarHr").hide();
                 $("#horario").show();
+                return false;
+            });
+            //ADMINISTRATIVE OPTIONS
+            $("#page_editAdmin").on('click', function() {
+                $("#cms").hide();
+                $("#options_T").hide();
+                $("#student-options").hide();
+                $("#teach-options").hide();
+                $("#table-mtro").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Tdelete").hide();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#table-talleres").hide();
+                $("#form-Adelete").hide();
+                $("#form-Aedit").hide();
+                $("#form-Aregister").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").hide();
+                $("#instrumentacionD").hide();
+                $("#options_Hr").hide();
+                $("#options_Admin").show();
+                return false;
+            });
+            $("#registrarAdmin").on('click', function() {
+                $("#cms").hide();
+                $("#options_T").hide();
+                $("#student-options").hide();
+                $("#teach-options").hide();
+                $("#table-mtro").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Tdelete").hide();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#table-talleres").hide();
+                $("#form-Adelete").hide();
+                $("#form-Aedit").hide();
+                $("#form-Aregister").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").hide();
+                $("#instrumentacionD").hide();
+                $("#options_Hr").hide();
+                $("#form-eliminarHr").hide();
+                $("#form-editarHr").hide();
+                $("#form-registrarAdmin").show();
+                $("#form-registrarHr").hide();
+                $("#form-eliminarAdmin").hide();
+                $("#lista-mostrarAdmin").hide();
+                $("#options_Admin").show();
+                $("#horario").hide();
+                return false;
+            });
+            $("#eliminarAdmin").on('click', function() {
+                $("#cms").hide();
+                $("#options_T").hide();
+                $("#student-options").hide();
+                $("#teach-options").hide();
+                $("#table-mtro").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Tdelete").hide();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#table-talleres").hide();
+                $("#form-Adelete").hide();
+                $("#form-Aedit").hide();
+                $("#form-Aregister").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").hide();
+                $("#instrumentacionD").hide();
+                $("#options_Hr").hide();
+                $("#form-registrarHr").hide();
+                $("#form-editarHr").hide();
+                $("#horario").hide();
+                $("#form-eliminarHr").hide();
+                $("#form-registrarAdmin").hide();
+                $("#lista-mostrarAdmin").hide();
+                $("#form-eliminarAdmin").show();
+                $("#options_Admin").show();
+                return false;
+            });
+            $("#mostrarAdmin").on('click', function() {
+                $("#cms").hide();
+                $("#options_T").hide();
+                $("#student-options").hide();
+                $("#teach-options").hide();
+                $("#table-mtro").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Tdelete").hide();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#table-talleres").hide();
+                $("#form-Adelete").hide();
+                $("#form-Aedit").hide();
+                $("#form-Aregister").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").hide();
+                $("#instrumentacionD").hide();
+                $("#options_Hr").hide();
+                $("#form-registrarHr").hide();
+                $("#form-editarHr").hide();
+                $("#form-eliminarHr").hide();
+                $("#horario").hide();
+                $("#form-registrarAdmin").hide();
+                $("#form-eliminarAdmin").hide();
+                $("#lista-mostrarAdmin").show();
+                $("#options_Admin").show();
                 return false;
             });
 

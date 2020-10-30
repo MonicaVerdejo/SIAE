@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2020 a las 23:10:27
+-- Tiempo de generación: 30-10-2020 a las 01:15:20
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -34,7 +34,6 @@ CREATE TABLE `administrador` (
   `correo` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `CURP` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
-  `telefono` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `img_profile` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `Token` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `rol_id` int(11) NOT NULL
@@ -44,8 +43,8 @@ CREATE TABLE `administrador` (
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`id`, `nombre`, `correo`, `password`, `CURP`, `telefono`, `img_profile`, `Token`, `rol_id`) VALUES
-(1, 'Fernando Vela Leon', 'vela@yopmail.com', '$2y$10$9ki4KSe9c3PKCUt8rdPcSumRRbAn0Z.MWRIgZ9qicGztUfzAcGrqq', 'VELF971204MCCLRN01', '9821276466', '39134-1159060930.jpg', '', 1);
+INSERT INTO `administrador` (`id`, `nombre`, `correo`, `password`, `CURP`, `img_profile`, `Token`, `rol_id`) VALUES
+(1, 'Fernando Vela Leon', 'vela@yopmail.com', '$2y$10$xoj3mWqqUxESZ.r8yILuOuv7Hn4VY5TQ5MCfjMbn35nmldW4pdPbu', 'VELF971204MCCLRN01', '39134-1159060930.jpg', '', 1);
 
 -- --------------------------------------------------------
 
@@ -57,7 +56,7 @@ CREATE TABLE `alumnos` (
   `nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `matricula` int(11) NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `taller_id` int(11) NOT NULL,
+  `taller_id` int(11) DEFAULT NULL,
   `representativo` enum('Si','No') COLLATE utf8_unicode_ci NOT NULL,
   `carrera` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `estatus` enum('Aprobado','Cursando','Reprobado') COLLATE utf8_unicode_ci NOT NULL,
@@ -73,13 +72,7 @@ CREATE TABLE `alumnos` (
 
 INSERT INTO `alumnos` (`nombre`, `matricula`, `password`, `taller_id`, `representativo`, `carrera`, `estatus`, `semestre`, `evaluacion`, `sexo`, `rol_id`) VALUES
 ('Sin asignar', 0, '', 1, '', '', '', '', '', '', 2),
-('Luis Daniel Sanchez Cocon', 161080111, '$2y$10$UNSgqLhlnmktTtjuSkm28etzzHSE4qrgzYOdALAl5ICD9RAs1Bv6u', 4, 'No', 'Licenciatura en Turismo', 'Cursando', 'Séptimo', '', 'M', 2),
-('monica verdejo', 161080138, '$2y$10$SOn3JSRzJXTW54VMRzAU/uXIvpQW2.04REd0Nl/6/iayBsjVVW4d.', 3, 'No', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Noveno', '', 'F', 2),
-('Gerardo Gonzalez Rosado', 161080150, '$2y$10$e8eK9TBk9NuBn4StNggy5OrLBQ6iuSUYCBaNj3/L003whTEhIOIbG', 2, 'Si', 'Ingeniería Ambiental', 'Cursando', 'Quinto', '', 'M', 2),
-('Jose Alberto Pech Villasis', 161080156, '$2y$10$AEUMfwC3sb2NQW4LuRn1xeIue9ft2OS5lx348ivhO0uiibek67biu', 2, 'No', 'Ingeniería en Administración', 'Cursando', 'Séptimo', '', 'M', 2),
-('Marlyn Granado Rojas', 161080157, '$2y$10$xuqeSdzqk.XrST11BdR.bebihJ0vQlmVBJ5hlSA/VclmjkH9uoLcu', 2, 'Si', 'Ingeniería en Gestion Empresarial', 'Cursando', 'Noveno', '', 'F', 2),
-('Valery Harrison Granados ', 161080333, '$2y$10$lX04NMuBHxkM8r/.nsw58.51Pdv4M.Z8DFZSQaK2LGOUT/WIiXmiK', 2, 'Si', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Segundo', '', 'F', 2),
-('Magnolia Verdejo Chong', 161080974, '$2y$10$l5No8N9mFNA0XH.NUPKDt.UprSBwHh2oOBOz7WQVkYEd8xaRf7nPu', 2, 'Si', 'Licenciatura en Turismo', 'Cursando', 'Noveno', '', 'F', 2);
+('Lorna Alejandra Delgado Verdejo', 161080138, '$2y$10$dxmq0KZQVhPKoa5lvbdzxOpY/D5QfeyNPS0njqBqe24Xve0K0R4qi', 2, 'Si', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Noveno', '', 'F', 2);
 
 -- --------------------------------------------------------
 
@@ -114,7 +107,7 @@ INSERT INTO `cms` (`id`, `img_index`, `img_civico`, `img_cultural`, `img_deporte
 CREATE TABLE `documentos` (
   `id` int(11) NOT NULL,
   `maestro_id` int(11) NOT NULL,
-  `taller_id` int(11) NOT NULL,
+  `taller_id` int(11) DEFAULT NULL,
   `alumno_id` int(11) NOT NULL,
   `categoria` enum('instrumentacionD','evaluacionB') COLLATE utf8_unicode_ci NOT NULL,
   `documento` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -126,10 +119,16 @@ CREATE TABLE `documentos` (
 --
 
 INSERT INTO `documentos` (`id`, `maestro_id`, `taller_id`, `alumno_id`, `categoria`, `documento`, `fecha`) VALUES
-(13, 9, 2, 0, 'instrumentacionD', 'Formato_Instrumentación_Didáctica_para_Ingreso.docx', '2020-10-21 19:02:18'),
-(14, 9, 2, 0, 'instrumentacionD', 'Formato de Evaluación al Desempeño de la Actividad Complementaria.pdf', '2020-10-21 12:03:44'),
-(15, 9, 2, 0, 'instrumentacionD', 'Instrucciones para la Instrumentación Didáctica.pdf', '2020-10-21 12:04:29'),
-(16, 9, 2, 0, 'instrumentacionD', 'Instrumentacion didactica (3).pdf', '2020-10-21 13:14:11');
+(5, 16, 2, 161080138, 'evaluacionB', '161080138', '2020-10-27 20:34:10'),
+(6, 16, 2, 0, 'instrumentacionD', 'Monica Priscila Delgado Verdejo', '2020-10-27 20:38:08'),
+(7, 16, 2, 161080138, 'evaluacionB', '161080138', '2020-10-27 20:39:42'),
+(8, 16, 2, 161080138, 'evaluacionB', '161080138.pdf', '2020-10-27 20:40:00'),
+(9, 16, 2, 161080138, 'evaluacionB', '161080138.pdf', '2020-10-27 20:41:55'),
+(10, 16, 2, 161080138, 'evaluacionB', '161080138.pdf', '2020-10-27 20:42:40'),
+(11, 16, 2, 161080138, 'evaluacionB', '161080138.docx', '2020-10-27 20:47:32'),
+(12, 16, 2, 161080138, 'evaluacionB', '161080138.pdf', '2020-10-27 20:49:25'),
+(13, 16, 2, 0, 'instrumentacionD', 'Monica Priscila Delgado Verdejo.docx', '2020-10-27 20:54:11'),
+(14, 16, 2, 0, 'instrumentacionD', 'Monica Priscila Delgado Verdejo.pdf', '2020-10-27 20:55:14');
 
 -- --------------------------------------------------------
 
@@ -150,14 +149,6 @@ CREATE TABLE `horarios` (
   `turno` enum('matutino','vespertino') COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `horarios`
---
-
-INSERT INTO `horarios` (`id`, `taller`, `lunes`, `martes`, `miercoles`, `jueves`, `viernes`, `sabado`, `domingo`, `turno`) VALUES
-(9, 3, '12:00pm-13:30pm', '0', '0', '12:00pm-13:30pm', '0', '12:00pm-13:30pm', '0', 'matutino'),
-(10, 2, '0', '0', '12:00-2:30', '12:00-2:30', '12:00-2:30', '0', '0', 'matutino');
-
 -- --------------------------------------------------------
 
 --
@@ -169,7 +160,7 @@ CREATE TABLE `maestro` (
   `nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `correo` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `taller_asignado` int(11) NOT NULL,
+  `taller_asignado` int(11) DEFAULT NULL,
   `curp` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
   `telefono` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `sexo` enum('F','M') COLLATE utf8_unicode_ci NOT NULL,
@@ -183,8 +174,8 @@ CREATE TABLE `maestro` (
 
 INSERT INTO `maestro` (`id`, `nombre`, `correo`, `password`, `taller_asignado`, `curp`, `telefono`, `sexo`, `Token`, `rol_id`) VALUES
 (1, 'Sin Asignar', '', '', 0, '', '', '', '', 3),
-(8, 'Lorna Alejandra Delgado Verdejo', 'esdeath97@yopmail.com', '$2y$10$5blpBo.iL.58av4SjTeQK.b2SARexjvGZdE836SJQQ/HvINvS2U.O', 3, 'DEVM971204MCCLRN01', '+529821159', 'F', '', 3),
-(9, 'Monica Priscila Delgado Verdejo', 'priscila_verdejo@outlook.com', '$2y$10$VsepihAgqDz7LgVqqbOWjOm/83j7wa6xqVaP7URCK7I7FRxxeDzkO', 2, 'DEVM971204MCCLRN02', '9821159667', 'F', '', 3);
+(16, 'Monica Priscila Delgado Verdejo', 'priscila_verdejo@outlook.com', '$2y$10$Z4FirdzKRTi5nzlC1xjV5eQbhBAyu1DrMlTup5Hlz4CUYtY.XULLy', 2, 'DEVM971204MCCLRN02', '9821159667', 'M', '', 3),
+(18, 'Lorna Alejandra Delgado Verdejo', 'verdejo97@outlook.com', '$2y$10$NCaZ6DLKO4ebvyIGkwTc2O66ZWLeyHiug/bR6B3nhNuGrPVPpKNZW', 1, 'DEVM971204MCCLRN01', '9821159667', 'M', '5f9b31d9b8ee3', 3);
 
 -- --------------------------------------------------------
 
@@ -230,8 +221,7 @@ CREATE TABLE `mensajemaestro` (
 --
 
 INSERT INTO `mensajemaestro` (`id`, `mensaje`, `fecha`, `estado`, `mtro_id`, `taller_id`) VALUES
-(36, 'PUTOS ', '2020-10-19 17:48:30', 0, 8, 3),
-(37, 'Prueba maestro volleybal', '2020-10-20 17:20:44', 0, 9, 2);
+(38, 'Prueba #1\r\n', '2020-10-27 20:06:48', 0, 16, 14);
 
 -- --------------------------------------------------------
 
@@ -264,8 +254,7 @@ CREATE TABLE `talleres` (
   `taller` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `nombre` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `descripcion` text COLLATE utf8_unicode_ci NOT NULL,
-  `horario` text COLLATE utf8_unicode_ci NOT NULL,
-  `mtro_asignado` int(11) NOT NULL,
+  `mtro_asignado` int(11) DEFAULT NULL,
   `categoria` enum('Civico','Cultural','Deportivo') COLLATE utf8_unicode_ci NOT NULL,
   `direccion` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `img1` varchar(100) COLLATE utf8_unicode_ci NOT NULL
@@ -275,12 +264,9 @@ CREATE TABLE `talleres` (
 -- Volcado de datos para la tabla `talleres`
 --
 
-INSERT INTO `talleres` (`id`, `taller`, `nombre`, `descripcion`, `horario`, `mtro_asignado`, `categoria`, `direccion`, `img1`) VALUES
-(1, 'No asignado', '', '', '', 1, '', '', ''),
-(2, 'volleybal', 'halcones', 'bla bla bla bla bla bla ', 'Lunes: 12:00 - 14:30\r\nSabado: 8:30 - 10:30', 9, 'Deportivo', 'Unidad Deportiva', 'voleibol.png'),
-(3, 'Danza Moderna', 'Frescos los panas', 'bla bla bla bla giro giro bla bla ', 'ss\r\nsss\r\nssss', 8, 'Cultural', 'Cancha de la escuela', 'danza.jpg'),
-(4, 'Futbol', 'halcones', 'qqqqqqqqqqqqqqqqqqqqqqqqqq', '', 1, 'Deportivo', 'qqqqqqqqqqqqqq', '39134-1159060930.jpg'),
-(5, 'Banda de guerra', 'Los halcones del Itescham', 'pum pum pum pum pum pum ', '', 1, 'Civico', 'En la cancha de la escuela', 'banda.png');
+INSERT INTO `talleres` (`id`, `taller`, `nombre`, `descripcion`, `mtro_asignado`, `categoria`, `direccion`, `img1`) VALUES
+(1, 'No asignado', '', '', 1, '', '', ''),
+(2, 'Danza moderna', 'Charizard', 'rgeehehg', 16, 'Cultural', 'Aula 211, Tecnologico', 'egrrg.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -299,7 +285,7 @@ ALTER TABLE `administrador`
 ALTER TABLE `alumnos`
   ADD PRIMARY KEY (`matricula`),
   ADD KEY `rol_id` (`rol_id`),
-  ADD KEY `taller_id` (`taller_id`);
+  ADD KEY `	taller_id` (`taller_id`);
 
 --
 -- Indices de la tabla `cms`
@@ -312,9 +298,9 @@ ALTER TABLE `cms`
 --
 ALTER TABLE `documentos`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `alumno_id` (`alumno_id`),
   ADD KEY `maestro_id` (`maestro_id`),
-  ADD KEY `taller_id` (`taller_id`),
-  ADD KEY `alumno_id` (`alumno_id`);
+  ADD KEY `taller_id` (`taller_id`);
 
 --
 -- Indices de la tabla `horarios`
@@ -365,7 +351,7 @@ ALTER TABLE `talleres`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `cms`
@@ -377,19 +363,19 @@ ALTER TABLE `cms`
 -- AUTO_INCREMENT de la tabla `documentos`
 --
 ALTER TABLE `documentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `maestro`
 --
 ALTER TABLE `maestro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajeadmin`
@@ -401,7 +387,7 @@ ALTER TABLE `mensajeadmin`
 -- AUTO_INCREMENT de la tabla `mensajemaestro`
 --
 ALTER TABLE `mensajemaestro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -413,7 +399,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `talleres`
 --
 ALTER TABLE `talleres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -429,22 +415,22 @@ ALTER TABLE `administrador`
 -- Filtros para la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  ADD CONSTRAINT `alumnos_ibfk_1` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`),
-  ADD CONSTRAINT `alumnos_ibfk_2` FOREIGN KEY (`taller_id`) REFERENCES `talleres` (`id`);
+  ADD CONSTRAINT `	taller_id` FOREIGN KEY (`taller_id`) REFERENCES `talleres` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `alumnos_ibfk_1` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`);
 
 --
 -- Filtros para la tabla `documentos`
 --
 ALTER TABLE `documentos`
-  ADD CONSTRAINT `alumno_id` FOREIGN KEY (`alumno_id`) REFERENCES `alumnos` (`matricula`),
-  ADD CONSTRAINT `maestro_id` FOREIGN KEY (`maestro_id`) REFERENCES `maestro` (`id`),
-  ADD CONSTRAINT `taller_id` FOREIGN KEY (`taller_id`) REFERENCES `talleres` (`id`);
+  ADD CONSTRAINT `alumno_id` FOREIGN KEY (`alumno_id`) REFERENCES `alumnos` (`matricula`) ON DELETE CASCADE,
+  ADD CONSTRAINT `maestro_id` FOREIGN KEY (`maestro_id`) REFERENCES `maestro` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `taller_id` FOREIGN KEY (`taller_id`) REFERENCES `talleres` (`id`) ON DELETE SET NULL;
 
 --
 -- Filtros para la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  ADD CONSTRAINT `taller` FOREIGN KEY (`taller`) REFERENCES `talleres` (`id`);
+  ADD CONSTRAINT `taller` FOREIGN KEY (`taller`) REFERENCES `talleres` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `maestro`
@@ -453,17 +439,10 @@ ALTER TABLE `maestro`
   ADD CONSTRAINT `maestro_ibfk_1` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`);
 
 --
--- Filtros para la tabla `mensajemaestro`
---
-ALTER TABLE `mensajemaestro`
-  ADD CONSTRAINT `mensajemaestro_ibfk_1` FOREIGN KEY (`mtro_id`) REFERENCES `maestro` (`id`),
-  ADD CONSTRAINT `mensajemaestro_ibfk_2` FOREIGN KEY (`taller_id`) REFERENCES `talleres` (`id`);
-
---
 -- Filtros para la tabla `talleres`
 --
 ALTER TABLE `talleres`
-  ADD CONSTRAINT `talleres_ibfk_1` FOREIGN KEY (`mtro_asignado`) REFERENCES `maestro` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `talleres_ibfk_1` FOREIGN KEY (`mtro_asignado`) REFERENCES `maestro` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
