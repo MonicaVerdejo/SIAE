@@ -30,6 +30,62 @@ $row = $taller->fetch(PDO::FETCH_NUM);
 
 
 
+    $porcentajeCero = 0;   
+//alumnos que cursan
+$cursandoA = $db->connect()->prepare("SELECT COUNT(nombre) FROM `alumnos` where `taller_id`=$Tallerstd and `estatus`='cursando'");
+$cursandoA->execute();
+//alumnos que reprobaron
+$aprobadoA = $db->connect()->prepare("SELECT COUNT(nombre) FROM `alumnos` where `taller_id`=$Tallerstd and `estatus`='aprobado'");
+$aprobadoA->execute();
+//alumnos que aprobaron
+$reprobadoA = $db->connect()->prepare("SELECT COUNT(nombre) FROM `alumnos` where `taller_id`=$Tallerstd and `estatus`='reprobado'");
+$reprobadoA->execute();
+
+foreach($cursandoA as $row){
+  if(!empty($row[0])){
+    $stdCursando=$row[0]  ;
+  }else{
+    $stdCursando = 0;
+  }
+}
+
+
+
+
+  
+
+    
+
+////////////////////////////////////////////////////GRAFICA PORCENTAJE DE APROBACION////////////////////////////////////////////////// 
+
+$sentencia = $db->connect()->prepare("SELECT ROUND((habitaciones_ocupadas/dias_vacaciones/num_habitaciones)*100,2) AS r FROM `registro` WHERE MONTH(fecha_inicio)=1 AND YEAR(fecha_inicio)='$año' AND hotel ='$hotel'");
+$sentencia->execute();
+$enero = $sentencia->fetch(PDO::FETCH_ASSOC);
+
+$sentencia = $db->connect()->prepare("SELECT ROUND((habitaciones_ocupadas/dias_vacaciones/num_habitaciones)*100,2) AS r FROM `registro`WHERE MONTH(fecha_inicio)=2 AND YEAR(fecha_inicio)='$año' AND hotel ='$hotel'");
+$sentencia->execute();
+$febrero = $sentencia->fetch(PDO::FETCH_ASSOC);
+
+$sentencia = $db->connect()->prepare("SELECT ROUND((habitaciones_ocupadas/dias_vacaciones/num_habitaciones)*100,2) AS r FROM `registro`WHERE MONTH(fecha_inicio)=3 AND YEAR(fecha_inicio)='$año' AND hotel ='$hotel'");
+$sentencia->execute();
+$marzo = $sentencia->fetch(PDO::FETCH_ASSOC);
+
+
+
+
+$data = array(
+  0 => round($enero['r'] ?? $porcentajeCero, 1),
+  1 => round($febrero['r'] ?? $porcentajeCero, 1),
+  2 => round($marzo['r'] ?? $porcentajeCero, 1)
+);
+
+$e3 = $data[0];
+$f3 = $data[1];
+$m3 = $data[2];
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////TABLA REGISTROS////////////////////////////////////////////////// 
 

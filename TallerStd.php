@@ -38,6 +38,9 @@
      <link rel="stylesheet" href="TABLA/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" type="text/css">
      <link rel="stylesheet" href="css/styles2.css">
      <!--MODAL BOOTSTRAP-->
+     <script src="Chartjs/Chart.min.js" type="text/javascript"></script>
+     <script src="public/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+     <!--Chartjs-->
  </head>
 
  <body>
@@ -229,7 +232,107 @@
                      <div class="row">
                          <div class="col-8">
 
-                             
+                             <!--GRAFICA DE APROBACION DE ALUMNOS-->
+                             <div class="row">
+                                 <div class="col-12">
+                                     <div class="tabla card">
+                                         <h1 class="ml-3 mt-3 card-title">ESTATUS ALUMNOS EN EL CURSO
+                                             <?php echo $stdCursando ?>
+                                         </h1>
+                                         <div>
+                                             <hr>
+                                             <div class="row">
+                                                 <div class="resultados col-12">
+                                                     <canvas id="grafico3" style="width:80%; margin-bottom:10%;"></canvas>
+                                                 </div>
+                                             </div>
+                                             <div class="card-footer">
+                                                 <small class="text-muted">Alumnos aprobados, reprobados y que cursan el taller.</small>
+                                             </div>
+                                         </div>
+
+                                         <script>
+                                             var contexto = document.getElementById("grafico3").getContext("2d");
+                                             var grafico = new Chart(contexto, {
+
+                                                 type: "doughnut", //line,bar,pie,bubble,doughnut,polarArea
+
+
+                                                 data: {
+                                                     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                                                     datasets: [{
+                                                         label: "Derrama economica",
+                                                         //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
+                                                         //backgroundColor: 'transparent',
+                                                         //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
+                                                         //highlightFill: 'rgba(73,206,180,0.6)', //color hover de la barra
+                                                         //highlightStroke: 'rgba(66,196,157,0.7)', //color hover del borde de la barra
+                                                         hoverBackgroundColor: '#6185ae',
+                                                         hoverBorderColor: 'black',
+
+                                                         backgroundColor: [
+                                                             'rgba(0, 99, 132, 0.8)',
+                                                             'rgba(30, 99, 132, 0.8)',
+                                                             'rgba(60, 99, 132, 0.8)',
+                                                             'rgba(90, 99, 132, 0.8)',
+                                                             'rgba(120, 99, 132, 0.8)',
+                                                             'rgba(150, 99, 132, 0.8)',
+                                                             'rgba(160, 99, 132, 0.8)',
+                                                             'rgba(180, 99, 132, 0.8)',
+                                                             'rgba(210, 99, 132, 0.8)',
+                                                             'rgba(240, 99, 132, 0.8)',
+                                                             'rgba(270, 99, 130, 0.8)',
+                                                             'rgba(300, 100, 138, 0.8)'
+                                                         ],
+                                                         borderColor: [
+                                                             'rgba(0, 99, 132, 1)',
+                                                             'rgba(30, 99, 132, 1)',
+                                                             'rgba(60, 99, 132, 1)',
+                                                             'rgba(90, 99, 132, 1)',
+                                                             'rgba(120, 99, 132, 1)',
+                                                             'rgba(150, 99, 132, 1)',
+                                                             'rgba(160, 90, 132, 1)',
+                                                             'rgba(180, 99, 132, 1)',
+                                                             'rgba(210, 99, 132, 1)',
+                                                             'rgba(240, 99, 132, 1)',
+                                                             'rgba(270, 99, 132, 1)',
+                                                             'rgba(300, 99, 132, 1)'
+                                                         ],
+                                                         borderWidth: 2,
+
+                                                         data: [<?php
+                                                                echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $ag . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
+
+                                                     }]
+
+                                                 },
+
+                                                 options: {
+                                                     responsive: true,
+                                                     scales: {
+                                                         yAxes: [{
+                                                             ticks: {
+                                                                 beginAtZero: true
+                                                             }
+                                                         }]
+                                                     }
+                                                 }
+                                             });
+                                         </script>
+                                     </div>
+                                 </div>
+                             </div>
+
+
+
+
+
+
+
+
+
+
+
                          </div>
                          <div class="col-4">
                              <div class="card">
