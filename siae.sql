@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2020 a las 01:15:20
+-- Tiempo de generación: 01-11-2020 a las 23:40:00
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -34,7 +34,7 @@ CREATE TABLE `administrador` (
   `correo` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `CURP` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
-  `img_profile` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `img_profile` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
   `Token` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `rol_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -44,7 +44,8 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`id`, `nombre`, `correo`, `password`, `CURP`, `img_profile`, `Token`, `rol_id`) VALUES
-(1, 'Fernando Vela Leon', 'vela@yopmail.com', '$2y$10$xoj3mWqqUxESZ.r8yILuOuv7Hn4VY5TQ5MCfjMbn35nmldW4pdPbu', 'VELF971204MCCLRN01', '39134-1159060930.jpg', '', 1);
+(1, 'Fernando Vela Leon', 'vela@yopmail.com', '$2y$10$xoj3mWqqUxESZ.r8yILuOuv7Hn4VY5TQ5MCfjMbn35nmldW4pdPbu', 'VELF971204MCCLRN01', '39134-1159060930.jpg', '', 1),
+(4, 'Lorna Alejandra Delgado Verdejo', 'mpdverdejo@gmail.com', '$2y$10$ryFz35QxAd5mt9fhAAe7c.hPzLEXMDCLhqlAwz9LP0XZr/0XDCava', 'DEVM971204MCCLRN01', 'default.jpg', '', 1);
 
 -- --------------------------------------------------------
 
@@ -72,7 +73,10 @@ CREATE TABLE `alumnos` (
 
 INSERT INTO `alumnos` (`nombre`, `matricula`, `password`, `taller_id`, `representativo`, `carrera`, `estatus`, `semestre`, `evaluacion`, `sexo`, `rol_id`) VALUES
 ('Sin asignar', 0, '', 1, '', '', '', '', '', '', 2),
-('Lorna Alejandra Delgado Verdejo', 161080138, '$2y$10$dxmq0KZQVhPKoa5lvbdzxOpY/D5QfeyNPS0njqBqe24Xve0K0R4qi', 2, 'Si', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Noveno', '', 'F', 2);
+('monica verdejo', 161080111, '$2y$10$U5Bcskx42d.uLDgsFUI6Lutrvha1ukOeUlkprI6vc1xNISA2lhrMm', 2, 'No', 'Ingeniería Ambiental', 'Cursando', 'Noveno', '', 'F', 2),
+('Lorna Alejandra Delgado Verdejo', 161080138, '$2y$10$dxmq0KZQVhPKoa5lvbdzxOpY/D5QfeyNPS0njqBqe24Xve0K0R4qi', 2, 'Si', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Noveno', '', 'F', 2),
+('Jose Alberto Pech Villasis', 161080150, '$2y$10$9Q6SlZVAGp3LcmT2ULuFxOl/XOyNRDjJAQqzuMzdPe794lxhAxJsC', 2, 'No', 'Ingeniería en Logística', 'Cursando', 'Séptimo', '', 'F', 2),
+('Gerardo Gonzalez Rosado', 161080156, '$2y$10$Zg4OgcdfMfOKAIOj887e3.DNSw7U1lcBsFYtMbLU6p77m6siX1Z7S', 2, 'No', 'Licenciatura en Turismo', 'Cursando', 'Tercero', '', 'F', 2);
 
 -- --------------------------------------------------------
 
@@ -266,7 +270,11 @@ CREATE TABLE `talleres` (
 
 INSERT INTO `talleres` (`id`, `taller`, `nombre`, `descripcion`, `mtro_asignado`, `categoria`, `direccion`, `img1`) VALUES
 (1, 'No asignado', '', '', 1, '', '', ''),
-(2, 'Danza moderna', 'Charizard', 'rgeehehg', 16, 'Cultural', 'Aula 211, Tecnologico', 'egrrg.jpg');
+(2, 'Danza moderna', 'halcones', 'asdadsasd', 16, 'Cultural', 'adsasd', '71HHP51MVEL._AC_SY355_.jpg'),
+(3, 'volleybal', 'Los halcones del Itescham', 'bla bla bla bla ', 1, 'Deportivo', '12', '5c3642f4bda1537b6aa50702-large.jpg'),
+(4, 'Futbol', 'halconese', 'fdffdfd', 1, 'Deportivo', 'dfdfdfd', '9ab2cb6cf42baebec14e35fa8a287db0.jpg'),
+(5, 'Escolta', 'halcones', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 1, 'Civico', '12', '0966713e7055b3340e54995b50f64704.jpg'),
+(6, 'Ballet', 'viejas en mallas', 'bla bla bla bla ', 1, 'Cultural', 'daesdadada', 'b56dbba6d76b457498767e12e624d2de.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -351,7 +359,7 @@ ALTER TABLE `talleres`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `cms`
@@ -399,7 +407,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `talleres`
 --
 ALTER TABLE `talleres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
