@@ -114,17 +114,18 @@ if (!isset($_SESSION['rol'])) {
                                         <p style="color: white; text-align: left; margin-left:15px;">Listas/Evaluar:</p>
                                         <li>
                                             <?php
-                                            $sentencia = $db->connect()->prepare("SELECT taller FROM talleres");
+                                            $sentencia = $db->connect()->prepare("SELECT id, taller FROM talleres");
                                             $sentencia->execute();
 
                                             foreach ($sentencia as $row) {
 
                                             ?>
                                                 <form class="text-center" action="buscar_id.php" method="POST">
-
-                                                    <input <?php if ($row[0] == "No asignado") { ?> style="display: none;" <?php } else { ?> type="submit" id="hotel" name="hotel" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[0];
-                                                                                                                                                                                                                                    } ?>">
-                                                    </input>
+<input type="text" class="sr-only" value="<?php echo $row[0];?>" name="idTaller">
+                                                    <input <?php if ($row[1] == "No asignado") { ?> style="display: none;" <?php } else { ?> type="submit" id="Tallerstd" name="Tallerstd" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[1];
+                                                                                                                                                                                                                                                    } ?>">
+                                                
+                                                </input>
                                                 </form>
                                             <?php } ?>
 
@@ -175,11 +176,11 @@ if (!isset($_SESSION['rol'])) {
                                                 $adminDios = $_SESSION['id_admin'];
                                                 if ($adminDios == 1) {
                                                 ?>id="page_editAdmin" <?php
-                                                            } else {
-                                                                ?>data-toggle="modal" data-target="#permisosModal"<?php
-                                                            }
+                                                                    } else {
+                                                                        ?>data-toggle="modal" data-target="#permisosModal" <?php
+                                                                                                                        }
 
-                                                                ?>>
+                                                                                                                            ?>>
                                         <i class="fas fa-edit "></i>
                                         <span>Administrativos</span>
                                     </a>
@@ -208,6 +209,50 @@ if (!isset($_SESSION['rol'])) {
                     <h2>SIAE</h2>
                 </div>
 
+
+                <!-------------------------------------------------------------SECCIÓN INICIO------------------------------------------------->
+
+                <section class="section bg-default text-md-center container">
+                    <div class="col-md-5 col-sm-4">
+                        <div class="card">
+                            <div class="card-header" style="margin:auto">
+                                <h3>Talleres</h3>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <?php
+                        $busquedaT = $db->connect()->prepare("SELECT * FROM talleres where id not in (1);");
+                        $busquedaT->execute();
+                        foreach ($busquedaT as $fila) {
+                        ?>
+                            <div class="col-md-3 col-sm-6">
+
+                                <div class="card articulo" style="width: 15rem;  display: inline-block; vertical-align: top; text-align: center;margin-left: 5%; margin-bottom:3%;">
+                                    <input name="Tallerstd" type="hidden" id="id" value="<?php echo $fila[0];  ?>">
+                                    <img src="img/<?php echo $fila[5]; ?>/taller/<?php echo $fila[7]; ?>" style="height: 200px; width:auto;" class="card-img-top mt-1" alt="Taller">
+
+
+
+                                    <div class="card-body">
+
+                                        <div class="card-footer text-center">
+                                            <small class="text-muted" style="text-transform: uppercase;"><?php echo $fila[1]; ?></small>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        <?php } ?>
+                    </div>
+
+
+                </section>
                 <!-------------------------------------------------------------SECCIÓN DE CMS------------------------------------------------->
 
                 <section class="section bg-default text-md-center">
@@ -732,8 +777,7 @@ if (!isset($_SESSION['rol'])) {
                     <div class="container" style="display:none;" id="student-options">
                         <h4>ALUMNOS</h4>
                         <div class="row row-lg row-30">
-
-                            <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".2s" id="registrarA">
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".2s" id="registrarA">
                                 <article class=""><img src="img/logos/new-user.png" alt="" width="100" height="100" />
                                     <div class="">
                                         <div>
@@ -742,8 +786,7 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                 </article>
                             </div>
-                            <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".2s" id="editA">
-
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".2s" id="editA">
                                 <article class=""><img src="img/logos/edit-user.png" alt="" width="100" height="100" />
                                     <div class="">
                                         <div>
@@ -753,8 +796,7 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                 </article>
                             </div>
-                            <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".1s" id="deleteA">
-
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".1s" id="deleteA">
                                 <article class=""><img src="img/logos/delete-user.png" alt="" width="100" height="100" />
                                     <div class="">
                                         <div>
@@ -762,7 +804,6 @@ if (!isset($_SESSION['rol'])) {
                                         </div>
                                     </div>
                                 </article>
-
                             </div>
                         </div>
                     </div>
@@ -937,9 +978,7 @@ if (!isset($_SESSION['rol'])) {
                             <div id="triangle"></div>
                             <div id="titulo">Eliminar Alumno</div>
                             <div id="form">
-
                                 <img src="img/logos/recycle-bin.png" width="100px" alt="Borrar">
-
                                 <form class="col-12" action="admin/delete_std.php" method="post">
                                     <br>
                                     <div class="form-group">
@@ -948,15 +987,10 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                     <button type="submit" class="btn btn-secondary" title="Advertencia" data-trigger="hover" data-content="Recuerda que una vez eliminado no podrás recuperarlo" data-toggle="popover">Enviar</button>
                                 </form>
-
-
-
                             </div>
                         </div>
                     </section>
-
                     <!--End-alumnos_section-->
-
                 </section>
 
                 <!-------------------------------------------------------------SECCIÓN DE MENSAJES-------------------------------------------->
@@ -1330,7 +1364,7 @@ if (!isset($_SESSION['rol'])) {
                 </section>
                 <!-------------------------------------------------------------SECCIÓN DE EVALUACION BIMESTRAL------------------------------------------------->
 
-
+                <!--AUN NO SE QUE PONER AQUÍ-->
 
 
                 <!-------------------------------------------------------------INSTRUMENTACION DIDACTICA--------------------------------------------->
@@ -1778,7 +1812,7 @@ if (!isset($_SESSION['rol'])) {
                     </div>
                 </div>
 
-                
+
                 <!-------------------------------------------------------------PERMISOS MODAL------------------------------------------------->
                 <div class="modal fade" id="permisosModal" tabindex="-1" role="dialog" aria-labelledby="permisosModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -2004,7 +2038,6 @@ if (!isset($_SESSION['rol'])) {
             </main>
         </div>
     </main>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/popper.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
@@ -2159,6 +2192,16 @@ if (!isset($_SESSION['rol'])) {
                 $("#mensajesE").hide();
 
 
+                return false;
+            });
+            $("#showA").on('click', function() {
+                $("#cms").hide();
+                $("#form-Aregister").hide();
+                $("#form-Aedit").hide();
+                $("#form-Adelete").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-showA").show();
                 return false;
             });
             //SECCION TALLERES
@@ -2516,6 +2559,23 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").show();
                 $("#options_Admin").show();
+                return false;
+            });
+            //PAGE_STDTALLER  opcion_stdTaller
+            $("#page-stdTaller").on('click', function() {
+                $("#cms").hide();
+                $("#student-options").hide();
+                $("#teach-options").hide();
+                $("#options_T").hide();
+                $("#table-mtro").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Tdelete").hide();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#options_Hr").hide();
+                $("#options_Admin").hide();
+                $("#opcion_stdTaller").show();
                 return false;
             });
 
