@@ -20,7 +20,7 @@
     ?>
 
  <!DOCTYPE html>
- <html lang="en">
+ <html lang="es">
 
  <head>
      <meta charset="UTF-8">
@@ -126,7 +126,8 @@
 
 
                                          <br>
-                                         <p style="color: white; text-align: left; margin-left:15px;">Listas/Evaluar:</p>
+                                         <p style="color: white; text-align: left; margin-left:15px;">Listas/Evaluar:
+                                         </p>
                                          <li>
                                              <?php
                                                 $sentencia = $db->connect()->prepare("SELECT id, taller FROM talleres");
@@ -165,12 +166,7 @@
                                      </ul>
                                  </div>
                              </li>
-                             <li id="mtro_evaluacion">
-                                 <a href="administrativo.php">
-                                     <i class="fa fa-hourglass" aria-hidden="true"></i>
-                                     <span>Evaluación bimestral</span>
-                                 </a>
-                             </li>
+
                              <li id="mtro_instrumentacion">
                                  <a href="administrativo.php">
                                      <i class="fa fa-hourglass" aria-hidden="true"></i>
@@ -228,7 +224,7 @@
 
                  <!-------------------------------------------------------------TABLAS ALUMNOS-------------------------------------------->
 
-                 <section class="section section-xl bg-default text-md-center container" id="opcion_stdTaller">
+                 <section class="section section-xl bg-default text-md-center container">
                      <div class="row">
                          <div class="col-8">
 
@@ -236,32 +232,33 @@
                              <div class="row">
                                  <div class="col-12">
                                      <div class="tabla card">
-                                         <h1 class="ml-3 mt-3 card-title">ESTATUS ALUMNOS EN EL CURSO
-                                             <?php echo $stdCursando ?>
+                                         <h1 class="ml-3 mt-3 card-title">ESTATUS DE LOS ALUMNOS EN EL TALLER
+
                                          </h1>
                                          <div>
                                              <hr>
                                              <div class="row">
                                                  <div class="resultados col-12">
-                                                     <canvas id="grafico3" style="width:80%; margin-bottom:10%;"></canvas>
+                                                     <canvas id="grafico" style="width:80%; margin-bottom:10%;"></canvas>
                                                  </div>
                                              </div>
                                              <div class="card-footer">
-                                                 <small class="text-muted">Alumnos aprobados, reprobados y que cursan el taller.</small>
+                                                 <small class="text-muted">Alumnos aprobados, reprobados y que cursan el
+                                                     taller.</small>
                                              </div>
                                          </div>
 
                                          <script>
-                                             var contexto = document.getElementById("grafico3").getContext("2d");
+                                             var contexto = document.getElementById("grafico").getContext("2d");
                                              var grafico = new Chart(contexto, {
 
                                                  type: "doughnut", //line,bar,pie,bubble,doughnut,polarArea
 
 
                                                  data: {
-                                                     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                                                     labels: ['Cursando', 'Aprobados', 'Reprobados'],
                                                      datasets: [{
-                                                         label: "Derrama economica",
+                                                         label: "Estatus alumnos",
                                                          //backgroundColor: 'rgba(70,228,146,0.6)', //color de la barra
                                                          //backgroundColor: 'transparent',
                                                          //borderColor: 'rgba(57,194,112,0.7)', //color del borde de la barra
@@ -271,37 +268,27 @@
                                                          hoverBorderColor: 'black',
 
                                                          backgroundColor: [
-                                                             'rgba(0, 99, 132, 0.8)',
-                                                             'rgba(30, 99, 132, 0.8)',
-                                                             'rgba(60, 99, 132, 0.8)',
-                                                             'rgba(90, 99, 132, 0.8)',
-                                                             'rgba(120, 99, 132, 0.8)',
-                                                             'rgba(150, 99, 132, 0.8)',
-                                                             'rgba(160, 99, 132, 0.8)',
-                                                             'rgba(180, 99, 132, 0.8)',
-                                                             'rgba(210, 99, 132, 0.8)',
-                                                             'rgba(240, 99, 132, 0.8)',
-                                                             'rgba(270, 99, 130, 0.8)',
-                                                             'rgba(300, 100, 138, 0.8)'
+                                                             'rgba(113, 128, 132, 0.9)',
+
+                                                             'rgba(15, 73, 143, 0.91)',
+
+                                                             'rgba(167, 57, 57, 0.87)'
+
                                                          ],
                                                          borderColor: [
-                                                             'rgba(0, 99, 132, 1)',
-                                                             'rgba(30, 99, 132, 1)',
-                                                             'rgba(60, 99, 132, 1)',
-                                                             'rgba(90, 99, 132, 1)',
-                                                             'rgba(120, 99, 132, 1)',
-                                                             'rgba(150, 99, 132, 1)',
-                                                             'rgba(160, 90, 132, 1)',
-                                                             'rgba(180, 99, 132, 1)',
-                                                             'rgba(210, 99, 132, 1)',
-                                                             'rgba(240, 99, 132, 1)',
-                                                             'rgba(270, 99, 132, 1)',
-                                                             'rgba(300, 99, 132, 1)'
+                                                             'rgb(113, 128, 132)',
+
+
+                                                             'rgb(15, 73, 143)',
+
+                                                             'rgb(167, 57, 57)'
                                                          ],
                                                          borderWidth: 2,
 
-                                                         data: [<?php
-                                                                echo ($e . "," . $f . "," . $m . "," . $a . "," . $ma . "," . $j . "," . $jl . "," . $ag . "," . $s . "," . $o . "," . $n . "," . $d); ?>],
+                                                         data: [
+                                                             <?php
+                                                                echo ($cursandoA . "," . $aprobadosA . "," . $reprobadosA); ?>
+                                                         ],
 
                                                      }]
 
@@ -310,11 +297,7 @@
                                                  options: {
                                                      responsive: true,
                                                      scales: {
-                                                         yAxes: [{
-                                                             ticks: {
-                                                                 beginAtZero: true
-                                                             }
-                                                         }]
+
                                                      }
                                                  }
                                              });
@@ -322,17 +305,6 @@
                                      </div>
                                  </div>
                              </div>
-
-
-
-
-
-
-
-
-
-
-
                          </div>
                          <div class="col-4">
                              <div class="card">
@@ -345,9 +317,15 @@
                              <div class="card articulo" style="width: 18rem;  display: inline-block; vertical-align: top;
                                 text-align: center;margin-left: 5%; margin-bottom:3%;">
 
-                                 <img src="img/<?php echo $categoria; ?>/taller/<?php echo $imgTaller ?>" style="height: 200px; width:auto;" class="card-img-top mt-1" alt="Taller">
-                                 <h5 class=" text-center" style="text-transform: uppercase;"><?php echo $nombreRepresentativo ?></h5>
-                                 <small class="card-text text-center"><?php echo $descripcion ?></small>
+                                 <img src="img/<?php echo $categoria; ?>/taller/<?php echo $imgTaller ?>" style="height: 200px; width:auto;" class="card-img-top mt-1 img-responsive" alt="Taller">
+                                 <h5 class=" text-center" style="text-transform: uppercase;">
+                                     <?php echo $nombreRepresentativo ?></h5>
+                                 <div class="text-left ml-3 mr-3">
+                                     <small class="card-text text-center"><?php echo $descripcion ?></small>
+                                     <hr>
+                                     <small class="card-text ml-0">Maestro asignado: <?php echo $mtroA; ?></small>
+                                     <small class="card-text ml-0">Dirección: <?php echo $direccion; ?></small>
+                                 </div>
 
                              </div>
                          </div>
@@ -357,30 +335,53 @@
 
                      <div id="tallerSTD" class="mt-3">
                          <div class="row">
-
-                             <div class="col-9 ">
+                             <div class="col-12 ">
                                  <div class="card">
                                      <div class="card-header" style="margin:auto">
                                          <h1 class="card-title">ALUMNOS REGISTRADOS</h1>
                                      </div>
                                      <div class="card-body">
-                                         <table class="mt-3 text-center table  table-hover table-responsive" style=" width: 70%; background-color: white; margin-left:5px;">
+                                         <table class="tablaEstudiantes mt-3 text-center table  table-hover table-responsive" style="background-color: white; margin:auto;">
                                              <?php echo $salida; ?>
                                          </table>
                                      </div>
                                  </div>
                              </div>
                          </div>
+                     </div>
+                 </section>
 
+                 <!-----------------------------------------EVALUACION BIMESTRAL ASIGNADA A LOS ALUMNOS------------------------------------------------------>
+                 <section class="section section-xl bg-default text-md-center container">
 
+                     <div class="mt-3">
+                         <div class="row">
+                             <div class="col-md-9 col-sm-12">
+                                 <div class="card">
+                                     <div class="card-header" style="margin:auto">
+                                         <h1 class="card-title">EVALUACIÓN BIMESTRAL DE LOS ALUMNOS</h1>
+                                     </div>
+                                     <div class="card-body">
+                                         <table class="tablaEstudiantes mt-3 text-center table  table-hover table-responsive" style=" width: 70%; background-color: white; margin:auto;">
+                                             <?php echo $tableDocument; ?>
+                                         </table>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".2s" id="registrarHorario">
+                                 <article class=""> <img src="img/logos/acreditar.png" width="150" height="auto" alt="Acreditar alumno">
+                                     <div class="">
+                                         <div>
+                                             <h4 class=""><a href="#">Acreditar alumno</a></h4>
+                                         </div>
+                                     </div>
+                                 </article>
+                             </div>
+
+                         </div>
                      </div>
 
                  </section>
-
-
-
-
-
              </main>
          </div>
      </main>

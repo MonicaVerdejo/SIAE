@@ -121,7 +121,7 @@ if (!isset($_SESSION['rol'])) {
 
                                             ?>
                                                 <form class="text-center" action="buscar_id.php" method="POST">
-<input type="text" class="sr-only" value="<?php echo $row[0];?>" name="idTaller">
+                                                    <input type="text" class="sr-only" value="<?php echo $row[0];?>" name="idTaller">
                                                     <input <?php if ($row[1] == "No asignado") { ?> style="display: none;" <?php } else { ?> type="submit" id="Tallerstd" name="Tallerstd" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[1];
                                                                                                                                                                                                                                                     } ?>">
                                                 
@@ -150,12 +150,7 @@ if (!isset($_SESSION['rol'])) {
                                     </ul>
                                 </div>
                             </li>
-                            <li id="mtro_evaluacion">
-                                <a href="">
-                                    <i class="fa fa-hourglass" aria-hidden="true"></i>
-                                    <span>Evaluación bimestral</span>
-                                </a>
-                            </li>
+                           
                             <li id="mtro_instrumentacion">
                                 <a href="">
                                     <i class="fa fa-hourglass" aria-hidden="true"></i>
@@ -1362,10 +1357,7 @@ if (!isset($_SESSION['rol'])) {
                     </div>
 
                 </section>
-                <!-------------------------------------------------------------SECCIÓN DE EVALUACION BIMESTRAL------------------------------------------------->
-
-                <!--AUN NO SE QUE PONER AQUÍ-->
-
+                
 
                 <!-------------------------------------------------------------INSTRUMENTACION DIDACTICA--------------------------------------------->
 
