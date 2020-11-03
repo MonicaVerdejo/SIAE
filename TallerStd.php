@@ -324,6 +324,7 @@
                                      <small class="card-text text-center"><?php echo $descripcion ?></small>
                                      <hr>
                                      <small class="card-text ml-0">Maestro asignado: <?php echo $mtroA; ?></small>
+                                     <br>
                                      <small class="card-text ml-0">Dirección: <?php echo $direccion; ?></small>
                                  </div>
 
@@ -370,7 +371,7 @@
                              </div>
                              <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".2s" id="registrarHorario">
                                  <article class=""> <img src="img/logos/acreditar.png" width="150" height="auto" alt="Acreditar alumno">
-                                     <div class="">
+                                     <div class="" data-toggle="modal" data-target="#acreditarModal">
                                          <div>
                                              <h4 class=""><a href="#">Acreditar alumno</a></h4>
                                          </div>
@@ -378,6 +379,89 @@
                                  </article>
                              </div>
 
+                             <!--Modal acreditar alumno-->
+                             <div class="modal fade" id="acreditarModal" tabindex="-1" role="dialog" aria-labelledby="acreditarModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog" role="document">
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <h5 class="modal-title" id="acreditarModalLabel">Acreditar alumno</h5>
+                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                             </button>
+                                         </div>
+                                         <div class="modal-body text-center">
+                                             <img src="img/logos/credito.png" width="200px" alt="Acreditar alumno">
+
+                                             <form class="col-12" action="admin/acreditarstd.php" method="post" target="blank">
+                                                 <br>
+                                                 <div class="form-group sr-only">
+                                                     <label for="mtro">Mtro asignado</label>
+                                                     <input id="mtro" class="form-control" type="text" name="mtro" value="<?php echo $mtroA; ?>">
+                                                 </div>
+                                                 <?php
+                                    $buscarAlumno = $db->connect()->prepare("SELECT matricula, nombre FROM alumnos WHERE taller_id=$Tallerstd and estatus='Cursando'");
+                                    $buscarAlumno->execute();
+                                    ?>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="matricula">Alumno:</label>
+                                        </div>
+                                        <select class="custom-select" name="matricula" id="matricula" required="true">
+                                            <?php foreach ($buscarAlumno as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
+
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
+
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
+
+
+
+                                                 <div class="form-group">
+                                                     <label for="nivelDesempeño">Nivel de desempeño adquirido:</label>
+                                                     <input id="nivelDesempeño" class="form-control" type="text" name="nivelDesempeño" placeholder="Excelente" required>
+                                                 </div>
+                                                 <div class="form-group">
+                                                     <label for="valorN">Valor numérico adquirido:</label>
+                                                     <input id="valorN" class="form-control" type="text" name="valorN" placeholder="4" required pattern="^\d+$" 
+                                                     oninvalid="this.setCustomValidity('El valor numérico sólo acepta ingreses un número')" oninput="this.setCustomValidity('')">
+                                                 </div>
+                                                  <div class="form-group">
+                                                     <label for="periodo">Periodo escolar:</label>
+                                                     <input id="periodo" class="form-control" type="text" name="periodo" placeholder="Agosto-Diciembre 2020" required>
+                                                 </div>
+                                                 <div class="form-group">
+                                                     <label for="valorCurricular">Valor curricular adquirido:</label>
+                                                     <input id="valorCurricular" class="form-control" type="text" name="valorCurricular" required pattern="^\d+$" 
+                                                     oninvalid="this.setCustomValidity('En el valor curricular sólo se acepta ingreses un número, correspondiente a los créditos adquiridos por el alumno.')" oninput="this.setCustomValidity('')">
+                                                 </div>
+                                                 <div class="form-group">
+                                                     <label for="jefeDepEscolares">Jefe(a) del departamento de servicios escolares:</label>
+                                                     <input id="jefeDepEscolares" class="form-control" type="text" name="jefeDepEscolares" required>
+                                                 </div>
+                                                 <div class="form-group">
+                                                     <label for="fechaexp">Fecha en que se extiende la constancia:</label>
+                                                     <input id="fechaexp" class="form-control" type="date" name="fechaexp" required>
+                                                 </div>
+                                                 <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                             </form>
+                                             <span>A continuacion te mostraremos una vista previa del documento generado</span>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
                          </div>
                      </div>
 
@@ -385,7 +469,7 @@
              </main>
          </div>
      </main>
-     <script src="js/buscar_taller.js" type="text/javascript"></script>
+     <!--<script src="js/buscar_taller.js" type="text/javascript"></script>-->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      <script src="js/popper.min.js" type="text/javascript"></script>
      <script src="js/bootstrap.min.js" type="text/javascript"></script>

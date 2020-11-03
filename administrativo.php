@@ -121,11 +121,11 @@ if (!isset($_SESSION['rol'])) {
 
                                             ?>
                                                 <form class="text-center" action="buscar_id.php" method="POST">
-                                                    <input type="text" class="sr-only" value="<?php echo $row[0];?>" name="idTaller">
+                                                    <input type="text" class="sr-only" value="<?php echo $row[0]; ?>" name="idTaller">
                                                     <input <?php if ($row[1] == "No asignado") { ?> style="display: none;" <?php } else { ?> type="submit" id="Tallerstd" name="Tallerstd" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[1];
-                                                                                                                                                                                                                                                    } ?>">
-                                                
-                                                </input>
+                                                                                                                                                                                                                                            } ?>">
+
+                                                    </input>
                                                 </form>
                                             <?php } ?>
 
@@ -150,7 +150,7 @@ if (!isset($_SESSION['rol'])) {
                                     </ul>
                                 </div>
                             </li>
-                           
+
                             <li id="mtro_instrumentacion">
                                 <a href="">
                                     <i class="fa fa-hourglass" aria-hidden="true"></i>
@@ -540,15 +540,15 @@ if (!isset($_SESSION['rol'])) {
                                 <form method="POST" action="admin/registrar_mtro.php">
                                     <div class="form-group">
                                         <label for="nombre">Nombre completo</label>
-                                        <input id="nombre" class="form-control" type="text" name="nombre" required="true">
+                                        <input id="nombre" class="form-control" type="text" name="nombre" required="true" placeholder="Fernando Enrique Vela Leon">
                                     </div>
                                     <div class="form-group">
                                         <label for="correo">Correo</label>
-                                        <input id="correo" class="form-control" type="email" name="correo" required="true">
+                                        <input id="correo" class="form-control" type="email" name="correo" required="true" placeholder="vela97@outlook.com">
                                     </div>
                                     <div class="form-group">
                                         <label for="curp">Curp</label>
-                                        <input id="curp" class="form-control" type="text" name="curp" required="true">
+                                        <input id="curp" class="form-control" type="text" name="curp" required="true" placeholder="VELF971204HCCLRN07" required pattern="[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]" oninvalid="this.setCustomValidity('Formato de la Clave Única de Registro de Población')" oninput="this.setCustomValidity('')">
                                     </div>
                                     <?php
                                     $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
@@ -579,7 +579,7 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="telefono">Telefono</label>
-                                        <input id="telefono" class="form-control" type="text" name="telefono" required="true">
+                                        <input id="telefono" class="form-control" type="text" name="telefono" placeholder="9821159667" required pattern="[0-9]{10}" oninvalid="this.setCustomValidity('El formato del número de celular es: 9821159667. Hazlo coincidir.')" oninput="this.setCustomValidity('')">
                                     </div>
                                     <div class="form-group">
                                         <label for="sexo">Sexo</label>
@@ -658,7 +658,7 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="telefono">Telefono</label>
-                                        <input id="telefono" class="form-control" type="text" name="telefono" required="true">
+                                        <input id="telefono" class="form-control" type="text" name="telefono" placeholder="9821159667" required pattern="[0-9]{10}" oninvalid="this.setCustomValidity('El formato del número de celular es: 9821159667. Hazlo coincidir.')" oninput="this.setCustomValidity('')">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                 </form>
@@ -739,17 +739,36 @@ if (!isset($_SESSION['rol'])) {
                                                         <?php
                                                         $busqueda = $db->connect()->prepare('SELECT maestro.nombre, correo, talleres.taller, curp, telefono FROM `maestro` join talleres on maestro.taller_asignado=talleres.id order by maestro.nombre asc');
                                                         $busqueda->execute();
-                                                        foreach ($busqueda as $fila) {
-                                                        ?>
-                                                            <tr>
-                                                                <td><?php echo $fila[0]; ?></td>
-                                                                <td><?php echo $fila[1]; ?></td>
-                                                                <td><?php echo $fila[2]; ?></td>
-                                                                <td><?php echo $fila[3]; ?></td>
-                                                                <td><?php echo $fila[4]; ?></td>
 
-                                                            </tr>
+                                                        foreach ($busqueda as $fila) {
+                                                            $sinasignar = "No asignado";
+                                                            $NoAsignado = $fila[2];
+                                                            if (strcmp($sinasignar, $NoAsignado) === 0) {
+                                                        ?>
+                                                                <tr class="sr-only">
+                                                                    <td><?php echo $fila[0]; ?></td>
+                                                                    <td><?php echo $fila[1]; ?></td>
+                                                                    <td><?php echo $fila[2]; ?></td>
+                                                                    <td><?php echo $fila[3]; ?></td>
+                                                                    <td><?php echo $fila[4]; ?></td>
+
+
+                                                                </tr>
+
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <tr>
+                                                                    <td><?php echo $fila[0]; ?></td>
+                                                                    <td><?php echo $fila[1]; ?></td>
+                                                                    <td><?php echo $fila[2]; ?></td>
+                                                                    <td><?php echo $fila[3]; ?></td>
+                                                                    <td><?php echo $fila[4]; ?></td>
+
+
+                                                                </tr>
                                                         <?php
+                                                            }
                                                         }
                                                         ?>
                                                     </tbody>
@@ -811,15 +830,15 @@ if (!isset($_SESSION['rol'])) {
                                 <form method="POST" action="admin/registrar_std.php">
                                     <div class="form-group">
                                         <label for="nombre">Nombre completo</label>
-                                        <input id="nombre" class="form-control" type="text" name="nombre" required="true">
+                                        <input id="nombre" class="form-control" type="text" name="nombre" required="true" placeholder="Monica Priscila Delgado Verdejo">
                                     </div>
                                     <div class="form-group">
                                         <label for="matricula">Matricula</label>
-                                        <input id="matricula" class="form-control" type="text" name="matricula" required="true">
+                                        <input id="matricula" class="form-control" type="text" name="matricula" required="true" placeholder="161080138" required pattern="^\d+$" oninvalid="this.setCustomValidity('La matricula es el número de control del estudiante, sólo se aceptan números')" oninput="this.setCustomValidity('')">
                                     </div>
                                     <div class="form-group">
                                         <label for="year">Año de nacimiento</label>
-                                        <input id="year" class="form-control" type="text" name="year" required="true">
+                                        <input id="year" class="form-control" type="text" name="year" required="true" placeholder="1997" required pattern="[0-9]{4}" oninvalid="this.setCustomValidity('El año de nacimiento en formato AAAA, sólo se aceptan números.')" oninput="this.setCustomValidity('')">
                                     </div>
                                     <?php
                                     $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
@@ -903,7 +922,7 @@ if (!isset($_SESSION['rol'])) {
                                 <form method="POST" action="admin/edit_std.php">
                                     <div class="form-group">
                                         <label for="matricula">Matricula</label>
-                                        <input id="matricula" class="form-control" type="text" name="matricula" required="true">
+                                        <input id="matricula" class="form-control" type="text" name="matricula" required="true" placeholder="161080138" required pattern="^\d+$" oninvalid="this.setCustomValidity('La matricula es el número de control del estudiante, sólo se aceptan números')" oninput="this.setCustomValidity('')">
                                     </div>
                                     <?php
                                     $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
@@ -978,7 +997,7 @@ if (!isset($_SESSION['rol'])) {
                                     <br>
                                     <div class="form-group">
                                         <label for="matricula">Ingresa la Matricula</label>
-                                        <input id="matricula" class="form-control" type="text" name="matricula" required=>
+                                        <input id="matricula" class="form-control" type="text" name="matricula" placeholder="161080138" required pattern="^\d+$" oninvalid="this.setCustomValidity('La matricula es el número de control del estudiante, sólo se aceptan números')" oninput="this.setCustomValidity('')">
                                     </div>
                                     <button type="submit" class="btn btn-secondary" title="Advertencia" data-trigger="hover" data-content="Recuerda que una vez eliminado no podrás recuperarlo" data-toggle="popover">Enviar</button>
                                 </form>
@@ -1357,7 +1376,7 @@ if (!isset($_SESSION['rol'])) {
                     </div>
 
                 </section>
-                
+
 
                 <!-------------------------------------------------------------INSTRUMENTACION DIDACTICA--------------------------------------------->
 
@@ -1886,7 +1905,7 @@ if (!isset($_SESSION['rol'])) {
 
                                         <div class="form-group">
                                             <label for="curp">CURP</label>
-                                            <input type="text" name="curp" id="" class="form-control" placeholder="VELF971204HCCLRN73" aria-describedby="helpId" required="True">
+                                            <input type="text" name="curp" id="" class="form-control" placeholder="VELF971204HCCLRN73" aria-describedby="helpId" required="True" required pattern="[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]" oninvalid="this.setCustomValidity('Formato de la Clave Única de Registro de Población')" oninput="this.setCustomValidity('')">
                                         </div>
                                         <button type="submit" class="btn btn-secondary">Enviar</button>
                                     </form>
