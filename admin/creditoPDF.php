@@ -1,41 +1,44 @@
 <?php
+
+// Iniciar sesión
+session_start();
+// Verificar que existe la variable de sesión
+if(!isset($_SESSION['pdf'])) {
+    die('Primero debes enviar el formulario, para que obtengamos los datos solicitados e imprimamos tu acuse.');
+}
+
+// Definir constante para no duplicar inicio de sesión
+define('SESSION_STARTED', 1);
+
 // Cargamos la librería dompdf que hemos instalado en la carpeta dompdf
 require_once '../dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
-define("DOMPDF_ENABLE_HTML5PARSER", true); 
-// Introducimos HTML de prueba
 
- $html=file_get_contents_curl("localhost/SIAE2/admin/acreditarstd.php");
+// Inicializar buffer de salida
+ob_start();
 
-//$options->set("isJavascriptEnabled", TRUE);
- 
+// Incluir script que genera HTML
+include 'acreditarstd.php';
+
+// Obtener HTML y limpiar buffer
+$html = ob_get_clean();
+
 // Instanciamos un objeto de la clase DOMPDF.
-$pdf = new DOMPDF();
- 
-// Definimos el tamaño y orientación del papel que queremos.
-$pdf->set_paper("A4", "portrait");
-//$pdf->set_paper(array(0,0,1100,950));
- 
-// Cargamos el contenido HTML.
-$pdf->load_html(utf8_decode($html));
- 
-// Renderizamos el documento PDF.
+$pdf = new Dompdf(array('enable_remote' => true)); 
+
+
+// Define el tamaño y orientación del papel.
+$pdf->set_paper("letter", "portrait");
+$pdf->set_paper(array(0, 0, 595.28, 841.89));
+
+// Carga el contenido HTML.
+$pdf->load_html($html, 'UTF-8');
+
+// Renderiza el documento PDF.
 $pdf->render();
- 
+
 // Enviamos el fichero PDF al navegador.
-$pdf->stream('hichibi.pdf');
-//$dompdf->stream("dompdf_out.pdf", array("Attachment" => false)); 
+$pdf->stream('Constancia.pdf');
 
-exit(0); 
-
-function file_get_contents_curl($url) {
-	$crl = curl_init();
-	$timeout = 5;
-	curl_setopt($crl, CURLOPT_URL, $url);
-	curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($crl, CURLOPT_CONNECTTIMEOUT, $timeout);
-	$ret = curl_exec($crl);
-	curl_close($crl);
-	return $ret;
-}
-
+// Eliminar variable de sesión
+unset($_SESSION['pdf']);

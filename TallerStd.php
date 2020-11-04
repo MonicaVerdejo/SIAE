@@ -395,8 +395,8 @@
                                              <form class="col-12" action="admin/acreditarstd.php" method="post" target="blank">
                                                  <br>
                                                  <div class="form-group sr-only">
-                                                     <label for="mtro">Mtro asignado</label>
-                                                     <input id="mtro" class="form-control" type="text" name="mtro" value="<?php echo $mtroA; ?>">
+                                                     <label for="mtroA">Mtro asignado</label>
+                                                     <input id="mtroA" class="form-control" type="text" name="mtroA" value="<?php echo $mtroA; ?>">
                                                  </div>
                                                  <?php
                                     $buscarAlumno = $db->connect()->prepare("SELECT matricula, nombre FROM alumnos WHERE taller_id=$Tallerstd and estatus='Cursando'");
@@ -431,7 +431,7 @@
 
                                                  <div class="form-group">
                                                      <label for="nivelDesempeño">Nivel de desempeño adquirido:</label>
-                                                     <input id="nivelDesempeño" class="form-control" type="text" name="nivelDesempeño" placeholder="Excelente" required>
+                                                     <input id="nivelDesempeño" class="form-control" type="text" name="nivelD" placeholder="Excelente" required>
                                                  </div>
                                                  <div class="form-group">
                                                      <label for="valorN">Valor numérico adquirido:</label>
