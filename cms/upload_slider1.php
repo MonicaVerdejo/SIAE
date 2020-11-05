@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES)) {
             //$file['error'] = $too_large;
             //return $file;
             echo '<script type="text/javascript">
-            alert("La imagen que seleccionaste es demasiado grande, para preservar la estética de la páagina forzosamente requerimos una imagen de 500x500 pixeles");
+            alert("La imagen que seleccionaste es demasiado grande, para preservar la estética de la página forzosamente requerimos una imagen de 500x500 pixeles");
             window.location.href="../admin_cms.php"; </script>';
         } else {
             $check = @getimagesize($_FILES['file']['tmp_name']);

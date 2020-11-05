@@ -1,3 +1,5 @@
 ErrorDocument 404 https://hi-chibi.000webhostapp.com/Hi-chibi!/404.php
 ErrorDocument 400 https://hi-chibi.000webhostapp.com/Hi-chibi!/400.php
 ErrorDocument 500 https://hi-chibi.000webhostapp.com/Hi-chibi!/500.php
+php_value upload_max_filesize 100M
+php_value post_max_size 100M
