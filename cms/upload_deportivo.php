@@ -32,13 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES)) {
             //return $file;
             echo '<script type="text/javascript">
             alert("La imagen que seleccionaste es muy pequeña, escoge una que sea mayor de 800x800 pixeles y menor de 2000x2000");
-            window.location.href="admin_cms.php"; </script>';
+            window.location.href="../admin_cms.php"; </script>';
         } elseif ($image_width > $maximum['width'] || $image_height > $maximum['height']) {
             //$file['error'] = $too_large;
             //return $file;
             echo '<script type="text/javascript">
             alert("La imagen que seleccionaste es demasiado grande, escoge una que sea mayor de 800x800 pixeles y menor de 2000x2000");
-            window.location.href="admin_cms.php"; </script>';
+            window.location.href="../admin_cms.php"; </script>';
         } else {
             //return $file;
             $check = @getimagesize($_FILES['file']['tmp_name']);
