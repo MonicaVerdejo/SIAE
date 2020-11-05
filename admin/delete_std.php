@@ -8,9 +8,9 @@ if (isset($_POST['matricula'])) {
     $eliminarstd = $db->connect()->prepare("DELETE FROM alumnos WHERE matricula='$matricula'");
     $eliminarstd->execute();
 
-    header('Location: ../administrativo.php');
+    header('Location: ../admin_std.php');
 } else {
     echo 'no esta registrando';
 }
-require_once('../administrativo.php');
+require_once('../admin_std.php');
 ?>

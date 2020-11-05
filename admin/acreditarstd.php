@@ -40,7 +40,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         
     ];
     // Enlace de descarga solo si se procesa formulario
-    $descarga = '<a class="btn btn-primary" href="creditoPdf.php"><i class="fa fa-download"></i> Descargar archivo PDF</a>';
+    $descarga = '<a class="btn btn-primary" href="creditoPdf.php"> <img style="margin-top:2%;" src="http://localhost/SIAE2/img/logos/descargar.png" height="150" width="150"> Descargar archivo PDF</a>';
+    
+    //$asigna = '<a class="btn btn-primary" href="creditoPdf.php"> <img style="margin-top:2%;" src="http://localhost/SIAE2/img/logos/descargar.png" height="150" width="150"> Descargar archivo PDF</a>';
 } elseif(isset($_SESSION['pdf'])) {
     // Se va a crear el PDF
     $matricula = $_SESSION['pdf']['matricula'];
@@ -71,7 +73,7 @@ echo <<<HTML
     <link rel="shortcut icon" href="../img/logos/tecnm_champoton.svg" type="image/x-icon">
 </head>
 <body>
-    <table style="margin:auto; background-color:white; " cellpadding="0" cellspacing="0">
+    <table width="60%"; style="margin:auto; background-color:white;" cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th style="width: 300px;">
@@ -126,7 +128,11 @@ echo <<<HTML
         </tfoot>
     </table>
     <div>
+        
+        <div style="margin-top:15px;margin-left:5%;">
         $descarga
+        </div>
+        
     </div>
 </body>
 </html>

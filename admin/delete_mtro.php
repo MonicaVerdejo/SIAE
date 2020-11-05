@@ -13,9 +13,9 @@ if (isset($_POST['mtro'])) {
     $eliminar->execute();
 
     
-    header('Location: ../administrativo.php');
+    header('Location: ../admin_mtro.php');
 } else {
     echo 'no esta registrando';
 }
-require_once('../administrativo.php');
+require_once('../admin_mtro.php');
 ?>

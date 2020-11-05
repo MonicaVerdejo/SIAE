@@ -5,13 +5,11 @@ $db = new DB();
 $idAdmin = $_SESSION['id_admin'];
 
 if (!empty($_POST['oldPass']) && !empty($_POST['newPass'])) {
-
     $consulta = $db->connect()->prepare("SELECT `password` FROM `administrador` WHERE id=$idAdmin");
     $consulta->execute();
     foreach ($consulta as $password) {
         $oldpassword = $password[0];
     }
-
     $password = $_POST['oldPass'];
 
     if (password_verify($password, $oldpassword)) {

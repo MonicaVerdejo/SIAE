@@ -26,9 +26,9 @@ if (isset($_POST['taller'])) {
     `mtro_asignado`='$id_mtro' WHERE `talleres`.`id` = '$taller';");
     $editTblTaller->execute();
 
-    header('Location: ../administrativo.php');
+    header('Location: ../admin_mtro.php');
 } else {
     echo 'no esta registrando';
 }
-require_once('../administrativo.php');
+require_once('../admin_mtro.php');
 ?>

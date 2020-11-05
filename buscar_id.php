@@ -191,6 +191,78 @@ if ($sentencia2->rowCount() > 0) {
 
 
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////TABLA ALUMNOS ACREDITADOS////////////////////////////////////////////////// 
+
+
+$tablestdAcreditados = "";
+
+
+
+$sentencia3 = $db->connect()->prepare("SELECT nombre, matricula, carrera, evaluacion from alumnos where taller_id=$Tallerstd");
+
+$sentencia3->execute();
+
+
+
+
+if ($sentencia3->rowCount() > 0) {
+  
+
+  $tablestdAcreditados  .= "
+      
+      <thead>
+      <tr>
+      <th>Alumno</th>
+      <th>Matricula</th>
+      <th>Carrera</th>
+      <th>Constancia Asignada</th>
+     
+  </tr>
+      </thead>
+      <tbody>";
+
+
+  while ($row = $sentencia3->fetch(PDO::FETCH_ASSOC)) {
+    if ($row['evaluacion']=="") {
+      $tablestdAcreditados  .= "<tr class="."sr-only".">";
+    } else {
+      $tablestdAcreditados  .= "
+          <tr>
+     
+          <td>" . $row['nombre'] . "</td>
+          <td>" . $row['matricula'] . "</td>
+          <td>" . $row['evaluacion'] . "</td>
+          <td>"." <a download=" . $row['matricula'] . " href="."pdf/". $row['evaluacion'].">
+          <img src="."img/descargar.png"." width="."60"." height="."60"." alt="."Descargar Constancia de crédito"."></a> "."</td>
+          
+          
+      </tr>
+          ";
+    }
+    
+
+
+
+    
+  }
+  $tablestdAcreditados  .= "</tbody> 
+      <tfoot>
+      <tr>
+      <th>Alumno</th>
+      <th>Matricula</th>
+      <th>Carrera</th>
+      <th>Constancia Asignada</th>
+  </tr>
+      </tfoot>
+      <tbody>";
+} else {
+  $tablestdAcreditados  .= "No existen coincidencias";
+}
+
+
+
 require_once 'Tallerstd.php';
 
 ?>

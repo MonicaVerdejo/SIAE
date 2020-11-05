@@ -15,9 +15,9 @@ if (!empty($_POST['taller']) && !empty($_POST['matricula'])) {
     `semestre` = '$semestre' WHERE `alumnos`.`matricula` = '$matricula'; ");
     $editstd->execute();
 
-    header('Location: ../administrativo.php');
+    header('Location: ../admin_std.php');
 } else {
     echo 'no esta registrando';
 }
-require_once('../administrativo.php');
+require_once('../admin_std.php');
 ?>

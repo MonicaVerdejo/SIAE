@@ -18,7 +18,7 @@ if (!empty($_POST['taller'])) {
     if ($matriculasregistradas->rowCount() > 0) {
         echo '<script type="text/javascript">
          alert("La matricula que has proporcionado ya se encuentra registrada con otro estudiante, intenta nuevamente por favor, verifica correctamente las credenciales de tu estudiante.");
-         window.location.href="../administrativo.php";
+         window.location.href="../admin_std.php";
          </script>';
     } else {
         $password = password_hash($_POST['year'], PASSWORD_BCRYPT);
@@ -27,10 +27,10 @@ if (!empty($_POST['taller'])) {
     VALUES ('$nombre', '$matricula', '$password', '$taller', '$representativo', '$carrera', 'Cursando', '$semestre', '', '$sexo', '2');");
     $newstd->execute();
 
-    header('Location: ../administrativo.php');
+    header('Location: ../admin_std.php');
     }
 } else {
     echo 'no esta registrando';
 }
-require_once('../administrativo.php');
+require_once('../admin_std.php');
 ?>

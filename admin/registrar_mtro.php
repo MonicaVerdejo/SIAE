@@ -25,7 +25,7 @@ if (isset($_POST['taller'])) {
         if (($stmtCorreosRegistrados->rowCount() > 0) || ($stmtCurpRegistrados->rowCount() > 0)) {
             echo '<script type="text/javascript">
              alert("El correo o CURP que has proporcionado ya se encuentra registrado con otra cuenta, por favor intenta con otro");
-             window.location.href="../administrativo.php";
+             window.location.href="../admin_mtro.php";
              </script>';
         } else {
              //Si algun otro mtro tiene ese id entonces lo borramos
@@ -52,15 +52,15 @@ if (isset($_POST['taller'])) {
                 $statement = $db->connect()->prepare($sql);
                 $statement->execute();
             }
-            header('Location: ../administrativo.php');
+            header('Location: ../admin_mtro.php');
         }
     } else {
         echo '<script type="text/javascript">
         alert("El correo no es de una credencial válida, intenta con @outlook.com, @gmail.com, @hotmail.com o @yahoo.es");
-        window.location.href="../administrativo.php";
+        window.location.href="../admin_mtro.php";
         </script>';
     }
 } else {
     echo 'Error';
 }
-require_once('../administrativo.php');
+require_once('../admin_mtro.php');

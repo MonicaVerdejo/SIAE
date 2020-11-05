@@ -213,64 +213,295 @@ if (!isset($_SESSION['rol'])) {
                         <div class="col-sm-9 mt-2 text-center">
                             <h1>Sistema Integral para Actividades Extraescolares</h1>
                         </div>
-                    </div>
-                    <section id="Bienvenido">
-                        <div class="section section-lg">
-                            <hr>
-                            <h3 class="text-center">
-                                <?php
-                                if ($_SESSION['sexo'] == 'F') {
-                                ?> Bienvenida <?php echo ($_SESSION['nombre']);
-                                            } else {
-                                                ?> Bienvenido <?php echo ($_SESSION['nombre']);
-                                                            }
 
-                                                                ?>
-                            </h3>
-                        </div>
-                        <div class="col-12 card " style="background-color: slategray;margin-top:50px;">
-                            <div class="card-header mt-2">
-                                <span class="">
-                                    Te presentamos a SIAE el "Sistema Integral para Actividades Extraescolares" dónde podrás organizar, manejar, y llevar un control de los
-                                    talleres que se imparten en el Instituto Tecnológico Superior de Champotón. Brindándote la eficacia, eficiencia y agilidad de un sistema web que te apoyará
-                                    en el transcurso del año para administrar tu trabajo de forma más actualizada.
-                                </span>
-                            </div>
-                        </div>
-                    </section>
+                    </div>
+                    <hr>
                 </div>
 
-                <!-------------------------------------------------------------SECCIÓN INICIO------------------------------------------------->
 
-                <section class="section bg-default text-md-center container" id="sectionIndex">
-                    <div class="col-md-5 col-sm-4">
-                        <div class="card">
-                            <div class="card-header" style="margin:auto">
-                                <h3>Talleres</h3>
-                            </div>
+                <!-------------------------------------------------------------SECCIÓN DE TALLERES------------------------------------------------->
+                <section class="section bg-default text-md-center">
+                    <div id="options_T">
+                        <div>
+                            <h3>TALLERES</h3>
+                            <img src="img/talleres.png" width="250" height="200" alt="cms_Talleres">
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <?php
-                        $busquedaT = $db->connect()->prepare("SELECT * FROM talleres where id not in (1);");
-                        $busquedaT->execute();
-                        foreach ($busquedaT as $fila) {
-                        ?>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="card articulo" style="width: 15rem;  display: inline-block; vertical-align: top; text-align: center;margin-left: 5%; margin-bottom:3%;">
-                                    <input name="Tallerstd" type="hidden" id="id" value="<?php echo $fila[0];  ?>">
-                                    <img src="img/<?php echo $fila[5]; ?>/taller/<?php echo $fila[7]; ?>" style="height: 200px; width:auto;" class="card-img-top mt-1" alt="Taller">
-                                    <div class="card-body">
-                                        <div class="card-footer text-center">
-                                            <small class="text-muted" style="text-transform: uppercase;"><?php echo $fila[1]; ?></small>
+                        <!--Options-Talleres-->
+                        <div class="row row-lg row-30 mt-5">
+                            <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".2s" id="registrarTaller">
+                                <article class=""><img src="img/logos/newT.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Registrar</a></h4>
                                         </div>
                                     </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".2s" id="editTaller">
+                                <article class=""><img src="img/logos/editT.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Editar</a></h4>
+
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".1s" id="deleteTaller">
+                                <article class=""><img src="img/logos/deleteT.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Eliminar</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".1s" id="mostrarTaller">
+                                <article class=""><img src="img/logos/show-listado.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Mostrar talleres</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+
+                        <!--Form-registrar-Taller-->
+                        <section class="section-form bg-default mt-4" id="form-Courseregister" style="display: none;">
+                            <div id="base">
+                                <div id="titulo">Agregar Taller</div>
+                                <div id="form">
+                                    <form method="POST" action="admin/registrar_Taller.php" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="nombre">Nombre del Taller</label>
+                                            <input placeholder="Volleyball" id="nombre" class="form-control" type="text" name="nombre" required="true">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nombreR">Nombre grupo representativo</label>
+                                            <input placeholder="Los halcones del Itescham" id="nombreR" class="form-control" type="text" name="nombreR" required="true">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descripcion">Descripción</label>
+                                            <textarea placeholder="En este taller aprenderás todo lo necesario para ser una estrella en el volleyball." id="descripcion" class="form-control" name="descripcion" rows="5" required="true"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="categoria">Categoria</label>
+                                            <select id="categoria" class="form-control" name="categoria" required="true">
+                                                <option>Civico</option>
+                                                <option>Cultural</option>
+                                                <option selected>Deportivo</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="direccion">Dirección</label>
+                                            <textarea placeholder="Unidad deportiva 'Ulises Sansores'" id="direccion" class="form-control" name="direccion" rows="2" required="true"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="file">Imagen representativa</label>
+                                            <input type="file" lass="form-control" name="file" id="file" required="true">
+                                        </div>
+                                        <button type="submit" class="btn btn-secondary">Enviar</button>
+                                    </form>
                                 </div>
                             </div>
-                        <?php } ?>
+                        </section>
+
+                        <!--Form-edit-Taller-->
+                        <section class="mt-4 section-form bg-default" style="display:none" id="form-Courseedit">
+                            <div id="base">
+                                <div id="triangle"></div>
+                                <div id="titulo">Editar Taller</div>
+                                <div id="form">
+                                    <form method="POST" action="admin/edit_taller.php" enctype="multipart/form-data">
+                                        <?php
+                                        $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
+                                        $taller->execute();
+                                        ?>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="nombre">Taller</label>
+                                            </div>
+                                            <select class="custom-select" name="nombre" id="nombre" required="true">
+                                                <?php foreach ($taller as $row) {
+                                                ?>
+                                                    <option <?php
+                                                            if ($row[0] == 1) {
+                                                                # code...
+                                                            ?> style="display: none;" <?php
+                                                                                    } else {
+                                                                                        # code...
+                                                                                        ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                        }
+
+                                                                                                                            ?>><?php echo $row[1]; ?></option>
+
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nombreR">Nombre grupo representativo</label>
+                                            <input placeholder="Los halcones del Itescham" id="nombreR" class="form-control" type="text" name="nombreR" required="true">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descripcion">Descripción</label>
+                                            <textarea placeholder="En este taller aprenderás todo lo necesario para ser una estrella en el volleyball." id="descripcion" class="form-control" name="descripcion" rows="5" required="true"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="categoria">Categoria</label>
+                                            <select id="categoria" class="form-control" name="categoria" required="true">
+                                                <option>Civico</option>
+                                                <option>Cultural</option>
+                                                <option selected>Deportivo</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="direccion">Dirección</label>
+                                            <textarea placeholder="Unidad deportiva 'Ulises Sansores'" id="direccion" class="form-control" name="direccion" rows="2" required="true"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="file">Imagen representativa</label>
+                                            <input type="file" lass="form-control" name="file" id="file" required="true">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-secondary">Enviar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!--Form-eliminar-Taller-->
+                        <section class="mt-4 section-form bg-default" style="display:none" id="form-Coursedelete">
+                            <div id="base">
+                                <div id="triangle"></div>
+                                <div id="titulo">Eliminar taller</div>
+
+                                <img src="img/logos/recycle-bin.png" width="100px" alt="Borrar">
+                                <div class="mt-4" id="form">
+
+                                    <form method="POST" action="admin/delete_taller.php">
+                                        <?php
+                                        $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
+                                        $taller->execute();
+                                        ?>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="taller">Taller</label>
+                                            </div>
+                                            <select class="custom-select" name="taller" id="taller" required="true">
+                                                <?php foreach ($taller as $row) {
+                                                ?>
+                                                    <option <?php
+                                                            if ($row[0] == 1) {
+                                                                # code...
+                                                            ?> style="display: none;" <?php
+                                                                                    } else {
+                                                                                        # code...
+                                                                                        ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                        }
+
+                                                                                                                            ?>><?php echo $row[1]; ?></option>
+
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <input class="btn btn-info" type="submit" value="Enviar" title="Advertencia" data-trigger="hover" data-content="Recuerda que una vez eliminado no podrás recuperarlo" data-toggle="popover">
+
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+
+
+                        <!--Tabla de talleres dados de alta-->
+                        <div class="container mt-5" style="display:none;" id="table-talleres">
+                            <section>
+                                <div class="container-fluid">
+                                    <div class="col-12 card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="fa fa-address-book" aria-hidden="true"></i>
+                                                Talleres dados de alta en el sistema </h3>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-lg-12 col-xs-12">
+                                            <div>
+                                                <!-- /.card-header -->
+                                                <div class="card-body">
+                                                    <table class="table table-bordered table-hover table-responsive" style="width:70%;margin-left:15%;">
+                                                        <thead style="background-color:steelblue;">
+                                                            <th>Taller</th>
+                                                            <th>Nombre del representativo</th>
+                                                            <th>Maestro Asignado</th>
+                                                            <th>Categoria</th>
+                                                            <th>Dirección</th>
+                                                        </thead>
+                                                        <tbody style="background-color:  #f7f5f3;">
+                                                            <?php
+                                                            $busqueda = $db->connect()->prepare('SELECT taller, talleres.nombre, maestro.nombre, categoria,direccion FROM `talleres` join maestro on talleres.mtro_asignado=maestro.id');
+                                                            $busqueda->execute();
+                                                            foreach ($busqueda as $fila) {
+                                                                $sinasignar = "No asignado";
+                                                                $NoAsignado = $fila[0];
+                                                                if (strcmp($sinasignar, $NoAsignado) === 0) {
+                                                            ?>
+                                                                    <tr class="sr-only">
+                                                                        <td><?php echo $fila[0]; ?></td>
+                                                                        <td><?php echo $fila[1]; ?></td>
+                                                                        <td><?php echo $fila[2]; ?></td>
+                                                                        <td><?php echo $fila[3]; ?></td>
+                                                                        <td><?php echo $fila[4]; ?></td>
+                                                                    </tr>
+
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <tr>
+                                                                        <td><?php echo $fila[0]; ?></td>
+                                                                        <td><?php echo $fila[1]; ?></td>
+                                                                        <td><?php echo $fila[2]; ?></td>
+                                                                        <td><?php echo $fila[3]; ?></td>
+                                                                        <td><?php echo $fila[4]; ?></td>
+
+                                                                    </tr>
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </div>
+                                <!-- /.container-fluid -->
+                            </section>
+                        </div>
+
+
+
+                        <footer class="container-fluid mt-4">
+                            <div class="col-12 card " style="background-color: slategray;">
+                                <div class="card-header">
+                                    <span class="">
+                                        Recuerda que ésta sección esta enlazada con el inicio de la página oficial, por lo que todos los talleres que registres serán visibles para todos los usuarios.
+                                    </span>
+                                </div>
+                            </div>
+                        </footer>
+
                     </div>
+
                 </section>
+
+
 
                 <!-------------------------------------------------------------SECCIÓN DE MENSAJES-------------------------------------------->
                 <!--Mensajes Enviados-->
@@ -328,7 +559,7 @@ if (!isset($_SESSION['rol'])) {
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                Envía un nuevo mensaje a tus maestros </h3>
+                                Envía un nuevo mensaje a tus alumnos </h3>
                         </div>
                     </div>
                     <div class="mensajesN container">
@@ -354,6 +585,8 @@ if (!isset($_SESSION['rol'])) {
                         </form>
                     </div>
                 </section>
+
+
 
 
                 <!-------------------------------------------------------------CHANGE PASSWORD SECTION------------------------------------------------->
@@ -525,7 +758,10 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                         </section>
 
+
+
                         <!--Administrativos-->
+
                         <div id="lista-mostrarAdmin" style="display: none;">
                             <div class="row">
                                 <div class="col-6">
@@ -539,9 +775,12 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                 </div>
                             </div>
+
                             <?php
                             $busqueda = $db->connect()->prepare("SELECT nombre,correo,curp FROM `administrador` where 1");
                             $busqueda->execute();
+
+
                             ?>
                             <div class="container">
                                 <section id="tabla_resultado" class="content">
@@ -549,6 +788,7 @@ if (!isset($_SESSION['rol'])) {
                                         <div class="row">
                                             <div class="col-12 mt-3">
                                                 <div class="card">
+
                                                     <!-- /.card-header -->
                                                     <div class="card-body">
                                                         <table class="mt-3 text-center table  table-hover table-responsive" style=" width: 70%; background-color: white;">
@@ -556,6 +796,7 @@ if (!isset($_SESSION['rol'])) {
                                                                 <th>Nombre</th>
                                                                 <th>Correo</th>
                                                                 <th>CURP</th>
+
                                                             </thead>
                                                             <tbody>
                                                                 <?php foreach ($busqueda as $fila) { ?>
@@ -563,8 +804,10 @@ if (!isset($_SESSION['rol'])) {
                                                                         <td><?php echo $fila[0]; ?></td>
                                                                         <td><?php echo $fila[1]; ?></td>
                                                                         <td><?php echo $fila[2]; ?></td>
+
                                                                     </tr>
                                                                 <?php }
+
                                                                 ?>
                                                             </tbody>
                                                         </table>
@@ -580,7 +823,9 @@ if (!isset($_SESSION['rol'])) {
                                     <!-- /.container-fluid -->
                                 </section>
                             </div>
+
                         </div>
+
                         <footer class="container-fluid mt-4">
                             <div class="col-12 card " style="background-color: slategray;">
                                 <div class="card-header">
@@ -598,7 +843,6 @@ if (!isset($_SESSION['rol'])) {
 
 
             </main>
-            <!--Fin del div universal-->
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -613,121 +857,56 @@ if (!isset($_SESSION['rol'])) {
                 $("#perfil").show();
                 return false;
             });
+
             //seccion de mensajes
             $("#mensajesEnviados").on('click', function() {
-                $("#cms").hide();
                 $("#mensajesE").show();
                 $("#mensajesN").hide();
-                $("#teach-options").hide();
-                $("#student-options").hide();
                 $("#options_T").hide();
-                $("#table-mtro").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
-                $("#cms").hide();
                 $("#mensajesN").show();
                 $("#mensajesE").hide();
-                $("#teach-options").hide();
-                $("#student-options").hide();
                 $("#options_T").hide();
-                $("#table-mtro").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
                 return false;
             });
             //ADMINISTRATIVE OPTIONS
             $("#page_editAdmin").on('click', function() {
-                $("#cms").hide();
                 $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
                 $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
                 $("#form-Courseedit").hide();
                 $("#form-Coursedelete").hide();
                 $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").show();
                 return false;
             });
             $("#registrarAdmin").on('click', function() {
-                $("#cms").hide();
                 $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
                 $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
                 $("#form-Courseedit").hide();
                 $("#form-Coursedelete").hide();
                 $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-eliminarHr").hide();
-                $("#form-editarHr").hide();
                 $("#form-registrarAdmin").show();
-                $("#form-registrarHr").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#options_Admin").show();
-                $("#horario").hide();
                 return false;
             });
             $("#eliminarAdmin").on('click', function() {
-                $("#cms").hide();
                 $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
                 $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
                 $("#form-Courseedit").hide();
                 $("#form-Coursedelete").hide();
                 $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#horario").hide();
-                $("#form-eliminarHr").hide();
                 $("#form-registrarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#form-eliminarAdmin").show();
@@ -735,35 +914,57 @@ if (!isset($_SESSION['rol'])) {
                 return false;
             });
             $("#mostrarAdmin").on('click', function() {
-                $("#cms").hide();
                 $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
                 $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
                 $("#form-Courseedit").hide();
                 $("#form-Coursedelete").hide();
                 $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#form-eliminarHr").hide();
-                $("#horario").hide();
                 $("#form-registrarAdmin").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").show();
                 $("#options_Admin").show();
                 return false;
             });
+
+            //SECCION TALLERES
+            $("#registrarTaller").on('click', function() {
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#table-talleres").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").show();
+                return false;
+            });
+            $("#editTaller").on('click', function() {
+                $("#table-talleres").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Courseregister").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseedit").show();
+                return false;
+            });
+            $("#deleteTaller").on('click', function() {
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#form-Courseregister").hide();
+                $("#form-Courseedit").hide();
+                $("#table-talleres").hide();
+                $("#form-Coursedelete").show();
+                return false;
+            });
+            $("#mostrarTaller").on('click', function() {
+                $("#mensajesN").hide();
+                $("#form-Courseedit").hide();
+                $("#form-Coursedelete").hide();
+                $("#form-Courseregister").hide();
+                $("#table-talleres").show();
+                return false;
+            });
+
         });
     </script>
     <script>
@@ -771,5 +972,7 @@ if (!isset($_SESSION['rol'])) {
             $('[data-toggle="popover"]').popover();
         });
     </script>
+
 </body>
+
 </html>

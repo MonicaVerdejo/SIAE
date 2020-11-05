@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES)) {
     if (!((strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png")))) {
         echo '<script type="text/javascript">
          alert("No seas pendejo, es una imagen lo que debes seleccionar");
-         window.location.href="../administrativo.php"; </script>';
+         window.location.href="../admin_cms.php"; </script>';
     } else {
         $nombre = 'inicio.jpg';
         $check = @getimagesize($_FILES['file']['tmp_name']);
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES)) {
         $statement = $db->connect()->prepare($sql);
         $statement->execute(array(':img_index' => $_FILES['file']['name']));
         //$_SESSION['imagen_profile']=$VARIABLE_HOST;
-        echo "<script>location.href='../administrativo.php';</script>";
+        echo "<script>location.href='../admin_cms.php';</script>";
     }
 }
 ob_end_flush();

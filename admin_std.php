@@ -214,62 +214,228 @@ if (!isset($_SESSION['rol'])) {
                             <h1>Sistema Integral para Actividades Extraescolares</h1>
                         </div>
                     </div>
-                    <section id="Bienvenido">
-                        <div class="section section-lg">
-                            <hr>
-                            <h3 class="text-center">
-                                <?php
-                                if ($_SESSION['sexo'] == 'F') {
-                                ?> Bienvenida <?php echo ($_SESSION['nombre']);
-                                            } else {
-                                                ?> Bienvenido <?php echo ($_SESSION['nombre']);
-                                                            }
+                    <hr>
+                </div>
+                <!-------------------------------------------------------------SECCIÓN DE ALUMNOS--------------------------------------------->
+                <section class="section  section-xl bg-default text-md-center">
+                    <!--Page alumnos-->
+                    <div class="container" id="student-options">
+                        <h4>ALUMNOS</h4>
+                        <div class="row row-lg row-30">
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".2s" id="registrarA">
+                                <article class=""><img src="img/logos/new-user.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Registrar</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".2s" id="editA">
+                                <article class=""><img src="img/logos/edit-user.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Editar</a></h4>
 
-                                                                ?>
-                            </h3>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".1s" id="deleteA">
+                                <article class=""><img src="img/logos/delete-user.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Eliminar</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
                         </div>
-                        <div class="col-12 card " style="background-color: slategray;margin-top:50px;">
-                            <div class="card-header mt-2">
-                                <span class="">
-                                    Te presentamos a SIAE el "Sistema Integral para Actividades Extraescolares" dónde podrás organizar, manejar, y llevar un control de los
-                                    talleres que se imparten en el Instituto Tecnológico Superior de Champotón. Brindándote la eficacia, eficiencia y agilidad de un sistema web que te apoyará
-                                    en el transcurso del año para administrar tu trabajo de forma más actualizada.
-                                </span>
+                    </div>
+
+                    <!--Form-registrar-alumno-->
+                    <section class="section-form bg-default mt-4 mb-4" id="form-Aregister" style="display: none;">
+                        <div id="base">
+                            <div id="titulo">Agregar Alumno</div>
+                            <div id="form">
+                                <form method="POST" action="admin/registrar_std.php">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre completo</label>
+                                        <input id="nombre" class="form-control" type="text" name="nombre" required="true" placeholder="Monica Priscila Delgado Verdejo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="matricula">Matricula</label>
+                                        <input id="matricula" class="form-control" type="text" name="matricula" required="true" placeholder="161080138" required pattern="^\d+$" oninvalid="this.setCustomValidity('La matricula es el número de control del estudiante, sólo se aceptan números')" oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="year">Año de nacimiento</label>
+                                        <input id="year" class="form-control" type="text" name="year" required="true" placeholder="1997" required pattern="[0-9]{4}" oninvalid="this.setCustomValidity('El año de nacimiento en formato AAAA, sólo se aceptan números.')" oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <?php
+                                    $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
+                                    $taller->execute();
+                                    ?>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="taller">Taller</label>
+                                        </div>
+                                        <select class="custom-select" name="taller" id="taller" required="true">
+                                            <?php foreach ($taller as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
+
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
+
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="representativo">Representativo</label>
+                                        <select id="representativo" class="form-control" name="representativo" required="true">
+                                            <option>Sí</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="carrera">Carrera</label>
+                                        <select id="carrera" class="form-control" name="carrera" required="true">
+                                            <option>Ingeniería en Sistemas Computacionales</option>
+                                            <option>Ingeniería Ambiental</option>
+                                            <option>Ingeniería Electromecánica</option>
+                                            <option>Ingeniería en Gestion Empresarial</option>
+                                            <option>Ingeniería en Logística</option>
+                                            <option>Ingeniería en Administración</option>
+                                            <option>Licenciatura en Turismo</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="semestre">Semestre</label>
+                                        <select id="semestre" class="form-control" name="semestre" required="true">
+                                            <option>Primero</option>
+                                            <option>Segundo</option>
+                                            <option>Tercero</option>
+                                            <option>Cuarto</option>
+                                            <option>Quinto</option>
+                                            <option>Sexto</option>
+                                            <option>Séptimo</option>
+                                            <option>Octavo</option>
+                                            <option>Noveno</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sexo">Sexo</label>
+                                        <select id="sexo" class="form-control" name="sexo" required="true">
+                                            <option>M</option>
+                                            <option>F</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </form>
                             </div>
                         </div>
                     </section>
-                </div>
 
-                <!-------------------------------------------------------------SECCIÓN INICIO------------------------------------------------->
+                    <!--Form-edit-alumno-->
+                    <section class="mt-4 mb-4 section-form bg-default" style="display:none" id="form-Aedit">
+                        <div id="base">
+                            <div id="triangle"></div>
+                            <div id="titulo">Editar Alumno</div>
+                            <div id="form">
+                                <form method="POST" action="admin/edit_std.php">
+                                    <div class="form-group">
+                                        <label for="matricula">Matricula</label>
+                                        <input id="matricula" class="form-control" type="text" name="matricula" required="true" placeholder="161080138" required pattern="^\d+$" oninvalid="this.setCustomValidity('La matricula es el número de control del estudiante, sólo se aceptan números')" oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <?php
+                                    $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
+                                    $taller->execute();
+                                    ?>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="taller">Taller</label>
+                                        </div>
+                                        <select class="custom-select" name="taller" id="taller" required="true">
+                                            <?php foreach ($taller as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
 
-                <section class="section bg-default text-md-center container" id="sectionIndex">
-                    <div class="col-md-5 col-sm-4">
-                        <div class="card">
-                            <div class="card-header" style="margin:auto">
-                                <h3>Talleres</h3>
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
+
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="representativo">Representativo</label>
+                                        <select id="representativo" class="form-control" name="representativo" required="true">
+                                            <option>Sí</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Estatus del curso</label>
+                                        <select id="status" class="form-control" name="status" required="true">
+                                            <option>Cursando</option>
+                                            <option>Aprobado</option>
+                                            <option>Reprobado</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="semestre">Semestre</label>
+                                        <select id="semestre" class="form-control" name="semestre" required="true">
+                                            <option>Primero</option>
+                                            <option>Segundo</option>
+                                            <option>Tercero</option>
+                                            <option>Cuarto</option>
+                                            <option>Quinto</option>
+                                            <option>Sexto</option>
+                                            <option>Séptimo</option>
+                                            <option>Octavo</option>
+                                            <option>Noveno</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </form>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="row">
-                        <?php
-                        $busquedaT = $db->connect()->prepare("SELECT * FROM talleres where id not in (1);");
-                        $busquedaT->execute();
-                        foreach ($busquedaT as $fila) {
-                        ?>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="card articulo" style="width: 15rem;  display: inline-block; vertical-align: top; text-align: center;margin-left: 5%; margin-bottom:3%;">
-                                    <input name="Tallerstd" type="hidden" id="id" value="<?php echo $fila[0];  ?>">
-                                    <img src="img/<?php echo $fila[5]; ?>/taller/<?php echo $fila[7]; ?>" style="height: 200px; width:auto;" class="card-img-top mt-1" alt="Taller">
-                                    <div class="card-body">
-                                        <div class="card-footer text-center">
-                                            <small class="text-muted" style="text-transform: uppercase;"><?php echo $fila[1]; ?></small>
-                                        </div>
+                    <!--Form-eliminar-alumno-->
+                    <section class="mt-4 mb-4 section-form bg-default" style="display:none" id="form-Adelete">
+                        <div id="base">
+                            <div id="triangle"></div>
+                            <div id="titulo">Eliminar Alumno</div>
+                            <div id="form">
+                                <img src="img/logos/recycle-bin.png" width="100px" alt="Borrar">
+                                <form class="col-12" action="admin/delete_std.php" method="post">
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="matricula">Ingresa la Matricula</label>
+                                        <input id="matricula" class="form-control" type="text" name="matricula" placeholder="161080138" required pattern="^\d+$" oninvalid="this.setCustomValidity('La matricula es el número de control del estudiante, sólo se aceptan números')" oninput="this.setCustomValidity('')">
                                     </div>
-                                </div>
+                                    <button type="submit" class="btn btn-secondary" title="Advertencia" data-trigger="hover" data-content="Recuerda que una vez eliminado no podrás recuperarlo" data-toggle="popover">Enviar</button>
+                                </form>
                             </div>
-                        <?php } ?>
-                    </div>
+                        </div>
+                    </section>
+                    <!--End-alumnos_section-->
                 </section>
 
                 <!-------------------------------------------------------------SECCIÓN DE MENSAJES-------------------------------------------->
@@ -292,7 +458,6 @@ if (!isset($_SESSION['rol'])) {
                                             <thead style="background-color:steelblue;">
                                                 <th>Fecha de envío</th>
                                                 <th>Mensaje enviado</th>
-
                                             </thead>
                                             <tbody style="background-color:  #f7f5f3;">
                                                 <?php
@@ -303,8 +468,6 @@ if (!isset($_SESSION['rol'])) {
                                                     <tr>
                                                         <td><?php echo $fila[0]; ?></td>
                                                         <td><?php echo $fila[1]; ?></td>
-
-
                                                     </tr>
                                                 <?php
                                                 }
@@ -316,11 +479,9 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                         </div>
                         <!-- /.row -->
-
                     </div>
                     <!-- /.container-fluid -->
                 </section>
-
 
                 <!--Mensajes Nuevos-->
                 <section id="mensajesN" style="display: none;">
@@ -328,7 +489,7 @@ if (!isset($_SESSION['rol'])) {
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                Envía un nuevo mensaje a tus maestros </h3>
+                                Envía un nuevo mensaje a tus alumnos </h3>
                         </div>
                     </div>
                     <div class="mensajesN container">
@@ -342,7 +503,6 @@ if (!isset($_SESSION['rol'])) {
                             <div class="form-group sr-only ">
                                 <input type="text" class="form-control" name="admin_id" id="admin_id" value="<?php echo $id_admin; ?>">
                             </div>
-
                             <div class="form-group">
                                 <label for="mensaje"></label>
                                 <textarea class="form-control" name="mensaje" id="mensaje" rows="3"></textarea>
@@ -350,11 +510,9 @@ if (!isset($_SESSION['rol'])) {
                             <div class="form-group">
                                 <button type="submit" class="btn btn-default" title="Advertencia" data-trigger="hover" data-content="Recuerda que una vez enviado no podrás eliminarlo" data-toggle="popover">Enviar</button>
                             </div>
-
                         </form>
                     </div>
                 </section>
-
 
                 <!-------------------------------------------------------------CHANGE PASSWORD SECTION------------------------------------------------->
                 <div class="modal fade" id="changePModal" tabindex="-1" role="dialog" aria-labelledby="changePModalLabel" aria-hidden="true">
@@ -386,7 +544,6 @@ if (!isset($_SESSION['rol'])) {
                     </div>
                 </div>
 
-
                 <!-------------------------------------------------------------PERMISOS MODAL------------------------------------------------->
                 <div class="modal fade" id="permisosModal" tabindex="-1" role="dialog" aria-labelledby="permisosModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -405,7 +562,6 @@ if (!isset($_SESSION['rol'])) {
                         </div>
                     </div>
                 </div>
-
 
                 <!-------------------------------------------------------------SECCIÓN DE ADMINISTRATIVOS------------------------------------------------->
                 <section class="section bg-default text-md-center">
@@ -426,7 +582,6 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                 </article>
                             </div>
-
                             <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".1s" id="eliminarAdmin">
                                 <article class=""><img src="img/logos/recycle-bin.png" alt="" width="100" height="100" />
                                     <div class="">
@@ -447,7 +602,6 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                         </div>
 
-
                         <!--Form-registrar-Admin-->
                         <section class="mt-4 section-form bg-default" style="display:none" id="form-registrarAdmin">
                             <div id="base">
@@ -455,17 +609,14 @@ if (!isset($_SESSION['rol'])) {
                                 <div id="titulo">Nuevo Administrador</div>
                                 <div id="form">
                                     <form method="POST" action="admin/registrar_admin.php" enctype="multipart/form-data">
-
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
                                             <input type="text" name="nombre" id="" class="form-control" placeholder="Fernando Vela Leon" aria-describedby="helpId" required="True">
                                         </div>
-
                                         <div class="form-group">
                                             <label for="Correo">Correo:</label>
                                             <input type="email" name="correo" id="" class="form-control" placeholder="vela97@outlook.com" aria-describedby="helpId" required="True">
                                         </div>
-
                                         <div class="form-group">
                                             <label for="curp">CURP</label>
                                             <input type="text" name="curp" id="" class="form-control" placeholder="VELF971204HCCLRN73" aria-describedby="helpId" required="True" required pattern="[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]" oninvalid="this.setCustomValidity('Formato de la Clave Única de Registro de Población')" oninput="this.setCustomValidity('')">
@@ -475,8 +626,6 @@ if (!isset($_SESSION['rol'])) {
                                 </div>
                             </div>
                         </section>
-
-
 
                         <!--Form-eliminar-Admin-->
                         <section class="mt-4 section-form bg-default" style="display:none" id="form-eliminarAdmin">
@@ -563,6 +712,7 @@ if (!isset($_SESSION['rol'])) {
                                                                         <td><?php echo $fila[0]; ?></td>
                                                                         <td><?php echo $fila[1]; ?></td>
                                                                         <td><?php echo $fila[2]; ?></td>
+
                                                                     </tr>
                                                                 <?php }
                                                                 ?>
@@ -590,15 +740,9 @@ if (!isset($_SESSION['rol'])) {
                                 </div>
                             </div>
                         </footer>
-
                     </div>
-
                 </section>
-
-
-
             </main>
-            <!--Fin del div universal-->
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -613,121 +757,59 @@ if (!isset($_SESSION['rol'])) {
                 $("#perfil").show();
                 return false;
             });
+
             //seccion de mensajes
             $("#mensajesEnviados").on('click', function() {
-                $("#cms").hide();
                 $("#mensajesE").show();
                 $("#mensajesN").hide();
-                $("#teach-options").hide();
                 $("#student-options").hide();
-                $("#options_T").hide();
-                $("#table-mtro").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
                 $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
-                $("#cms").hide();
                 $("#mensajesN").show();
                 $("#mensajesE").hide();
-                $("#teach-options").hide();
                 $("#student-options").hide();
-                $("#options_T").hide();
-                $("#table-mtro").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
                 $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
                 return false;
             });
             //ADMINISTRATIVE OPTIONS
             $("#page_editAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
                 $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
                 $("#form-Adelete").hide();
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").show();
                 return false;
             });
             $("#registrarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
                 $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
                 $("#form-Adelete").hide();
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-eliminarHr").hide();
-                $("#form-editarHr").hide();
                 $("#form-registrarAdmin").show();
-                $("#form-registrarHr").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#options_Admin").show();
-                $("#horario").hide();
                 return false;
             });
             $("#eliminarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
                 $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
                 $("#form-Adelete").hide();
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#horario").hide();
-                $("#form-eliminarHr").hide();
                 $("#form-registrarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#form-eliminarAdmin").show();
@@ -735,33 +817,42 @@ if (!isset($_SESSION['rol'])) {
                 return false;
             });
             $("#mostrarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
                 $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
                 $("#form-Adelete").hide();
                 $("#form-Aedit").hide();
                 $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#form-eliminarHr").hide();
-                $("#horario").hide();
                 $("#form-registrarAdmin").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").show();
                 $("#options_Admin").show();
+                return false;
+            });
+
+            //seccion de alumno
+            $("#registrarA").on('click', function() {
+                $("#form-Aregister").show();
+                $("#form-Aedit").hide();
+                $("#form-Adelete").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                return false;
+            });
+            $("#editA").on('click', function() {
+                $("#form-Aedit").show();
+                $("#form-Aregister").hide();
+                $("#form-Adelete").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                return false;
+            });
+            $("#deleteA").on('click', function() {
+                $("#form-Adelete").show();
+                $("#form-Aedit").hide();
+                $("#form-Aregister").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
                 return false;
             });
         });
@@ -771,5 +862,7 @@ if (!isset($_SESSION['rol'])) {
             $('[data-toggle="popover"]').popover();
         });
     </script>
+
 </body>
+
 </html>

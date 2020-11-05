@@ -12,9 +12,9 @@ if (isset($_POST['taller'])) {
     $eliminar = $db->connect()->prepare("DELETE FROM talleres WHERE id='$id_taller'");
     $eliminar->execute();
 
-    header('Location: ../administrativo.php');
+    header('Location: ../admin_taller.php');
 } else {
     echo 'no esta registrando';
 }
-require_once('../administrativo.php');
+require_once('../admin_taller.php');
 ?>

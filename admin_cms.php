@@ -206,71 +206,255 @@ if (!isset($_SESSION['rol'])) {
 
             <main class="page-content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img src="img/logos/tecnm.svg" alt="">
-                        </div>
-                        <div class="col-sm-9 mt-2 text-center">
-                            <h1>Sistema Integral para Actividades Extraescolares</h1>
-                        </div>
-                    </div>
-                    <section id="Bienvenido">
-                        <div class="section section-lg">
-                            <hr>
-                            <h3 class="text-center">
-                                <?php
-                                if ($_SESSION['sexo'] == 'F') {
-                                ?> Bienvenida <?php echo ($_SESSION['nombre']);
-                                            } else {
-                                                ?> Bienvenido <?php echo ($_SESSION['nombre']);
-                                                            }
-
-                                                                ?>
-                            </h3>
-                        </div>
-                        <div class="col-12 card " style="background-color: slategray;margin-top:50px;">
-                            <div class="card-header mt-2">
-                                <span class="">
-                                    Te presentamos a SIAE el "Sistema Integral para Actividades Extraescolares" dónde podrás organizar, manejar, y llevar un control de los
-                                    talleres que se imparten en el Instituto Tecnológico Superior de Champotón. Brindándote la eficacia, eficiencia y agilidad de un sistema web que te apoyará
-                                    en el transcurso del año para administrar tu trabajo de forma más actualizada.
-                                </span>
-                            </div>
-                        </div>
-                    </section>
+                    <h2>SIAE</h2>
                 </div>
 
-                <!-------------------------------------------------------------SECCIÓN INICIO------------------------------------------------->
+                <!-------------------------------------------------------------SECCIÓN DE CMS------------------------------------------------->
 
-                <section class="section bg-default text-md-center container" id="sectionIndex">
-                    <div class="col-md-5 col-sm-4">
-                        <div class="card">
-                            <div class="card-header" style="margin:auto">
-                                <h3>Talleres</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <?php
-                        $busquedaT = $db->connect()->prepare("SELECT * FROM talleres where id not in (1);");
-                        $busquedaT->execute();
-                        foreach ($busquedaT as $fila) {
-                        ?>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="card articulo" style="width: 15rem;  display: inline-block; vertical-align: top; text-align: center;margin-left: 5%; margin-bottom:3%;">
-                                    <input name="Tallerstd" type="hidden" id="id" value="<?php echo $fila[0];  ?>">
-                                    <img src="img/<?php echo $fila[5]; ?>/taller/<?php echo $fila[7]; ?>" style="height: 200px; width:auto;" class="card-img-top mt-1" alt="Taller">
-                                    <div class="card-body">
-                                        <div class="card-footer text-center">
-                                            <small class="text-muted" style="text-transform: uppercase;"><?php echo $fila[1]; ?></small>
-                                        </div>
+                <section class="section bg-default text-md-center" id="cms">
+                    <div class="container">
+                        <h4 style="color:black">TABLERO DE EDICIÓN</h4>
+                        <div class="base-cms mt-5">
+                            <br>
+                            <h5 class="mt-1">Nueva experiencia de edición</h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-4 ">
+                                    <div class="img-div-1 btn btn-default btn-rounded" data-toggle="modal" data-target="#inicioModal">
+                                        <p class="font-weight-bold">INICIO</p>
+                                        <img src="img/muestra.png" height="150px" alt="Edit image index">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="img-div-2 btn btn-default btn-rounded" data-toggle="modal" data-target="#civicoModal">
+                                        <p class="font-weight-bold">CIVICO</p>
+                                        <img src="img/image.png" height="150px" alt="Edit image civico">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="img-div-3 btn btn-default btn-rounded" data-toggle="modal" data-target="#culturalModal">
+                                        <p class="font-weight-bold">CULTURAL</p>
+                                        <img src="img/galeria.png" height="150px" alt="Edit image cultural">
                                     </div>
                                 </div>
                             </div>
-                        <?php } ?>
+                            <div class="row mt-3">
+                                <div class="col-4 ">
+                                    <div class="img-div-1 btn btn-default btn-rounded" data-toggle="modal" data-target="#deportivoModal">
+                                        <p class="font-weight-bold">DEPORTIVO</p>
+                                        <img src="img/img.png" height="150px" alt="Edit image index">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="img-div-2 btn btn-default btn-rounded" data-toggle="modal" data-target="#slider1Modal">
+                                        <p class="font-weight-bold">SLIDER 1</p>
+                                        <img src="img/galeriaa.png" height="150px" alt="Edit image civico">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="img-div-3 btn btn-default btn-rounded" data-toggle="modal" data-target="#slider2Modal">
+                                        <p class="font-weight-bold">SLIDER 2</p>
+                                        <img src="img/imagen.png" height="150px" alt="Edit image cultural">
+                                    </div>
+                                </div>
+                                <div class="col-4 mt-3">
+                                    <div class="img-div-1 btn btn-default btn-rounded" data-toggle="modal" data-target="#slider3Modal">
+                                        <p class="font-weight-bold">SLIDER 3</p>
+                                        <img src="img/gallery.png" height="150px" alt="Edit image cultural">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr>
+                            <div>
+                                <label>
+                                    En esta sección podrás editar las imágenes que deseas destaquen en tu página sin necesidad de acudir al técnico del sistema.
+                                    <br> Recuerda que es primordial te acates a las dimensiones específicadas si deseas que no haya desbordes en la misma.
+                                </label>
+                                <div class="col-12">
+                                    <div class="">
+                                        <img src="img/CMS.png" height="150px" alt="CMS">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
                     </div>
                 </section>
+
+                <!--Modal Form Index-->
+                <div class="modal fade" id="inicioModal" tabindex="-1" role="dialog" aria-labelledby="inicioModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="inicioModalLabel">Cambiar imagen de Inicio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+
+                                <img src="img/img_edit/bg-image-1-1920x800.jpg" width="400px" alt="Portada Inicio">
+
+                                <form class="col-12" action="cms/upload_inicio.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal Form Civico-->
+                <div class="modal fade" id="civicoModal" tabindex="-1" role="dialog" aria-labelledby="civicoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="civicoModalLabel">Cambiar imagen de Civico</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+
+                                <img src="img/img_edit/bg-image-1-1920x800.jpg" width="400px" alt="Portada Inicio">
+
+                                <form class="col-12" action="cms/upload_civico.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal Form Cultural-->
+                <div class="modal fade" id="culturalModal" tabindex="-1" role="dialog" aria-labelledby="culturalModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="culturalModalLabel">Cambiar imagen de Cultural</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/img_edit/bg-image-1-1920x800.jpg" width="400px" alt="Portada Inicio">
+                                <form class="col-12" action="cms/upload_cultural.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal Form Deportivo-->
+                <div class="modal fade" id="deportivoModal" tabindex="-1" role="dialog" aria-labelledby="deportivoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deportivoModalLabel">Cambiar imagen de Deportivo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/img_edit/bg-image-1-1920x800.jpg" width="400px" alt="Portada Inicio">
+                                <form class="col-12" action="cms/upload_deportivo.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal Form Slider1-->
+                <div class="modal fade" id="slider1Modal" tabindex="-1" role="dialog" aria-labelledby="slider1ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="slider1ModalLabel">Cambiar la imagen 1 del carrusel que se presenta en el módulo de Inicio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/img_edit/index-1-618x614.jpg" height="250px" alt="Portada Inicio">
+                                <form class="col-12" action="cms/upload_slider1.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal Form Slider2-->
+                <div class="modal fade" id="slider2Modal" tabindex="-1" role="dialog" aria-labelledby="slider2ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="slider2ModalLabel">Cambiar la imagen 2 del carrusel que se presenta en el módulo de Inicio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/img_edit/index-1-618x614.jpg" height="250px" alt="Portada Inicio">
+                                <form class="col-12" action="cms/upload_slider2.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal Form Slider3-->
+                <div class="modal fade" id="slider3Modal" tabindex="-1" role="dialog" aria-labelledby="slider3ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="slider3ModalLabel">Cambiar la imagen 3 del carrusel que se presenta en el módulo de Inicio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/img_edit/index-1-618x614.jpg" height="250px" alt="Portada Inicio">
+                                <form class="col-12" action="cms/upload_slider3.php" method="post" enctype="multipart/form-data">
+                                    <br>
+                                    <input type="file" lass="form-control" name="file" id="file">
+                                    <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                </form>
+                                <span>Recuerda verificar las dimensiones requeridas antes de asignar la foto</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+               
+
 
                 <!-------------------------------------------------------------SECCIÓN DE MENSAJES-------------------------------------------->
                 <!--Mensajes Enviados-->
@@ -328,7 +512,7 @@ if (!isset($_SESSION['rol'])) {
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                Envía un nuevo mensaje a tus maestros </h3>
+                                Envía un nuevo mensaje a tus alumnos </h3>
                         </div>
                     </div>
                     <div class="mensajesN container">
@@ -354,6 +538,8 @@ if (!isset($_SESSION['rol'])) {
                         </form>
                     </div>
                 </section>
+
+
 
 
                 <!-------------------------------------------------------------CHANGE PASSWORD SECTION------------------------------------------------->
@@ -525,7 +711,10 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                         </section>
 
+
+
                         <!--Administrativos-->
+
                         <div id="lista-mostrarAdmin" style="display: none;">
                             <div class="row">
                                 <div class="col-6">
@@ -539,9 +728,12 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                 </div>
                             </div>
+
                             <?php
                             $busqueda = $db->connect()->prepare("SELECT nombre,correo,curp FROM `administrador` where 1");
                             $busqueda->execute();
+
+
                             ?>
                             <div class="container">
                                 <section id="tabla_resultado" class="content">
@@ -549,6 +741,7 @@ if (!isset($_SESSION['rol'])) {
                                         <div class="row">
                                             <div class="col-12 mt-3">
                                                 <div class="card">
+
                                                     <!-- /.card-header -->
                                                     <div class="card-body">
                                                         <table class="mt-3 text-center table  table-hover table-responsive" style=" width: 70%; background-color: white;">
@@ -556,6 +749,7 @@ if (!isset($_SESSION['rol'])) {
                                                                 <th>Nombre</th>
                                                                 <th>Correo</th>
                                                                 <th>CURP</th>
+
                                                             </thead>
                                                             <tbody>
                                                                 <?php foreach ($busqueda as $fila) { ?>
@@ -563,8 +757,10 @@ if (!isset($_SESSION['rol'])) {
                                                                         <td><?php echo $fila[0]; ?></td>
                                                                         <td><?php echo $fila[1]; ?></td>
                                                                         <td><?php echo $fila[2]; ?></td>
+
                                                                     </tr>
                                                                 <?php }
+
                                                                 ?>
                                                             </tbody>
                                                         </table>
@@ -580,7 +776,9 @@ if (!isset($_SESSION['rol'])) {
                                     <!-- /.container-fluid -->
                                 </section>
                             </div>
+
                         </div>
+
                         <footer class="container-fluid mt-4">
                             <div class="col-12 card " style="background-color: slategray;">
                                 <div class="card-header">
@@ -598,7 +796,6 @@ if (!isset($_SESSION['rol'])) {
 
 
             </main>
-            <!--Fin del div universal-->
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -613,22 +810,19 @@ if (!isset($_SESSION['rol'])) {
                 $("#perfil").show();
                 return false;
             });
+            //Seccion de CMS
+            $("#inicio-cms").on('click', function() {
+                $("#cms").show();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                $("#options_Admin").hide();
+                return false;
+            });
             //seccion de mensajes
             $("#mensajesEnviados").on('click', function() {
                 $("#cms").hide();
                 $("#mensajesE").show();
                 $("#mensajesN").hide();
-                $("#teach-options").hide();
-                $("#student-options").hide();
-                $("#options_T").hide();
-                $("#table-mtro").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
                 return false;
             });
@@ -636,98 +830,31 @@ if (!isset($_SESSION['rol'])) {
                 $("#cms").hide();
                 $("#mensajesN").show();
                 $("#mensajesE").hide();
-                $("#teach-options").hide();
-                $("#student-options").hide();
-                $("#options_T").hide();
-                $("#table-mtro").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
                 return false;
             });
             //ADMINISTRATIVE OPTIONS
             $("#page_editAdmin").on('click', function() {
                 $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").show();
                 return false;
             });
             $("#registrarAdmin").on('click', function() {
                 $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-eliminarHr").hide();
-                $("#form-editarHr").hide();
                 $("#form-registrarAdmin").show();
-                $("#form-registrarHr").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#options_Admin").show();
-                $("#horario").hide();
                 return false;
             });
             $("#eliminarAdmin").on('click', function() {
                 $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#horario").hide();
-                $("#form-eliminarHr").hide();
                 $("#form-registrarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#form-eliminarAdmin").show();
@@ -736,28 +863,8 @@ if (!isset($_SESSION['rol'])) {
             });
             $("#mostrarAdmin").on('click', function() {
                 $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#form-eliminarHr").hide();
-                $("#horario").hide();
                 $("#form-registrarAdmin").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").show();
@@ -771,5 +878,7 @@ if (!isset($_SESSION['rol'])) {
             $('[data-toggle="popover"]').popover();
         });
     </script>
+
 </body>
+
 </html>

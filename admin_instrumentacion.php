@@ -2,7 +2,6 @@
 require_once 'db.php';
 $db = new DB();
 session_start();
-
 if (!isset($_SESSION['rol'])) {
     header('location: perfiles.html');
 } else {
@@ -11,10 +10,8 @@ if (!isset($_SESSION['rol'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,12 +29,11 @@ if (!isset($_SESSION['rol'])) {
     <link rel="stylesheet" href="css/styles2.css">
     <!--MODAL BOOTSTRAP-->
 </head>
-
 <body>
     <main>
         <div class="page-wrapper chiller-theme toggled">
-            <!--Sidebar-->
-            <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
+           <!--Sidebar-->
+           <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
                 <i class="fas fa-bars"></i>
             </a>
             <nav id="sidebar" class="sidebar-wrapper">
@@ -206,69 +202,56 @@ if (!isset($_SESSION['rol'])) {
 
             <main class="page-content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img src="img/logos/tecnm.svg" alt="">
-                        </div>
-                        <div class="col-sm-9 mt-2 text-center">
-                            <h1>Sistema Integral para Actividades Extraescolares</h1>
-                        </div>
-                    </div>
-                    <section id="Bienvenido">
-                        <div class="section section-lg">
-                            <hr>
-                            <h3 class="text-center">
-                                <?php
-                                if ($_SESSION['sexo'] == 'F') {
-                                ?> Bienvenida <?php echo ($_SESSION['nombre']);
-                                            } else {
-                                                ?> Bienvenido <?php echo ($_SESSION['nombre']);
-                                                            }
-
-                                                                ?>
-                            </h3>
-                        </div>
-                        <div class="col-12 card " style="background-color: slategray;margin-top:50px;">
-                            <div class="card-header mt-2">
-                                <span class="">
-                                    Te presentamos a SIAE el "Sistema Integral para Actividades Extraescolares" dónde podrás organizar, manejar, y llevar un control de los
-                                    talleres que se imparten en el Instituto Tecnológico Superior de Champotón. Brindándote la eficacia, eficiencia y agilidad de un sistema web que te apoyará
-                                    en el transcurso del año para administrar tu trabajo de forma más actualizada.
-                                </span>
-                            </div>
-                        </div>
-                    </section>
+                    <h2>SIAE</h2>
                 </div>
-
-                <!-------------------------------------------------------------SECCIÓN INICIO------------------------------------------------->
-
-                <section class="section bg-default text-md-center container" id="sectionIndex">
-                    <div class="col-md-5 col-sm-4">
-                        <div class="card">
-                            <div class="card-header" style="margin:auto">
-                                <h3>Talleres</h3>
+                <!-------------------------------------------------------------INSTRUMENTACION DIDACTICA--------------------------------------------->
+                <section id="instrumentacionD">
+                    <div>
+                        <div class="container">
+                            <!--Tabla de instrumentacion didactica -->
+                            <div class="col-12 card mt-5">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fa fa-address-book" aria-hidden="true"></i>
+                                        Instrumentación didáctica del curso</h3>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <?php
-                        $busquedaT = $db->connect()->prepare("SELECT * FROM talleres where id not in (1);");
-                        $busquedaT->execute();
-                        foreach ($busquedaT as $fila) {
-                        ?>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="card articulo" style="width: 15rem;  display: inline-block; vertical-align: top; text-align: center;margin-left: 5%; margin-bottom:3%;">
-                                    <input name="Tallerstd" type="hidden" id="id" value="<?php echo $fila[0];  ?>">
-                                    <img src="img/<?php echo $fila[5]; ?>/taller/<?php echo $fila[7]; ?>" style="height: 200px; width:auto;" class="card-img-top mt-1" alt="Taller">
+                            <div class="col-lg-12 col-xs-12 mt-2">
+                                <div>
+                                    <!-- /.card-header -->
                                     <div class="card-body">
-                                        <div class="card-footer text-center">
-                                            <small class="text-muted" style="text-transform: uppercase;"><?php echo $fila[1]; ?></small>
-                                        </div>
+                                        <table class="table table-bordered table-hover">
+                                            <thead style="background-color:steelblue;">
+                                                <th>Nombre</th>
+                                                <th>Taller</th>
+                                                <th>Fecha</th>
+                                                <th>Documento</th>
+                                            </thead>
+                                            <tbody style="background-color:  #f7f5f3;">
+                                                <?php
+                                                $busqueda = $db->connect()->prepare('SELECT maestro.nombre, taller,fecha, documento FROM `maestro` join documentos join talleres on maestro.id=documentos.maestro_id and talleres.id=maestro.taller_asignado WHERE documentos.categoria="instrumentacionD"');
+                                                $busqueda->execute();
+                                                foreach ($busqueda as $fila) {
+                                                ?>
+                                                    <tr>
+                                                        <td><?php echo $fila[0]; ?></td>
+                                                        <td><?php echo $fila[1]; ?></td>
+                                                        <td><?php echo $fila[2]; ?></td>
+                                                        <td>
+                                                            <a download="Instrumentacion didactica" href="maestro/documentos/instrumentacion/<?php echo $fila[3]; ?>">
+                                                                <img src="img/descargar.png" width="60" height="60" alt="Descargar Formato de Instrumentacion Didáctica"></a>
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                        <?php } ?>
+                        </div>
+                        <!--Fin tabla-->
                     </div>
                 </section>
 
@@ -316,11 +299,9 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                         </div>
                         <!-- /.row -->
-
                     </div>
                     <!-- /.container-fluid -->
                 </section>
-
 
                 <!--Mensajes Nuevos-->
                 <section id="mensajesN" style="display: none;">
@@ -328,7 +309,7 @@ if (!isset($_SESSION['rol'])) {
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                Envía un nuevo mensaje a tus maestros </h3>
+                                Envía un nuevo mensaje a tus alumnos </h3>
                         </div>
                     </div>
                     <div class="mensajesN container">
@@ -342,7 +323,6 @@ if (!isset($_SESSION['rol'])) {
                             <div class="form-group sr-only ">
                                 <input type="text" class="form-control" name="admin_id" id="admin_id" value="<?php echo $id_admin; ?>">
                             </div>
-
                             <div class="form-group">
                                 <label for="mensaje"></label>
                                 <textarea class="form-control" name="mensaje" id="mensaje" rows="3"></textarea>
@@ -350,11 +330,9 @@ if (!isset($_SESSION['rol'])) {
                             <div class="form-group">
                                 <button type="submit" class="btn btn-default" title="Advertencia" data-trigger="hover" data-content="Recuerda que una vez enviado no podrás eliminarlo" data-toggle="popover">Enviar</button>
                             </div>
-
                         </form>
                     </div>
                 </section>
-
 
                 <!-------------------------------------------------------------CHANGE PASSWORD SECTION------------------------------------------------->
                 <div class="modal fade" id="changePModal" tabindex="-1" role="dialog" aria-labelledby="changePModalLabel" aria-hidden="true">
@@ -386,7 +364,6 @@ if (!isset($_SESSION['rol'])) {
                     </div>
                 </div>
 
-
                 <!-------------------------------------------------------------PERMISOS MODAL------------------------------------------------->
                 <div class="modal fade" id="permisosModal" tabindex="-1" role="dialog" aria-labelledby="permisosModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -405,7 +382,6 @@ if (!isset($_SESSION['rol'])) {
                         </div>
                     </div>
                 </div>
-
 
                 <!-------------------------------------------------------------SECCIÓN DE ADMINISTRATIVOS------------------------------------------------->
                 <section class="section bg-default text-md-center">
@@ -426,7 +402,6 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                 </article>
                             </div>
-
                             <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".1s" id="eliminarAdmin">
                                 <article class=""><img src="img/logos/recycle-bin.png" alt="" width="100" height="100" />
                                     <div class="">
@@ -447,7 +422,6 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                         </div>
 
-
                         <!--Form-registrar-Admin-->
                         <section class="mt-4 section-form bg-default" style="display:none" id="form-registrarAdmin">
                             <div id="base">
@@ -455,17 +429,14 @@ if (!isset($_SESSION['rol'])) {
                                 <div id="titulo">Nuevo Administrador</div>
                                 <div id="form">
                                     <form method="POST" action="admin/registrar_admin.php" enctype="multipart/form-data">
-
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
                                             <input type="text" name="nombre" id="" class="form-control" placeholder="Fernando Vela Leon" aria-describedby="helpId" required="True">
                                         </div>
-
                                         <div class="form-group">
                                             <label for="Correo">Correo:</label>
                                             <input type="email" name="correo" id="" class="form-control" placeholder="vela97@outlook.com" aria-describedby="helpId" required="True">
                                         </div>
-
                                         <div class="form-group">
                                             <label for="curp">CURP</label>
                                             <input type="text" name="curp" id="" class="form-control" placeholder="VELF971204HCCLRN73" aria-describedby="helpId" required="True" required pattern="[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]" oninvalid="this.setCustomValidity('Formato de la Clave Única de Registro de Población')" oninput="this.setCustomValidity('')">
@@ -475,8 +446,6 @@ if (!isset($_SESSION['rol'])) {
                                 </div>
                             </div>
                         </section>
-
-
 
                         <!--Form-eliminar-Admin-->
                         <section class="mt-4 section-form bg-default" style="display:none" id="form-eliminarAdmin">
@@ -590,15 +559,9 @@ if (!isset($_SESSION['rol'])) {
                                 </div>
                             </div>
                         </footer>
-
                     </div>
-
                 </section>
-
-
-
             </main>
-            <!--Fin del div universal-->
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -615,153 +578,55 @@ if (!isset($_SESSION['rol'])) {
             });
             //seccion de mensajes
             $("#mensajesEnviados").on('click', function() {
-                $("#cms").hide();
                 $("#mensajesE").show();
                 $("#mensajesN").hide();
-                $("#teach-options").hide();
-                $("#student-options").hide();
-                $("#options_T").hide();
-                $("#table-mtro").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
+                $("#instrumentacionD").hide();
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
-                $("#cms").hide();
                 $("#mensajesN").show();
                 $("#mensajesE").hide();
-                $("#teach-options").hide();
-                $("#student-options").hide();
-                $("#options_T").hide();
-                $("#table-mtro").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
+                $("#instrumentacionD").hide();
                 return false;
             });
             //ADMINISTRATIVE OPTIONS
             $("#page_editAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").show();
+                $("#instrumentacionD").hide();
                 return false;
             });
             $("#registrarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-eliminarHr").hide();
-                $("#form-editarHr").hide();
                 $("#form-registrarAdmin").show();
-                $("#form-registrarHr").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#options_Admin").show();
-                $("#horario").hide();
+                $("#instrumentacionD").hide();
                 return false;
             });
             $("#eliminarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#horario").hide();
-                $("#form-eliminarHr").hide();
                 $("#form-registrarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#form-eliminarAdmin").show();
                 $("#options_Admin").show();
+                $("#instrumentacionD").hide();
                 return false;
             });
             $("#mostrarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#form-eliminarHr").hide();
-                $("#horario").hide();
                 $("#form-registrarAdmin").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").show();
                 $("#options_Admin").show();
+                $("#instrumentacionD").hide();
                 return false;
             });
         });

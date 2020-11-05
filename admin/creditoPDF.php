@@ -34,11 +34,30 @@ $pdf->set_paper(array(0, 0, 595.28, 841.89));
 // Carga el contenido HTML.
 $pdf->load_html($html, 'UTF-8');
 
+
+//Tomamos el nombre de la session 
+$archivo=$_SESSION['pdf']['matricula'];
+$nombreArchivo=$archivo.'.pdf';
+//Donde guardar el documento
+$rutaGuardado = "../pdf/";
+
 // Renderiza el documento PDF.
 $pdf->render();
 
 // Enviamos el fichero PDF al navegador.
-$pdf->stream('Constancia.pdf');
+$pdf->stream($archivo.'.pdf');
+//Guardalo en una variable
+
+$output = $pdf->output();
+// Una vez lo guardes en local lo puedes subir o enviar a un ftp.
+
+file_put_contents($rutaGuardado.$nombreArchivo, $output);
+
+//asigno de una vez el documento al alumno que corresponde 
+$sql = "UPDATE `alumnos` SET `evaluacion` = '$nombreArchivo' WHERE `alumnos`.`matricula` = $archivo;";
+$statement = $db->connect()->prepare($sql);
+$statement->execute();
+
 
 // Eliminar variable de sesión
 unset($_SESSION['pdf']);

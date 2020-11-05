@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!((strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png")))) {
         echo '<script type="text/javascript">
          alert("No seas pendejo, es una imagen lo que debes seleccionar");
-         window.location.href="../administrativo.php"; </script>';
+         window.location.href="../admin_taller.php"; </script>';
     } else {
         
     if (strcmp($categoria, $civico) === 0) {
@@ -67,11 +67,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      $statement = $db->connect()->prepare($sql);
      $statement->execute(array(':img1' => $_FILES['file']['name']));
  
-     echo "<script>location.href='../administrativo.php';</script>";
+     echo "<script>location.href='../admin_taller.php';</script>";
     }
 
 } else {
     echo "Error, no se está ejecutando la consulta";
 }
 
-require_once('../administrativo.php');
+require_once('../admin_taller.php');

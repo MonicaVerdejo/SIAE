@@ -1,5 +1,5 @@
 <?php
-//include_once '../administrativo.php';
+//include_once '../admin_cms.php';
 include_once '../db.php';
 ob_start();
 $db = new DB();
@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES)) {
     if (!((strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png")))) {
         echo '<script type="text/javascript">
          alert("No seas pendejo, es una imagen lo que debes seleccionar");
-         window.location.href="../administrativo.php"; </script>';
+         window.location.href="../admin_cms.php"; </script>';
     } else {
 
         $image = getimagesize($_FILES['file']['tmp_name']);
@@ -33,13 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES)) {
             //return $file;
             echo '<script type="text/javascript">
             alert("La imagen que seleccionaste es muy pequeña, para preservar la estética de la páagina forzosamente requerimos una imagen de 500x500 pixeles");
-            window.location.href="../administrativo.php"; </script>';
+            window.location.href="../admin_cms.php"; </script>';
         } elseif ($image_width > $maximum['width'] || $image_height > $maximum['height']) {
             //$file['error'] = $too_large;
             //return $file;
             echo '<script type="text/javascript">
             alert("La imagen que seleccionaste es demasiado grande, para preservar la estética de la páagina forzosamente requerimos una imagen de 500x500 pixeles");
-            window.location.href="../administrativo.php"; </script>';
+            window.location.href="../admin_cms.php"; </script>';
         } else {
             $check = @getimagesize($_FILES['file']['tmp_name']);
             $_FILES['file']['name'] = 'slider3.jpg';
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES)) {
             $statement->execute(array(':slider3' => $_FILES['file']['name']));
             //$_SESSION['imagen_profile']=$VARIABLE_HOST;
 
-            echo "<script>location.href='../administrativo.php';</script>";
+            echo "<script>location.href='../admin_cms.php';</script>";
         }
     }
 }

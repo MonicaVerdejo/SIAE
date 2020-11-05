@@ -213,64 +213,306 @@ if (!isset($_SESSION['rol'])) {
                         <div class="col-sm-9 mt-2 text-center">
                             <h1>Sistema Integral para Actividades Extraescolares</h1>
                         </div>
+                        
                     </div>
-                    <section id="Bienvenido">
-                        <div class="section section-lg">
-                            <hr>
-                            <h3 class="text-center">
-                                <?php
-                                if ($_SESSION['sexo'] == 'F') {
-                                ?> Bienvenida <?php echo ($_SESSION['nombre']);
-                                            } else {
-                                                ?> Bienvenido <?php echo ($_SESSION['nombre']);
-                                                            }
+                    <hr>
+                </div>
 
-                                                                ?>
-                            </h3>
+                <!-------------------------------------------------------------SECCIÓN DE MAESTROS--------------------------------------------->
+                <section class="section  section-xl bg-default text-md-center">
+                    <div class="container" id="teach-options">
+                        <h4>MAESTROS</h4>
+                        <div class="row row-lg row-30">
+
+                            <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".2s" id="registrarM">
+                                <article class=""><img src="img/logos/new-user.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Registrar</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".2s" id="editM">
+
+                                <article class=""><img src="img/logos/edit-user.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Editar</a></h4>
+
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 col-md-4 wow blurIn" data-wow-delay=".1s" id="deleteM">
+
+                                <article class=""><img src="img/logos/delete-user.png" alt="" width="100" height="100" />
+                                    <div class="">
+                                        <div>
+                                            <h4 class=""><a href="#">Eliminar</a></h4>
+                                        </div>
+                                    </div>
+                                </article>
+
+                            </div>
                         </div>
-                        <div class="col-12 card " style="background-color: slategray;margin-top:50px;">
-                            <div class="card-header mt-2">
-                                <span class="">
-                                    Te presentamos a SIAE el "Sistema Integral para Actividades Extraescolares" dónde podrás organizar, manejar, y llevar un control de los
-                                    talleres que se imparten en el Instituto Tecnológico Superior de Champotón. Brindándote la eficacia, eficiencia y agilidad de un sistema web que te apoyará
-                                    en el transcurso del año para administrar tu trabajo de forma más actualizada.
-                                </span>
+                    </div>
+
+                    <!--Form-registrar-maestro-->
+                    <section class="section-form bg-default mt-4" id="form-Tregister" style="display: none;">
+                        <div id="base">
+                            <div id="titulo">Agregar Maestro</div>
+                            <div id="form">
+                                <form method="POST" action="admin/registrar_mtro.php">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre completo</label>
+                                        <input id="nombre" class="form-control" type="text" name="nombre" required="true" placeholder="Fernando Enrique Vela Leon">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="correo">Correo</label>
+                                        <input id="correo" class="form-control" type="email" name="correo" required="true" placeholder="vela97@outlook.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="curp">Curp</label>
+                                        <input id="curp" class="form-control" type="text" name="curp" required="true" placeholder="VELF971204HCCLRN07" required pattern="[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]" oninvalid="this.setCustomValidity('Formato de la Clave Única de Registro de Población')" oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <?php
+                                    $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
+                                    $taller->execute();
+                                    ?>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="taller">Taller</label>
+                                        </div>
+                                        <select class="custom-select" name="taller" id="taller" required="true">
+                                            <?php foreach ($taller as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
+
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
+
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telefono">Telefono</label>
+                                        <input id="telefono" class="form-control" type="text" name="telefono" placeholder="9821159667" required pattern="[0-9]{10}" oninvalid="this.setCustomValidity('El formato del número de celular es: 9821159667. Hazlo coincidir.')" oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sexo">Sexo</label>
+                                        <select id="sexo" class="form-control" name="sexo" required="true">
+                                            <option>M</option>
+                                            <option>F</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </form>
                             </div>
                         </div>
                     </section>
-                </div>
 
-                <!-------------------------------------------------------------SECCIÓN INICIO------------------------------------------------->
+                    <!--Form-edit-maestro-->
+                    <section class="mt-4 section-form bg-default" style="display:none" id="form-Tedit">
+                        <div id="base">
+                            <div id="triangle"></div>
+                            <div id="titulo">Editar Maestro</div>
+                            <div id="form">
+                                <form method="POST" action="admin/edit_mtro.php">
+                                    <?php
+                                    $taller = $db->connect()->prepare("SELECT id, nombre FROM `maestro` WHERE 1");
+                                    $taller->execute();
+                                    ?>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="mtro">Maestro</label>
+                                        </div>
+                                        <select class="custom-select" name="mtro" id="mtro" required="true">
+                                            <?php foreach ($taller as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
 
-                <section class="section bg-default text-md-center container" id="sectionIndex">
-                    <div class="col-md-5 col-sm-4">
-                        <div class="card">
-                            <div class="card-header" style="margin:auto">
-                                <h3>Talleres</h3>
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
+
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
+                                    <?php
+                                    $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
+                                    $taller->execute();
+                                    ?>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="taller">Taller</label>
+                                        </div>
+                                        <select class="custom-select" name="taller" id="taller" required="true">
+                                            <?php foreach ($taller as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
+
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
+
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telefono">Telefono</label>
+                                        <input id="telefono" class="form-control" type="text" name="telefono" placeholder="9821159667" required pattern="[0-9]{10}" oninvalid="this.setCustomValidity('El formato del número de celular es: 9821159667. Hazlo coincidir.')" oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </form>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="row">
-                        <?php
-                        $busquedaT = $db->connect()->prepare("SELECT * FROM talleres where id not in (1);");
-                        $busquedaT->execute();
-                        foreach ($busquedaT as $fila) {
-                        ?>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="card articulo" style="width: 15rem;  display: inline-block; vertical-align: top; text-align: center;margin-left: 5%; margin-bottom:3%;">
-                                    <input name="Tallerstd" type="hidden" id="id" value="<?php echo $fila[0];  ?>">
-                                    <img src="img/<?php echo $fila[5]; ?>/taller/<?php echo $fila[7]; ?>" style="height: 200px; width:auto;" class="card-img-top mt-1" alt="Taller">
-                                    <div class="card-body">
-                                        <div class="card-footer text-center">
-                                            <small class="text-muted" style="text-transform: uppercase;"><?php echo $fila[1]; ?></small>
+                    <!--Form-eliminar-maestro-->
+                    <section class="mt-4 section-form bg-default" style="display:none" id="form-Tdelete">
+                        <div id="base">
+                            <div id="triangle"></div>
+                            <div id="titulo">Eliminar maestro</div>
+
+                            <img src="img/logos/recycle-bin.png" width="100px" alt="Borrar">
+                            <div class="mt-4" id="form">
+                                <form method="POST" action="admin/delete_mtro.php">
+                                    <?php
+                                    $taller = $db->connect()->prepare("SELECT id, nombre FROM `maestro` WHERE 1");
+                                    $taller->execute();
+                                    ?>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="mtro">Maestro</label>
+                                        </div>
+                                        <select class="custom-select" name="mtro" id="mtro" required="true">
+                                            <?php foreach ($taller as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
+
+
+                                                                                                                        ?>><?php echo $row[1]; ?></option>
+
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
+                                    <input class="btn btn-info" type="submit" value="Enviar" title="Advertencia" data-trigger="hover" data-content="Recuerda que una vez eliminado no podrás recuperarlo" data-toggle="popover">
+
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--Tabla de maestros dados de alta-->
+                    <div class="container mt-5" >
+                        <section>
+                            <div class="container-fluid">
+                                <div class="col-12 card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            <i class="fa fa-address-book" aria-hidden="true"></i>
+                                            Maestros dados de alta en el sistema </h3>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12 col-xs-12">
+                                        <div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body">
+                                                <table class="table table-bordered table-hover table-responsive" style="width:80%;margin-left:12%;">
+                                                    <thead style="background-color:steelblue;">
+                                                        <th>Nombre</th>
+                                                        <th>Correo</th>
+                                                        <th>Taller Asignado</th>
+                                                        <th>CURP</th>
+                                                        <th>Teléfono</th>
+                                                    </thead>
+                                                    <tbody style="background-color:  #f7f5f3;">
+                                                        <?php
+                                                        $busqueda = $db->connect()->prepare('SELECT maestro.nombre, correo, talleres.taller, curp, telefono FROM `maestro` join talleres on maestro.taller_asignado=talleres.id order by maestro.nombre asc');
+                                                        $busqueda->execute();
+
+                                                        foreach ($busqueda as $fila) {
+                                                            $sinasignar = "No asignado";
+                                                            $NoAsignado = $fila[2];
+                                                            if (strcmp($sinasignar, $NoAsignado) === 0) {
+                                                        ?>
+                                                                <tr class="sr-only">
+                                                                    <td><?php echo $fila[0]; ?></td>
+                                                                    <td><?php echo $fila[1]; ?></td>
+                                                                    <td><?php echo $fila[2]; ?></td>
+                                                                    <td><?php echo $fila[3]; ?></td>
+                                                                    <td><?php echo $fila[4]; ?></td>
+
+
+                                                                </tr>
+
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <tr>
+                                                                    <td><?php echo $fila[0]; ?></td>
+                                                                    <td><?php echo $fila[1]; ?></td>
+                                                                    <td><?php echo $fila[2]; ?></td>
+                                                                    <td><?php echo $fila[3]; ?></td>
+                                                                    <td><?php echo $fila[4]; ?></td>
+
+
+                                                                </tr>
+                                                        <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- /.row -->
                             </div>
-                        <?php } ?>
+                            <!-- /.container-fluid -->
+                        </section>
                     </div>
                 </section>
+
+
+
+
 
                 <!-------------------------------------------------------------SECCIÓN DE MENSAJES-------------------------------------------->
                 <!--Mensajes Enviados-->
@@ -328,7 +570,7 @@ if (!isset($_SESSION['rol'])) {
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                Envía un nuevo mensaje a tus maestros </h3>
+                                Envía un nuevo mensaje a tus alumnos </h3>
                         </div>
                     </div>
                     <div class="mensajesN container">
@@ -354,6 +596,8 @@ if (!isset($_SESSION['rol'])) {
                         </form>
                     </div>
                 </section>
+
+
 
 
                 <!-------------------------------------------------------------CHANGE PASSWORD SECTION------------------------------------------------->
@@ -525,7 +769,10 @@ if (!isset($_SESSION['rol'])) {
                             </div>
                         </section>
 
+
+
                         <!--Administrativos-->
+
                         <div id="lista-mostrarAdmin" style="display: none;">
                             <div class="row">
                                 <div class="col-6">
@@ -539,9 +786,12 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                 </div>
                             </div>
+
                             <?php
                             $busqueda = $db->connect()->prepare("SELECT nombre,correo,curp FROM `administrador` where 1");
                             $busqueda->execute();
+
+
                             ?>
                             <div class="container">
                                 <section id="tabla_resultado" class="content">
@@ -549,6 +799,7 @@ if (!isset($_SESSION['rol'])) {
                                         <div class="row">
                                             <div class="col-12 mt-3">
                                                 <div class="card">
+
                                                     <!-- /.card-header -->
                                                     <div class="card-body">
                                                         <table class="mt-3 text-center table  table-hover table-responsive" style=" width: 70%; background-color: white;">
@@ -556,6 +807,7 @@ if (!isset($_SESSION['rol'])) {
                                                                 <th>Nombre</th>
                                                                 <th>Correo</th>
                                                                 <th>CURP</th>
+
                                                             </thead>
                                                             <tbody>
                                                                 <?php foreach ($busqueda as $fila) { ?>
@@ -563,8 +815,10 @@ if (!isset($_SESSION['rol'])) {
                                                                         <td><?php echo $fila[0]; ?></td>
                                                                         <td><?php echo $fila[1]; ?></td>
                                                                         <td><?php echo $fila[2]; ?></td>
+
                                                                     </tr>
                                                                 <?php }
+
                                                                 ?>
                                                             </tbody>
                                                         </table>
@@ -580,7 +834,9 @@ if (!isset($_SESSION['rol'])) {
                                     <!-- /.container-fluid -->
                                 </section>
                             </div>
+
                         </div>
+
                         <footer class="container-fluid mt-4">
                             <div class="col-12 card " style="background-color: slategray;">
                                 <div class="card-header">
@@ -598,7 +854,6 @@ if (!isset($_SESSION['rol'])) {
 
 
             </main>
-            <!--Fin del div universal-->
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -613,48 +868,56 @@ if (!isset($_SESSION['rol'])) {
                 $("#perfil").show();
                 return false;
             });
+            //seccion de maestro
+            $("#registrarM").on('click', function() {
+                $("#form-Tregister").show();
+                $("#form-Tedit").hide();
+                $("#form-Tdelete").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                return false;
+            });
+            $("#editM").on('click', function() {
+                $("#form-Tedit").show();
+                $("#form-Tregister").hide();
+                $("#form-Tdelete").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                return false;
+            });
+            $("#deleteM").on('click', function() {
+                $("#form-Tdelete").show();
+                $("#form-Tedit").hide();
+                $("#form-Tregister").hide();
+                $("#mensajesN").hide();
+                $("#mensajesE").hide();
+                return false;
+            });
             //seccion de mensajes
             $("#mensajesEnviados").on('click', function() {
-                $("#cms").hide();
                 $("#mensajesE").show();
                 $("#mensajesN").hide();
                 $("#teach-options").hide();
-                $("#student-options").hide();
-                $("#options_T").hide();
                 $("#table-mtro").hide();
                 $("#form-Tdelete").hide();
                 $("#form-Tedit").hide();
                 $("#form-Tregister").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
-                $("#cms").hide();
                 $("#mensajesN").show();
                 $("#mensajesE").hide();
                 $("#teach-options").hide();
-                $("#student-options").hide();
-                $("#options_T").hide();
                 $("#table-mtro").hide();
                 $("#form-Tdelete").hide();
                 $("#form-Tedit").hide();
                 $("#form-Tregister").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
                 return false;
             });
             //ADMINISTRATIVE OPTIONS
             $("#page_editAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
                 $("#teach-options").hide();
                 $("#table-mtro").hide();
                 $("#mensajesN").hide();
@@ -663,21 +926,10 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Tedit").hide();
                 $("#form-Tregister").hide();
                 $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").show();
                 return false;
             });
             $("#registrarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
                 $("#teach-options").hide();
                 $("#table-mtro").hide();
                 $("#mensajesN").hide();
@@ -686,28 +938,13 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Tedit").hide();
                 $("#form-Tregister").hide();
                 $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-eliminarHr").hide();
-                $("#form-editarHr").hide();
                 $("#form-registrarAdmin").show();
-                $("#form-registrarHr").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#options_Admin").show();
-                $("#horario").hide();
                 return false;
             });
             $("#eliminarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
                 $("#teach-options").hide();
                 $("#table-mtro").hide();
                 $("#mensajesN").hide();
@@ -715,19 +952,6 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Tdelete").hide();
                 $("#form-Tedit").hide();
                 $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#horario").hide();
-                $("#form-eliminarHr").hide();
                 $("#form-registrarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#form-eliminarAdmin").show();
@@ -735,9 +959,6 @@ if (!isset($_SESSION['rol'])) {
                 return false;
             });
             $("#mostrarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
                 $("#teach-options").hide();
                 $("#table-mtro").hide();
                 $("#mensajesN").hide();
@@ -745,19 +966,6 @@ if (!isset($_SESSION['rol'])) {
                 $("#form-Tdelete").hide();
                 $("#form-Tedit").hide();
                 $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#form-eliminarHr").hide();
-                $("#horario").hide();
                 $("#form-registrarAdmin").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").show();
@@ -771,5 +979,7 @@ if (!isset($_SESSION['rol'])) {
             $('[data-toggle="popover"]').popover();
         });
     </script>
+
 </body>
+
 </html>

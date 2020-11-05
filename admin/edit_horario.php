@@ -19,13 +19,13 @@ $domingo = $_POST['domingo'];
       
             $insertar = $db->connect()->prepare(" UPDATE `horarios` SET `lunes` = '$lunes',`martes` = '$martes',`miercoles` = '$miercoles', `jueves` = '$jueves',`viernes` = '$viernes', `sabado` = '$sabado',`domingo` = '$domingo' WHERE `horarios`.`taller` = $nombre and `horarios`.`turno`='$turno' ;");
             $insertar->execute();
-            header('Location: ../administrativo.php');
+            header('Location: ../admin_horarios.php');
         } else {
             
             #echo "pendejo no puedes repetir turnos";
             echo '<script type="text/javascript">
             alert("No hay taller registrado en ese turno");
-            window.location.href="../administrativo.php"; </script>';
+            window.location.href="../admin_horarios.php"; </script>';
         }
       
     }
@@ -33,4 +33,4 @@ $domingo = $_POST['domingo'];
     
 
 
-require_once('../administrativo.php');
+require_once('../admin_horarios.php');

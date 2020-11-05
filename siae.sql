@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2020 a las 23:40:00
+-- Tiempo de generación: 05-11-2020 a las 01:22:38
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -73,10 +73,11 @@ CREATE TABLE `alumnos` (
 
 INSERT INTO `alumnos` (`nombre`, `matricula`, `password`, `taller_id`, `representativo`, `carrera`, `estatus`, `semestre`, `evaluacion`, `sexo`, `rol_id`) VALUES
 ('Sin asignar', 0, '', 1, '', '', '', '', '', '', 2),
+('Magnolia Verdejo Chong', 161616, '$2y$10$0ZAgJ7YjVooOY.mIiQGVWu5sdmVizdTvwUL0ULV8wCvoeVzx41Eoq', 3, 'Si', 'Licenciatura en Turismo', 'Cursando', 'Noveno', '', 'F', 2),
 ('monica verdejo', 161080111, '$2y$10$U5Bcskx42d.uLDgsFUI6Lutrvha1ukOeUlkprI6vc1xNISA2lhrMm', 2, 'No', 'Ingeniería Ambiental', 'Cursando', 'Noveno', '', 'F', 2),
-('Lorna Alejandra Delgado Verdejo', 161080138, '$2y$10$dxmq0KZQVhPKoa5lvbdzxOpY/D5QfeyNPS0njqBqe24Xve0K0R4qi', 2, 'Si', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Noveno', '', 'F', 2),
+('Lorna Alejandra Delgado Verdejo', 161080138, '$2y$10$dxmq0KZQVhPKoa5lvbdzxOpY/D5QfeyNPS0njqBqe24Xve0K0R4qi', 2, 'No', 'Ingeniería en Sistemas Computacionales', 'Reprobado', 'Séptimo', '', 'F', 2),
 ('Jose Alberto Pech Villasis', 161080150, '$2y$10$9Q6SlZVAGp3LcmT2ULuFxOl/XOyNRDjJAQqzuMzdPe794lxhAxJsC', 2, 'No', 'Ingeniería en Logística', 'Cursando', 'Séptimo', '', 'F', 2),
-('Gerardo Gonzalez Rosado', 161080156, '$2y$10$Zg4OgcdfMfOKAIOj887e3.DNSw7U1lcBsFYtMbLU6p77m6siX1Z7S', 2, 'No', 'Licenciatura en Turismo', 'Cursando', 'Tercero', '', 'F', 2);
+('Gerardo Gonzalez Rosado', 161080156, '$2y$10$Zg4OgcdfMfOKAIOj887e3.DNSw7U1lcBsFYtMbLU6p77m6siX1Z7S', 2, 'No', 'Licenciatura en Turismo', 'Cursando', 'Tercero', '161080156.pdf', 'F', 2);
 
 -- --------------------------------------------------------
 
@@ -132,7 +133,8 @@ INSERT INTO `documentos` (`id`, `maestro_id`, `taller_id`, `alumno_id`, `categor
 (11, 16, 2, 161080138, 'evaluacionB', '161080138.docx', '2020-10-27 20:47:32'),
 (12, 16, 2, 161080138, 'evaluacionB', '161080138.pdf', '2020-10-27 20:49:25'),
 (13, 16, 2, 0, 'instrumentacionD', 'Monica Priscila Delgado Verdejo.docx', '2020-10-27 20:54:11'),
-(14, 16, 2, 0, 'instrumentacionD', 'Monica Priscila Delgado Verdejo.pdf', '2020-10-27 20:55:14');
+(14, 16, 2, 0, 'instrumentacionD', 'Monica Priscila Delgado Verdejo.pdf', '2020-10-27 20:55:14'),
+(16, 16, 2, 161080150, 'evaluacionB', '161080150.pdf', '2020-11-04 17:53:52');
 
 -- --------------------------------------------------------
 
@@ -153,6 +155,13 @@ CREATE TABLE `horarios` (
   `turno` enum('matutino','vespertino') COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `horarios`
+--
+
+INSERT INTO `horarios` (`id`, `taller`, `lunes`, `martes`, `miercoles`, `jueves`, `viernes`, `sabado`, `domingo`, `turno`) VALUES
+(16, 2, '12:00pm-13:30pm', '0', '12:00-2:30', '12:00pm-13:30pm', '12:00-2:30', '0', '0', 'vespertino');
+
 -- --------------------------------------------------------
 
 --
@@ -166,7 +175,7 @@ CREATE TABLE `maestro` (
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `taller_asignado` int(11) DEFAULT NULL,
   `curp` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
-  `telefono` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `telefono` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sexo` enum('F','M') COLLATE utf8_unicode_ci NOT NULL,
   `Token` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `rol_id` int(11) NOT NULL
@@ -177,9 +186,9 @@ CREATE TABLE `maestro` (
 --
 
 INSERT INTO `maestro` (`id`, `nombre`, `correo`, `password`, `taller_asignado`, `curp`, `telefono`, `sexo`, `Token`, `rol_id`) VALUES
-(1, 'Sin Asignar', '', '', 0, '', '', '', '', 3),
+(1, 'Sin Asignar', '', '', 1, '', '', '', '', 3),
 (16, 'Monica Priscila Delgado Verdejo', 'priscila_verdejo@outlook.com', '$2y$10$Z4FirdzKRTi5nzlC1xjV5eQbhBAyu1DrMlTup5Hlz4CUYtY.XULLy', 2, 'DEVM971204MCCLRN02', '9821159667', 'M', '', 3),
-(18, 'Lorna Alejandra Delgado Verdejo', 'verdejo97@outlook.com', '$2y$10$NCaZ6DLKO4ebvyIGkwTc2O66ZWLeyHiug/bR6B3nhNuGrPVPpKNZW', 1, 'DEVM971204MCCLRN01', '9821159667', 'M', '5f9b31d9b8ee3', 3);
+(18, 'Lorna Alejandra Delgado Verdejo', 'verdejo97@outlook.com', '$2y$10$NCaZ6DLKO4ebvyIGkwTc2O66ZWLeyHiug/bR6B3nhNuGrPVPpKNZW', 3, 'DEVM971204MCCLRN01', '9821276466', 'M', '5f9b31d9b8ee3', 3);
 
 -- --------------------------------------------------------
 
@@ -271,7 +280,7 @@ CREATE TABLE `talleres` (
 INSERT INTO `talleres` (`id`, `taller`, `nombre`, `descripcion`, `mtro_asignado`, `categoria`, `direccion`, `img1`) VALUES
 (1, 'No asignado', '', '', 1, '', '', ''),
 (2, 'Danza moderna', 'halcones', 'asdadsasd', 16, 'Cultural', 'adsasd', '71HHP51MVEL._AC_SY355_.jpg'),
-(3, 'volleybal', 'Los halcones del Itescham', 'bla bla bla bla ', 1, 'Deportivo', '12', '5c3642f4bda1537b6aa50702-large.jpg'),
+(3, 'volleybal', 'Los halcones del Itescham', 'bla bla bla bla ', 18, 'Deportivo', '12', '5c3642f4bda1537b6aa50702-large.jpg'),
 (4, 'Futbol', 'halconese', 'fdffdfd', 1, 'Deportivo', 'dfdfdfd', '9ab2cb6cf42baebec14e35fa8a287db0.jpg'),
 (5, 'Escolta', 'halcones', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 1, 'Civico', '12', '0966713e7055b3340e54995b50f64704.jpg'),
 (6, 'Ballet', 'viejas en mallas', 'bla bla bla bla ', 1, 'Cultural', 'daesdadada', 'b56dbba6d76b457498767e12e624d2de.jpg');
@@ -371,13 +380,13 @@ ALTER TABLE `cms`
 -- AUTO_INCREMENT de la tabla `documentos`
 --
 ALTER TABLE `documentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `maestro`

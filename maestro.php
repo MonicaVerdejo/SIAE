@@ -581,11 +581,11 @@ if (!isset($_SESSION['rol'])) {
                                             <th>Sexo</th>
                                             <th>Estatus</th>
                                             <th>Representativo</th>
-                                            <th>Evaluacion</th>
+                                            
                                         </thead>
                                         <tbody style="background-color:  #f7f5f3;">
                                             <?php
-                                            $busqueda = $db->connect()->prepare("SELECT nombre, matricula,carrera, semestre, sexo, estatus, representativo, evaluacion FROM `alumnos` WHERE taller_id='$tallerid'");
+                                            $busqueda = $db->connect()->prepare("SELECT nombre, matricula,carrera, semestre, sexo, estatus, representativo FROM `alumnos` WHERE taller_id='$tallerid'");
                                             $busqueda->execute();
                                             foreach ($busqueda as $fila) {
                                             ?>
@@ -597,7 +597,7 @@ if (!isset($_SESSION['rol'])) {
                                                     <td><?php echo $fila[4]; ?></td>
                                                     <td><?php echo $fila[5]; ?></td>
                                                     <td><?php echo $fila[6]; ?></td>
-                                                    <td><?php echo $fila[7]; ?></td>
+                                                    
                                                 </tr>
                                             <?php
                                             }

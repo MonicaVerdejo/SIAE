@@ -19,6 +19,7 @@ if (!empty($_POST['correo']) && !empty($_POST['password'])) {
         $_SESSION['id_admin'] = $row[0];
         $_SESSION['img_profile']=$row[5];
         $_SESSION['correo']=$row[2];
+        $_SESSION['sexo']=$row[8];
         
        
         switch ($rol) {

@@ -46,174 +46,173 @@
  <body>
      <main>
          <div class="page-wrapper chiller-theme toggled">
-             <!--Sidebar-->
-             <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
-                 <i class="fas fa-bars"></i>
-             </a>
-             <nav id="sidebar" class="sidebar-wrapper">
-                 <div class="sidebar-content">
-                     <div class="sidebar-brand">
-                         <a href="#">Administrador</a>
-                         <div id="close-sidebar">
-                             <i class="fas fa-times"></i>
-                         </div>
-                         <hr>
-                     </div>
-                     <div class="text-center">
-                         <?php if ((isset($_SESSION['rol'])) && ($_SESSION['rol'] != "")) { ?>
+              <!--Sidebar-->
+            <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
+                <i class="fas fa-bars"></i>
+            </a>
+            <nav id="sidebar" class="sidebar-wrapper">
+                <div class="sidebar-content">
+                    <div class="sidebar-brand">
+                        <a href="#">Administrador</a>
+                        <div id="close-sidebar">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="text-center">
+                        <?php if ((isset($_SESSION['rol'])) && ($_SESSION['rol'] != "")) { ?>
 
-                             <div class="user-img"> <img height="40" width="40" src="img/img_profile/<?php echo  $_SESSION['img_profile']; ?>" alt=""></div>
-
-
-                             <div id="cambiarp">
-                                 <img width="20" height="20" src="img/editar.png" alt="">
-                                 <label for="file">Cambiar avatar</label>
-                             </div>
-
-                             <!---->
-                             <form class="col-12" id="perfil" style="display:none;" action="upload.php" method="post" enctype="multipart/form-data">
-                                 <input type="file" lass="form-control" name="file" id="file">
-                                 <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
-                             </form>
-
-                             <!---->
-
-                         <?php } ?>
-                     </div>
-
-                     <div class="sidebar-menu">
-                         <ul>
-                             <li class="header-menu">
-                                 <span>General</span>
-                             </li>
-                             <li id="inicio-cms">
-                                 <a href="administrativo.php">
-                                     <i class="fa fa-desktop" aria-hidden="true"></i>
-                                     <span>Administrar inicio</span>
-                                 </a>
-                             </li>
-                             <li id="page-Course">
-                                 <a href="administrativo.php">
-                                     <i class="fas fa-table"></i>
-                                     <span>Talleres</span>
-                                 </a>
-                             </li>
-                             <li id="page-schedule">
-                                 <a href="administrativo.php">
-                                     <i class="fas fa-calendar-alt    "></i>
-                                     <span>Horarios</span>
-                                 </a>
-                             </li>
-                             <li id="page-mtro">
-                                 <a href="administrativo.php">
-                                     <i class="fas fa-table"></i>
-                                     <span>Maestros</span>
-                                 </a>
-                             </li>
-
-                             <li class="sidebar-dropdown">
-                                 <a href="administrativo.php">
-                                     <i class="fa fa-folder-open" aria-hidden="true"></i>
-                                     <span>Alumnos</span>
-                                 </a>
-                                 <div class="sidebar-submenu">
-                                     <ul style="text-align: center;">
-
-                                         <li id="page-std" style="text-align: left;" class="btn btn-outline-info btn-sm mt-1 mb-1" id="mensajesEnviados">
-                                             <i class="fa fa-archive" aria-hidden="true"></i>Administrar
-                                         </li>
+                            <div class="user-img"> <img height="40" width="40" src="img/img_profile/<?php echo  $_SESSION['img_profile']; ?>" alt=""></div>
 
 
+                            <div id="cambiarp">
+                                <img width="20" height="20" src="img/editar.png" alt="">
+                                <label for="file">Cambiar avatar</label>
+                            </div>
 
-                                         <br>
-                                         <p style="color: white; text-align: left; margin-left:15px;">Listas/Evaluar:
-                                         </p>
-                                         <li>
-                                             <?php
-                                                $sentencia = $db->connect()->prepare("SELECT id, taller FROM talleres");
-                                                $sentencia->execute();
+                            <!---->
+                            <form class="col-12" id="perfil" style="display:none;" action="upload.php" method="post" enctype="multipart/form-data">
+                                <input type="file" lass="form-control" name="file" id="file">
+                                <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                            </form>
 
-                                                foreach ($sentencia as $row) {
+                            <!---->
 
-                                                ?>
-                                                 <form class="text-center" action="buscar_id.php" method="POST">
-                                                     <input type="text" class="sr-only" value="<?php echo $row[0]; ?>" name="idTaller">
-                                                     <input <?php if ($row[1] == "No asignado") { ?> style="display: none;" <?php } else { ?> type="submit" id="Tallerstd" name="Tallerstd" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[1];
-                                                                                                                                                                                                                                                } ?>">
+                        <?php } ?>
+                    </div>
 
-                                                     </input>
-                                                 </form>
-                                             <?php } ?>
+                    <div class="sidebar-menu">
+                        <ul>
+                            <li class="header-menu">
+                                <span>General</span>
+                            </li>
+                            <li>
+                                <a href="administrativo.php">
+                                    <i class="fa fa-desktop" aria-hidden="true"></i>
+                                    <span>Inicio</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin_cms.php">
+                                    <i class="fa fa-desktop" aria-hidden="true"></i>
+                                    <span>Administrar página</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin_taller.php">
+                                    <i class="fas fa-table"></i>
+                                    <span>Talleres</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin_horarios.php">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Horarios</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin_mtro.php">
+                                    <i class="fas fa-table"></i>
+                                    <span>Maestros</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="fa fa-folder-open" aria-hidden="true"></i>
+                                    <span>Alumnos</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul style="text-align: center; list-style:none;">
+                                        <li style="text-align: left;  " class="btn btn-outline-info btn-sm mt-1 mb-1">
+                                            <i class="fa fa-archive" aria-hidden="true"></i><a href="admin_std.php">Administrar</a>
+                                        </li>
+                                        <br>
+                                        <p style="color: white; text-align: left; margin-left:15px;">Listas/Evaluar:</p>
+                                        <li>
+                                            <?php
+                                            $sentencia = $db->connect()->prepare("SELECT id, taller FROM talleres");
+                                            $sentencia->execute();
 
-                                         </li>
-                                     </ul>
-                                 </div>
-                             </li>
-                             <li class="sidebar-dropdown">
-                                 <a href="administrativo.php">
-                                     <i class="fa fa-comment" aria-hidden="true"></i>
-                                     <span>Mensajes</span>
-                                 </a>
-                                 <div class="sidebar-submenu">
-                                     <ul style="text-align: center;">
-                                         <li style="text-align: left;" class="btn btn-outline-info btn-sm mt-1 mb-1" id="mensajesEnviados">
-                                             <i class="fa fa-archive" aria-hidden="true"></i>Enviados
-                                         </li> <br>
+                                            foreach ($sentencia as $row) {
 
-                                         <li class="btn btn-outline-info btn-sm mt-1 mb-1" id="mensajesNuevos">
-                                             <i class="fas fa-edit"></i>Nuevo
-                                         </li>
-                                     </ul>
-                                 </div>
-                             </li>
+                                            ?>
+                                                <form class="text-center" action="buscar_id.php" method="POST">
+                                                    <input type="text" class="sr-only" value="<?php echo $row[0]; ?>" name="idTaller">
+                                                    <input <?php if ($row[1] == "No asignado") { ?> style="display: none;" <?php } else { ?> type="submit" id="Tallerstd" name="Tallerstd" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[1];
+                                                                                                                                                                                                                                            } ?>">
 
-                             <li id="mtro_instrumentacion">
-                                 <a href="administrativo.php">
-                                     <i class="fa fa-hourglass" aria-hidden="true"></i>
-                                     <span>Instrumentación didáctica</span>
-                                 </a>
-                             </li>
-                             <li class="header-menu">
-                                 <span>Sistema</span>
-                             </li>
+                                                    </input>
+                                                </form>
+                                            <?php } ?>
 
-                             <li class="sidebar-dropdown" id="opciones">
-                                 <a href="administrativo.php">
-                                     <i class="fa fa-cogs" aria-hidden="true"></i>
-                                     <span>Opciones</span>
-                                 </a>
-                                 <div class="sidebar-submenu">
-                                     <a href="administrativo.php" <?php
-                                                                    $adminDios = $_SESSION['id_admin'];
-                                                                    if ($adminDios == 1) {
-                                                                    ?>id="page_editAdmin" <?php
-                                                                                        } else {
-                                                                                            ?>data-toggle="modal" data-target="#permisosModal" <?php
-                                                                                                                                            }
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="fa fa-comment" aria-hidden="true"></i>
+                                    <span>Mensajes</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul style="text-align: center;">
+                                        <li style="text-align: left;" class="btn btn-outline-info btn-sm mt-1 mb-1" id="mensajesEnviados">
+                                            <i class="fa fa-archive" aria-hidden="true"></i>Enviados
+                                        </li> <br>
 
-                                                                                                                                                ?>>
-                                         <i class="fas fa-edit "></i>
-                                         <span>Administrativos</span>
-                                     </a>
-                                     <a href="administrativo.php" data-toggle="modal" data-target="#changePModal">
-                                         <i class="fas fa-edit "></i>
-                                         <span>Cambiar contraseña</span>
-                                     </a>
-                                 </div>
-                             </li>
-                             <li>
-                                 <a href="cerrar.php">
-                                     <i class="fa fa-power-off"></i>
-                                     <span>Salir</span>
-                                 </a>
-                             </li>
+                                        <li class="btn btn-outline-info btn-sm mt-1 mb-1" id="mensajesNuevos">
+                                            <i class="fas fa-edit"></i>Nuevo
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="admin_instrumentacion.php  ">
+                                    <i class="fa fa-hourglass" aria-hidden="true"></i>
+                                    <span>Instrumentación didáctica</span>
+                                </a>
+                            </li>
+                            <li class="header-menu">
+                                <span>Sistema</span>
+                            </li>
 
-                         </ul>
-                         <!-- sidebar-menu  -->
-                     </div>
-                     <!-- sidebar-content  -->
-             </nav>
-             <!-- Sidebar end -->
+                            <li class="sidebar-dropdown" id="opciones">
+                                <a href="#">
+                                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                                    <span>Opciones</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <a href="#" <?php
+                                                $adminDios = $_SESSION['id_admin'];
+                                                if ($adminDios == 1) {
+                                                ?>id="page_editAdmin" <?php
+                                                                    } else {
+                                                                        ?>data-toggle="modal" data-target="#permisosModal" <?php
+                                                                                                                        }
+
+                                                                                                                            ?>>
+                                        <i class="fas fa-edit "></i>
+                                        <span>Administrativos</span>
+                                    </a>
+                                    <a href="#" data-toggle="modal" data-target="#changePModal">
+                                        <i class="fas fa-edit "></i>
+                                        <span>Cambiar contraseña</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="cerrar.php">
+                                    <i class="fa fa-power-off"></i>
+                                    <span>Salir</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <!-- sidebar-menu  -->
+                    </div>
+                    <!-- sidebar-content  -->
+            </nav>
+            <!-- Sidebar end -->
 
              <main class="page-content">
                  <div class="container-fluid">
@@ -369,14 +368,25 @@
                                      </div>
                                  </div>
                              </div>
-                             <div class="col-sm-6 col-md-3 wow blurIn" data-wow-delay=".2s" id="registrarHorario">
-                                 <article class=""> <img src="img/logos/acreditar.png" width="150" height="auto" alt="Acreditar alumno">
-                                     <div class="" data-toggle="modal" data-target="#acreditarModal">
-                                         <div>
-                                             <h4 class=""><a href="#">Acreditar alumno</a></h4>
+                             <div class="col-sm-6 col-md-3 wow blurIn text-center" data-wow-delay=".2s">
+                                 <div class="row ml-3">
+                                     <article class=""> <img src="img/logos/acreditar.png" width="150" height="auto" alt="Acreditar alumno">
+                                         <div class="" data-toggle="modal" data-target="#acreditarModal">
+                                             <div>
+                                                 <h4 class=""><a href="#">Acreditar alumno</a></h4>
+                                             </div>
                                          </div>
-                                     </div>
-                                 </article>
+                                     </article>
+                                 </div>
+                                 <div class="row mt-3">
+                                     <article class=""> <img src="img/logos/aprobar.png" width="150" height="auto" alt="Aprobar/Reprobar alumno">
+                                         <div class="" data-toggle="modal" data-target="#aprobarModal">
+                                             <div>
+                                                 <h4 class=""><a href="#">Aprobar/Reprobar Alumno</a></h4>
+                                             </div>
+                                         </div>
+                                     </article>
+                                 </div>
                              </div>
 
                              <!--Modal acreditar alumno-->
@@ -399,32 +409,32 @@
                                                      <input id="mtroA" class="form-control" type="text" name="mtroA" value="<?php echo $mtroA; ?>">
                                                  </div>
                                                  <?php
-                                    $buscarAlumno = $db->connect()->prepare("SELECT matricula, nombre FROM alumnos WHERE taller_id=$Tallerstd and estatus='Cursando'");
-                                    $buscarAlumno->execute();
-                                    ?>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text" for="matricula">Alumno:</label>
-                                        </div>
-                                        <select class="custom-select" name="matricula" id="matricula" required="true">
-                                            <?php foreach ($buscarAlumno as $row) {
-                                            ?>
-                                                <option <?php
-                                                        if ($row[0] == 1) {
-                                                            # code...
-                                                        ?> style="display: none;" <?php
-                                                                                } else {
-                                                                                    # code...
-                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
-                                                                                                                    }
+                                                    $buscarAlumno = $db->connect()->prepare("SELECT matricula, nombre FROM alumnos WHERE taller_id=$Tallerstd and estatus='Cursando'");
+                                                    $buscarAlumno->execute();
+                                                    ?>
+                                                 <div class="input-group mb-3">
+                                                     <div class="input-group-prepend">
+                                                         <label class="input-group-text" for="matricula">Alumno:</label>
+                                                     </div>
+                                                     <select class="custom-select" name="matricula" id="matricula" required="true">
+                                                         <?php foreach ($buscarAlumno as $row) {
+                                                            ?>
+                                                             <option <?php
+                                                                        if ($row[0] == 1) {
+                                                                            # code...
+                                                                        ?> style="display: none;" <?php
+                                                                                                } else {
+                                                                                                    # code...
+                                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                                    }
 
-                                                                                                                        ?>><?php echo $row[1]; ?></option>
+                                                                                                                                        ?>><?php echo $row[1]; ?></option>
 
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
+                                                         <?php
+                                                            }
+                                                            ?>
+                                                     </select>
+                                                 </div>
 
 
 
@@ -435,17 +445,15 @@
                                                  </div>
                                                  <div class="form-group">
                                                      <label for="valorN">Valor numérico adquirido:</label>
-                                                     <input id="valorN" class="form-control" type="text" name="valorN" placeholder="4" required pattern="^\d+$" 
-                                                     oninvalid="this.setCustomValidity('El valor numérico sólo acepta ingreses un número')" oninput="this.setCustomValidity('')">
+                                                     <input id="valorN" class="form-control" type="text" name="valorN" placeholder="4" required pattern="^\d+$" oninvalid="this.setCustomValidity('El valor numérico sólo acepta ingreses un número')" oninput="this.setCustomValidity('')">
                                                  </div>
-                                                  <div class="form-group">
+                                                 <div class="form-group">
                                                      <label for="periodo">Periodo escolar:</label>
                                                      <input id="periodo" class="form-control" type="text" name="periodo" placeholder="Agosto-Diciembre 2020" required>
                                                  </div>
                                                  <div class="form-group">
                                                      <label for="valorCurricular">Valor curricular adquirido:</label>
-                                                     <input id="valorCurricular" class="form-control" type="text" name="valorCurricular" required pattern="^\d+$" 
-                                                     oninvalid="this.setCustomValidity('En el valor curricular sólo se acepta ingreses un número, correspondiente a los créditos adquiridos por el alumno.')" oninput="this.setCustomValidity('')">
+                                                     <input id="valorCurricular" class="form-control" type="text" name="valorCurricular" required pattern="^\d+$" oninvalid="this.setCustomValidity('En el valor curricular sólo se acepta ingreses un número, correspondiente a los créditos adquiridos por el alumno.')" oninput="this.setCustomValidity('')">
                                                  </div>
                                                  <div class="form-group">
                                                      <label for="jefeDepEscolares">Jefe(a) del departamento de servicios escolares:</label>
@@ -462,9 +470,84 @@
                                      </div>
                                  </div>
                              </div>
+
+                             <!--Modal aprobar alumno-->
+                             <div class="modal fade" id="aprobarModal" tabindex="-1" role="dialog" aria-labelledby="aprobarModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog" role="document">
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <h5 class="modal-title" id="aprobarModalLabel">Aprobar ó Reprobar alumno</h5>
+                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                             </button>
+                                         </div>
+                                         <div class="modal-body text-center">
+                                             <img src="img/logos/credito.png" width="200px" alt="Acreditar alumno">
+
+                                             <form class="col-12" action="admin/aprobarStd.php" method="post">
+                                                 <br>
+
+                                                 <?php
+                                                    $buscarAlumno = $db->connect()->prepare("SELECT matricula, nombre FROM alumnos WHERE taller_id=$Tallerstd and estatus='Cursando'");
+                                                    $buscarAlumno->execute();
+                                                    ?>
+                                                 <div class="input-group mb-3">
+                                                     <div class="input-group-prepend">
+                                                         <label class="input-group-text" for="matricula">Alumno:</label>
+                                                     </div>
+                                                     <select class="custom-select" name="matricula" id="matricula" required="true">
+                                                         <?php foreach ($buscarAlumno as $row) {
+                                                            ?>
+                                                             <option <?php
+                                                                        if ($row[0] == 1) {
+                                                                            # code...
+                                                                        ?> style="display: none;" <?php
+                                                                                                } else {
+                                                                                                    # code...
+                                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                                    }
+
+                                                                                                                                        ?>><?php echo $row[1]; ?></option>
+
+                                                         <?php
+                                                            }
+                                                            ?>
+                                                     </select>
+                                                 </div>
+
+                                                 <div class="form-group">
+                                                     <label for="estatus">Estatus</label>
+                                                     <select id="estatus" class="form-control" name="estatus">
+                                                         <option>Aprobado</option>
+                                                         <option>Reprobado</option>
+                                                     </select>
+                                                 </div>
+
+                                                 <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
+                                             </form>
+                                             <span>Se cambiará el estado de cursando, según lo asignado, al estudiante que corresponda.</span>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+
                          </div>
                      </div>
+                 </section>
 
+                 <section class="section section-xl bg-default text-md-center container">
+                     <div class="col-md-12 col-sm-12">
+                         <div class="card">
+                             <div class="card-header" style="margin:auto">
+                                 <h1 class="card-title">CONSTANCIAS DE ACREDITACIÓN ASIGNADAS</h1>
+                             </div>
+                             <div class="card-body">
+                                 <table class="tablaEstudiantes mt-3 text-center table  table-hover table-responsive" style=" width: 70%; background-color: white; margin:auto;">
+                                     <?php echo $tablestdAcreditados; ?>
+                                 </table>
+                             </div>
+                         </div>
+                     </div>
                  </section>
              </main>
          </div>
