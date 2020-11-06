@@ -470,6 +470,14 @@ if (!isset($_SESSION['rol'])) {
                                             <label for="curp">CURP</label>
                                             <input type="text" name="curp" id="" class="form-control" placeholder="VELF971204HCCLRN73" aria-describedby="helpId" required="True" required pattern="[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]" oninvalid="this.setCustomValidity('Formato de la Clave Única de Registro de Población')" oninput="this.setCustomValidity('')">
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="sexo">Sexo</label>
+                                            <select id="sexo" class="form-control" name="sexo">
+                                                <option>F</option>
+                                                <option>M</option>
+                                            </select>
+                                        </div>
                                         <button type="submit" class="btn btn-secondary">Enviar</button>
                                     </form>
                                 </div>
@@ -615,153 +623,61 @@ if (!isset($_SESSION['rol'])) {
             });
             //seccion de mensajes
             $("#mensajesEnviados").on('click', function() {
-                $("#cms").hide();
                 $("#mensajesE").show();
                 $("#mensajesN").hide();
-                $("#teach-options").hide();
-                $("#student-options").hide();
-                $("#options_T").hide();
-                $("#table-mtro").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
+                $("#sectionIndex").hide();
+                $("#Bienvenido").hide();
                 return false;
             });
             $("#mensajesNuevos").on('click', function() {
-                $("#cms").hide();
                 $("#mensajesN").show();
                 $("#mensajesE").hide();
-                $("#teach-options").hide();
-                $("#student-options").hide();
-                $("#options_T").hide();
-                $("#table-mtro").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Adelete").hide();
-                $("#options_Hr").hide();
                 $("#options_Admin").hide();
+                $("#sectionIndex").hide();
+                $("#Bienvenido").hide();
                 return false;
             });
             //ADMINISTRATIVE OPTIONS
             $("#page_editAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
+                $("#sectionIndex").hide();
                 $("#options_Admin").show();
+                $("#Bienvenido").hide();
                 return false;
             });
             $("#registrarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-eliminarHr").hide();
-                $("#form-editarHr").hide();
                 $("#form-registrarAdmin").show();
-                $("#form-registrarHr").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#options_Admin").show();
-                $("#horario").hide();
+                $("#sectionIndex").hide();
+                $("#Bienvenido").hide();
                 return false;
             });
             $("#eliminarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#horario").hide();
-                $("#form-eliminarHr").hide();
                 $("#form-registrarAdmin").hide();
                 $("#lista-mostrarAdmin").hide();
                 $("#form-eliminarAdmin").show();
                 $("#options_Admin").show();
+                $("#sectionIndex").hide();
+                $("#Bienvenido").hide();
                 return false;
             });
             $("#mostrarAdmin").on('click', function() {
-                $("#cms").hide();
-                $("#options_T").hide();
-                $("#student-options").hide();
-                $("#teach-options").hide();
-                $("#table-mtro").hide();
                 $("#mensajesN").hide();
                 $("#mensajesE").hide();
-                $("#form-Tdelete").hide();
-                $("#form-Tedit").hide();
-                $("#form-Tregister").hide();
-                $("#table-talleres").hide();
-                $("#form-Adelete").hide();
-                $("#form-Aedit").hide();
-                $("#form-Aregister").hide();
-                $("#form-Courseedit").hide();
-                $("#form-Coursedelete").hide();
-                $("#form-Courseregister").hide();
-                $("#instrumentacionD").hide();
-                $("#options_Hr").hide();
-                $("#form-registrarHr").hide();
-                $("#form-editarHr").hide();
-                $("#form-eliminarHr").hide();
-                $("#horario").hide();
                 $("#form-registrarAdmin").hide();
                 $("#form-eliminarAdmin").hide();
                 $("#lista-mostrarAdmin").show();
                 $("#options_Admin").show();
+                $("#sectionIndex").hide();
+                $("#Bienvenido").hide();
                 return false;
             });
         });

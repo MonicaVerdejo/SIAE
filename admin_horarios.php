@@ -203,7 +203,7 @@ if (!isset($_SESSION['rol'])) {
                 </div>
 
                 <!-------------------------------------------------------------SECCIÓN DE HORARIOS------------------------------------------------->
-                <section class="section bg-default text-md-center" id="">
+                <section class="section bg-default text-md-center" id="options_Hr">
                     <div>
                         <div>
                             <h3>HORARIOS</h3>
@@ -579,7 +579,7 @@ if (!isset($_SESSION['rol'])) {
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                Envía un nuevo mensaje a tus alumnos </h3>
+                                Envía un nuevo mensaje a tus maestros </h3>
                         </div>
                     </div>
                     <div class="mensajesN container">
@@ -711,6 +711,13 @@ if (!isset($_SESSION['rol'])) {
                                         <div class="form-group">
                                             <label for="curp">CURP</label>
                                             <input type="text" name="curp" id="" class="form-control" placeholder="VELF971204HCCLRN73" aria-describedby="helpId" required="True" required pattern="[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]" oninvalid="this.setCustomValidity('Formato de la Clave Única de Registro de Población')" oninput="this.setCustomValidity('')">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sexo">Sexo</label>
+                                            <select id="sexo" class="form-control" name="sexo">
+                                                <option>F</option>
+                                                <option>M</option>
+                                            </select>
                                         </div>
                                         <button type="submit" class="btn btn-secondary">Enviar</button>
                                     </form>

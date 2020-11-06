@@ -425,12 +425,12 @@ if (!isset($_SESSION['rol'])) {
                         <div class="row ">
                             <div class="col-sm-4 col-xs-12">
                                 <h3>Descargar Formato</h3>
-                                <a download="Instrumentacion didactica" href="pdf/Formato_Instrumentación_Didáctica_para_Ingreso.docx">
+                                <a download="Instrumentacion didactica" href="maestro/documentos/formatos/Formato_Instrumentación_Didáctica_para_Ingreso.docx">
                                     <img src="img/descargar.png" width="100" height="100" alt="Descargar Formato de Instrumentacion Didáctica"></a>
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <h3>Instrucciones de llenado</h3>
-                                <a href="pdf/Instrucciones para la Instrumentación Didáctica.pdf" target="blank"><img src="img/editar.png" width="100" height="100" alt="Instrucciones de llenado"></a>
+                                <a href="maestro/documentos/formatos/Instrucciones para la Instrumentación Didáctica.pdf" target="blank"><img src="img/editar.png" width="100" height="100" alt="Instrucciones de llenado"></a>
                             </div>
                             <div class="col-sm-4 col-xs-12" data-toggle="modal" data-target="#enviarModal">
                                 <h3>Enviar Formato</h3>
@@ -597,7 +597,6 @@ if (!isset($_SESSION['rol'])) {
                                                     <td><?php echo $fila[4]; ?></td>
                                                     <td><?php echo $fila[5]; ?></td>
                                                     <td><?php echo $fila[6]; ?></td>
-                                                    
                                                 </tr>
                                             <?php
                                             }

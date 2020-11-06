@@ -12,6 +12,7 @@ if (!isset($_SESSION['rol'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,11 +30,12 @@ if (!isset($_SESSION['rol'])) {
     <link rel="stylesheet" href="css/styles2.css">
     <!--MODAL BOOTSTRAP-->
 </head>
+
 <body>
     <main>
         <div class="page-wrapper chiller-theme toggled">
-           <!--Sidebar-->
-           <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
+            <!--Sidebar-->
+            <a id="show-sidebar" style="position:absolute; z-index:3;" class="btn btn-sm btn-dark" href="#">
                 <i class="fas fa-bars"></i>
             </a>
             <nav id="sidebar" class="sidebar-wrapper">
@@ -202,14 +204,22 @@ if (!isset($_SESSION['rol'])) {
 
             <main class="page-content">
                 <div class="container-fluid">
-                    <h2>SIAE</h2>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="img/logos/tecnm.svg" alt="">
+                        </div>
+                        <div class="col-sm-9 mt-2 text-center">
+                            <h1>Sistema Integral para Actividades Extraescolares</h1>
+                        </div>
+                    </div>
+                    <hr>
                 </div>
                 <!-------------------------------------------------------------INSTRUMENTACION DIDACTICA--------------------------------------------->
                 <section id="instrumentacionD">
                     <div>
                         <div class="container">
                             <!--Tabla de instrumentacion didactica -->
-                            <div class="col-12 card mt-5">
+                            <div class="col-12 card mt-1">
                                 <div class="card-header">
                                     <h3 class="card-title">
                                         <i class="fa fa-address-book" aria-hidden="true"></i>
@@ -220,7 +230,7 @@ if (!isset($_SESSION['rol'])) {
                                 <div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
-                                        <table class="table table-bordered table-hover">
+                                        <table class="table table-bordered table-hover table-responsive">
                                             <thead style="background-color:steelblue;">
                                                 <th>Nombre</th>
                                                 <th>Taller</th>
@@ -309,7 +319,7 @@ if (!isset($_SESSION['rol'])) {
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                Envía un nuevo mensaje a tus alumnos </h3>
+                                Envía un nuevo mensaje a tus maestros </h3>
                         </div>
                     </div>
                     <div class="mensajesN container">
@@ -440,6 +450,13 @@ if (!isset($_SESSION['rol'])) {
                                         <div class="form-group">
                                             <label for="curp">CURP</label>
                                             <input type="text" name="curp" id="" class="form-control" placeholder="VELF971204HCCLRN73" aria-describedby="helpId" required="True" required pattern="[A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9]" oninvalid="this.setCustomValidity('Formato de la Clave Única de Registro de Población')" oninput="this.setCustomValidity('')">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sexo">Sexo</label>
+                                            <select id="sexo" class="form-control" name="sexo">
+                                                <option>F</option>
+                                                <option>M</option>
+                                            </select>
                                         </div>
                                         <button type="submit" class="btn btn-secondary">Enviar</button>
                                     </form>
@@ -637,4 +654,5 @@ if (!isset($_SESSION['rol'])) {
         });
     </script>
 </body>
+
 </html>

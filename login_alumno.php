@@ -22,6 +22,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['password'])) {
         $_SESSION['carrera'] = $row[5];
         $_SESSION['semestre'] = $row[7];
         $_SESSION['taller_id'] = $row[3];
+        $_SESSION['credito'] = $row[8];
         switch ($rol) {
             case 2:
                 header('location: alumno.php');

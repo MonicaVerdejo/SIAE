@@ -89,9 +89,17 @@ $mtroasignado = $opcion[3];
                                 </a>
                             </li>
                             <li id="constancia de crédito">
-                                <a href="#">   <!--Con un if si tiene doc asignado lo descarga y si no imprime "Este apartado aun no esta disponible para ti"
-                            o algo por el estilo-->
-                                   <i class="fa fa-file" aria-hidden="true"></i>
+                                <a href="#" <?php
+                                                $credito = $_SESSION['credito'];
+                                                if ($credito !="") {
+                                                ?>data-toggle="modal" data-target="#creditoModal"<?php
+                                                                    } else {
+                                                                        ?>data-toggle="modal" data-target="#nocreditoModal" <?php
+                                                                                                                        }
+
+                                                                                                                            ?>>
+                                    
+                                    <i class="fa fa-file" aria-hidden="true"></i>
                                     <span>Constancia de Crédito</span>
                                 </a>
                             </li>
@@ -269,9 +277,6 @@ $mtroasignado = $opcion[3];
                         </section>
 
                     </div>
-
-
-
                 </div>
 
 
@@ -335,6 +340,49 @@ $mtroasignado = $opcion[3];
 
                 </section>
 
+                <!-------------------------------------SIN CREDITO ASIGNADO---------------------------------------------->
+               
+                <div class="modal fade" id="nocreditoModal" tabindex="-1" role="dialog" aria-labelledby="nocreditoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="nocreditoModalLabel">QUERIDO ESTUDIANTE</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/logos/losentimos.gif" height="150px" alt="Portada Inicio">
+                                <h5>Lamentamos informarte que aún no cuentas con los permisos necesarios para acceder a estas funciones.</h5>
+                                <span>Por favor sigue trabajando arduamente para conseguirlo.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-------------------------------------CON CREDITO ASIGNADO---------------------------------------------->
+               
+                <div class="modal fade" id="creditoModal" tabindex="-1" role="dialog" aria-labelledby="creditoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="creditoModalLabel">QUERIDO ESTUDIANTE</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="img/logos/felicitaciones.png" width="450px" alt="Felicitaciones">
+                                <h5 class="mt-4">Nos honra decirte que has conseguido tu crédito por el taller satisfactoriamente cursado.</h5>
+                                <hr>
+                                <?php $matricula=$_SESSION['matricula']; $credito=$_SESSION['credito'];  ?> 
+                                <a download="Constancia <?php echo $matricula;?>" href="pdf/<?php echo $credito;?>"><img src="img/logos/descargar.png" width="100px" alt="Descargar credito">Descargar constancia</a>
+                                <br>
+                                <span>Por favor sigue trabajando arduamente.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 

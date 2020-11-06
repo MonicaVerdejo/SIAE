@@ -435,10 +435,6 @@
                                                             ?>
                                                      </select>
                                                  </div>
-
-
-
-
                                                  <div class="form-group">
                                                      <label for="nivelDesempeño">Nivel de desempeño adquirido:</label>
                                                      <input id="nivelDesempeño" class="form-control" type="text" name="nivelD" placeholder="Excelente" required>

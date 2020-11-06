@@ -2,13 +2,12 @@
 // Inicializar sesión solo si no se ha iniciado
 include_once '../db.php';
 $db = new DB();
-if(isset ($_SESSION)) {
-    
-}else{
-session_start();
+if (isset($_SESSION)) {
+} else {
+    session_start();
 }
 
-if($_SERVER['REQUEST_METHOD']=='POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Si se va a procesar el formulario
     $matricula = $_POST['matricula'];
     $nivelD = $_POST['nivelD'];
@@ -17,6 +16,55 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $valorCurricular = $_POST['valorCurricular'];
     $jefeDepEscolares = $_POST['jefeDepEscolares'];
     $mtroA = $_POST['mtroA'];
+    $f = $_POST['fechaexp'];
+    $fechasql = explode('-', $f);
+    $year = $fechasql[0];
+    $day = $fechasql[2];
+    $month = $fechasql[1];
+
+    switch ($month) {
+        case '1':
+            $month = "Enero";
+            break;
+        case '2':
+            $month = "Febrero";
+            break;
+        case '3':
+            $month = "Marzo";
+            break;
+        case '4':
+            $month = "Abril";
+            break;
+        case '5':
+            $month = "Mayo";
+            break;
+        case '6':
+            $month = "Junio";
+            break;
+        case '7':
+            $month = "Julio";
+            break;
+        case '8':
+            $month = "Agosto";
+            break;
+        case '9':
+            $month = "Septiembre";
+            break;
+        case '10':
+            $month = "Octubre";
+            break;
+        case '11':
+            $month = "Noviembre";
+            break;
+        case '12':
+            $month = "Diciembre";
+            break;
+        default:
+            # code...
+            break;
+    }
+
+
     //buscar datos del alumno
     $sql = "SELECT nombre, carrera FROM alumnos where matricula=$matricula";
     $statement = $db->connect()->prepare($sql);
@@ -24,10 +72,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     foreach ($statement as $row) {
         $nombreA = $row[0];
         $carrera = $row[1];
-    
     }
-      // Crear variable de sesión para que se pueda generar el PDF
-      $_SESSION['pdf'] = [
+    // Crear variable de sesión para que se pueda generar el PDF
+    $_SESSION['pdf'] = [
         'matricula' => $matricula,
         'nivelD' => $nivelD,
         'valorN' => $valorN,
@@ -36,14 +83,16 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         'jefeDepEscolares' => $jefeDepEscolares,
         'mtroA' => $mtroA,
         'nombreA' => $nombreA,
-        'carrera' => $carrera
-        
+        'carrera' => $carrera,
+        'year' => $year,
+        'month' => $month,
+        'day' => $day
     ];
     // Enlace de descarga solo si se procesa formulario
     $descarga = '<a class="btn btn-primary" href="creditoPdf.php"> <img style="margin-top:2%;" src="http://localhost/SIAE2/img/logos/descargar.png" height="150" width="150"> Descargar archivo PDF</a>';
-    
+
     //$asigna = '<a class="btn btn-primary" href="creditoPdf.php"> <img style="margin-top:2%;" src="http://localhost/SIAE2/img/logos/descargar.png" height="150" width="150"> Descargar archivo PDF</a>';
-} elseif(isset($_SESSION['pdf'])) {
+} elseif (isset($_SESSION['pdf'])) {
     // Se va a crear el PDF
     $matricula = $_SESSION['pdf']['matricula'];
     $nivelD = $_SESSION['pdf']['nivelD'];
@@ -54,10 +103,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $mtroA = $_SESSION['pdf']['mtroA'];
     $nombreA = $_SESSION['pdf']['nombreA'];
     $carrera = $_SESSION['pdf']['carrera'];
-    
+    $year = $_SESSION['pdf']['year'];
+    $day = $_SESSION['pdf']['day'];
+    $month = $_SESSION['pdf']['month'];
+
+
+
     // No hay enlace de descarga al crear PDF
     $descarga = '';
-    
 } else {
     die('No hay datos para procesar.');
 }
@@ -105,7 +158,7 @@ echo <<<HTML
                         actividad complementaria con el nivel de desempeño  $nivelD y un valor numérico
                         de  $valorN, durante el periodo escolar $periodo con un valor curricular de $valorCurricular
                         créditos.</p>
-                    <p style="margin-left:10%; margin-right:10%;">Se extiende la presente en Champotón, Campeche a los ____ días de ____________ de 20__.</p>
+                    <p style="margin-left:10%; margin-right:10%;">Se extiende la presente en Champotón, Campeche a los $day días de $month de $year.</p>
                 </td>
             </tr>
         </tbody>

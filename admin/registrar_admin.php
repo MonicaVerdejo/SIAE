@@ -6,6 +6,7 @@ if (!empty($_POST['curp']) && !empty($_POST['nombre']) && !empty($_POST['correo'
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
     $curp = $_POST['curp'];
+    $sexo = $_POST['sexo'];
    
 
     if (strpos($correo, 'outlook.com') || strpos($correo, '@gmail.com') || strpos($correo, '@hotmail.com') || strpos($correo, '@yahoo.es') !== false) {
@@ -28,8 +29,8 @@ if (!empty($_POST['curp']) && !empty($_POST['nombre']) && !empty($_POST['correo'
             #code register
             $password = password_hash($_POST['curp'], PASSWORD_BCRYPT);
             //Insertar los datos en la bd
-            $newadmin = $db->connect()->prepare("INSERT INTO `administrador` (`id`, `nombre`, `correo`, `password`,  `curp`, `img_profile`, `Token`, `rol_id`) 
-                                                                VALUES ('', '$nombre', '$correo', '$password', '$curp', 'default.jpg',  '', '1');");
+            $newadmin = $db->connect()->prepare("INSERT INTO `administrador` (`id`, `nombre`, `correo`, `password`,  `curp`, `img_profile`, `Token`, `rol_id`, `sexo`) 
+                                                                VALUES ('', '$nombre', '$correo', '$password', '$curp', 'default.jpg',  '', '1', '$sexo');");
             $newadmin->execute();
 
             
