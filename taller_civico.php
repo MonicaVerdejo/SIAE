@@ -72,7 +72,7 @@ $db = new DB();
                                                 127-6466</a>
                                         </li>
                                         <li>
-                                            <div class="contacts-classic-title">Correo:</div><a href="mailTo:#">info@vinculacion.org</a>
+                                            <div class="contacts-classic-title">Correo:</div><a href="mailTo:#calidad@champoton.tecnm.mx">calidad@champoton.tecnm.mx</a>
                                         </li>
                                         <li>
                                             <div class="contacts-classic-title">Síguenos:</div>
@@ -93,8 +93,7 @@ $db = new DB();
                 </nav>
             </div>
         </header>
-        <section class="section section-inset-1 bg-default text-center bg-image background-position-1" 
-        id="home" style="background-image: url(img/img_portada/civico/civico.jpg)">
+        <section class="section section-inset-1 bg-default text-center bg-image background-position-1" id="home" style="background-image: url(img/img_portada/civico/civico.jpg)">
             <div class="container">
                 <div class="title-style-1-wrap">
                     <div class="oh-desktop wow slideInLeft">
@@ -148,7 +147,7 @@ $db = new DB();
 
         <!-- Page Footer-->
         <footer class="section footer-classic section-full section-full-1 section-sm section-inset-2 bg-gray-3 context-dark text-md-center" id="contacts">
-         <img class="mb-3" src="img/img_portada/slider/comunidadDigital.jpg" alt="comunidad Digital">
+            <img class="mb-3" src="img/img_portada/slider/comunidadDigital.jpg" alt="comunidad Digital">
             <div class="container">
                 <div class="footer-classic-list-social wow fadeInUp">
                     <ul class="list-inline list-social list-inline-sm">
@@ -160,7 +159,7 @@ $db = new DB();
                 <p class="rights wow fadeInUp"><span>&copy;&nbsp; </span>
                     <span class="copyright-year"></span><span>&nbsp;</span>
                     <span>SIAE</span><span>.&nbsp;</span>
-                    <span>Todos los derechos reservados.</span><br />Diseñado&nbsp;por&nbsp;<a href="#">Softup</a></p>
+                    <span>Todos los derechos reservados.</span><br />Diseñado&nbsp;por&nbsp;<a href="#">Soft Up</a></p>
             </div>
         </footer>
     </div>

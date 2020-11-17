@@ -367,27 +367,38 @@ if (!isset($_SESSION['rol'])) {
                         </div>
                     </div>
                     <div class="mensajesN container">
-
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-10"><label for="talleres">Tus talleres son:</label></div>
-                                <div class="col-2"><img src="img/mensajes.png" alt="mensajes" width="50" height="50"></div>
-                            </div>
-                            <?php
-                            $sentencia = $db->connect()->prepare('SELECT taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
-                            $sentencia->execute(['mtro_id' => $mtro_id]);
-                            foreach ($sentencia as $row) {
-                            ?>
-                                <button id="talleres" name="talleres" class="btn btn-outline-info btn-sm mt-1 mb-1" value="<?php echo $row[0]; ?>"><?php echo $row[0]; ?></button>
-                            <?php } ?>
-                        </div>
                         <form action="mensajeMtro.php" method="POST">
                             <div class="form-group sr-only ">
                                 <input type="text" class="form-control" name="mtro_id" id="mtro_id" value="<?php echo $mtro_id; ?>">
                             </div>
-                            <div class="form-group" title="Advertencia" data-toggle="popover" data-trigger="hover" data-content="Escoge sólo un taller">
-                                <label for="taller">Confirma el taller destinatario del mensaje:</label>
-                                <textarea class="form-control" placeholder="Danza Moderna"  name="taller" id="taller" rows="1" required="true"></textarea>
+                            <div>
+                                <label for="taller">Taller:</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <select class="custom-select col-8 ml-3" name="taller" id="taller" required="true">
+                                        <?php
+                                        $sentencia = $db->connect()->prepare('SELECT taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
+                                        $sentencia->execute(['mtro_id' => $mtro_id]);
+                                        foreach ($sentencia as $row) {
+                                        ?>
+                                            <option <?php
+                                                    if ($row[0] == 1) {
+                                                        # code...
+                                                    ?> style="display: none;" <?php
+                                                                            } else {
+                                                                                # code...
+                                                                                ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                        }
+
+                                                                                                            ?>><?php echo $row[0]; ?></option>
+
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <div class="col-2"><img src="img/mensajes.png" alt="mensajes" width="50" height="50"></div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="mensaje">Redacta tu mensaje:</label>
@@ -396,7 +407,6 @@ if (!isset($_SESSION['rol'])) {
                             <div class="form-group">
                                 <button title="Advertencia" data-toggle="popover" data-trigger="hover" data-content="Recuerda que una vez enviado no podrás eliminarlo" type="submit" class="btn btn-primary">Enviar</button>
                             </div>
-                            
                         </form>
                     </div>
                 </section>
@@ -451,27 +461,31 @@ if (!isset($_SESSION['rol'])) {
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <div class="form-group">
-                                        <div class="row text-left">
-                                            <div class="col-10"><label for="talleres">Tus talleres son:</label></div>
-                                        </div>
-                                        <?php
-                                        $sentencia = $db->connect()->prepare('SELECT taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
-                                        $sentencia->execute(['mtro_id' => $mtro_id]);
-                                        foreach ($sentencia as $row) {
-                                        ?>
-                                            <button id="talleres" name="talleres" class="btn btn-outline-info btn-sm mb-1" value="<?php echo $row[0]; ?>"><?php echo $row[0]; ?></button>
-                                        <?php } ?>
-                                    </div>
-
                                     <form class="mt-3" method="POST" action="maestro/enviarFormato.php" enctype="multipart/form-data">
                                         <div class="form-group sr-only ">
                                             <input type="text" class="form-control" name="mtro_id" id="mtro_id" value="<?php echo $mtro_id; ?>">
                                         </div>
-                                        <div class="form-group" title="Advertencia" data-toggle="popover" data-trigger="hover" data-content="Escoge sólo un taller">
-                                            <label for="taller">Confirma el taller al que pertenece la instrumentación:</label>
-                                            <textarea class="form-control" placeholder="Danza Moderna"  name="taller" id="taller" rows="1" required="true"></textarea>
-                                        </div>
+                                        <select class="custom-select col-8 ml-3" name="taller" id="taller" required="true">
+                                            <?php
+                                            $sentencia = $db->connect()->prepare('SELECT taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
+                                            $sentencia->execute(['mtro_id' => $mtro_id]);
+                                            foreach ($sentencia as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == 1) {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                            } else {
+                                                                                # code...
+                                                                                ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                        }
+
+                                                                                                            ?>><?php echo $row[0]; ?></option>
+
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
                                         <img src="img/logos/adjuntar.png" width="100px" alt="Portada Inicio">
                                         <div class="form-group mt-2">
                                             <span>Cargar archivo:</span>
@@ -581,7 +595,7 @@ if (!isset($_SESSION['rol'])) {
                                             <th>Sexo</th>
                                             <th>Estatus</th>
                                             <th>Representativo</th>
-                                            
+
                                         </thead>
                                         <tbody style="background-color:  #f7f5f3;">
                                             <?php
@@ -630,7 +644,7 @@ if (!isset($_SESSION['rol'])) {
 
                                     <div class="form-group">
                                         <label for="matricula">Matricula</label>
-                                        <input id="matricula" placeholder="161080138"  class="form-control" type="text" name="matricula" required="true">
+                                        <input id="matricula" placeholder="161080138" class="form-control" type="text" name="matricula" required="true">
                                     </div>
                                     <?php
                                     $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
