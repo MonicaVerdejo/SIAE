@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2020 a las 04:15:44
+-- Tiempo de generación: 19-11-2020 a las 08:04:04
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -76,13 +76,7 @@ CREATE TABLE `alumnos` (
 --
 
 INSERT INTO `alumnos` (`nombre`, `matricula`, `password`, `taller_id`, `representativo`, `carrera`, `estatus`, `semestre`, `evaluacion`, `sexo`, `rol_id`) VALUES
-('Sin asignar', 0, '', 1, '', '', '', '', '', '', 2),
-('Magnolia Verdejo Chong', 161616, '$2y$10$0ZAgJ7YjVooOY.mIiQGVWu5sdmVizdTvwUL0ULV8wCvoeVzx41Eoq', 3, 'Si', 'Licenciatura en Turismo', 'Cursando', 'Noveno', '', 'F', 2),
-('monica verdejo', 161080111, '$2y$10$U5Bcskx42d.uLDgsFUI6Lutrvha1ukOeUlkprI6vc1xNISA2lhrMm', 2, 'Si', 'Ingeniería Ambiental', 'Aprobado', 'Noveno', '', 'F', 2),
-('Dillan Alberto Delgado Verdejo', 161080133, '$2y$10$DkHiPtW9WefBjFV.HkB/Y.Iasoj5IjVBjK8U1XftolroDgl3gHkwu', 4, 'Si', 'Ingeniería Electromecánica', 'Cursando', 'Noveno', '161080133.pdf', 'M', 2),
-('Lorna Alejandra Delgado Verdejo', 161080138, '$2y$10$dxmq0KZQVhPKoa5lvbdzxOpY/D5QfeyNPS0njqBqe24Xve0K0R4qi', 2, 'No', 'Ingeniería en Sistemas Computacionales', 'Reprobado', 'Séptimo', '', 'F', 2),
-('Jose Alberto Pech Villasis', 161080150, '$2y$10$9Q6SlZVAGp3LcmT2ULuFxOl/XOyNRDjJAQqzuMzdPe794lxhAxJsC', 2, 'No', 'Ingeniería en Logística', 'Cursando', 'Séptimo', '', 'F', 2),
-('Gerardo Gonzalez Rosado', 161080156, '$2y$10$Zg4OgcdfMfOKAIOj887e3.DNSw7U1lcBsFYtMbLU6p77m6siX1Z7S', 2, 'No', 'Licenciatura en Turismo', 'Cursando', 'Tercero', '161080156.pdf', 'F', 2);
+('Sin asignar', 0, '', 1, '', '', '', '', '', '', 2);
 
 -- --------------------------------------------------------
 
@@ -124,24 +118,6 @@ CREATE TABLE `documentos` (
   `fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `documentos`
---
-
-INSERT INTO `documentos` (`id`, `maestro_id`, `taller_id`, `alumno_id`, `categoria`, `documento`, `fecha`) VALUES
-(5, 16, 2, 161080138, 'evaluacionB', '161080138', '2020-10-27 20:34:10'),
-(6, 16, 2, 0, 'instrumentacionD', 'Monica Priscila Delgado Verdejo', '2020-10-27 20:38:08'),
-(7, 16, 2, 161080138, 'evaluacionB', '161080138', '2020-10-27 20:39:42'),
-(8, 16, 2, 161080138, 'evaluacionB', '161080138.pdf', '2020-10-27 20:40:00'),
-(9, 16, 2, 161080138, 'evaluacionB', '161080138.pdf', '2020-10-27 20:41:55'),
-(10, 16, 2, 161080138, 'evaluacionB', '161080138.pdf', '2020-10-27 20:42:40'),
-(11, 16, 2, 161080138, 'evaluacionB', '161080138.docx', '2020-10-27 20:47:32'),
-(12, 16, 2, 161080138, 'evaluacionB', '161080138.pdf', '2020-10-27 20:49:25'),
-(13, 16, 2, 0, 'instrumentacionD', 'Monica Priscila Delgado Verdejo.docx', '2020-10-27 20:54:11'),
-(14, 16, 2, 0, 'instrumentacionD', 'Monica Priscila Delgado Verdejo.pdf', '2020-10-27 20:55:14'),
-(16, 16, 2, 161080150, 'evaluacionB', '161080150.pdf', '2020-11-04 17:53:52'),
-(17, 16, 2, 0, 'instrumentacionD', 'Monica Priscila Delgado Verdejo.pdf', '2020-11-11 19:32:02');
-
 -- --------------------------------------------------------
 
 --
@@ -166,8 +142,15 @@ CREATE TABLE `horarios` (
 --
 
 INSERT INTO `horarios` (`id`, `taller`, `lunes`, `martes`, `miercoles`, `jueves`, `viernes`, `sabado`, `domingo`, `turno`) VALUES
-(16, 2, '12:00pm-13:30pm', '0', '12:00-2:30', '12:00pm-13:30pm', '12:00-2:30', '0', '0', 'vespertino'),
-(17, 4, '0', '0', '12:00am-2:30pm', '12:00pm-13:30pm', '0', '12:00pm-13:30pm', '0', 'matutino');
+(1, 2, '8:00pm - 10:00pm', '8:00pm - 10:00pm', '8:00pm - 10:00pm', '0', '0', '0', '0', 'matutino'),
+(2, 3, '8:30pm - 10:30pm', '8:30pm - 10:30pm', '0', '8:30pm - 10:30pm', '0', '0', '0', 'matutino'),
+(3, 4, '7:30pm - 10:30pm', '0', '7:30pm - 10:30pm', '0', '0', '0', '0', 'matutino'),
+(4, 5, '0', '0', '7:30pm - 09:00pm', '7:30pm - 09:00pm', '0', '0', '0', 'matutino'),
+(5, 6, '0', '0', '7:00pm - 10:00pm', '7:00pm - 10:00pm', '0', '0', '0', 'matutino'),
+(6, 7, '8:00pm - 10:00pm', '8:00pm - 10:00pm', '8:00pm - 10:00pm', '0', '0', '0', '0', 'matutino'),
+(7, 8, '0', '8:00pm - 10:00pm', '8:00pm - 10:00pm', '8:00pm - 10:00pm', '0', '0', '0', 'matutino'),
+(8, 9, '0', '0', '4:00pm- 7:00pm', '0', '0', '0', '0', 'matutino'),
+(9, 9, '0', '9:00am - 12:00pm', '0', '0', '0', '0', '0', 'vespertino');
 
 -- --------------------------------------------------------
 
@@ -193,10 +176,7 @@ CREATE TABLE `maestro` (
 --
 
 INSERT INTO `maestro` (`id`, `nombre`, `correo`, `password`, `taller_asignado`, `curp`, `telefono`, `sexo`, `Token`, `rol_id`) VALUES
-(1, 'Sin Asignar', '', '', 1, '', '', '', '', 3),
-(16, 'Monica Priscila Delgado Verdejo', 'priscila_verdejo@outlook.com', '$2y$10$BANnoDdrDPzchJpsznXFxemgodLSj3TL2Qe3rEIe/YQ2eJWIKkm2K', 2, 'DEVM971204MCCLRN02', '9821159667', 'M', '', 3),
-(18, 'Lorna Alejandra Delgado Verdejo', 'verdejo97@outlook.com', '$2y$10$NCaZ6DLKO4ebvyIGkwTc2O66ZWLeyHiug/bR6B3nhNuGrPVPpKNZW', 5, 'DEVM971204MCCLRN01', '9821159667', 'M', '5f9b31d9b8ee3', 3),
-(22, 'Magnolia Verdejo Chong', 'verdejo@outlook.com', '$2y$10$jAC2ZcUHzgzVh6H..T28V.sVnZzijLaw11.QdxlOv2.6JPcKWJvjS', 3, 'DEVM971204MCCLRN05', '9821276466', 'F', '', 3);
+(1, 'Sin Asignar', '', '', 1, '', '', '', '', 3);
 
 -- --------------------------------------------------------
 
@@ -236,15 +216,6 @@ CREATE TABLE `mensajemaestro` (
   `mtro_id` int(11) NOT NULL,
   `taller_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `mensajemaestro`
---
-
-INSERT INTO `mensajemaestro` (`id`, `mensaje`, `fecha`, `estado`, `mtro_id`, `taller_id`) VALUES
-(38, 'Prueba #1\r\n', '2020-10-27 20:06:48', 0, 16, 14),
-(39, 'Bienvenidos sean al taller de baile moderno, mañana aprenderemos a ser putas. xoxo', '2020-11-04 18:27:07', 0, 16, 2),
-(40, 'Bola de putos', '2020-11-11 19:28:51', 0, 16, 2);
 
 -- --------------------------------------------------------
 
@@ -289,11 +260,14 @@ CREATE TABLE `talleres` (
 
 INSERT INTO `talleres` (`id`, `taller`, `nombre`, `descripcion`, `mtro_asignado`, `categoria`, `direccion`, `img1`) VALUES
 (1, 'No asignado', '', '', 1, '', '', ''),
-(2, 'Danza moderna', 'halcones', 'asdadsasd', 16, 'Cultural', 'adsasd', '71HHP51MVEL._AC_SY355_.jpg'),
-(3, 'volleybal', 'Los halcones del Itescham', 'bla bla bla bla ', 22, 'Deportivo', '12', '5c3642f4bda1537b6aa50702-large.jpg'),
-(4, 'Futbol', 'halconese', 'fdffdfd', 1, 'Deportivo', 'dfdfdfd', '9ab2cb6cf42baebec14e35fa8a287db0.jpg'),
-(5, 'Escolta', 'halcones', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 18, 'Civico', '12', '0966713e7055b3340e54995b50f64704.jpg'),
-(6, 'Ballet', 'viejas en mallas', 'bla bla bla bla ', 1, 'Cultural', 'daesdadada', 'b56dbba6d76b457498767e12e624d2de.jpg');
+(2, 'Futbol soccer', 'Los halcones del Itescham', 'En este taller te divertirás jugando futbol al mismo tiempo que competirás para formar parte de la selección escolar.', 1, 'Deportivo', 'Campo \"Cascareros\" U. D. \"Ulises Sansores\"', 'fut.png'),
+(3, 'Basquetbol', 'Los halcones del Itescham', 'En este taller te divertirás jugando basquetbol al mismo tiempo que competirás para formar parte de la selección escolar.', 1, 'Deportivo', 'Cancha Duela U. D. \"Ulises Sansores\"', 'basket.png'),
+(4, 'Voleibol de sala', 'Los halcones del Itescham', 'En este taller te divertirás jugando futbol al mismo tiempo que competirás para formar parte de la selección escolar.', 1, 'Deportivo', 'Cancha techada #1 Usos múltiples U.D. \"Ulises Sansores\"', 'voleibol.png'),
+(5, 'Escolta de Bandera', 'Itescham', 'En este taller aprenderás a marchar correctamente para honrar a nuestro labora patrio como se merece.', 1, 'Civico', 'Explanada de Usos Múltiples U.D. \"Ulises Sansores\"', 'escolta-400x334.png'),
+(6, 'Banda de Guerra', 'Itescham', 'En este taller honrarás a nuestro lábaro patrio con los honores que se merece tocando al ritmo de nuestro himno nacional. ', 1, 'Civico', 'Cancha techada del Itescham', 'banda.png'),
+(7, 'Muay-Thai', 'Los halcones del Itescham', 'En este taller te forjamos en el camino de la disciplina, amando y respetando el arte marcial.', 1, 'Deportivo', 'Gimnasio frente a la gasolinera de la U.D. \"Ulises Sansores\"', 'muaythai.png'),
+(8, 'Beisbol', 'Los halcones del Itescham', 'En este taller te divertirás jugando beisbol al mismo tiempo que competirás para formar parte de la selección escolar.', 1, 'Deportivo', 'Calle 28 % 23 y 25 Col. Centro. \"Casa del instructor\"', 'beisbol.jpg'),
+(9, 'Ajedrez', 'Los halcones del Itescham', 'Deporte es sinónimo de destreza y estrategia. ', 1, 'Deportivo', 'Aula 101/201. Itescham.', 'ajedrez.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -390,19 +364,19 @@ ALTER TABLE `cms`
 -- AUTO_INCREMENT de la tabla `documentos`
 --
 ALTER TABLE `documentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `maestro`
 --
 ALTER TABLE `maestro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajeadmin`
@@ -414,7 +388,7 @@ ALTER TABLE `mensajeadmin`
 -- AUTO_INCREMENT de la tabla `mensajemaestro`
 --
 ALTER TABLE `mensajemaestro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -426,7 +400,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `talleres`
 --
 ALTER TABLE `talleres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas

@@ -260,7 +260,7 @@ if (!isset($_SESSION['rol'])) {
                             <div class="col-md-3 col-sm-6">
                                 <div class="card articulo" style="width: 15rem;  display: inline-block; vertical-align: top; text-align: center;margin-left: 5%; margin-bottom:3%;">
                                     <input name="Tallerstd" type="hidden" id="id" value="<?php echo $fila[0];  ?>">
-                                    <img src="img/<?php echo $fila[5]; ?>/taller/<?php echo $fila[7]; ?>" style="height: 200px; width:auto;" class="card-img-top mt-1" alt="Taller">
+                                    <img src="img/<?php echo $fila[5]; ?>/taller/<?php echo $fila[7]; ?>" style="height: 200px; width:200px;" class="card-img-top mt-1" alt="Taller">
                                     <div class="card-body">
                                         <div class="card-footer text-center">
                                             <small class="text-muted" style="text-transform: uppercase;"><?php echo $fila[1]; ?></small>
@@ -414,7 +414,7 @@ if (!isset($_SESSION['rol'])) {
                             <h3>ADMINISTRATIVOS</h3>
                             <img src="img/img_portada/administrativos.jpg" width="350" alt="cms_Talleres">
                         </div>
-                        <!--Options-Talleres-->
+                        <!--Options-admin-->
                         <div class="row row-lg row-30 mt-3 mb-3" style="margin:auto;">
                             <div class="col-sm-4 col-md-4 wow blurIn" data-wow-delay=".2s" id="registrarAdmin">
                                 <article class=""><img src="img/logos/administrativo.png" alt="" width="100" height="100" />
