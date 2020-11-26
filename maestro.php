@@ -389,9 +389,9 @@ if (!isset($_SESSION['rol'])) {
                                                                             } else {
                                                                                 # code...
                                                                                 ?> value="<?php echo $row[0]; ?>" <?php
-                                                                                                        }
+                                                                                                                }
 
-                                                                                                            ?>><?php echo $row[0]; ?></option>
+                                                                                                                    ?>><?php echo $row[0]; ?></option>
 
                                         <?php
                                         }
@@ -475,12 +475,12 @@ if (!isset($_SESSION['rol'])) {
                                                         if ($row[0] == 1) {
                                                             # code...
                                                         ?> style="display: none;" <?php
-                                                                            } else {
-                                                                                # code...
-                                                                                ?> value="<?php echo $row[0]; ?>" <?php
-                                                                                                        }
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                }
 
-                                                                                                            ?>><?php echo $row[0]; ?></option>
+                                                                                                                    ?>><?php echo $row[0]; ?></option>
 
                                             <?php
                                             }
@@ -504,13 +504,9 @@ if (!isset($_SESSION['rol'])) {
                 <!-------------------------------TALLERES---------------------------------------->
                 <section>
                     <?php
-
-
                     if (!empty($_POST['nombreTaller'])) {
                         $taller = $_POST['nombreTaller'];
                     } else {
-                        //echo "PUTA LA QUE TE REPARIO";
-                        //echo $hotel;
                     }
 
                     ?>
@@ -641,11 +637,31 @@ if (!isset($_SESSION['rol'])) {
                                     <div class="form-group sr-only ">
                                         <input type="text" class="form-control" name="taller_id" id="taller_id" value="<?php echo $tallerid; ?>">
                                     </div>
+                                    <select class="custom-select" name="matricula" id="matricula" required="true">
+                                        <?php
+                                        $buscarAlumno = $db->connect()->prepare("SELECT matricula, nombre FROM alumnos WHERE taller_id=$tallerid and estatus='Cursando'");
+                                        $buscarAlumno->execute();
+                                        foreach ($buscarAlumno as $row) {
+                                        ?>
+                                            <option <?php
+                                                    if ($row[0] == 1) {
+                                                        # code...
+                                                    ?> style="display: none;" <?php
+                                                                                                } else {
+                                                                                                    # code...
+                                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                                    }
 
-                                    <div class="form-group">
-                                        <label for="matricula">Matricula</label>
-                                        <input id="matricula" placeholder="161080138" class="form-control" type="text" name="matricula" required="true">
-                                    </div>
+                                                                                                                                        ?>><?php echo $row[1]; ?></option>
+
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+
+
+
+
                                     <?php
                                     $taller = $db->connect()->prepare("SELECT id, taller FROM `talleres` WHERE 1");
                                     $taller->execute();
@@ -693,10 +709,27 @@ if (!isset($_SESSION['rol'])) {
                                     <div class="form-group sr-only ">
                                         <input type="text" class="form-control" name="taller_id" id="taller_id" value="<?php echo $tallerid; ?>">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="matricula">Matricula</label>
-                                        <input id="matricula" placeholder="161080138" class="form-control" type="text" name="matricula" required="true">
-                                    </div>
+                                    <select class="custom-select" name="matricula" id="matricula" required="true">
+                                        <?php
+                                        $buscarAlumno = $db->connect()->prepare("SELECT matricula, nombre FROM alumnos WHERE taller_id=$tallerid and estatus='Cursando'");
+                                        $buscarAlumno->execute();
+                                        foreach ($buscarAlumno as $row) {
+                                        ?>
+                                            <option <?php
+                                                    if ($row[0] == 1) {
+                                                        # code...
+                                                    ?> style="display: none;" <?php
+                                                                                                } else {
+                                                                                                    # code...
+                                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                                    }
+
+                                                                                                                                        ?>><?php echo $row[1]; ?></option>
+
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
                                     <img src="img/logos/adjuntar.png" width="100px" alt="Portada Inicio">
                                     <div class="form-group mt-2">
                                         <span>Cargar archivo:</span>
