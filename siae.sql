@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2020 a las 08:04:04
+-- Tiempo de generación: 27-11-2020 a las 02:08:24
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -45,7 +45,7 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`id`, `nombre`, `correo`, `password`, `CURP`, `img_profile`, `Token`, `rol_id`, `sexo`) VALUES
-(1, 'Fernando Vela Leon', 'vela@yopmail.com', '$2y$10$YW7BeQHM6S6Uhq4EMAmTPus/O0XInEZI2WGCX0Usfa//RRMXoOPqu', 'VELF971204MCCLRN01', '39134-1159060930.jpg', '', 1, 'M'),
+(1, 'Fernando Vela Leon', 'vela@yopmail.com', '$2y$10$zHWk33GV6ftHoOGVS1m/4ekJ8Jh.YUPNQCDBAKeajkt5CYAcneIdm', 'VELF971204MCCLRN01', '39134-1159060930.jpg', '', 1, 'M'),
 (2, 'Johanes Balam García Fabian', 'fenderman6020@gmail.com', '$2y$10$fzhCcCs.PJiQREKn1.2mz.s.LIwLhW6QUq0TR/mBMC7UqgTDB0TY.', 'GAFJ751121HDFRBH00', 'default.jpg', '', 1, 'M'),
 (3, 'Juan Rubén Ortega Granados', 'juan.og1@champoton.tecnm.mx', '$2y$10$WEhXMeFj5sWI7yM.ubuwPu1ZDUXWRDyD7qcGor29pmizQe6TTjRga', 'OEGJ921029HCCRRN03', 'default.jpg', '', 1, 'M'),
 (4, 'Mariana Fabiola Góngora Dominguez', 'mariana.gd@champoton.tecnm.mx', '$2y$10$LAD2mz2WCqd31hvckMgIK.hk0d7e35oboFCKct6HFQKWz07IpIEb2', 'GODM880420MCCNMR00', 'default.jpg', '', 1, 'F'),
@@ -76,7 +76,9 @@ CREATE TABLE `alumnos` (
 --
 
 INSERT INTO `alumnos` (`nombre`, `matricula`, `password`, `taller_id`, `representativo`, `carrera`, `estatus`, `semestre`, `evaluacion`, `sexo`, `rol_id`) VALUES
-('Sin asignar', 0, '', 1, '', '', '', '', '', '', 2);
+('Sin asignar', 0, '', 1, '', '', '', '', '', '', 2),
+('Monica Priscila Delgado Verdejo', 161080138, '$2y$10$xnuZAUsxrIWF7oWoOVsC6OWqkTEY36rfFHl58nIv67Ccfap6765B2', 4, 'Si', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Noveno', '161080138.pdf', 'F', 2),
+('Jose Alberto Pech Villasis', 161080156, '$2y$10$xeX9BMfJ1zZ4r/J3k.a0H.XwKBrisvP/Dz9NwH7B7vybXaeKthH5q', 4, 'No', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Noveno', '', 'M', 2);
 
 -- --------------------------------------------------------
 
@@ -117,6 +119,14 @@ CREATE TABLE `documentos` (
   `documento` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `documentos`
+--
+
+INSERT INTO `documentos` (`id`, `maestro_id`, `taller_id`, `alumno_id`, `categoria`, `documento`, `fecha`) VALUES
+(1, 2, 4, 0, 'instrumentacionD', 'Lorna Alejandra Delgado Verdejo.pdf', '2020-11-25 17:54:04'),
+(2, 2, 4, 161080138, 'evaluacionB', '161080138.pdf', '2020-11-25 17:54:27');
 
 -- --------------------------------------------------------
 
@@ -176,7 +186,8 @@ CREATE TABLE `maestro` (
 --
 
 INSERT INTO `maestro` (`id`, `nombre`, `correo`, `password`, `taller_asignado`, `curp`, `telefono`, `sexo`, `Token`, `rol_id`) VALUES
-(1, 'Sin Asignar', '', '', 1, '', '', '', '', 3);
+(1, 'Sin Asignar', '', '', 1, '', '', '', '', 3),
+(2, 'Lorna Alejandra Delgado Verdejo', 'priscila_verdejo@outlook.com', '$2y$10$ceQpmgqy1Cbh4IQKCX0bOu3LpVpq3r6QoN.9r95gpu4vI/6K70slW', 4, 'DEVM971204MCCLRN01', '9821159667', 'F', '', 3);
 
 -- --------------------------------------------------------
 
@@ -200,7 +211,12 @@ INSERT INTO `mensajeadmin` (`id`, `mensaje`, `fecha`, `estado`, `admin_id`) VALU
 (1, 'Prueba #1', '2020-10-03 15:27:55', 0, 0),
 (2, 'Prueba #1', '2020-10-03 15:30:32', 0, 0),
 (3, 'Prueba #2', '2020-10-03 16:23:14', 0, 0),
-(4, 'Prueba#3', '2020-10-06 15:24:07', 0, 0);
+(4, 'Prueba#3', '2020-10-06 15:24:07', 0, 0),
+(5, 'Buenas tardes maestros, este miércoles no se retirara a la 1, así que no habrá talleres de 1pm a 3pm.', '2020-11-26 18:47:24', 0, 0),
+(6, 'Prueba#5\r\n', '2020-11-26 19:00:48', 0, 0),
+(7, 'Prueba #6\r\n', '2020-11-26 19:04:55', 0, 0),
+(8, 'Prueba #6', '2020-11-26 19:06:51', 0, 0),
+(9, 'prueba #7', '2020-11-26 19:07:52', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -216,6 +232,13 @@ CREATE TABLE `mensajemaestro` (
   `mtro_id` int(11) NOT NULL,
   `taller_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `mensajemaestro`
+--
+
+INSERT INTO `mensajemaestro` (`id`, `mensaje`, `fecha`, `estado`, `mtro_id`, `taller_id`) VALUES
+(1, 'Bienvenidos al taller de voleyball, la primera clase será en la escuela debido a circunstancias ajenas a mi. Nos vemos ahi, no falten.', '2020-11-25 17:41:07', 0, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -262,7 +285,7 @@ INSERT INTO `talleres` (`id`, `taller`, `nombre`, `descripcion`, `mtro_asignado`
 (1, 'No asignado', '', '', 1, '', '', ''),
 (2, 'Futbol soccer', 'Los halcones del Itescham', 'En este taller te divertirás jugando futbol al mismo tiempo que competirás para formar parte de la selección escolar.', 1, 'Deportivo', 'Campo \"Cascareros\" U. D. \"Ulises Sansores\"', 'fut.png'),
 (3, 'Basquetbol', 'Los halcones del Itescham', 'En este taller te divertirás jugando basquetbol al mismo tiempo que competirás para formar parte de la selección escolar.', 1, 'Deportivo', 'Cancha Duela U. D. \"Ulises Sansores\"', 'basket.png'),
-(4, 'Voleibol de sala', 'Los halcones del Itescham', 'En este taller te divertirás jugando futbol al mismo tiempo que competirás para formar parte de la selección escolar.', 1, 'Deportivo', 'Cancha techada #1 Usos múltiples U.D. \"Ulises Sansores\"', 'voleibol.png'),
+(4, 'Voleibol de sala', 'Los halcones del Itescham', 'En este taller te divertirás jugando futbol al mismo tiempo que competirás para formar parte de la selección escolar.', 2, 'Deportivo', 'Cancha techada #1 Usos múltiples U.D. \"Ulises Sansores\"', 'voleibol.png'),
 (5, 'Escolta de Bandera', 'Itescham', 'En este taller aprenderás a marchar correctamente para honrar a nuestro labora patrio como se merece.', 1, 'Civico', 'Explanada de Usos Múltiples U.D. \"Ulises Sansores\"', 'escolta-400x334.png'),
 (6, 'Banda de Guerra', 'Itescham', 'En este taller honrarás a nuestro lábaro patrio con los honores que se merece tocando al ritmo de nuestro himno nacional. ', 1, 'Civico', 'Cancha techada del Itescham', 'banda.png'),
 (7, 'Muay-Thai', 'Los halcones del Itescham', 'En este taller te forjamos en el camino de la disciplina, amando y respetando el arte marcial.', 1, 'Deportivo', 'Gimnasio frente a la gasolinera de la U.D. \"Ulises Sansores\"', 'muaythai.png'),
@@ -364,7 +387,7 @@ ALTER TABLE `cms`
 -- AUTO_INCREMENT de la tabla `documentos`
 --
 ALTER TABLE `documentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
@@ -376,19 +399,19 @@ ALTER TABLE `horarios`
 -- AUTO_INCREMENT de la tabla `maestro`
 --
 ALTER TABLE `maestro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajeadmin`
 --
 ALTER TABLE `mensajeadmin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajemaestro`
 --
 ALTER TABLE `mensajemaestro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
