@@ -12,7 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['mensaje'])) {
     $query->execute();
 
     echo '<script type="text/javascript">
-    alert("El mensaje ha sido enviado con éxito");
+    alert("El mensaje ha sido enviado con éxito ᕕ( ՞ ᗜ ՞ )ᕗ");
     window.location.href="administrativo.php";
     </script>';
+}else{
+    echo '<script type="text/javascript">
+         alert("Lo sentimos, el mensaje no se ha podido enviar, por favor intenta más tarde (-_-｡)");
+         window.location.href="maestro.php";
+         </script>';
 }

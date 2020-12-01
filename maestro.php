@@ -232,22 +232,6 @@ if (!isset($_SESSION['rol'])) {
                                     ?>
                                 </tbody>
                             </table>
-                            <div class="row mt-5">
-                                <div class="col-6 ">
-                                    <div class="card">
-                                        <div class="card-header ">
-                                            <h1 class="card-title" style="margin-left: 150px;">ESTADISTICAS DE MIS ALUMNOS</h1>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <img src="img/logos/icon_alumnos.png" width="100" height="100" alt="Horario asignado">
-                                </div>
-                            </div>
-                            <div>
-                                aqui va algo mamalon sobre sus reprobados y aprobados, los que estan cursando tambien
-                            </div>
                         </div>
                     </section>
                 </div>
@@ -325,11 +309,9 @@ if (!isset($_SESSION['rol'])) {
 
                                                 $sentencia = $db->connect()->prepare("select fecha, maestro.nombre, mensaje from maestro join mensajemaestro join talleres
                             on mensajemaestro.taller_id= talleres.id and talleres.id = maestro.taller_asignado and talleres.mtro_asignado=mensajemaestro.mtro_id 
-                            where mensajemaestro.mtro_id=:mtro_id");
+                            where mensajemaestro.mtro_id=:mtro_id order by fecha desc");
                                                 $sentencia->execute(['mtro_id' => $mtro_id]);
-                                                $sentencia->execute();
-                                                $busqueda = $db->connect()->prepare('select fecha, mensaje from mensajeadmin order by fecha desc');
-                                                $sentencia->execute();
+                                             
                                                 foreach ($sentencia as $fila) {
                                                 ?>
                                                     <tr>
