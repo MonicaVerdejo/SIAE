@@ -335,7 +335,7 @@ if (!isset($_SESSION['rol'])) {
                                         <div class="input-group-prepend">
                                             <label class="input-group-text" for="mtro">Maestro</label>
                                         </div>
-                                        <select class="custom-select" name="mtro" id="mtro" required="true">
+                                        <select class="custom-select" name="mtro" id="mtro">
                                             <?php foreach ($taller as $row) {
                                             ?>
                                                 <option <?php
@@ -363,7 +363,7 @@ if (!isset($_SESSION['rol'])) {
                                         <div class="input-group-prepend">
                                             <label class="input-group-text" for="taller">Taller</label>
                                         </div>
-                                        <select class="custom-select" name="taller" id="taller" required="true">
+                                        <select class="custom-select" name="taller" id="taller" >
                                             <?php foreach ($taller as $row) {
                                             ?>
                                                 <option <?php

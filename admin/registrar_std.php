@@ -2,7 +2,7 @@
 include_once '../db.php';
 $db = new DB();
 
-if (!empty($_POST['taller'])) {
+if ((($_POST['taller']) != "No asignado")) {
     $nombre = $_POST['nombre'];
     $matricula = $_POST['matricula'];
     $taller = $_POST['taller'];
@@ -26,11 +26,14 @@ if (!empty($_POST['taller'])) {
     $newstd = $db->connect()->prepare("INSERT INTO `alumnos` (`nombre`, `matricula`, `password`, `taller_id`, `representativo`, `carrera`, `estatus`, `semestre`, `evaluacion`, `sexo`, `rol_id`) 
     VALUES ('$nombre', '$matricula', '$password', '$taller', '$representativo', '$carrera', 'Cursando', '$semestre', '', '$sexo', '2');");
     $newstd->execute();
-
-    header('Location: ../admin_std.php');
+    echo '<script type="text/javascript">
+    alert("Alumno registrado con éxito (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
+    window.location.href="../admin_std.php"; </script>';
     }
 } else {
-    echo 'no esta registrando';
+    echo '<script type="text/javascript">
+    alert("No se esta ejecutando la consulta (◞‸◟；) verifica hayas ingresado todos los datos");
+    window.location.href="../admin_std.php"; </script>';
 }
 require_once('../admin_std.php');
 ?>

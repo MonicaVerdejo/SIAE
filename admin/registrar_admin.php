@@ -33,8 +33,9 @@ if (!empty($_POST['curp']) && !empty($_POST['nombre']) && !empty($_POST['correo'
                                                                 VALUES ('', '$nombre', '$correo', '$password', '$curp', 'default.jpg',  '', '1', '$sexo');");
             $newadmin->execute();
 
-            
-            header('Location: ../administrativo.php');
+            echo '<script type="text/javascript">
+     alert("Administrador registrado con éxito (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
+     window.location.href="../administrativo.php"; </script>';
         }
     } else {
         echo '<script type="text/javascript">
@@ -43,6 +44,8 @@ if (!empty($_POST['curp']) && !empty($_POST['nombre']) && !empty($_POST['correo'
         </script>';
     }
 } else {
-    echo 'Error';
+    echo '<script type="text/javascript">
+    alert("No se esta ejecutando la consulta (◞‸◟；) verifica hayas ingresado todos los datos");
+    window.location.href="../admin_std.php"; </script>';
 }
 require_once('../administrativo.php');

@@ -306,7 +306,7 @@ $mtroasignado = $opcion[3];
 
                                                 $sentencia = $db->connect()->prepare('select  DISTINCTROW fecha, maestro.nombre, mensaje from maestro join mensajemaestro join talleres join alumnos
                                                                                             on mensajemaestro.taller_id= talleres.id and alumnos.taller_id = talleres.id and talleres.id = maestro.taller_asignado 
-                                                                                            and talleres.mtro_asignado=mensajemaestro.mtro_id    where talleres.id=:taller_id ');
+                                                                                            and talleres.mtro_asignado=mensajemaestro.mtro_id where talleres.id=:taller_id order by fecha desc');
                                                 $sentencia->execute(['taller_id' => $taller_id]);
                                                 foreach ($sentencia as $row) {
 

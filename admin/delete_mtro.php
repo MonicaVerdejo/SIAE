@@ -12,10 +12,12 @@ if (isset($_POST['mtro'])) {
     $eliminar = $db->connect()->prepare("DELETE FROM maestro WHERE id='$id_mtro'");
     $eliminar->execute();
 
-    
-    header('Location: ../admin_mtro.php');
+    echo '<script type="text/javascript">
+    alert("Maestro eliminado con éxito ⊂(▀¯▀⊂)");
+    window.location.href="../admin_mtro.php"; </script>';
 } else {
-    echo 'no esta registrando';
+  echo '<script type="text/javascript">
+  alert("Error ( ຈ ﹏ ຈ )");
+  window.location.href="../admin_mtro.php"; </script>';
 }
 require_once('../admin_mtro.php');
-?>

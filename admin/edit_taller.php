@@ -10,14 +10,14 @@ $civico = 'Civico';
 $deportivo = 'Deportivo';
 $cultural = 'Cultural';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && (($_POST['nombre'])!="No asignado")) {
     $tipo_archivo = $_FILES['file']['type'];
     //$tamano_archivo = $_FILES['file']['size'];   por si deseo darle un tamaño especifico
 
     //compruebo si las características del archivo son las que deseo, solo aceptara pdf y word
     if (!((strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png")))) {
         echo '<script type="text/javascript">
-         alert("No seas pendejo, es una imagen lo que debes seleccionar");
+         alert("Selecciona una imagen por favor, las extensiones aceptadas son: jpeg, jpg y png.");
          window.location.href="../admin_taller.php"; </script>';
     } else {
         
@@ -66,12 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      `categoria`='$categoria', `direccion`='$direccion', `img1`=:img1 where id='$nombre'";
      $statement = $db->connect()->prepare($sql);
      $statement->execute(array(':img1' => $_FILES['file']['name']));
- 
-     echo "<script>location.href='../admin_taller.php';</script>";
+     echo '<script type="text/javascript">
+     alert("Taller actualizado correctamente (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
+     window.location.href="../admin_taller.php"; </script>';
     }
 
 } else {
-    echo "Error, no se está ejecutando la consulta";
+    echo '<script type="text/javascript">
+    alert("No se esta ejecutando la consulta (◞‸◟；) verifica hayas ingresado todos los datos");
+    window.location.href="../admin_std.php"; </script>';
 }
 
 require_once('../admin_taller.php');

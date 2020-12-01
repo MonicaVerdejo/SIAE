@@ -91,7 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Enlace de descarga solo si se procesa formulario
     $descarga = '<a class="btn btn-primary" href="creditoPdf.php"> <img style="margin-top:2%;" src="http://localhost/SIAE2/img/logos/descargar.png" height="150" width="150"> Descargar archivo PDF</a>';
 
-    //$asigna = '<a class="btn btn-primary" href="creditoPdf.php"> <img style="margin-top:2%;" src="http://localhost/SIAE2/img/logos/descargar.png" height="150" width="150"> Descargar archivo PDF</a>';
+    echo '<script type="text/javascript">
+               alert("Alumno acreditado con éxito ヽ〳 ՞ ᗜ ՞ 〵ง");
+          </script>';
 } elseif (isset($_SESSION['pdf'])) {
     // Se va a crear el PDF
     $matricula = $_SESSION['pdf']['matricula'];

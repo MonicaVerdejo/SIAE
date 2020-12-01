@@ -9,10 +9,13 @@ if (!empty($_POST['estatus']) && !empty($_POST['matricula'])) {
     //Editar los datos de la bd
     $editstd = $db->connect()->prepare("UPDATE `alumnos` SET `estatus` = '$estatus' WHERE `alumnos`.`matricula` = '$matricula'; ");
     $editstd->execute();
-
-    header('Location: ../administrativo.php');
+    echo '<script type="text/javascript">
+    alert("Asignación correcta ヽ〳 ՞ ᗜ ՞ 〵ง");
+    window.location.href="../administrativo.php"; </script>';
 } else {
-    echo 'no esta registrando';
+    echo '<script type="text/javascript">
+               alert("Error, no se proceso correctamente ᕙ( ~ . ~ )ᕗ");
+               window.location.href="../administrativo.php"; </script>';
 }
 require_once('../administrativo.php');
 ?>

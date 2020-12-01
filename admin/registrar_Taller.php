@@ -68,13 +68,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             VALUES (NULL, '$nombre', '$nombreR','$descripcion','1','$categoria','$direccion',:img1)";
         $statement = $db->connect()->prepare($sql);
         $statement->execute(array(':img1' => $_FILES['file']['name']));
-
-        echo "<script>location.href='../admin_taller.php';</script>";
+        echo '<script type="text/javascript">
+        alert("Taller creado correctamente (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
+        window.location.href="../admin_taller.php"; </script>';
     }
 
 
 } else {
-    echo "Error, no se está ejecutando la consulta";
+    echo '<script type="text/javascript">
+    alert("No se esta ejecutando la consulta (◞‸◟；) verifica hayas ingresado todos los datos");
+    window.location.href="../admin_horarios.php"; </script>';
 }
 
 require_once('../admin_taller.php');

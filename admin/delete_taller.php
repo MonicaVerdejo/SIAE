@@ -11,10 +11,13 @@ if (isset($_POST['taller'])) {
     //Insertar los datos en la bd
     $eliminar = $db->connect()->prepare("DELETE FROM talleres WHERE id='$id_taller'");
     $eliminar->execute();
-
-    header('Location: ../admin_taller.php');
+    echo '<script type="text/javascript">
+    alert("Taller eliminado con éxito ⊂(▀¯▀⊂)");
+    window.location.href="../admin_taller.php"; </script>';
 } else {
-    echo 'no esta registrando';
+    echo '<script type="text/javascript">
+  alert("Error ( ຈ ﹏ ຈ )");
+  window.location.href="../admin_std.php"; </script>';
 }
 require_once('../admin_taller.php');
 ?>

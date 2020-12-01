@@ -1,14 +1,16 @@
 <?php
 include_once '../db.php';
 $db = new DB();
+$taller = $_POST['taller'];
+$nombre = $_POST['nombre'];
+$correo = $_POST['correo'];
+$curp = $_POST['curp'];
 
-if (isset($_POST['taller'])) {
-    $nombre = $_POST['nombre'];
-    $correo = $_POST['correo'];
-    $curp = $_POST['curp'];
-    $taller = $_POST['taller'];
-    $telefono = $_POST['telefono'];
-    $sexo = $_POST['sexo'];
+$telefono = $_POST['telefono'];
+$sexo = $_POST['sexo'];
+
+if ((($_POST['taller']) != "No asignado")) {
+   
 
 
 
@@ -52,7 +54,9 @@ if (isset($_POST['taller'])) {
                 $statement = $db->connect()->prepare($sql);
                 $statement->execute();
             }
-            header('Location: ../admin_mtro.php');
+            echo '<script type="text/javascript">
+            alert("Maestro registrado correctamente (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
+            window.location.href="../admin_mtro.php"; </script>';
         }
     } else {
         echo '<script type="text/javascript">
@@ -61,6 +65,8 @@ if (isset($_POST['taller'])) {
         </script>';
     }
 } else {
-    echo 'Error';
+    echo '<script type="text/javascript">
+    alert("No se esta ejecutando la consulta (◞‸◟；) verifica hayas ingresado todos los datos");
+    window.location.href="../admin_mtro.php"; </script>';
 }
 require_once('../admin_mtro.php');

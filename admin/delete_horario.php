@@ -8,7 +8,7 @@ $turno = $_POST['turno'];
 $sintaller = "No asignado";
 if (strcmp($nombre, $sintaller) === 0) {
      echo '<script type="text/javascript">
-     alert("Sí serás pendejo! ¿Cómo voy a eliminar algo que no ingresaste?");
+     alert("Error. Datos no encontrados ( ຈ ﹏ ຈ )");
      window.location.href="../admin_horarios.php"; </script>';
 } else {
      $buscarHorario = $db->connect()->prepare("SELECT taller from horarios where taller=$nombre and turno='$turno' ;");
@@ -18,7 +18,9 @@ if (strcmp($nombre, $sintaller) === 0) {
           //sentencia pa borrar alv el horario
           $eliminarHorario = $db->connect()->prepare("DELETE from horarios where taller= $nombre and turno='$turno' ;");
           $eliminarHorario->execute();
-          header('Location: ../admin_horarios.php');
+          echo '<script type="text/javascript">
+          alert("Horario eliminado ( ຈ ﹏ ຈ )");
+          window.location.href="../admin_horarios.php"; </script>';
      } else {
           echo '<script type="text/javascript">
            alert("El horario que buscas no esta registrado, no podemos eliminar algo que no existe.");

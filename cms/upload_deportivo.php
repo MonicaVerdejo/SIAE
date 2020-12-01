@@ -8,8 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES)) {
     $tipo_archivo = $_FILES['file']['type'];
     if (!((strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png")))) {
         echo '<script type="text/javascript">
-         alert("No seas pendejo, es una imagen lo que debes seleccionar");
-         window.location.href="../admin_cms.php"; </script>';
+        alert("ᕙ( ~ . ~ )ᕗ Por favor selecciona una imagen, los formatos aceptables son jpeg, jpg y png.");
+        window.location.href="../admin_cms.php"; </script>';
     } else {
         $image = getimagesize($_FILES['file']['tmp_name']);
         //Definir un tamaño en pixeles para la imagen...
@@ -47,13 +47,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES)) {
                 $carpeta_destino = '../img/img_portada/deportivo/';
                 $archivo = $carpeta_destino . $_FILES['file']['name'];
                 move_uploaded_file($_FILES['file']['tmp_name'], $archivo);
+                $sql = "UPDATE cms SET img_deporte=:img_deportivo where id=1";
+                $statement = $db->connect()->prepare($sql);
+                $statement->execute(array(':img_deportivo' => $_FILES['file']['name']));
+                echo '<script type="text/javascript">
+               alert("Imagen asignada con éxito ヽ〳 ՞ ᗜ ՞ 〵ง");
+               window.location.href="../admin_cms.php"; </script>';
+            } else {
+                echo '<script type="text/javascript">
+                alert("La imagen no ha podido ser asignada T.T");
+                window.location.href="../admin_cms.php"; </script>';
             }
-            $sql = "UPDATE cms SET img_deporte=:img_deportivo where id=1";
-            $statement = $db->connect()->prepare($sql);
-            $statement->execute(array(':img_deportivo' => $_FILES['file']['name']));
-            //$_SESSION['imagen_profile']=$VARIABLE_HOST;
-    
-            echo "<script>location.href='../admin_cms.php';</script>";
         }
     }
 }

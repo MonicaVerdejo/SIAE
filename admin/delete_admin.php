@@ -8,11 +8,13 @@ if (!empty($_POST['nombre']) ) {
     //Eliminar los datos en la bd
     $eliminar = $db->connect()->prepare("DELETE FROM administrador WHERE id='$id_admin'");
     $eliminar->execute();
-
-    
-    header('Location: ../administrativo.php');
+    echo '<script type="text/javascript">
+    alert("Administrador eliminado con éxito ヽ〳 ՞ ᗜ ՞ 〵ง");
+    window.location.href="../administrativo.php"; </script>';
 } else {
-    echo 'no esta registrando';
+    echo '<script type="text/javascript">
+    alert("Error. No se pudo eliminar ( ຈ ﹏ ຈ )");
+    window.location.href="../administrativo.php"; </script>';
 }
 require_once('../administrativo.php');
 ?>
