@@ -2,8 +2,8 @@
 
 define('HOST', 'localhost');
 define('DB', 'siae');
-define('USER', 'root');
-define('PASSWORD', '');
+define('USER', 'mcqueen');
+define('PASSWORD', 'lid74');
 
 
 ?>

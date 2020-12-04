@@ -95,7 +95,7 @@
         <h1 style="font-size: 100px; font-weight: bold;">404</h1>
         <p>No se pudo encontrar la página.</p>
         <p> Mejor dame anvorgesa</p>
-        <p> ¿Contenta Mónica?</p>
+        <p> ¿Contenta Karen?</p>
         <a href="index.php"><button class="boton">Ir a página principal</button></a>
     </div>
 
