@@ -1,4 +1,6 @@
-ErrorDocument 404 localhost://SIAE2/404.php
-ErrorDocument 400 localhost://SIAE2/400.php
-ErrorDocument 500 localhost://SIAE2/500.php
+# https://siae.champoton.tecnm.mx/
+# ErrorDocument 404 localhost://SIAE2/404.php
+# ErrorDocument 400 localhost://SIAE2/400.php
+# ErrorDocument 500 localhost://SIAE2/500.php
+
 

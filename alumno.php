@@ -12,7 +12,7 @@ if (!isset($_SESSION['rol'])) {
 }
 
 $alumno_id = $_SESSION['matricula'];
-$query = $db->connect()->prepare("SELECT talleres.taller, talleres.direccion, talleres.mtro_asignado, maestro.nombre FROM talleres 
+$query = $db->connect()->prepare("SELECT talleres.taller, talleres.direccion, talleres.mtro_asignado, maestro.nombre, maestro.telefono, maestro.telegram FROM talleres 
 JOIN maestro join alumnos ON talleres.id = alumnos.taller_id and maestro.id = talleres.mtro_asignado
 where alumnos.matricula=$alumno_id;");
 $query->execute();
@@ -24,11 +24,13 @@ $opcion = $query->fetch(PDO::FETCH_NUM);
 $taller = $opcion[0];
 $direccion = $opcion[1];
 $mtroasignado = $opcion[3];
+$telefonoMaestro = $opcion[4];
+$telegramMaestro = $opcion[5];
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -138,7 +140,7 @@ $mtroasignado = $opcion[3];
 
                 <div class="row" id="inicio" style="background-image: url(img/actividades-extraescolar.jpg); background-size:cover;  background-repeat: no-repeat;">
                     <div class="col-lg-6 col-sm-6 col-xs-12" style="height: 400px;">
-                        <div class="datosTaller card-1">
+                        <div class="datosTaller card-1" style="height: 390px;">
                             <li>
                                 <i class="fa fa-bookmark" aria-hidden="true"></i>
                                 Inscrito en: <?php echo $taller; ?>
@@ -157,7 +159,15 @@ $mtroasignado = $opcion[3];
                                 Maestro asignado: <?php echo $mtroasignado; ?>
                             </li>
                             <li>
-                                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                                Teléfono: <?php echo $telefonoMaestro; ?>
+                            </li>
+                            <li>
+                            <i class="fab fa-telegram" aria-hidden="true"></i>
+                                Telegram: <?php echo $telegramMaestro; ?>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                                 Ubicación del taller: <?php echo $direccion; ?>
                                 <hr>
                             </li>

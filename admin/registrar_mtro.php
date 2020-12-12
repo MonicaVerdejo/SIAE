@@ -7,6 +7,7 @@ $correo = $_POST['correo'];
 $curp = $_POST['curp'];
 
 $telefono = $_POST['telefono'];
+$telegram = $_POST['telegram'];
 $sexo = $_POST['sexo'];
 
 if ((($_POST['taller']) != "No asignado")) {
@@ -14,7 +15,7 @@ if ((($_POST['taller']) != "No asignado")) {
 
 
 
-    if (strpos($correo, 'outlook.com') || strpos($correo, '@gmail.com') || strpos($correo, '@hotmail.com') || strpos($correo, '@yahoo.es') !== false) {
+    if (strpos($correo, 'outlook.com') || strpos($correo, '@gmail.com') || strpos($correo, '@hotmail.com') || strpos($correo, '@yahoo.es') !== false || empty($correo)) {
         #check email register on bd
         $stmtCorreosRegistrados = $db->connect()->prepare('SELECT correo FROM maestro WHERE correo = :correo');
         $stmtCorreosRegistrados->bindParam(':correo', $_POST['correo']);
@@ -37,8 +38,8 @@ if ((($_POST['taller']) != "No asignado")) {
             #code register
             $password = password_hash($_POST['curp'], PASSWORD_BCRYPT);
             //Insertar los datos en la bd
-            $newteacher = $db->connect()->prepare("INSERT INTO `maestro` (`id`, `nombre`, `correo`, `password`, `taller_asignado`, `curp`, `telefono`, `sexo`, `Token`, `rol_id`) 
-                                                                VALUES ('', '$nombre', '$correo', '$password', '$taller', '$curp', '$telefono', '$sexo', '', '3');");
+            $newteacher = $db->connect()->prepare("INSERT INTO `maestro` (`id`, `nombre`, `correo`, `password`, `taller_asignado`, `curp`, `telefono`, `telegram`, `sexo`, `Token`, `rol_id`) 
+                                                                VALUES ('', '$nombre', '$correo', '$password', '$taller', '$curp', '$telefono', '$telegram', '$sexo', '', '3');");
             $newteacher->execute();
 
             #Consultar el id del maestro que acabamos de registrar
@@ -47,7 +48,7 @@ if ((($_POST['taller']) != "No asignado")) {
             $id->execute();
 
             foreach ($id as $row) {
-                echo $row[0];
+                
                 #Actualizar el campo maestro_asignado en tabla talleres
                 $sql = "UPDATE `talleres` set `mtro_asignado`='$row[0]' WHERE 
            `id`='$taller'";

@@ -257,7 +257,8 @@ if (!isset($_SESSION['rol'])) {
                                         <table class="table table-bordered table-hover" style="border-radius: 3%;">
                                             <tbody>
                                                 <?php
-                                                $busqueda = $db->connect()->prepare('select fecha, mensaje from mensajeadmin order by fecha desc');
+                                                $nombreMaestro = $_SESSION['nombre'];
+                                           TODO:$busqueda = $db->connect()->prepare("select fecha, mensaje from mensajeadmin WHERE destinatario='$nombreMaestro' OR destinatario='todos' order by fecha desc");
                                                 $busqueda->execute();
                                                 foreach ($busqueda as $fila) {
                                                 ?>

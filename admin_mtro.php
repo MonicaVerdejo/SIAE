@@ -10,10 +10,11 @@ if (!isset($_SESSION['rol'])) {
         header('location: perfiles.html');
     }
 }
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -270,7 +271,7 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="correo">Correo</label>
-                                        <input id="correo" class="form-control" type="email" name="correo" required="true" placeholder="vela97@outlook.com">
+                                        <input id="correo" class="form-control" type="email" name="correo"  required placeholder="vela97@outlook.com">
                                     </div>
                                     <div class="form-group">
                                         <label for="curp">Curp</label>
@@ -305,7 +306,11 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="telefono">Telefono</label>
-                                        <input id="telefono" class="form-control" type="text" name="telefono" placeholder="9821159667" required pattern="[0-9]{10}" oninvalid="this.setCustomValidity('El formato del número de celular es: 9821159667. Hazlo coincidir.')" oninput="this.setCustomValidity('')">
+                                        <input id="telefono" class="form-control" type="text" name="telefono" placeholder="9821159667" pattern="[0-9]{10}" oninvalid="this.setCustomValidity('El formato del número de celular es: 9821159667. Hazlo coincidir.')" oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telegram">Telegram</label>
+                                        <input id="telegram" class="form-control" type="text" name="telegram" placeholder="@desacad_ITESCHAM">
                                     </div>
                                     <div class="form-group">
                                         <label for="sexo">Sexo</label>
@@ -347,7 +352,8 @@ if (!isset($_SESSION['rol'])) {
                                                                                     ?> value="<?php echo $row[0]; ?>" <?php
                                                                                                                     }
 
-                                                                                                                        ?>><?php echo $row[1]; ?></option>
+                                                                                                                        ?>><?php echo $row[1]; 
+                                                                                                                        $correoSeleccionado = $row[2];?></option>
 
                                             <?php
                                             }
@@ -382,9 +388,14 @@ if (!isset($_SESSION['rol'])) {
                                             ?>
                                         </select>
                                     </div>
+                            
                                     <div class="form-group">
-                                        <label for="telefono">Telefono</label>
-                                        <input id="telefono" class="form-control" type="text" name="telefono" placeholder="9821159667" required pattern="[0-9]{10}" oninvalid="this.setCustomValidity('El formato del número de celular es: 9821159667. Hazlo coincidir.')" oninput="this.setCustomValidity('')">
+                                        <label for="telefono">Teléfono</label>
+                                        <input id="telefono" class="form-control" type="text" name="telefono" placeholder="9821159667" pattern="[0-9]{10}" oninvalid="this.setCustomValidity('El formato del número de celular es: 9821159667. Hazlo coincidir.')" oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telegram">Telegram</label>
+                                        <input id="telegram" class="form-control" type="text" name="telegram" placeholder="@desacad_ITESCHAM">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                 </form>
@@ -460,10 +471,11 @@ if (!isset($_SESSION['rol'])) {
                                                         <th>Taller Asignado</th>
                                                         <th>CURP</th>
                                                         <th>Teléfono</th>
+                                                        <th>Telegram</th>
                                                     </thead>
                                                     <tbody style="background-color:  #f7f5f3;">
                                                         <?php
-                                                        $busqueda = $db->connect()->prepare('SELECT maestro.nombre, correo, talleres.taller, curp, telefono FROM `maestro` join talleres on maestro.taller_asignado=talleres.id order by maestro.nombre asc');
+                                                        $busqueda = $db->connect()->prepare('SELECT maestro.nombre, correo, talleres.taller, curp, telefono, maestro.telegram FROM `maestro` join talleres on maestro.taller_asignado=talleres.id order by maestro.nombre asc');
                                                         $busqueda->execute();
 
                                                         foreach ($busqueda as $fila) {
@@ -477,7 +489,7 @@ if (!isset($_SESSION['rol'])) {
                                                                     <td><?php echo $fila[2]; ?></td>
                                                                     <td><?php echo $fila[3]; ?></td>
                                                                     <td><?php echo $fila[4]; ?></td>
-
+                                                                    <td><?php echo $fila[5]; ?></td>
 
                                                                 </tr>
 
@@ -490,7 +502,7 @@ if (!isset($_SESSION['rol'])) {
                                                                     <td><?php echo $fila[2]; ?></td>
                                                                     <td><?php echo $fila[3]; ?></td>
                                                                     <td><?php echo $fila[4]; ?></td>
-
+                                                                    <td><?php echo $fila[5]; ?></td>
 
                                                                 </tr>
                                                         <?php
@@ -580,11 +592,38 @@ if (!isset($_SESSION['rol'])) {
                                 <div class="col-2"><img src="img/mensajes.png" alt="mensajes" width="50" height="50"></div>
                             </div>
                         </div>
+
+                  
                         <form action="mensajeAdmin.php" method="POST">
                             <div class="form-group sr-only ">
-                                <input type="text" class="form-control" name="admin_id" id="admin_id" value="<?php echo $id_admin; ?>">
+                              <input type="text" class="form-control" name="admin_id" id="admin_id" value="<?php echo 0;?>">
                             </div>
+                            <div class="form-group">
+                                 <?php
+                                    $maestros = $db->connect()->prepare("SELECT nombre, correo FROM `maestro`");
+                                    $maestros->execute();
+                                ?>
+                                <label for="destinatario">Destinatario</label>
+                                <select class="custom-select" name="destinatario" id="destinatario" required="true">
+                                    <option value="Todos">Todos</option>
+                                            <?php foreach ($maestros as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == "Sin Asignar") {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
 
+                                                                                                                        ?>><?php echo $row[0]; ?></option>
+
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="mensaje"></label>
                                 <textarea class="form-control" name="mensaje" id="mensaje" rows="3"></textarea>
@@ -594,6 +633,7 @@ if (!isset($_SESSION['rol'])) {
                             </div>
 
                         </form>
+
                     </div>
                 </section>
 
@@ -982,6 +1022,8 @@ if (!isset($_SESSION['rol'])) {
         $(document).ready(function() {
             $('[data-toggle="popover"]').popover();
         });
+
+
     </script>
 
 </body>

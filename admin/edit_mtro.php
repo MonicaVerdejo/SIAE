@@ -6,6 +6,7 @@ if ((($_POST['taller'])!="No asignado") && (($_POST['mtro'])!="Sin Asignar")) {
     $id_mtro = $_POST['mtro'];
     $taller = $_POST['taller'];
     $telefono = $_POST['telefono'];
+    $telegram = $_POST['telegram'];
     //Borramos el taller que tenga asignado ese maestro
     $editTblmtro = $db->connect()->prepare("UPDATE `talleres` set 
     `mtro_asignado`=1 WHERE `mtro_asignado` = '$id_mtro';");
@@ -19,7 +20,7 @@ if ((($_POST['taller'])!="No asignado") && (($_POST['mtro'])!="Sin Asignar")) {
 
     //Insertar los datos en la bd
     $editmtro = $db->connect()->prepare("UPDATE `maestro` set 
-    `taller_asignado`='$taller', `telefono`='$telefono' WHERE `maestro`.`id` = '$id_mtro';");
+    `taller_asignado`='$taller', `telefono`='$telefono', `telegram`='$telegram' WHERE `maestro`.`id` = '$id_mtro';");
     $editmtro->execute();
 
     //Insertar los datos en la bd

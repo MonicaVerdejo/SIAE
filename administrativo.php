@@ -13,7 +13,7 @@ if (!isset($_SESSION['rol'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -331,6 +331,7 @@ if (!isset($_SESSION['rol'])) {
                                 Envía un nuevo mensaje a tus maestros </h3>
                         </div>
                     </div>
+                
                     <div class="mensajesN container">
                         <div class="form-group">
                             <div class="row">
@@ -338,11 +339,37 @@ if (!isset($_SESSION['rol'])) {
                                 <div class="col-2"><img src="img/mensajes.png" alt="mensajes" width="50" height="50"></div>
                             </div>
                         </div>
+
                         <form action="mensajeAdmin.php" method="POST">
                             <div class="form-group sr-only ">
-                                <input type="text" class="form-control" name="admin_id" id="admin_id" value="<?php echo $id_admin; ?>">
+                              <input type="text" class="form-control" name="admin_id" id="admin_id" value="<?php echo 0;?>">
                             </div>
+                            <div class="form-group">
+                                 <?php
+                                    $maestros = $db->connect()->prepare("SELECT nombre, correo FROM `maestro`");
+                                    $maestros->execute();
+                                ?>
+                                <label for="destinatario">Destinatario</label>
+                                <select class="custom-select" name="destinatario" id="destinatario" required="true">
+                                    <option value="Todos">Todos</option>
+                                            <?php foreach ($maestros as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == "Sin Asignar") {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
 
+                                                                                                                        ?>><?php echo $row[0]; ?></option>
+
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="mensaje"></label>
                                 <textarea class="form-control" name="mensaje" id="mensaje" rows="3"></textarea>
@@ -352,6 +379,7 @@ if (!isset($_SESSION['rol'])) {
                             </div>
 
                         </form>
+                        
                     </div>
                 </section>
 
@@ -376,7 +404,7 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                     <div class="form-group">
                                         <label for="newPass">Nueva contraseña</label>
-                                        <input type="password" class="form-control" name="newPass" id="newPass" placeholder="" required="true" pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,20}$" oninvalid="this.setCustomValidity('La contraseña debe tener entre 8 y 20 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.')" oninput="this.setCustomValidity('')" />
+                                        <input type="password" class="form-control" name="newPass" id="newPass" placeholder="" required="true"/>
                                     </div>
                                     <p class=" mt-4 center "><input class="btn btn-secondary" name="enviar" type="submit" value="Enviar"></p>
                                 </form>

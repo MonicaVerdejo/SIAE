@@ -571,9 +571,34 @@ if (!isset($_SESSION['rol'])) {
                         </div>
                         <form action="mensajeAdmin.php" method="POST">
                             <div class="form-group sr-only ">
-                                <input type="text" class="form-control" name="admin_id" id="admin_id" value="<?php echo $id_admin; ?>">
+                              <input type="text" class="form-control" name="admin_id" id="admin_id" value="<?php echo 0;?>">
                             </div>
+                            <div class="form-group">
+                                 <?php
+                                    $maestros = $db->connect()->prepare("SELECT nombre, correo FROM `maestro`");
+                                    $maestros->execute();
+                                ?>
+                                <label for="destinatario">Destinatario</label>
+                                <select class="custom-select" name="destinatario" id="destinatario" required="true">
+                                    <option value="Todos">Todos</option>
+                                            <?php foreach ($maestros as $row) {
+                                            ?>
+                                                <option <?php
+                                                        if ($row[0] == "Sin Asignar") {
+                                                            # code...
+                                                        ?> style="display: none;" <?php
+                                                                                } else {
+                                                                                    # code...
+                                                                                    ?> value="<?php echo $row[0]; ?>" <?php
+                                                                                                                    }
 
+                                                                                                                        ?>><?php echo $row[0]; ?></option>
+
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="mensaje"></label>
                                 <textarea class="form-control" name="mensaje" id="mensaje" rows="3"></textarea>
