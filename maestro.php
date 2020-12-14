@@ -188,15 +188,18 @@ if (!isset($_SESSION['rol'])) {
                                     </div>
                                 </div>
                             </div>
-
+                                                        
+                            TODO:<!--Tabla de horario-->
                             <table class="table table-bordered table-hover">
                                 <h3 class="mr-5"><?php
                                                     $mtro_id = $_SESSION['id_mtro'];
+                                                    $nombreTaller;
 
                                                     $sentencia = $db->connect()->prepare('SELECT taller FROM `talleres` WHERE mtro_asignado=:mtro_id');
                                                     $sentencia->execute(['mtro_id' => $mtro_id]);
                                                     foreach ($sentencia as $row) {
                                                         echo $row[0];
+                                                        $nombreTaller = $row[0];
                                                     }
 
                                                     ?></h3>
@@ -213,6 +216,7 @@ if (!isset($_SESSION['rol'])) {
                                 <tbody style="background-color:  #f7f5f3;">
                                     <?php
                                     $mtroTaller = $_SESSION['id_tallerMtro'];
+            
                                     $busqueda = $db->connect()->prepare("SELECT turno,lunes,martes,miercoles,jueves,viernes,sabado,domingo from horarios WHERE taller=$mtroTaller");
                                     $busqueda->execute();
                                     foreach ($busqueda as $fila) {
@@ -232,6 +236,14 @@ if (!isset($_SESSION['rol'])) {
                                     ?>
                                 </tbody>
                             </table>
+                            <div class="row justify-content-end">
+                                <div class="col-3 ">
+                                    <form method="POST" action="maestro/descargar_horario.php">
+                                        <input type="hidden" name="mtroTaller" value="<?php echo $mtroTaller?>"/>
+                                        <button type="submit" class="btn btn-primary" name="taller" value="<?php echo $nombreTaller;?>">Descargar</button>
+                                    </form>
+                                </div>
+                            </div>    
                         </div>
                     </section>
                 </div>
@@ -258,7 +270,7 @@ if (!isset($_SESSION['rol'])) {
                                             <tbody>
                                                 <?php
                                                 $nombreMaestro = $_SESSION['nombre'];
-                                           TODO:$busqueda = $db->connect()->prepare("select fecha, mensaje from mensajeadmin WHERE destinatario='$nombreMaestro' OR destinatario='todos' order by fecha desc");
+                                                $busqueda = $db->connect()->prepare("select fecha, mensaje from mensajeadmin WHERE destinatario='$nombreMaestro' OR destinatario='todos' order by fecha desc");
                                                 $busqueda->execute();
                                                 foreach ($busqueda as $fila) {
                                                 ?>

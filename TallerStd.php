@@ -420,6 +420,7 @@
                                                          <?php foreach ($buscarAlumno as $row) {
                                                             ?>
                                                              <option <?php
+                                                             #TODO:if(($buscarAlumno->rowCount()) > 0) //No hay alumnos registrados en este taller
                                                                         if ($row[0] == 1) {
                                                                             # code...
                                                                         ?> style="display: none;" <?php
