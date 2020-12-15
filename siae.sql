@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-12-2020 a las 09:25:07
+-- Tiempo de generación: 15-12-2020 a las 01:04:59
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.7
 
@@ -78,7 +78,7 @@ INSERT INTO `alumnos` (`nombre`, `matricula`, `password`, `taller_id`, `represen
 ('Sin asignar', 0, '', 1, '', '', '', '', '', '', 2),
 ('Monica Priscila Delgado Verdejo', 161080138, '$2y$10$xnuZAUsxrIWF7oWoOVsC6OWqkTEY36rfFHl58nIv67Ccfap6765B2', 4, 'Si', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Noveno', '161080138.pdf', 'F', 2),
 ('jerry', 161080140, '$2y$10$8Xn4dgD/8Ryh02JUiJzFJefntiE1.ryLqh1EHND7KGRFkTTUylmTO', 3, 'Si', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Primero', '', 'M', 2),
-('Jose Alberto Pech Villasis', 161080156, '$2y$10$xeX9BMfJ1zZ4r/J3k.a0H.XwKBrisvP/Dz9NwH7B7vybXaeKthH5q', 4, 'No', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Noveno', '', 'M', 2);
+('Jose Alberto Pech Villasis', 161080156, '$2y$10$xeX9BMfJ1zZ4r/J3k.a0H.XwKBrisvP/Dz9NwH7B7vybXaeKthH5q', 4, 'No', 'Ingeniería en Sistemas Computacionales', 'Cursando', 'Noveno', '161080156.pdf', 'M', 2);
 
 -- --------------------------------------------------------
 
@@ -119,14 +119,6 @@ CREATE TABLE `documentos` (
   `documento` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `documentos`
---
-
-INSERT INTO `documentos` (`id`, `maestro_id`, `taller_id`, `alumno_id`, `categoria`, `documento`, `fecha`) VALUES
-(14, 2, 3, 0, 'instrumentacionD', 'Fernando Vela Leon  2020-12-12.jpg', '2020-12-11 18:03:08'),
-(15, 2, 3, 0, 'instrumentacionD', 'maestro1  2020-12-12.sql', '2020-12-11 18:04:12');
 
 -- --------------------------------------------------------
 
@@ -188,9 +180,8 @@ CREATE TABLE `maestro` (
 
 INSERT INTO `maestro` (`id`, `nombre`, `correo`, `password`, `taller_asignado`, `curp`, `telefono`, `telegram`, `sexo`, `Token`, `rol_id`) VALUES
 (1, 'Sin Asignar', '', '', 1, '', '', '', '', '', 3),
-(2, 'maestro1', 'josepech0603@hotmail.com', '$2y$10$0aNH9AydUEHU1iIuIJZH6.zgf9jNS2bSX6ZFYD9X1ygzZhzEOCroG', 3, 'PEVA980306HCCCLL01', '', '', 'M', '', 3),
-(7, 'Jose Alberto', 'testerfree98@gmail.com', '$2y$10$92oHcM.Ncmp2tjcISMNttO9tYAMpIMRvnOVbQgGfkIJ5paC00qjda', 7, 'PEVA980306HCCCLL07', '', '', 'M', '', 3),
-(8, 'maestro2', 'josevillasis98@gmail.com', '$2y$10$7HEJJi.Tve82s/BuJT4kauCaRavUYuQLUkCMP3jtMHMkiPQdxu50y', 2, 'PEVA980306HCCCLL012', '', '', 'M', '', 3);
+(7, 'Jose Alberto', 'testerfree98@gmail.com', '$2y$10$92oHcM.Ncmp2tjcISMNttO9tYAMpIMRvnOVbQgGfkIJ5paC00qjda', 4, 'PEVA980306HCCCLL07', '', '', 'M', '', 3),
+(9, 'jose alberto pech villasis', 'josepech0603@hotmail.com', '$2y$10$gL54wEpEK/aYZs7jMJLCuOeQdwIoONtRuRExfOQQJZTVy7zZuaZ/6', 5, 'PEVA980306HCCCLL06', '', '', 'M', '', 3);
 
 -- --------------------------------------------------------
 
@@ -361,12 +352,12 @@ CREATE TABLE `talleres` (
 
 INSERT INTO `talleres` (`id`, `taller`, `nombre`, `descripcion`, `mtro_asignado`, `categoria`, `direccion`, `img1`) VALUES
 (1, 'No asignado', '', '', 1, '', '', ''),
-(2, 'Futbol soccer', 'Los halcones del Itescham', 'En este taller te divertirás jugando futbol al mismo tiempo que competirás para formar parte de la selección escolar.', 8, 'Deportivo', 'Campo \"Cascareros\" U. D. \"Ulises Sansores\"', 'fut.png'),
+(2, 'Futbol soccer', 'Los halcones del Itescham', 'En este taller te divertirás jugando futbol al mismo tiempo que competirás para formar parte de la selección escolar.', NULL, 'Deportivo', 'Campo \"Cascareros\" U. D. \"Ulises Sansores\"', 'fut.png'),
 (3, 'Basquetbol', 'Los halcones del Itescham', 'En este taller te divertirás jugando basquetbol al mismo tiempo que competirás para formar parte de la selección escolar.', 1, 'Deportivo', 'Cancha Duela U. D. \"Ulises Sansores\"', 'basket.png'),
-(4, 'Voleibol de sala', 'Los halcones del Itescham', 'En este taller te divertirás jugando futbol al mismo tiempo que competirás para formar parte de la selección escolar.', 1, 'Deportivo', 'Cancha techada #1 Usos múltiples U.D. \"Ulises Sansores\"', 'voleibol.png'),
-(5, 'Escolta de Bandera', 'Itescham', 'En este taller aprenderás a marchar correctamente para honrar a nuestro labora patrio como se merece.', 1, 'Civico', 'Explanada de Usos Múltiples U.D. \"Ulises Sansores\"', 'escolta-400x334.png'),
+(4, 'Voleibol de sala', 'Los halcones del Itescham', 'En este taller te divertirás jugando futbol al mismo tiempo que competirás para formar parte de la selección escolar.', 7, 'Deportivo', 'Cancha techada #1 Usos múltiples U.D. \"Ulises Sansores\"', 'voleibol.png'),
+(5, 'Escolta de Bandera', 'Itescham', 'En este taller aprenderás a marchar correctamente para honrar a nuestro labora patrio como se merece.', 9, 'Civico', 'Explanada de Usos Múltiples U.D. \"Ulises Sansores\"', 'escolta-400x334.png'),
 (6, 'Banda de Guerra', 'Itescham', 'En este taller honrarás a nuestro lábaro patrio con los honores que se merece tocando al ritmo de nuestro himno nacional. ', 1, 'Civico', 'Cancha techada del Itescham', 'banda.png'),
-(7, 'Muay-Thai', 'Los halcones del Itescham', 'En este taller te forjamos en el camino de la disciplina, amando y respetando el arte marcial.', 7, 'Deportivo', 'Gimnasio frente a la gasolinera de la U.D. \"Ulises Sansores\"', 'muaythai.png'),
+(7, 'Muay-Thai', 'Los halcones del Itescham', 'En este taller te forjamos en el camino de la disciplina, amando y respetando el arte marcial.', 1, 'Deportivo', 'Gimnasio frente a la gasolinera de la U.D. \"Ulises Sansores\"', 'muaythai.png'),
 (8, 'Beisbol', 'Los halcones del Itescham', 'En este taller te divertirás jugando beisbol al mismo tiempo que competirás para formar parte de la selección escolar.', 1, 'Deportivo', 'Calle 28 % 23 y 25 Col. Centro. \"Casa del instructor\"', 'beisbol.jpg'),
 (9, 'Ajedrez', 'Los halcones del Itescham', 'Deporte es sinónimo de destreza y estrategia. ', 1, 'Deportivo', 'Aula 101/201. Itescham.', 'ajedrez.jpg');
 
@@ -477,7 +468,7 @@ ALTER TABLE `horarios`
 -- AUTO_INCREMENT de la tabla `maestro`
 --
 ALTER TABLE `maestro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajeadmin`
