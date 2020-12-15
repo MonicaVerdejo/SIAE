@@ -21,16 +21,16 @@ $html = <<<HTML
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horario</title>
-  
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 </head>
 <body>
     <div class="container">
         <div class="row" style="display: flex;">
             <div class="col-6" style="text-align: left;">
-                <img style="margin-top:2%;" src="http://localhost/SIAE2/img/logos/educacionLogo.png" height="50">
+                <img src="http://localhost/SIAE2/img/logos/educacionLogo.png" height="50">
             </div>
             <div class="col-6" style="text-align: right;">
-                <img style="margin-top:2%;" src="http://localhost/SIAE2/img/logos/Logo-TecNM.png" height="50" width="150">
+                <img src="http://localhost/SIAE2/img/logos/Logo-TecNM.png" height="50" width="150">
             </div>
         </div>
         <div class="row" style="text-align: center;">
@@ -38,16 +38,20 @@ $html = <<<HTML
         </div>
     </div>
 
+    <div class="container">
+    <div class="row">
     <table width="100%" style="text-align: center; background-color:white;" cellpadding="0" cellspacing="0" style="">
         <thead style="background-color:steelblue;">
-            <th>Turno</th>
-            <th>Lunes</th>
-            <th>Martes</th>
-            <th>Miercoles</th>
-            <th>Jueves</th>
-            <th>Viernes</th>
-            <th>Sabado</th>
-            <th>Domingo</th>
+            <tr>
+                <th>Turno</th>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miercoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+                <th>Sabado</th>
+                <th>Domingo</th>
+            </tr>
         </thead>
         <tbody style="background-color: #f7f5f3;">
 HTML;   
@@ -67,21 +71,25 @@ foreach ($busqueda as $fila) {
 }
 
 $html.=<<<HTML
-    <td>$turno</td>
-    <td>$lunes</td>
-    <td>$martes</td>
-    <td>$miercoles</td>
-    <td>$jueves</td>
-    <td>$viernes</td>
-    <td>$sabado</td>
-    <td>$domingo</td>
+    <tr>
+        <td>$turno</td>
+        <td>$lunes</td>
+        <td>$martes</td>
+        <td>$miercoles</td>
+        <td>$jueves</td>
+        <td>$viernes</td>
+        <td>$sabado</td>
+        <td>$domingo</td>
+    </tr>
 HTML;
 
 $html .= <<<HTML
         </tbody>
 
         </table>
-        <div class="row">
+        </div>
+        </div>
+        <div class="row" style="margin-top: 400px">
             <div class="col">
                 <p style="margin-top:50px; margin-left:50px;"><b>$fecha</b></p>
             </div>
@@ -103,7 +111,6 @@ $pdf = new Dompdf(array('enable_remote' => true));
 
 // Define el tamaño y orientación del papel.
 $pdf->set_paper("letter", "landscape");
-//$pdf->set_paper(array(0, 0, 595.28, 841.89));
 
 // Carga el contenido HTML.
 $pdf->load_html($html, 'UTF-8');
