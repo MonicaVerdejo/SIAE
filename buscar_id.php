@@ -31,7 +31,7 @@ $row = $taller->fetch(PDO::FETCH_NUM);
 $maestroAsignado = $db->connect()->prepare("SELECT nombre FROM `maestro` where taller_asignado=$Tallerstd");
 $maestroAsignado->execute();
 $fila = $maestroAsignado->fetch(PDO::FETCH_NUM);    
-$mtroA=$fila[0];
+$mtroA=$fila[0] ?? "Sin maestro asignado";
 
 
 
