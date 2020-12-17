@@ -344,7 +344,7 @@ if (!isset($_SESSION['rol'])) {
                             <div class="form-group sr-only ">
                               <input type="text" class="form-control" name="admin_id" id="admin_id" value="<?php echo 0;?>">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group ">
                                  <?php
                                     $maestros = $db->connect()->prepare("SELECT nombre, correo FROM `maestro`");
                                     $maestros->execute();

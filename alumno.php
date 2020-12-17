@@ -270,10 +270,19 @@ $telegramMaestro = $opcion[5];
                                                         }
                                                         ?>
                                                     </tbody>
-
-
-
+                                                        </div>    
                                                 </table>
+                                                            
+
+                                                <div class="row justify-content-end">
+                                                    <div class="col-2 ">
+                                                        <form method="POST" action="maestro/descargar_horario.php">
+                                                            <input type="hidden" name="mtroTaller" value="<?php echo $idtallerAlumno?>"/>
+                                                            <button type="submit" class="btn btn-primary" name="taller" value="<?php echo $tallerAlumno;?>">Descargar</button>
+                                                        </form>
+                                                    </div>
+                                                </div>    
+                                                            
                                             </div>
                                             <!-- /.card-body -->
                                         </div>

@@ -1,13 +1,9 @@
 <?php
+use Dompdf\Dompdf;
 require_once '../db.php';
 require_once '../dompdf/autoload.inc.php';
-use Dompdf\Dompdf;
 
 $db = new DB();
-
-$html = "";
-$nombreTaller = "";
-$maestroTaller = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $nombreTaller = $_POST['taller'];
@@ -121,6 +117,5 @@ $pdf->render();
 $nombreArchivo = "Horario";
 // Enviamos el fichero PDF al navegador.
 $pdf->stream($nombreArchivo."_".$nombreTaller.'.pdf');
-
 
 ?>
